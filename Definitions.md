@@ -13,4 +13,4 @@
 - Work submitted with additional logic tests where needed
 - UI task does not contain logic, and vice versa
 - No external dependencies that violate any licenses
-- 500 line limit per pull request
+- 500 line limit per pull request, or a good reason for exceeding the limit
