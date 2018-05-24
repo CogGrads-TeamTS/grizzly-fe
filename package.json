@@ -14,6 +14,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "mocha": "*",
     "chai": "^4.1.2"
   }
 }
