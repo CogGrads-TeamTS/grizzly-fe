@@ -11,9 +11,6 @@
       "name": "Second Category",
       "description": "This is another test category.",
       "products": 1392
-    },
-    {
-      "id": 3
     }
   ]
 }
