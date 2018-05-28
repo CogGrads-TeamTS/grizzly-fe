@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Test Category",
+      "description": "This is a test category.",
+      "products": 12
+    },
+    {
+      "id": 2,
+      "name": "Second Category",
+      "description": "This is another test category.",
+      "products": 1392
+    }
+  ]
+}
