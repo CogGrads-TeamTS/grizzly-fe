@@ -11,6 +11,8 @@ import { loadVendors } from './actions/vendorActions';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 const store = configureStore();
 store.dispatch(loadVendors());
 
