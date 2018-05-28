@@ -14,7 +14,6 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const store = configureStore();
-store.dispatch(loadVendors());
 
 ReactDOM.render(
     <Provider store={store}>
