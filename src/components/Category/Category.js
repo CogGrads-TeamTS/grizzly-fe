@@ -13,8 +13,7 @@ class Category extends React.Component{
 
     render(){
         return(
-        <div>
-            <h1>This should display a list of categories!!!!</h1>
+            <div>
             {this.props.categories.length > 0 && <CategoryTable categories={this.props.categories} />}   
             
             </div>

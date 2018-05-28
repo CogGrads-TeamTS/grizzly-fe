@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
-
+import { Container, Row, Col } from 'reactstrap';
 class Sidebar extends Component {
     render() {
-        return ( <div>
-            <h1>Hello I am the sidebar component</h1>
-        </div> );
+        return (
+
+        <Container>
+            <div>
+            <Row>
+                <Col>
+                    <h1>Hello I am the sidebar component</h1>
+                </Col>
+            </Row>
+            </div>
+        </Container>
+
+
+        );
     }
 }
 
