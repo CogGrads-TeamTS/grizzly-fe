@@ -3,18 +3,11 @@ import { Container, Row, Col } from 'reactstrap';
 class Sidebar extends Component {
     render() {
         return (
-
-        <Container>
-            <div>
-            <Row>
+        <Row>
                 <Col>
                     <h1>Hello I am the sidebar component</h1>
                 </Col>
-            </Row>
-            </div>
-        </Container>
-
-
+        </Row>
         );
     }
 }

@@ -21,9 +21,8 @@ class Tabs extends Component {
     }
     render() {
         return (
-            <Container>
                 <Row>
-                    <Col md={{ size: 9, offset: 3 }} sm="12">
+                    <Col>
                         <div>
                             <Nav tabs>
                                 <NavItem>
@@ -77,7 +76,6 @@ class Tabs extends Component {
                         </div>
                     </Col>
                 </Row>
-            </Container>
         );
     }
 }

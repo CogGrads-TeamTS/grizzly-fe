@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-
+import Tabs from '../components/common/common_tabs';
 class Homepage extends Component {
     render() {
         return ( 
             <div>
-                <h1>Hello I am the home page component</h1>
-                </div> 
+                <Tabs/>
+            </div> 
         );
     }
 }
