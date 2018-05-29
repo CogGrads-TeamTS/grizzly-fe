@@ -1,12 +1,15 @@
 import * as types from '../actions/actionTypes';
 
+import _ from 'lodash';
+
 export function category(state = [], action) { 
     console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
             return action.categories
         case types.DELETE_CATEGORY_SUCCESS:
-            return state
+            // creates a new state that removes the deleted category
+            return _.remove(state, (arg) => arg.id != action.payload);
         default:
             return state
     }

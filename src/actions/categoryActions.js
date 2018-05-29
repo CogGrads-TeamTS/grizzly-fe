@@ -51,7 +51,7 @@ export function deleteCategory(id) {
         const request = axios.delete(`http://ts.ausgrads.academy:8080/categories/${id}`);
         request.then((response) => {
             console.log(response);
-          dispatch({ type: types.DELETE_CATEGORY_SUCCESS, payload: response });
+          dispatch({ type: types.DELETE_CATEGORY_SUCCESS, payload: id });
         }).catch((error) => console.error(error))
     };
 }

@@ -16,15 +16,15 @@ class Category extends React.Component{
     render(){
         return(
             <div>
-            {this.props.categories.length > 0 && <CategoryTable categories={this.props.categories} delete={this.deleteCategory} />}   
-            
+                {this.props.categories.length > 0 && <CategoryTable categories={this.props.categories} delete={this.deleteCategory} />}   
             </div>
     )}
-
+    // dispatches an action to delete the category using its id
+    // this function is passed down to the table and its rows
     deleteCategory(cat) {
         console.log("parent deleting category");
         console.log(cat);
-        this.props.delete(cat);
+        this.props.delete(cat.id);
     }
 } 
 

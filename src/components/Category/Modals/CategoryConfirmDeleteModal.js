@@ -26,6 +26,7 @@ class ConfirmDeleteModal extends React.Component {
     //this.props.deleteCategory(this.state.category.id);
     //console.log(this.props);
     this.props.confirm(this.state.category);
+    this.toggle();
   }
 
   toggle() {
@@ -44,7 +45,7 @@ class ConfirmDeleteModal extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Delete Confirmation</ModalHeader>
           <ModalBody>
-            <p>Are you sure you want to delete <b>{this.state.category.name}</b>?</p>
+            <p>Are you sure you want to delete the category <b>{this.state.category.name}</b>?</p>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
