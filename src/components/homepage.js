@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 
-import OurModal from './ourModal'
-import CategoryForm from './categoryForm';
+import CategoryModal from './categoryModal'
 
 class Homepage extends Component {
 
     render() {
         return ( <div>
-            <OurModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done">
-                <CategoryForm />
-            </OurModal>
+            <CategoryModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done" />
         </div> );
     }
 }

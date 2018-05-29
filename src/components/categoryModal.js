@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
+import axios from 'axios'
 import PropTypes from 'prop-types'
 
-class OurModal extends Component {
+class CategoryModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          modal: false
+          modal: false,
+          name: "",
+          description: ""
         };
     
         this.toggle = this.toggle.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     
     toggle() {
@@ -18,8 +24,26 @@ class OurModal extends Component {
         })  
     }
 
-    actionAndClose = () => {
-        {this.props.action}
+    handleNameChange(event) {
+        this.setState({
+            name: event.target.value,
+            description: this.state.description
+        })
+    }
+    
+    handleDescriptionChange(event) {
+        this.setState({
+            name: this.state.name,
+            description: event.target.value
+        })
+    }
+
+    handleSubmit(event) {
+        axios.post("http://ts.ausgrads.academy:8080/categories/add", this.state).finally()
+    }
+
+    submitAndClose = () => {
+        this.handleSubmit("")
         this.toggle()
     }
     
@@ -30,10 +54,15 @@ class OurModal extends Component {
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
                 <ModalBody>
-                {this.props.children}
+                <form onSubmit={this.handleSubmit}>
+                    <label>Category Name:</label>
+                    <input name="name" placeholder="Add Name" onChange={this.handleNameChange}/><br/>
+                    <label>Category Description:</label>
+                    <input name="description" placeholder="Add Description" onChange={this.handleDescriptionChange}/><br/>
+                </form>
                 </ModalBody>
                 <ModalFooter>
-                <Button color="primary" onClick={this.actionAndClose}>{this.props.actionLabel}</Button>{' '}
+                <Button color="primary" onClick={this.submitAndClose}>{this.props.actionLabel}</Button>{' '}
                 <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
@@ -42,7 +71,7 @@ class OurModal extends Component {
     }
 }
 
-OurModal.propTypes = {
+CategoryModal.propTypes = {
     // boolean to control the state of the popover
     isOpen:  PropTypes.bool,
     autoFocus: PropTypes.bool,
@@ -99,4 +128,4 @@ OurModal.propTypes = {
     formName: PropTypes.string,
   }
 
-export default OurModal
+export default CategoryModal
