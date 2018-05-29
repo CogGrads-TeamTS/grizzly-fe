@@ -10,7 +10,7 @@ const CategoryRows = (props) => {
         <td>{category.count}</td>
         <td><Button color="info">Edit</Button></td>
         <td><Button color="secondary">Block </Button></td>
-        <td><Button color="danger">Delete</Button></td>
+        <td><Button color="danger" onClick={() => props.delete(category)}>Delete</Button></td>
     </tr>
     )
 };
