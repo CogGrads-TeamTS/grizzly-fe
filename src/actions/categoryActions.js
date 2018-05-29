@@ -44,14 +44,25 @@ export function categoriesFetchData(url) {
     };
 }
 
+const deleteCategorySuccess = (id) => ({ type: types.DELETE_CATEGORY_SUCCESS, payload: id });
+const deleteCategoryLoading = (loading) => ({ type: types.DELETE_CATEGORY_LOADING, payload: loading });
+const deleteCategoryError = (message) => ({ type: types.DELETE_CATEGORY_ERROR, payload: message });
+
 export function deleteCategory(id) {
     console.log("delete called, id: " + id);
 
     return (dispatch) => {
         const request = axios.delete(`http://ts.ausgrads.academy:8080/categories/${id}`);
-        request.then((response) => {
-            console.log(response);
-          dispatch({ type: types.DELETE_CATEGORY_SUCCESS, payload: id });
-        }).catch((error) => console.error(error))
+        request
+            .then((response) => {
+                console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(deleteCategorySuccess(id))
+            })
+            .catch((error) => {
+                dispatch(deleteCategoryError(error.message));
+            })
     };
 }

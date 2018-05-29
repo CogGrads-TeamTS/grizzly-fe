@@ -8,8 +8,8 @@ export function category(state = [], action) {
         case types.LOAD_CATEGORIES_SUCCESS:
             return action.categories
         case types.DELETE_CATEGORY_SUCCESS:
-            // creates a new state that removes the deleted category
-            return _.remove(state, (arg) => arg.id != action.payload);
+            // creates a new state that has the deleted category removed 
+            return _.remove(state, (cat) => cat.id != action.payload);
         default:
             return state
     }
