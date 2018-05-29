@@ -10,14 +10,14 @@ export function loadCategorySuccess(categories) {
 export function loadCategoriesError(bool) {
     return {
         type: types.LOAD_CATEGORIES_ERROR,
-        hasErrored:bool
+        categoryHasErrored:bool
     }
 }
 
-export function loadCategoriesLoading(bool) {
+export function loadCategoriesLoading(bool) { 
     return {
         type: types.LOAD_CATEGORIES_LOADING,
-        isLoading:bool
+        categoryIsLoading:bool
     }
 }
 

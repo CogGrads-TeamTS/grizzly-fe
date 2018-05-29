@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import CategoryTable from './CategoryTable';
-import * as categoryActions from '../../actions/categoryActions';
 import { categoriesFetchData } from '../../actions/categoryActions';
 
 class Category extends React.Component{

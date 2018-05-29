@@ -7,7 +7,6 @@ import configureStore from './store/configureStore';
 import './index.css';
 import App from './App';
 
-import { loadVendors } from './actions/vendorActions';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 

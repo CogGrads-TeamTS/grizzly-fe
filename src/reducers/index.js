@@ -5,8 +5,8 @@ import { category, categoryHasErrored, categoryIsLoading } from './categoryReduc
 const rootReducer = combineReducers({
     vendors,
     category:category,
-    categoryHasErrored:category.categoryHasErrored,
-    categoryIsLoading:category.categoryIsLoading
+    categoryHasErrored:categoryHasErrored,
+    categoryIsLoading:categoryIsLoading
 
 });
 

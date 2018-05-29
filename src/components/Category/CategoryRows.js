@@ -1,9 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import EditButton from '../Buttons/EditButton'
-import RemoveButton from '../Buttons/RemoveButton'
-import BlockButton from '../Buttons/BlockButton'
-import { Table,Container, Row, Col } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 const CategoryRows = (props) => {
     const  category  = props.category;
@@ -11,12 +7,17 @@ const CategoryRows = (props) => {
     <tr>
         <td>{category.name}</td>
         <td>{category.description}</td>
-        <td>{category.id}</td>
-        <td><EditButton/></td>
-        <td><BlockButton/></td>
-        <td><RemoveButton/></td>
+        <td>{category.count}</td>
+        <td><Button color="info">Edit</Button></td>
+        <td><Button color="secondary">Block </Button></td>
+        <td><Button color="danger">Delete</Button></td>
     </tr>
     )
 };
+
+//Uncomment later
+// const EditEvent = () => {
+//     console.log('Test');
+// }
 
 export default CategoryRows;
