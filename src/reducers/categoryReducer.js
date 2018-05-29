@@ -1,9 +1,12 @@
 import * as types from '../actions/actionTypes';
 
 export function category(state = [], action) { 
+    console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
             return action.categories
+        case types.DELETE_CATEGORY_SUCCESS:
+            return state
         default:
             return state
     }

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
 import PropTypes from 'prop-types'
+import { deleteCategory } from '../../../actions/categoryActions';
 
 class ConfirmDeleteModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       modal: false
     };
-
+    console.log(props);
     this.toggle = this.toggle.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
   }
 
   openModal(cat) {
@@ -17,6 +20,12 @@ class ConfirmDeleteModal extends React.Component {
       modal:true,
       category:cat
     });
+  }
+
+  confirmDelete() {
+    //this.props.deleteCategory(this.state.category.id);
+    //console.log(this.props);
+    this.props.confirm(this.state.category);
   }
 
   toggle() {
@@ -39,7 +48,7 @@ class ConfirmDeleteModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-            <Button color="danger" onClick={this.toggle}>Confirm</Button>{' '}
+            <Button color="danger" onClick={this.confirmDelete}>Confirm</Button>{' '}
           </ModalFooter>
         </Modal>
     );
@@ -100,6 +109,7 @@ ConfirmDeleteModal.propTypes = {
     children: PropTypes.node,
     action: PropTypes.func,
     actionLabel: PropTypes.string,
-    formName: PropTypes.string,
+    formName: PropTypes.string
   }
+
 export default ConfirmDeleteModal;

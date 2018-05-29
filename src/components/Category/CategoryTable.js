@@ -31,16 +31,19 @@ class CategoryTable extends React.Component {
                 <Row>
                 
                 </Row>
-                <ConfirmDeleteModal ref="deleteModal" actionLabel="Done" />
+                <ConfirmDeleteModal ref="deleteModal" actionLabel="Done" confirm={this.deleteConfirmed} />
             </Container>
         )
+    }
+
+    deleteConfirmed = (cat) => {
+        console.log("delete confirmed: " + cat.id);
+        this.props.delete(cat.id);
     }
 
     deleteClicked = (cat) => {
         this.refs.deleteModal.openModal(cat);
     };
 }
-
-
 
 export default CategoryTable;
