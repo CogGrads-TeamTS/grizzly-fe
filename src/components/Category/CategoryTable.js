@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryRows from './CategoryRows';
 import { Table,Container, Row, Col } from 'reactstrap';
-import ConfirmDeleteModal from '../common/modals/commonConfirmDelete';
+import ConfirmDeleteModal from './Modals/CategoryConfirmDelete';
 
 class CategoryTable extends React.Component {
     render() {
@@ -37,9 +37,7 @@ class CategoryTable extends React.Component {
     }
 
     deleteClicked = (cat) => {
-        console.log(cat);
-        this.refs.deleteModal.setCategory(cat);
-        this.refs.deleteModal.toggle();
+        this.refs.deleteModal.openModal(cat);
     };
 }
 

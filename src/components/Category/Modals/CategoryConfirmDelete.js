@@ -6,37 +6,40 @@ class ConfirmDeleteModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      category: null
+      modal: false
     };
 
     this.toggle = this.toggle.bind(this);
   }
 
-  setCategory(cat) {
+  openModal(cat) {
     this.setState({
+      modal:true,
       category:cat
     });
-    console.log("set cat called: " + this.state.category);
   }
 
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
-    console.log("toggle called: " + this.state.category);
   }
 
   render() {
+    if (!this.state.category) {
+      return (
+        <p>No Category Defined</p>
+      )
+    }
     return (
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}></ModalHeader>
+          <ModalHeader toggle={this.toggle}>Delete Confirmation</ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <p>Are you sure you want to delete <b>{this.state.category.name}</b>?</p>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="danger" onClick={this.toggle}>Confirm</Button>{' '}
           </ModalFooter>
         </Modal>
     );
