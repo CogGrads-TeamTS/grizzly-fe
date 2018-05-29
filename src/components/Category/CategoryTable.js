@@ -6,7 +6,7 @@ const CategoryTable = ({categories}) => {
         return (
             <Container>
                 <Row>
-                    <Col md={{ size: 9, offset: 3 }} sm="12">
+                    <Col md="12" sm="12">
                         <Table>
                             <thead>
                             <tr>
