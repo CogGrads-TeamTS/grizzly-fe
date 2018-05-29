@@ -1,8 +1,11 @@
 import React from 'react';
 import CategoryRows from './CategoryRows';
 import { Table,Container, Row, Col } from 'reactstrap';
+import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
+import EditModal from './Modals/CategoryEditModal';
 
-const CategoryTable = ({categories}) => {
+class CategoryTable extends React.Component {
+    render() {
         return (
             <Container>
                 <Row>
@@ -19,18 +22,34 @@ const CategoryTable = ({categories}) => {
                             </tr>
                             </thead>
                             <tbody>
-
-                                {categories.map(guess =>
-
-                                <CategoryRows key={guess.id} category={guess} />,
-
+                                {this.props.categories.map(cat =>
+                                    <CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />
                                 )}
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
+                <Row>
+                
+                </Row>
+                <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
+                <EditModal ref="editModal" />
             </Container>
         )
-};
+    }
+
+    deleteConfirmed = (cat) => {
+        console.log("delete confirmed: " + cat.id);
+        this.props.delete(cat);
+    }
+
+    deleteClicked = (cat) => {
+        this.refs.deleteModal.openModal(cat);
+    };
+
+    editClicked = (cat) => {
+        this.refs.editModal.openModal(cat);
+    }
+}
 
 export default CategoryTable;
