@@ -8,11 +8,9 @@ class Homepage extends Component {
     render() {
         return ( 
             <div>
-                <Tabs>
-                  <CategoryModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done" />
-                <Tabs/>
+                <CategoryModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done" />
+                <Tabs />
             </div> 
-            
         );
     }
 }
