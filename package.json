@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "ajv": "^6.5.0",
     "bootstrap": "^4.1.1",
     "jquery": "^1.9.1",

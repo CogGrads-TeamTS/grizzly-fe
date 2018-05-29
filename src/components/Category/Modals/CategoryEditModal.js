@@ -1,21 +1,30 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
-class ConfirmDeleteModal extends React.Component {
+class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      name: "",
+      description: ""
     };
 
     this.toggle = this.toggle.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitAndClose = this.submitAndClose.bind(this);
   }
 
   openModal(cat) {
     this.setState({
       modal:true,
-      category:cat
+      category:cat,
+      name: cat.name,
+      description: cat.description
     });
   }
 
@@ -39,6 +48,18 @@ handleDescriptionChange(event) {
     })
 }
 
+handleSubmit(event) {
+  console.log("Deleting")
+  console.log(this.state.category.id)
+  axios.put(`http://ts.ausgrads.academy:8080/categories/edit/${this.state.category.id}`, {name: this.state.name, description: this.state.description}).finally()
+}
+
+submitAndClose = () => {
+  console.log("Running")
+  this.handleSubmit("")
+  this.toggle()
+}
+
   render() {
     if (!this.state.category) {
       return (
@@ -47,20 +68,25 @@ handleDescriptionChange(event) {
     }
     return (
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Delete Confirmation</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Update user details</ModalHeader>
           <ModalBody>
-            <p>Are you sure you want to delete <b>{this.state.category.name}</b>?</p>
+          <form onSubmit={this.handleSubmit}>
+                    <label>Category Name:</label>
+                    <input name="name" value={this.state.name} style={{width: "60%", float: "right"}} onChange={this.handleNameChange} /><br/>
+                    <label>Category Description:</label>
+                    <input name="description" value={this.state.description} style={{width: "60%", float: "right"}} onChange={this.handleDescriptionChange}/><br/>
+          </form>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-            <Button color="danger" onClick={this.toggle}>Confirm</Button>{' '}
+            <Button color="primary" onClick={this.submitAndClose}>Confirm</Button>{' '}
           </ModalFooter>
         </Modal>
     );
   }
 }
 
-ConfirmDeleteModal.propTypes = {
+EditModal.propTypes = {
     // boolean to control the state of the popover
     isOpen:  PropTypes.bool,
     autoFocus: PropTypes.bool,
@@ -116,4 +142,4 @@ ConfirmDeleteModal.propTypes = {
     actionLabel: PropTypes.string,
     formName: PropTypes.string,
   }
-export default ConfirmDeleteModal;
+export default EditModal;
