@@ -2,14 +2,22 @@ import * as types from '../actions/actionTypes';
 
 import _ from 'lodash';
 
-export function category(state = [], action) { 
+export function category(state = {}, action) { 
     console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
-            return action.categories
+            return _.mapKeys(action.categories, "id")
+
         case types.DELETE_CATEGORY_SUCCESS:
             // creates a new state that has the deleted category removed 
-            return _.remove(state, (cat) => cat.id != action.payload);
+            return _.omit(state, action.payload);
+            
+        case types.EDIT_CATEGORY_SUCCESS:
+            const clone = _.cloneDeep(state) // Create a copy of state
+
+            // Return the updated cloned state
+            return _.update(clone, `${action.id}`, (cat) => {return {id:action.id, name: action.name, description: action.description, count: cat.count}});
+        
         default:
             return state
     }
