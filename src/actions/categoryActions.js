@@ -2,26 +2,9 @@ import * as types from './actionTypes';
 
 import axios from 'axios'
 
-export function loadCategorySuccess(categories) { 
-    return {
-        type: types.LOAD_CATEGORIES_SUCCESS,
-        categories
-    }
-}
-
-export function loadCategoriesError(bool) {
-    return {
-        type: types.LOAD_CATEGORIES_ERROR,
-        categoryHasErrored:bool
-    }
-}
-
-export function loadCategoriesLoading(bool) { 
-    return {
-        type: types.LOAD_CATEGORIES_LOADING,
-        categoryIsLoading:bool
-    }
-}
+const loadCategoriesSuccess = (categories) => ({type: types.LOAD_CATEGORIES_SUCCESS, categories})
+const loadCategoriesLoading = (loading) => ({type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:bool}); 
+const loadCategoriesError = (bool) => ({type: types.LOAD_CATEGORIES_ERROR, categoryHasErrored:bool});
 
 export function categoriesFetchData(url) {
     
@@ -39,7 +22,7 @@ export function categoriesFetchData(url) {
                 return response;
             })
             .then((response) => response.json())
-            .then((categories) => dispatch(loadCategorySuccess(categories)))
+            .then((categories) => dispatch(loadCategoriesSuccess(categories)))
             .catch(() => dispatch(loadCategoriesError(true)));
     };
 }
