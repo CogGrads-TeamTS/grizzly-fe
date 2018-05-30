@@ -7,9 +7,7 @@ class EditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      name: "",
-      description: ""
+      modal: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -22,9 +20,9 @@ class EditModal extends React.Component {
   openModal(cat) {
     this.setState({
       modal:true,
-      category:cat,
+      description: cat.description,
       name: cat.name,
-      description: cat.description
+      id: cat.id
     });
   }
 
@@ -36,22 +34,22 @@ class EditModal extends React.Component {
 
   handleNameChange(event) {
     this.setState({
-        name: event.target.value,
-        description: this.state.description
+        name: event.target.value
     })
 }
 
 handleDescriptionChange(event) {
     this.setState({
-        name: this.state.name,
-        description: event.target.value
+      description: event.target.value
     })
 }
 
 handleSubmit(event) {
-  console.log("Deleting")
-  console.log(this.state.category.id)
-  axios.put(`http://ts.ausgrads.academy:8080/categories/edit/${this.state.category.id}`, {name: this.state.name, description: this.state.description}).finally()
+  console.log("Editing")
+  console.log(this.state.id)
+
+  const cat = {name: this.state.name, description: this.state.description, id: this.state.id}
+  this.props.confirm(cat)
 }
 
 submitAndClose = () => {
@@ -61,11 +59,6 @@ submitAndClose = () => {
 }
 
   render() {
-    if (!this.state.category) {
-      return (
-        <p>No Category Defined</p>
-      )
-    }
     return (
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Update user details</ModalHeader>

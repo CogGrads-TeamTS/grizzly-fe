@@ -66,3 +66,26 @@ export function deleteCategory(id) {
             })
     };
 }
+
+const editCategorySuccess = (id, name, description) => ({ type: types.EDIT_CATEGORY_SUCCESS, id: id, name:name, description: description });
+const editCategoryLoading = (loading) => ({ type: types.EDIT_CATEGORY_LOADING, payload: loading });
+const editCategoryError = (message) => ({ type: types.EDIT_CATEGORY_ERROR, payload: message });
+
+export function editCategoryAction(id, name, description) {
+    console.log("Edit Category called, id: " + id);
+
+    return (dispatch) => {
+        const request = axios.put(`http://ts.ausgrads.academy:8080/categories/edit/${id}`, {name: name, description: description});
+        request
+            .then((response) => {
+                console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(editCategorySuccess(id, name, description))
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                dispatch(editCategoryError(error.message));
+            })
+    };
+}

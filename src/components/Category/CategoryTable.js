@@ -3,6 +3,7 @@ import CategoryRows from './CategoryRows';
 import { Table,Container, Row, Col } from 'reactstrap';
 import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
 import EditModal from './Modals/CategoryEditModal';
+import _ from 'lodash';
 
 class CategoryTable extends React.Component {
     render() {
@@ -22,8 +23,9 @@ class CategoryTable extends React.Component {
                             </tr>
                             </thead>
                             <tbody>
-                                {this.props.categories.map(cat =>
-                                    <CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />
+                                {  
+                                    _.map(this.props.categories, cat => {
+                                    return (<CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />)}
                                 )}
                             </tbody>
                         </Table>
@@ -33,7 +35,7 @@ class CategoryTable extends React.Component {
                 
                 </Row>
                 <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
-                <EditModal ref="editModal" />
+                <EditModal ref="editModal" confirm={this.editConfirmed}/>
             </Container>
         )
     }
@@ -41,6 +43,11 @@ class CategoryTable extends React.Component {
     deleteConfirmed = (cat) => {
         console.log("delete confirmed: " + cat.id);
         this.props.delete(cat);
+    }
+
+    editConfirmed = (cat) => {
+        console.log("Edit confirmed: " + cat.id);
+        this.props.edit(cat);
     }
 
     deleteClicked = (cat) => {
