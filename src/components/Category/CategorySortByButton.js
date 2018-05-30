@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, ButtonDropdown } from 'reactstrap';
 
-class CategorySortBy extends Component {
+class CategorySortByButton extends Component {
     constructor(props) {
         super(props);
 
@@ -21,7 +21,7 @@ class CategorySortBy extends Component {
 
     changeValue = event => {
         this.setState({
-          dropdownValue: event.currentTarget.textContent
+          dropdownValue: event.currentTarget.textContent,
         });
     }
 
@@ -33,8 +33,10 @@ class CategorySortBy extends Component {
                     {this.state.dropdownValue}
                 </DropdownToggle>
                 <DropdownMenu id="categoryDropdown">
-                    <DropdownItem onClick={this.changeValue} id="name">Name</DropdownItem>
-                    <DropdownItem onClick={this.changeValue} id="productCount">Product Count</DropdownItem>
+                    <DropdownItem onClick={this.changeValue} id="name">Name A-Z</DropdownItem>
+                    <DropdownItem onClick={this.changeValue} id="name">Name Z-A</DropdownItem>
+                    <DropdownItem onClick={this.changeValue} id="productCount">Product Count - High to Low</DropdownItem>
+                    <DropdownItem onClick={this.changeValue} id="productCount">Product Count - Low to High</DropdownItem>
                 </DropdownMenu>
             </ButtonDropdown>
           </div>
@@ -42,4 +44,4 @@ class CategorySortBy extends Component {
     }
 }
 
-export default CategorySortBy;
+export default CategorySortByButton;
