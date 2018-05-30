@@ -46,8 +46,3 @@ export function categoryHasErrored(state = false, action) {
             return state
     }
 }
-
-return [
-    ...state,
-    Object.assign({}, action.book)
-  ];
