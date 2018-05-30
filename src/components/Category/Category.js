@@ -1,22 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryTable from './CategoryTable';
-import { categoriesFetchData, deleteCategory, editCategoryAction } from '../../actions/categoryActions';
+import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
+import CategoryAddModal from './Modals/CategoryAddModal';
 
 class Category extends React.Component{
     constructor() {
         super()
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
+        this.addConfirm = this.addConfirm.bind(this);
     }
     
     componentDidMount(){
-        this.props.fetchData('http://ts.ausgrads.academy:8080/categories');
+        this.props.fetchData();
     }
 
     render(){
         return(
             <div>
+                 <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                 {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
             </div>
     )}
@@ -33,6 +36,10 @@ class Category extends React.Component{
         console.log(cat);
         this.props.edit(cat.id, cat.name, cat.description);
     }
+
+    addConfirm(cat){
+        this.props.add(cat.name, cat.description);
+    }
 } 
 
 const mapStateToProps = (state) => { 
@@ -45,7 +52,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url)=> dispatch(categoriesFetchData(url)),
         delete: (id) => dispatch(deleteCategory(id)),
-        edit: (id, name, description) => dispatch(editCategoryAction(id, name, description))
+        edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
+        add: (name, description) => dispatch(addCategoryAction(name, description))
     };
 };
 
