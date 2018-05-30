@@ -11,7 +11,7 @@ class Category extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchData('http://ts.ausgrads.academy:8080/categories');
+        this.props.fetchData();
     }
 
     render(){
