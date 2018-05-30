@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink,Container, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Category from '../Category/Category';
-import CategoryModal from '../Category/Modals/categoryModal';
-import CategorySortByButton from '../Category/CategorySortByButton';
 
 class Tabs extends Component {
     constructor(props) {
@@ -69,12 +67,6 @@ class Tabs extends Component {
                                 </TabPane>
                                 <TabPane tabId="3">
                                     <Row>
-                                        <Col md="4" sm="4" xs="12">
-                                            <CategorySortByButton />
-                                        </Col>
-                                        <Col md="4" sm="4" xs="12">
-                                            <CategoryModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done"/>
-                                        </Col>
                                         <Col sm="12">
                                             <Category/>
                                         </Col>
