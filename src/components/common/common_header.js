@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap';
+import Search from './search';
 class Header extends Component {
     render() {
         return (
@@ -8,7 +9,8 @@ class Header extends Component {
                         <img src="http://alt.ausgrads.academy/static/media/logo.b7468bce.png" width="100%" />
                     </Col>
                     <Col xs="8">
-                        <p>Search Bar</p>
+                        <Search placeholder="Search"/>
+                        <Search placeholder="Search by Category"/>
                     </Col>
                 </Row>
             );
