@@ -81,7 +81,7 @@ const addCategoryError = (error) => ({ type: types.ADD_CATEGORY_ERROR, payload: 
 export function addCategoryAction(name, description){
     
     return(dispatch) => {
-       const request = axios.post("http://ts.ausgrads.academy:8080/categories/add", {name: name, description: description});
+       const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description});
        request
         .then(( response) => {
             if (!response.status == 200) {
