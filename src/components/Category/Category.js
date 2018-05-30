@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryTable from './CategoryTable';
-import { categoriesFetchData, deleteCategory } from '../../actions/categoryActions';
+import { categoriesFetchData, deleteCategory, editCategoryAction } from '../../actions/categoryActions';
 
 class Category extends React.Component{
     constructor() {
         super()
         this.deleteCategory = this.deleteCategory.bind(this);
+        this.editCategory = this.editCategory.bind(this);
     }
     
     componentDidMount(){
@@ -16,7 +17,7 @@ class Category extends React.Component{
     render(){
         return(
             <div>
-                {this.props.categories.length > 0 && <CategoryTable categories={this.props.categories} delete={this.deleteCategory} />}   
+                {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
             </div>
     )}
     // dispatches an action to delete the category using its id
@@ -25,6 +26,12 @@ class Category extends React.Component{
         console.log("parent deleting category");
         console.log(cat);
         this.props.delete(cat.id);
+    }
+
+    editCategory(cat) {
+        console.log("parent editing category");
+        console.log(cat);
+        this.props.edit(cat.id, cat.name, cat.description);
     }
 } 
 
@@ -37,7 +44,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { 
     return {
         fetchData: (url)=> dispatch(categoriesFetchData(url)),
-        delete: (id) => dispatch(deleteCategory(id))
+        delete: (id) => dispatch(deleteCategory(id)),
+        edit: (id, name, description) => dispatch(editCategoryAction(id, name, description))
     };
 };
 
