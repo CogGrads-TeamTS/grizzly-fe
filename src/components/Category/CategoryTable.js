@@ -36,6 +36,7 @@ class CategoryTable extends React.Component {
                 </Row>
                 <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
                 <EditModal ref="editModal" confirm={this.editConfirmed}/>
+                
             </Container>
         )
     }

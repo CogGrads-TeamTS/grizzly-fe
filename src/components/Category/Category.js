@@ -1,31 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CategoryTable from './CategoryTable';
-import { categoriesFetchData, deleteCategory, editCategoryAction } from '../../actions/categoryActions';
 import { Row, Col } from 'reactstrap';
 import CategorySortByButton from './CategorySortByButton';
-import CategoryModal from '../Category/Modals/categoryModal';
+import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
+import CategoryAddModal from './Modals/CategoryAddModal';
 
 class Category extends React.Component{
     constructor() {
         super()
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
+        this.addConfirm = this.addConfirm.bind(this);
     }
     
     componentDidMount(){
-        this.props.fetchData('http://ts.ausgrads.academy:8080/categories');
+        this.props.fetchData();
     }
 
     render(){
         return(
             <div>
+                 <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                 <Row>
                     <Col md="4" sm="4" xs="12">
                         <CategorySortByButton />
                     </Col>
                     <Col md="4" sm="4" xs="12">
-                        <CategoryModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done"/>
                     </Col>
                 </Row>
                 {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
@@ -44,6 +45,10 @@ class Category extends React.Component{
         console.log(cat);
         this.props.edit(cat.id, cat.name, cat.description);
     }
+
+    addConfirm(cat){
+        this.props.add(cat.name, cat.description);
+    }
 } 
 
 const mapStateToProps = (state) => { 
@@ -56,7 +61,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url)=> dispatch(categoriesFetchData(url)),
         delete: (id) => dispatch(deleteCategory(id)),
-        edit: (id, name, description) => dispatch(editCategoryAction(id, name, description))
+        edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
+        add: (name, description) => dispatch(addCategoryAction(name, description))
     };
 };
 

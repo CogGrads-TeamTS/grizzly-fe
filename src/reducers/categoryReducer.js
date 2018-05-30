@@ -18,6 +18,12 @@ export function category(state = {}, action) {
             // Return the updated cloned state
             return _.update(clone, `${action.id}`, (cat) => {return {id:action.id, name: action.name, description: action.description, count: cat.count}});
         
+        case types.ADD_CATEGORY_SUCCESS:
+
+            return{
+                ...state, [action.id]: {id: action.id, name: action.name, description: action.description, count: action.count}
+            }
+
         default:
             return state
     }
@@ -40,4 +46,3 @@ export function categoryHasErrored(state = false, action) {
             return state
     }
 }
-
