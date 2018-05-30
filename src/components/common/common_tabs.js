@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink,Container, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Category from '../Category/Category';
-import CategoryModal from '../Category/categoryModal';
+import CategoryModal from '../Category/Modals/categoryModal';
 import CategorySortByButton from '../Category/CategorySortByButton';
 
 class Tabs extends Component {
