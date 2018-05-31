@@ -13,13 +13,13 @@ class Category extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchData('http://ts.ausgrads.academy:8080/categories');
+        this.props.fetchData();
     }
 
     render(){
         return(
             <div>
-                 <CategoryAddModal buttonLabel="Add Categories" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
+                 <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                 {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
             </div>
     )}

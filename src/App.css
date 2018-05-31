@@ -26,3 +26,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* Search Box Hover */
+.btn-search:hover {
+  color: #fff !important;
+  background-color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+}
+
+.btn-search {
+  color: black !important;
+  background-color: white !important;
+  border-color: white !important;
+  border-right: none;
+}
+
+.btn-right-curve {
+  border: 1px solid #ced4da !important;
+  border-left: none !important;
+}
+
+.btn-left-curve {
+  border: 1px solid #ced4da !important;
+  border-right: none !important;
+}
+/* END Search Box Hover */
