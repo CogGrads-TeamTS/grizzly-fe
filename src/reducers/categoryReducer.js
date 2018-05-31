@@ -25,7 +25,7 @@ export function category(state = {}, action) {
         case types.ADD_CATEGORY_SUCCESS:
 
             return{
-                ...state, [action.id]: {id: action.id, name: action.name, description: action.description, count: action.count}
+                ...state, [action.id]: {id: action.id,name: action.name, description: action.description, count: action.count}
             }
 
         default:

@@ -5,7 +5,7 @@ class Sidebar extends Component {
         return (
         <Row>
                 <Col>
-                    [Sidebar]
+                    <img src="http://alt.ausgrads.academy/static/media/loading.3a0e9bb2.svg" width="100%"/>
                 </Col>
         </Row>
         );
