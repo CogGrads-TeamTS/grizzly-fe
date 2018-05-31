@@ -5,7 +5,7 @@ class Sidebar extends Component {
         return (
         <Row>
                 <Col>
-                    <h1>Hello I am the sidebar component</h1>
+                    [Sidebar]
                 </Col>
         </Row>
         );

@@ -63,12 +63,12 @@ submitAndClose = () => {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Update user details</ModalHeader>
           <ModalBody>
-          <form onSubmit={this.handleSubmit}>
-                    <label>Category Name:</label>
-                    <input name="name" value={this.state.name} style={{width: "60%", float: "right"}} onChange={this.handleNameChange} /><br/>
-                    <label>Category Description:</label>
-                    <input name="description" value={this.state.description} style={{width: "60%", float: "right"}} onChange={this.handleDescriptionChange}/><br/>
-          </form>
+            <form onSubmit={this.handleSubmit}>
+                <label>Category Name:</label>
+                <input name="name" value={this.state.name} style={{width: "60%", float: "right"}} onChange={this.handleNameChange} /><br/>
+                <label>Category Description:</label>
+                <input name="description" value={this.state.description} style={{width: "60%", float: "right"}} onChange={this.handleDescriptionChange}/><br/>
+            </form>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>

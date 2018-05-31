@@ -5,6 +5,8 @@ import { Row, Col } from 'reactstrap';
 import CategorySortByButton from './CategorySortByButton';
 import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import CategoryAddModal from './Modals/CategoryAddModal';
+import { Search } from '../common/search';
+
 
 class Category extends React.Component{
     constructor() {
@@ -12,21 +14,44 @@ class Category extends React.Component{
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
         this.addConfirm = this.addConfirm.bind(this);
+
+        // Change paginate values here
+        this.page = 0;
+        this.size = 20; 
+        this.sort = "";
+
+        this.updateSort = this.updateSort.bind(this);
     }
     
     componentDidMount(){
-        this.props.fetchData();
+        this.props.fetchData(null);
+    }
+
+    fetchDataWithFilter() {
+        this.props.fetchData(this.page, this.size, this.sort)
+    }
+
+    updateSort(sort) {
+        this.sort = sort;
+        this.fetchDataWithFilter();
+    }
+
+    incrementPage() {
+        this.page += 1;
     }
 
     render(){
         return(
             <div>
-                 <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                 <Row>
-                    <Col md="4" sm="4" xs="12">
-                        <CategorySortByButton />
+                    <Col md="6" sm="6" xs="12">
+                        <Search placeholder="Search by Category" />
                     </Col>
-                    <Col md="4" sm="4" xs="12">
+                    <Col md="3" sm="3" xs="12">
+                        <CategorySortByButton update={this.updateSort}/>
+                    </Col>
+                    <Col md="3" sm="3" xs="12">
+                        <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
                 {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
@@ -59,7 +84,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { 
     return {
-        fetchData: (url)=> dispatch(categoriesFetchData(url)),
+        fetchData: (page, size, sort)=> dispatch(categoriesFetchData(page, size, sort)),
         delete: (id) => dispatch(deleteCategory(id)),
         edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         add: (name, description) => dispatch(addCategoryAction(name, description))
