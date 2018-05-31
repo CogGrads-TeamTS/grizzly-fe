@@ -86,7 +86,7 @@ export function addCategoryAction(name, description){
             if (!response.status == 200) {
                 throw Error(response.statusText);
             }
-            dispatch(addCategorySuccess(response.data.id, name, description, 15))//remove hard coded count and replace with server response
+            dispatch(addCategorySuccess(response.data.id, response.data.name, response.data.description, 15))//remove hard coded count and replace with server response
         })
         .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addCategoryError(error));
