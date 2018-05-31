@@ -5,13 +5,13 @@ class Header extends Component {
     render() {
         return (
                 <Row>
-                    <Col xs="4">
+                    <Col xs="5">
                         <img src="http://alt.ausgrads.academy/static/media/logo.b7468bce.png" width="100%" />
                     </Col>
-                    <Col xs="8">
+                    <Col xs="4">
                         <Search placeholder="Search"/>
-                        <Search placeholder="Search by Category"/>
                     </Col>
+                    <Col xs="3"></Col>
                 </Row>
             );
     }
