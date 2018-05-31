@@ -2,28 +2,29 @@ import * as types from './actionTypes';
 
 import axios from 'axios'
 
-const loadCategoriesSuccess = (categories) => ({ type: types.LOAD_CATEGORIES_SUCCESS, categories })
-const loadCategoriesLoading = (loading) => ({ type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:loading }); 
+const API_URL = 'http://ts.ausgrads.academy:8080';
+const loadCategoriesSuccess = (categories) => ({type: types.LOAD_CATEGORIES_SUCCESS, categories})
+const loadCategoriesLoading = (loading) => ({type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:loading}); 
 const loadCategoriesError = (error) => ({ type: types.LOAD_CATEGORIES_ERROR, categoryHasErrored:error });
 
-export function categoriesFetchData(url) {
+export function categoriesFetchData() {
     
     return (dispatch) => {
         dispatch(loadCategoriesLoading(true));
 
-        fetch(url)
+        const request = axios.get(`${API_URL}/categories`);
+        request
             .then((response) => {
-                if (!response.ok) {
+                if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
 
                 dispatch(loadCategoriesLoading(false));
                 
-                return response;
+                return response.data;
             })
-            .then((response) => response.json())
             .then((categories) => dispatch(loadCategoriesSuccess(categories)))
-            .catch(() => dispatch(loadCategoriesError(true)));
+            .catch((error) => dispatch(loadCategoriesError(error)));
     };
 }
 
@@ -35,7 +36,7 @@ export function deleteCategory(id) {
     console.log("delete called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.delete(`http://ts.ausgrads.academy:8080/categories/${id}`);
+        const request = axios.delete(`${API_URL}/categories/${id}`);
         request
             .then((response) => {
                 console.log(response);
@@ -58,7 +59,7 @@ export function editCategoryAction(id, name, description) {
     console.log("Edit Category called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.put(`http://ts.ausgrads.academy:8080/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
         request
             .then((response) => {
                 console.log(response);
@@ -80,7 +81,7 @@ const addCategoryError = (error) => ({ type: types.ADD_CATEGORY_ERROR, payload: 
 export function addCategoryAction(name, description){
     
     return(dispatch) => {
-       const request = axios.post("http://ts.ausgrads.academy:8080/categories/add", {name: name, description: description});
+       const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description});
        request
         .then(( response) => {
             if (!response.status == 200) {

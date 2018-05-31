@@ -46,4 +46,3 @@ export function categoryHasErrored(state = false, action) {
             return state
     }
 }
-
