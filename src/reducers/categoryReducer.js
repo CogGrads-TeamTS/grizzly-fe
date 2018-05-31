@@ -8,7 +8,6 @@ export function category(state = [], action) {
         case types.LOAD_CATEGORIES_SUCCESS:
             const catArray = action.data.content;
             const isFirst = action.data.first;
-            console.log(catArray);
             // returns a new state with the server data and may append to existing state
             return (!isFirst ? [ ...state, ...catArray] : catArray);
             
@@ -29,8 +28,7 @@ export function category(state = [], action) {
         
         case types.ADD_CATEGORY_SUCCESS:
             // returns a new state with the added category appended
-            return [...state, [action.id,action.name,action.description,action.count]]
-
+            return [...state, {id:action.id,name:action.name,description:action.description,count:action.count}];
         default:
             return state
     }
