@@ -38,11 +38,11 @@ class AddModal extends Component {
     }
 
     handleSubmit(event) {
-        this.props.confirm({name: "test", description: "test"});
+        this.props.confirm({name: this.state.name, description: this.state.description});
     }
 
     submitAndClose = () => {
-        this.handleSubmit("")
+        this.handleSubmit()
         this.toggle()
     }
     
