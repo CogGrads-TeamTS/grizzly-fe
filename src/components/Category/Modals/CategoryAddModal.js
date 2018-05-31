@@ -55,9 +55,9 @@ class AddModal extends Component {
                 <ModalBody>
                 <form onSubmit={this.handleSubmit}>
                     <label>Category Name:</label>
-                    <input name="name" placeholder="Add Name" onChange={this.handleNameChange}/><br/>
+                    <input name="name" placeholder="Add Name" onChange={this.handleNameChange} style={{width: "60%", float: "right"}}/><br/>
                     <label>Category Description:</label>
-                    <input name="description" placeholder="Add Description" onChange={this.handleDescriptionChange}/><br/>
+                    <input name="description" placeholder="Add Description" onChange={this.handleDescriptionChange} style={{width: "60%", float: "right"}}/><br/>
                 </form>
                 </ModalBody>
                 <ModalFooter>

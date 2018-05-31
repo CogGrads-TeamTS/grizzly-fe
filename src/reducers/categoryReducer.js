@@ -6,8 +6,12 @@ export function category(state = {}, action) {
     console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
-            return _.mapKeys(action.categories, "id")
+            const categories = action.data.content;
+            const isFirst = action.data.first;
+            const catDict = _.mapKeys(action.data.content, "id");
 
+            return (!isFirst ? { ...state, ...catDict} : catDict);
+            
         case types.DELETE_CATEGORY_SUCCESS:
             // creates a new state that has the deleted category removed 
             return _.omit(state, action.payload);

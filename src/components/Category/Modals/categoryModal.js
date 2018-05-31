@@ -56,9 +56,9 @@ class CategoryModal extends Component {
                 <ModalBody>
                 <form onSubmit={this.handleSubmit}>
                     <label>Category Name:</label>
-                    <input name="name" placeholder="Add Name" onChange={this.handleNameChange}/><br/>
+                    <input name="name" style={{width: "60%", float: "right"}} placeholder="Add Name" onChange={this.handleNameChange}/><br/>              
                     <label>Category Description:</label>
-                    <input name="description" placeholder="Add Description" onChange={this.handleDescriptionChange}/><br/>
+                    <input name="description"  style={{width: "60%", float: "right"}} placeholder="Add Description" onChange={this.handleDescriptionChange}/><br/>
                 </form>
                 </ModalBody>
                 <ModalFooter>
