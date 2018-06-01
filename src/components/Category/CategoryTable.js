@@ -19,7 +19,7 @@ class CategoryTable extends React.Component {
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.props.fetchNextPage}
-                    hasMore={true} //fix this later
+                    hasMore={!this.props.last} 
                     loader={loader}>
 
                     <Row>
