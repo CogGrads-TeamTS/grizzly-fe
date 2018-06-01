@@ -3,7 +3,7 @@ import { Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, ButtonDro
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-import { categoriesFetchData, sortCategory } from '../../actions/categoryActions';
+import { categoriesFetchData } from '../../actions/categoryActions';
 
 
 class CategorySortByButton extends Component {
@@ -75,7 +75,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { 
     return {
         fetchData: (page, size, sort) => dispatch(categoriesFetchData(page, size, sort)),
-        sortChanged: (sortParam) => dispatch(sortCategory(sortParam))
     };
 };
 
