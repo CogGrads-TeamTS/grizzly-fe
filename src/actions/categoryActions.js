@@ -10,7 +10,7 @@ const loadCategoriesError = (error) => ({ type: types.LOAD_CATEGORIES_ERROR, cat
 const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
 const NO_PARAM = "";
-
+const SEARCH = "";
 // export function sortCategory(sortParam) {
 //     return (dispatch) => {
 //         dispatch(sortCategoryChange(sortParam));
@@ -19,10 +19,10 @@ const NO_PARAM = "";
 // }
 
 // Use default values if none are specified
-export function categoriesFetchData(pageNumber = FIRST_PAGE, size = DEFAULT_PAGE_SIZE, sortParam = NO_PARAM) {
+export function categoriesFetchData(search = SEARCH, pageNumber = FIRST_PAGE, size = DEFAULT_PAGE_SIZE, sortParam = NO_PARAM) {
 
     // BUILD URL
-    const urlParams = `search=&page=${pageNumber}&size=${size}&sort=${sortParam}`
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`
     console.log("url param: " + urlParams)
     const url = `${API_URL}/categories/page?${urlParams}`;
 
