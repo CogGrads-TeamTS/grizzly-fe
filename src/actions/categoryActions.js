@@ -7,24 +7,22 @@ const loadCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, d
 const loadCategoriesLoading = (loading) => ({type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:loading}); 
 const loadCategoriesError = (error) => ({ type: types.LOAD_CATEGORIES_ERROR, categoryHasErrored:error });
 
-const sortCategoryChange = (sortParam) => ({ type: types.SORT_CATEGORY_CHANGE, sortParam });
-
 const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
 const NO_PARAM = "";
 
-export function sortCategory(sortParam) {
-    return (dispatch) => {
-        dispatch(sortCategoryChange(sortParam));
-        // dispatch(categoriesFetchData(sortParam));
-    }
-}
+// export function sortCategory(sortParam) {
+//     return (dispatch) => {
+//         dispatch(sortCategoryChange(sortParam));
+//         // dispatch(categoriesFetchData(sortParam));
+//     }
+// }
 
 // Use default values if none are specified
 export function categoriesFetchData(pageNumber = FIRST_PAGE, size = DEFAULT_PAGE_SIZE, sortParam = NO_PARAM) {
 
     // BUILD URL
-    const urlParams = `page=${pageNumber}&size=${size}&sort=${sortParam}`
+    const urlParams = `search=&page=${pageNumber}&size=${size}&sort=${sortParam}`
     console.log("url param: " + urlParams)
     const url = `${API_URL}/categories/page?${urlParams}`;
 

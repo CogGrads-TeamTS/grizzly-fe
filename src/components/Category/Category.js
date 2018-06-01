@@ -14,12 +14,13 @@ class Category extends React.Component{
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
         this.addConfirm = this.addConfirm.bind(this);
+        this.incrementPage = this.incrementPage.bind(this);
 
         // Change paginate values here
         this.page = 0;
         this.size = 20; 
         this.sort = "";
-
+        this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
     }
     
@@ -38,6 +39,7 @@ class Category extends React.Component{
 
     incrementPage() {
         this.page += 1;
+        this.fetchDataWithFilter();
     }
 
     render(){
@@ -54,7 +56,7 @@ class Category extends React.Component{
                         <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
-                {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory}/>}   
+                {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory} fetchNextPage={this.incrementPage}/>}   
             </div>
     )}
     // dispatches an action to delete the category using its id
@@ -74,15 +76,19 @@ class Category extends React.Component{
     addConfirm(cat){
         this.props.add(cat.name, cat.description);
     }
+
+    fetchData(){
+        this.props.fetchData()
+    }
 } 
 
 const mapStateToProps = (state) => { 
     return{
-        categories: state.category
+        categories: state.category.content
     };
 };
 
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = (dispatch) => { console.log(dispatch);
     return {
         fetchData: (page, size, sort)=> dispatch(categoriesFetchData(page, size, sort)),
         delete: (id) => dispatch(deleteCategory(id)),

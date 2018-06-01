@@ -2,14 +2,16 @@ import * as types from '../actions/actionTypes';
 
 import _ from 'lodash';
 
-export function category(state = [], action) { 
+export function category(state = {}, action) { 
     console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
+            const loadState = {...state};
             const catArray = action.data.content;
             const isFirst = action.data.first;
+            loadState.content = (!isFirst ? [ ...state.content, ...catArray] : catArray);
             // returns a new state with the server data and may append to existing state
-            return (!isFirst ? [ ...state, ...catArray] : catArray);
+            return loadState
             
         case types.DELETE_CATEGORY_SUCCESS:
             // returns a new state that has the deleted category removed
