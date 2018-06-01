@@ -6,10 +6,18 @@ export function category(state = {}, action) {
     console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
+            // create a new copy of the current state
             const loadState = {...state};
+            // create array from fetched data from database
             const catArray = action.data.content;
+            // get from response if first page
             const isFirst = action.data.first;
+            // set the category content of the new state
             loadState.content = (!isFirst ? [ ...state.content, ...catArray] : catArray);
+            // set the is first flag of the new state
+            loadState.isFirst = isFirst;
+            loadState.last = action.data.last;
+
             // returns a new state with the server data and may append to existing state
             return loadState
             
