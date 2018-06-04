@@ -32,10 +32,12 @@ class Category extends React.Component{
 
     fetchDataWithFilter() {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
+        console.log('fetch data with filter page: ' + this.page);
     }
 
     updateSort(sort) {
         this.sort = sort;
+        this.page = 0;
         this.fetchDataWithFilter();
     }
 
@@ -64,7 +66,11 @@ class Category extends React.Component{
                         <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
-                {<CategoryTable categories={this.props.categories} delete={this.deleteCategory} edit={this.editCategory} fetchNextPage={this.incrementPage}/>}   
+                {<CategoryTable categories={this.props.categories} 
+                    delete={this.deleteCategory} 
+                    edit={this.editCategory} 
+                    fetchNextPage={this.incrementPage}
+                    last={this.props.last} />}   
             </div>
     )}
     // dispatches an action to delete the category using its id
@@ -92,7 +98,8 @@ class Category extends React.Component{
 
 const mapStateToProps = (state) => { 
     return{
-        categories: state.category.content
+        categories: state.category.content,
+        last: state.category.last
     };
 };
 
