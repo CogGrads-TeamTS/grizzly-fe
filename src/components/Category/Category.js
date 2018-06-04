@@ -19,7 +19,7 @@ class Category extends React.Component{
         // Change paginate values here
         this.page = 0;
         this.size = 20; 
-        this.sort = "";
+        this.sort = "id, desc";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
     }
@@ -34,6 +34,7 @@ class Category extends React.Component{
 
     updateSort(sort) {
         this.sort = sort;
+        this.page = 0;
         this.fetchDataWithFilter();
     }
 
