@@ -7,6 +7,8 @@ import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAct
 import CategoryAddModal from './Modals/CategoryAddModal';
 import Search from './CategorySearch';
 
+import _ from 'lodash';
+
 
 class Category extends React.Component{
     constructor() {
@@ -54,11 +56,14 @@ class Category extends React.Component{
     }
 
     render(){
+        // waits for the user to stop typing before issuing the search request to the server.
+        const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
+        
         return(
             <div>
                 <Row>
                     <Col md="6" sm="6" xs="12">
-                        <Search placeholder="Search by Category" updateSearch={this.updateSearch} />
+                        <Search placeholder="Search by Category" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         <CategorySortByButton update={this.updateSort}/>
