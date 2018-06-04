@@ -25,6 +25,7 @@ export function categoriesFetchData(pageNumber = FIRST_PAGE, size = DEFAULT_PAGE
     const urlParams = `search=&page=${pageNumber}&size=${size}&sort=${sortParam}`
     console.log("url param: " + urlParams)
     const url = `${API_URL}/categories/page?${urlParams}`;
+    console.log(url);
 
     return (dispatch) => {
         dispatch(loadCategoriesLoading(true));
@@ -86,6 +87,7 @@ export function editCategoryAction(id, name, description) {
                 dispatch(editCategorySuccess(id, name, description))
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
+                console.log(error);
                 dispatch(editCategoryError(error));
             })
     };

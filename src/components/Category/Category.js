@@ -29,11 +29,13 @@ class Category extends React.Component{
     }
 
     fetchDataWithFilter() {
+        console.log('fetch data with filter page: ' + this.page);
         this.props.fetchData(this.page, this.size, this.sort)
     }
 
     updateSort(sort) {
         this.sort = sort;
+        this.page = 0;
         this.fetchDataWithFilter();
     }
 

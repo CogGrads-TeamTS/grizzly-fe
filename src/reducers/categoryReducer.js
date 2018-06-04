@@ -26,19 +26,24 @@ export function category(state = {}, action) {
             return state.filter(cat => cat.id !== action.payload);
             
         case types.EDIT_CATEGORY_SUCCESS:
-            // find index of category in state
-            var indexToEdit = _.findIndex(state, { id: action.id });
             // create a new state
-            const newState = [...state];
+            const newState = {...state};
+            // find index of category in state
+            var indexToEdit = _.findIndex(newState.content, { id: action.id });
+            console.log(indexToEdit);
             // update the category in the new state using the index.
-            newState[indexToEdit].name = action.name;
-            newState[indexToEdit].description = action.description;
+            newState.content[indexToEdit].name = action.name;
+            newState.content[indexToEdit].description = action.description;
             // return the new state with the updated category
             return newState;
         
         case types.ADD_CATEGORY_SUCCESS:
+            // create a new state
+            const addState = {...state};
+            addState.content = [...addState.content, {id:action.id,name:action.name,description:action.description,count:action.count}];
+            
             // returns a new state with the added category appended
-            return [...state, {id:action.id,name:action.name,description:action.description,count:action.count}];
+            return addState;
         default:
             return state
     }
