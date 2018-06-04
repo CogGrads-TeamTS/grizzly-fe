@@ -29,9 +29,7 @@
 
 /* Search Box Hover */
 .btn-search:hover {
-  color: #fff !important;
-  background-color: #17a2b8 !important;
-  border-color: #17a2b8 !important;
+  cursor: default !important;
 }
 
 .btn-search {
@@ -39,6 +37,7 @@
   background-color: white !important;
   border-color: white !important;
   border-right: none;
+  cursor: default !important;
 }
 
 .btn-right-curve {

@@ -32,7 +32,7 @@ class Category extends React.Component{
 
     fetchDataWithFilter() {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
-        console.log('fetch data with filter page: ' + this.page);
+        console.log('fetch data with filter page: ' + this.search);
     }
 
     updateSort(sort) {
@@ -44,6 +44,7 @@ class Category extends React.Component{
     updateSearch(search) {
         console.log("search");
         this.search = search;
+        this.page = 0;
         this.fetchDataWithFilter();
     }
 
