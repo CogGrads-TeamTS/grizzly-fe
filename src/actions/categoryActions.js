@@ -64,6 +64,7 @@ export function deleteCategory(id) {
                 dispatch(deleteCategorySuccess(id))
             })
             .catch((error) => {
+                console.log(error);
                 dispatch(deleteCategoryError(error));
             })
     };
