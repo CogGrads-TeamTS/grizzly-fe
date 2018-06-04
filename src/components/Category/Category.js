@@ -31,7 +31,7 @@ class Category extends React.Component{
     }
 
     fetchDataWithFilter() {
-        this.props.fetchData(this.page, this.size, this.sort, this.search)
+        this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
 
     updateSort(sort) {
@@ -55,7 +55,7 @@ class Category extends React.Component{
             <div>
                 <Row>
                     <Col md="6" sm="6" xs="12">
-                        <Search placeholder="Search by Category" update={this.updateSearch} />
+                        <Search placeholder="Search by Category" updateSearch={this.updateSearch} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         <CategorySortByButton update={this.updateSort}/>

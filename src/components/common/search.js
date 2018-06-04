@@ -19,8 +19,9 @@ class Search extends React.Component {
   }
 
   searchValue = event => {
-    console.log(event.currentTarget.value + "hi");
-    this.props.update(event.currentTarget.value);
+    this.props.updateSearch(event.target.value);
+    console.log(event.currentTarget.value);
+    
   }
  
   // Need to create a handleSearchbarChange as like in CategoryAddModal, looking for changes and setting state.
@@ -36,10 +37,10 @@ class Search extends React.Component {
           name="search" 
           id="exampleSearch" 
           placeholder={this.placeholder} 
+          onChange={this.searchValue} 
           />
             <InputGroupAddon addonType="prepend">
               <Button 
-              onClick={this.searchValue} 
               className="btn-search btn-right-curve">
               <i className="fa fa-search"></i>
               </Button>
