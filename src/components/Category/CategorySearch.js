@@ -7,14 +7,17 @@ import {
   Input,
   Button,
  } from 'reactstrap';
- import { connect } from 'react-redux';
+import { connect } from 'react-redux';
  import { categoriesFetchData } from '../../actions/categoryActions';
+
+const ENTER_KEY = 13;
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     placeholder : props.placeholder;
+
     this.searchValue = this.searchValue.bind(this);
   }
 
@@ -22,12 +25,14 @@ class Search extends React.Component {
     this.props.updateSearch(event.target.value);
     console.log(event.currentTarget.value);
   }
- 
-  // Need to create a handleSearchbarChange as like in CategoryAddModal, looking for changes and setting state.
 
+  onFormSubmit = event => {
+    event.preventDefault();
+  }
+ 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.onFormSubmit}>
         <FormGroup>
         <InputGroup>
           <Input 

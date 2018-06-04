@@ -5,7 +5,7 @@ import { Row, Col } from 'reactstrap';
 import CategorySortByButton from './CategorySortByButton';
 import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import CategoryAddModal from './Modals/CategoryAddModal';
-import Search from '../common/search';
+import Search from './CategorySearch';
 
 
 class Category extends React.Component{
