@@ -3,7 +3,7 @@ import * as types from './actionTypes';
 import axios from 'axios'
 
 const API_URL = 'http://ts.ausgrads.academy:8080';
-const loadCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, data})
+const loadCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, data});
 const loadCategoriesLoading = (loading) => ({type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:loading}); 
 const loadCategoriesError = (error) => ({ type: types.LOAD_CATEGORIES_ERROR, categoryHasErrored:error });
 
@@ -22,8 +22,8 @@ const SEARCH = "";
 export function categoriesFetchData(search = SEARCH, pageNumber = FIRST_PAGE, size = DEFAULT_PAGE_SIZE, sortParam = NO_PARAM) {
 
     // BUILD URL
-    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`
-    console.log("url param: " + urlParams)
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    console.log("url param: " + urlParams);
     const url = `${API_URL}/categories/page?${urlParams}`;
     console.log(url);
 

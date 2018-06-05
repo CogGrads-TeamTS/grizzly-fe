@@ -16,10 +16,10 @@ class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs="12" sm="4">
+          <Col xs="12" sm="3">
             <Sidebar />
           </Col>
-          <Col xs="12" sm="8">
+          <Col xs="12" sm="9">
             <Routes />
           </Col>
         </Row>

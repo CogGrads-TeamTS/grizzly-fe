@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-import vendors from './vendorReducer';
+import {vendor,vendorHasErrored,vendorIsLoading} from './vendorReducer';
 import { category, categoryHasErrored, categoryIsLoading } from './categoryReducer';
 
 const rootReducer = combineReducers({
-    vendors,
     category:category,
     categoryHasErrored:categoryHasErrored,
     categoryIsLoading:categoryIsLoading,
+    vendor:vendor,
+    vendorHasErrored:vendorHasErrored,
+    vendorIsLoading:vendorIsLoading
 });
 
 export default rootReducer;

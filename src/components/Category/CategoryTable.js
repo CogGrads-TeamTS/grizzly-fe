@@ -24,15 +24,16 @@ class CategoryTable extends React.Component {
 
                     <Row>
                         <Col md="12" sm="12">
-                            <Table>
+                            <div className={"table-responsive"}>
+                            <Table className={"table table-hover"}>
                                 <thead>
                                 <tr>
-                                    <th>Category</th>
-                                    <th>Description</th>
-                                    <th>Products</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th scope={"col"}>Category</th>
+                                    <th scope={"col"}>Description</th>
+                                    <th scope={"col"}>Products</th>
+                                    <th scope={"col"}></th>
+                                    <th scope={"col"}></th>
+                                    <th scope={"col"}></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,13 +43,15 @@ class CategoryTable extends React.Component {
                                     )}
                                 </tbody>
                             </Table>
+                            </div>
                         </Col>
                     </Row>
                 </InfiniteScroll>
                 <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
                 <EditModal ref="editModal" confirm={this.editConfirmed}/>
-                
             </Container>
+                
+
         )
     }
 
