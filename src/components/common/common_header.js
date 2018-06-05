@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap';
-import Search from './search';
+import GlobalSearch from './global_search';
+
 class Header extends Component {
     render() {
         return (
@@ -9,7 +10,7 @@ class Header extends Component {
                         <img src="http://alt.ausgrads.academy/static/media/logo.b7468bce.png" width="100%" />
                     </Col>
                     <Col xs="4">
-                        <Search placeholder="Search"/>
+                        <GlobalSearch placeholder="Search"/>
                     </Col>
                     <Col xs="3"></Col>
                 </Row>

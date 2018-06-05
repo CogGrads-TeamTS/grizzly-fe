@@ -5,7 +5,9 @@ import { Row, Col } from 'reactstrap';
 import CategorySortByButton from './CategorySortByButton';
 import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import CategoryAddModal from './Modals/CategoryAddModal';
-import { Search } from '../common/search';
+import Search from './CategorySearch';
+
+import _ from 'lodash';
 
 
 class Category extends React.Component{
@@ -20,8 +22,10 @@ class Category extends React.Component{
         this.page = 0;
         this.size = 20; 
         this.sort = "";
+        this.search = "";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
+        this.updateSearch = this.updateSearch.bind(this);
     }
     
     componentDidMount(){
@@ -29,11 +33,20 @@ class Category extends React.Component{
     }
 
     fetchDataWithFilter() {
-        this.props.fetchData(this.page, this.size, this.sort)
+        this.props.fetchData(this.search, this.page, this.size, this.sort)
+        console.log('fetch data with filter page: ' + this.search);
     }
 
     updateSort(sort) {
         this.sort = sort;
+        this.page = 0;
+        this.fetchDataWithFilter();
+    }
+
+    updateSearch(search) {
+        console.log("search");
+        this.search = search;
+        this.page = 0;
         this.fetchDataWithFilter();
     }
 
@@ -43,11 +56,14 @@ class Category extends React.Component{
     }
 
     render(){
+        // waits for the user to stop typing before issuing the search request to the server.
+        const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
+        
         return(
             <div>
                 <Row>
                     <Col md="6" sm="6" xs="12">
-                        <Search placeholder="Search by Category" />
+                        <Search placeholder="Search by Category" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         <CategorySortByButton update={this.updateSort}/>
@@ -95,7 +111,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { console.log(dispatch);
     return {
-        fetchData: (page, size, sort)=> dispatch(categoriesFetchData(page, size, sort)),
+        fetchData: (search, page, size, sort)=> dispatch(categoriesFetchData(search, page, size, sort)),
         delete: (id) => dispatch(deleteCategory(id)),
         edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         add: (name, description) => dispatch(addCategoryAction(name, description))
