@@ -9,14 +9,9 @@ class VendorTable extends React.Component{
         const divStyle = {
             marginLeft: '50%',
         };
-        const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
+      // const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
         return (
             <Container>
-                <InfiniteScroll
-                    pageStart={0}
-                    loadMore={this.props.fetchNextPage}
-                    hasMore={!this.props.last}
-                    loader={loader}>
 
                     <Row>
                         <Col md="12" sm="12">
@@ -34,16 +29,17 @@ class VendorTable extends React.Component{
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {
-                                        _.map(this.props.vendors, ven => {
-                                            return (<VendorRows key={ven.id} vendor={ven} />)}
-                                        )}
+
+                                    {   _.map(this.props.vendors, ven => {
+                                           // console.log(ven);
+                                            return (<VendorRows vendor={ven} />)}
+                                        )
+                                    }
                                     </tbody>
                                 </Table>
                             </div>
                         </Col>
                     </Row>
-                </InfiniteScroll>
 
             </Container>
         )

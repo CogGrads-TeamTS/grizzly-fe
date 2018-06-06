@@ -2,13 +2,14 @@ import React from 'react';
 import { Button } from 'reactstrap';
 
 const VendorRows= (props) => {
-    const  vendor  = props.vendor;
+    console.log(props.vendor);
+   // const  vendor  = props.vendor;
     return (
         <tr>
-            <td>{vendor.name}</td>
-            <td>{vendor.Id}</td>
-            <td>{vendor.location}</td>
-            <td>{vendor.contact}</td>
+            <td>{props.vendor.id}</td>
+            <td>{props.vendor.name}</td>
+            <td>{props.vendor.location}</td>
+            <td>{props.vendor.contact}</td>
             <td><Button color="info">Edit</Button></td>
             <td><Button color="secondary">Block </Button></td>
             <td><Button color="danger">Delete</Button></td>

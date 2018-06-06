@@ -62,7 +62,7 @@ class Tabs extends Component {
                                 <TabPane tabId="2">
                                     <Row>
                                         <Col sm="12">
-                                            <h4><Vendor/></h4>
+                                            <Vendor/>
                                         </Col>
                                     </Row>
                                 </TabPane>

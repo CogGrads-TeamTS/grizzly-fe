@@ -1,16 +1,18 @@
 {
-  "categories": [
-    {
-      "id": 1,
-      "name": "Test Category",
-      "description": "This is a test category.",
-      "products": 12
-    },
-    {
-      "id": 2,
-      "name": "Second Category",
-      "description": "This is another test category.",
-      "products": 1392
+  "/vendor": {
+    "get":  [
+        {
+          "id": 1,
+          "name": "Test Vendor",
+          "location": "Melbourne",
+          "contact": 78945672
+        },
+        {
+          "id": 2,
+          "name": "Test Vendor 2",
+          "location": "Melbourne",
+          "contact": 78945672
+        }
+      ]
     }
-  ]
-}
+  }

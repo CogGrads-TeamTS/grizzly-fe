@@ -55,7 +55,7 @@ class Category extends React.Component{
         this.fetchDataWithFilter();
     }
 
-    render(){
+    render(){console.log(this.props.categories);
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
         
@@ -74,7 +74,7 @@ class Category extends React.Component{
                 </Row>
                 <Row>
                     <Col md="12" sm="12" xs="12">
-                {<CategoryTable categories={this.props.categories} 
+                {<CategoryTable categories={this.props.categories}
                     delete={this.deleteCategory} 
                     edit={this.editCategory} 
                     fetchNextPage={this.incrementPage}

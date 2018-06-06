@@ -9,13 +9,15 @@ class Vendor extends React.Component{
         super();
     }
     componentDidMount(){
-        this.props.fetchData(null);
+        this.props.fetchData();
     }
 
     render(){
+        console.log("vendor component")
+        console.log(this.props.vendors);
         return(
             <div>
-            {<VendorTable vendors = {this.props.vendors}/>}
+                { <VendorTable vendors={this.props.vendors} />}
             </div>
         )};
     fetchData(){
@@ -26,15 +28,16 @@ class Vendor extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        vendors: state.vendor.content,
-        last: state.vendor.last
+        vendors: state.vendor.vendors,
+       // last: state.vendor.last
     };
 };
 
-const mapDispatchToProps = (dispatch) => { console.log(dispatch);
+const mapDispatchToProps = (dispatch) => { //console.log(dispatch);
     return {
-        fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort)),
-    };
+       fetchData: ()=>dispatch(vendorsFetchData())
+        // fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort))
+    }
 };
 
 export default connect(mapStateToProps,mapDispatchToProps) (Vendor);

@@ -38,7 +38,7 @@ class CategoryTable extends React.Component {
                                 </thead>
                                 <tbody>
                                     {  
-                                        _.map(this.props.categories, cat => {
+                                        _.map(this.props.categories, cat => { //console.log(this.props.categories);
                                         return (<CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />)}
                                     )}
                                 </tbody>

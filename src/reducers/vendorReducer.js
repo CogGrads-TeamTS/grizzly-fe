@@ -1,18 +1,21 @@
 import * as types from '../actions/actionTypes';
 
-export function vendor(state = {}, action) {
+export function vendor(state = [], action) {
+
+    console.log(action.data);
     switch (action.type) {
         case types.LOAD_VENDORS_SUCCESS:
-            const vendorArray=action.vendors.content;
-            const vendorFirst = action.vendors.first;
-            const vendorLast = action.vendors.last;
+          //  const vendorArray=action.data.content;
+          //  const vendorFirst = action.data.first;
+           // const vendorLast = action.data.last;
 
             // create a new copy of the current state
             return {
-                ...state,
-                content: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
-                vendorFirst,
-                vendorLast
+            //    ...state,
+            //    content: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
+             //   vendorFirst,
+              //  vendorLast
+                vendors:action.data
             };
         default:
             return state

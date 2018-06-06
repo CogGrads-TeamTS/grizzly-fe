@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 
-const CategoryRows = (props) => {
+const CategoryRows = (props) => { //console.log(props.category);
     const  category  = props.category;
     return (
     <tr>
