@@ -29,7 +29,7 @@ class Category extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchData(null);
+        this.props.fetchData();
     }
 
     fetchDataWithFilter() {
