@@ -8,7 +8,7 @@ class Header extends Component {
         return (
                 <Row>
                     <Col xs="5">
-                        <img src={grizzlogo} width="100%" />
+                        <img src={grizzlogo} width="60%" />
                     </Col>
                     <Col xs="4">
                         <GlobalSearch placeholder="Search"/>

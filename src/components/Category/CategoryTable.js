@@ -23,6 +23,21 @@ class CategoryTable extends React.Component {
                 <div></div>
             </div>
         </div>;
+        
+        // This method is used to determine what rows to load in table based on categories length using a ternary operator
+        const tableIsEmpty = _.isEmpty(this.props.categories) ?
+            (  
+                <tr>
+                    <td colSpan={6}>There are no categories to display.</td>
+                </tr>
+            ) : (
+                _.map(this.props.categories, cat => {
+                    return (
+                        <CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />   
+                    )
+                })
+            );
+
         return (
             <Container>
                 <InfiniteScroll
@@ -36,18 +51,16 @@ class CategoryTable extends React.Component {
                             <Table>
                                 <thead>
                                 <tr>
-                                    <th>Category</th>
+                                    <th width="20px">Category</th>
                                     <th>Description</th>
-                                    <th># Products</th>
-                                    <th colSpan={3}></th>
+                                    <th colSpan={2}># Products</th>
+                                    <th colSpan={2}></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    {  
-                                        _.map(this.props.categories, cat => {
-                                        return (<CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />)}
-                                    )}
+                                <tbody> 
+                                    {tableIsEmpty}
                                 </tbody>
+
                             </Table>
                         </Col>
                     </Row>
