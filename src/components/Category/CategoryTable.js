@@ -13,7 +13,16 @@ class CategoryTable extends React.Component {
         const divStyle = {
             marginLeft: '50%',
           };
-        const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
+        const loader = 
+        <div className="loader" key="loader" style={divStyle}>
+            <div className="flip-preloader example-3">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>;
         return (
             <Container>
                 <InfiniteScroll
@@ -29,10 +38,8 @@ class CategoryTable extends React.Component {
                                 <tr>
                                     <th>Category</th>
                                     <th>Description</th>
-                                    <th>Products</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th># Products</th>
+                                    <th colSpan={3}></th>
                                 </tr>
                                 </thead>
                                 <tbody>
