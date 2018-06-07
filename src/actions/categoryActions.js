@@ -2,8 +2,10 @@ import * as types from './actionTypes';
 
 import axios from 'axios'
 
-const API_URL = 'http://ts.ausgrads.academy:8080';
-const loadCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, data});
+
+const API_URL = 'http://ts.ausgrads.academy:8765/';
+const loadCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, data})
+
 const loadCategoriesLoading = (loading) => ({type: types.LOAD_CATEGORIES_LOADING, categoryIsLoading:loading}); 
 const loadCategoriesError = (error) => ({ type: types.LOAD_CATEGORIES_ERROR, categoryHasErrored:error });
 
