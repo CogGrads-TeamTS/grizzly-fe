@@ -51,10 +51,10 @@ class CategoryTable extends React.Component {
                             <Table>
                                 <thead>
                                 <tr>
-                                    <th width="20px">Category</th>
+                                    <th>Category</th>
                                     <th>Description</th>
-                                    <th colSpan={2}># Products</th>
-                                    <th colSpan={2}></th>
+                                    <th>Products</th>
+                                    <th colSpan={3}></th>
                                 </tr>
                                 </thead>
                                 <tbody> 
