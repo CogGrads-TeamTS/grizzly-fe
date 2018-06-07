@@ -1,18 +1,18 @@
+
 {
-  "/vendor": {
-    "get":  [
-        {
-          "id": 1,
-          "name": "Test Vendor",
-          "location": "Melbourne",
-          "contact": 78945672
-        },
-        {
-          "id": 2,
-          "name": "Test Vendor 2",
-          "location": "Melbourne",
-          "contact": 78945672
-        }
-      ]
-    }
-  }
+  "vendor": [
+    {"id": 1,
+      "name": "Test Vendor",
+      "location": "Melbourne",
+      "contact": 78945672},
+    {"id": 2,
+      "name": "Test Vendor 2",
+      "location": "Melbourne",
+      "contact": 78945672},
+    {"id": 3,
+      "name": "Test Vendor 3",
+      "location": "Melbourne",
+      "contact": 78945672}
+
+  ]
+}

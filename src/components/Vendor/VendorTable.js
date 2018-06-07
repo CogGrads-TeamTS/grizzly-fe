@@ -19,9 +19,9 @@ class VendorTable extends React.Component{
                                 <Table className={"table table-hover"}>
                                     <thead>
                                     <tr>
-                                        <th scope={"col"}>Vendor Name</th>
                                         <th scope={"col"}>Id</th>
-                                        <th scope={"col"}>Location</th>
+                                        <th scope={"col"}>Vendor Name</th>
+                                        <th scope={"col"}>Email</th>
                                         <th scope={"col"}>Contact</th>
                                         <th scope={"col"}></th>
                                         <th scope={"col"}></th>

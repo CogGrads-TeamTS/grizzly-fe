@@ -8,7 +8,7 @@ const VendorRows= (props) => {
         <tr>
             <td>{props.vendor.id}</td>
             <td>{props.vendor.name}</td>
-            <td>{props.vendor.location}</td>
+            <td>{props.vendor.email}</td>
             <td>{props.vendor.contact}</td>
             <td><Button color="info">Edit</Button></td>
             <td><Button color="secondary">Block </Button></td>
