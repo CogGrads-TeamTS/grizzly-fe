@@ -17,7 +17,7 @@ const SEARCH = "";
 export function vendorsFetchData(){
    // const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
     //const url = `${API_URL}/vendors/page?${urlParams}`;
-    const  url ='http://localhost:3000/vendor';
+    const  url ='http://localhost:3004/vendor';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadVendorsLoading(true));
@@ -34,4 +34,29 @@ export function vendorsFetchData(){
             .then((data)=>dispatch(loadVendorsSuccess(data)))
             .catch((error)=>dispatch(loadVendorsError(error)));
     }
+}
+
+const editVendorSuccess = (payload) => ({ type: types.EDIT_VENDOR_SUCCESS, payload });
+const editVendorLoading = (loading) => ({ type: types.EDIT_VENDOR_LOADING, payload: loading });
+const editVendorError = (error) => ({ type: types.EDIT_VENDOR_ERROR, payload: error });
+
+export function editVendorAction(payload) {
+    console.log( payload);
+
+    return (dispatch) => {
+        // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`http://localhost:3004/vendor/${payload.id}`, payload );
+        request
+            .then((response) => {
+                console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(editVendorSuccess(payload))
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                console.log(error);
+                dispatch(editVendorError(error));
+            })
+    };
 }

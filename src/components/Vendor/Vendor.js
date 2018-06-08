@@ -1,42 +1,43 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import VendorTable from './VendorTable';
-import {vendorsFetchData} from "../../actions/vendorActions";
+import {vendorsFetchData, editVendorAction} from "../../actions/vendorActions";
 
 class Vendor extends React.Component{
-    constructor()
-    {
+    constructor() {
         super();
+
+        this.editVendor = this.editVendor.bind(this);
     }
     componentDidMount(){
         this.props.fetchData();
     }
 
     render(){
-        console.log("vendor component")
-        console.log(this.props.vendors);
         return(
             <div>
-                { <VendorTable vendors={this.props.vendors} />}
+                { <VendorTable vendors={this.props.vendors} edit={this.editVendor}/>}
             </div>
         )};
     fetchData(){
         this.props.fetchData();
     }
+
+    editVendor(ven) {
+        this.props.edit(ven);
+    }
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
     return{
-        vendors: state.vendor.vendors,
-       // last: state.vendor.last
+        vendors: state.vendor.content,
     };
 };
 
-const mapDispatchToProps = (dispatch) => { //console.log(dispatch);
+const mapDispatchToProps = (dispatch) => { 
     return {
-       fetchData: ()=>dispatch(vendorsFetchData())
-        // fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort))
+       fetchData: ()=>dispatch(vendorsFetchData()),
+       edit: (payload) => dispatch(editVendorAction(payload))
     }
 };
 

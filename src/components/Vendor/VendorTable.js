@@ -3,6 +3,8 @@ import VendorRows from './VendorRows';
 import { Table,Container, Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroller';
+import VendorEditModal from './Modals/VendorEditModal';
+import EditModal from './../Category/Modals/CategoryEditModal';
 
 class VendorTable extends React.Component{
     render() {
@@ -31,8 +33,8 @@ class VendorTable extends React.Component{
                                     <tbody>
 
                                     {   _.map(this.props.vendors, ven => {
-                                           // console.log(ven);
-                                            return (<VendorRows vendor={ven} />)}
+                                           console.log(ven);
+                                            return (<VendorRows key={ven.id} vendor={ven} edit={this.editClicked}/>)}
                                         )
                                     }
                                     </tbody>
@@ -40,11 +42,17 @@ class VendorTable extends React.Component{
                             </div>
                         </Col>
                     </Row>
-
+                    <VendorEditModal ref="editModal" confirm={this.editConfirmed}/>
             </Container>
         )
     }
-
+    editConfirmed = (ven) => { console.log(ven);
+        console.log("Edit confirmed: ");
+        this.props.edit(ven);
+    }
+    editClicked = (ven) => { console.log(ven);
+        this.refs.editModal.openModal(ven);
+    }
 
 }
 export default VendorTable;

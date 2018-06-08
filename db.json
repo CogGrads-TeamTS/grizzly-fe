@@ -1,18 +1,23 @@
 {
-  "/vendor": {
-    "get":  [
-        {
-          "id": 1,
-          "name": "Test Vendor",
-          "location": "Melbourne",
-          "contact": 78945672
-        },
-        {
-          "id": 2,
-          "name": "Test Vendor 2",
-          "location": "Melbourne",
-          "contact": 78945672
-        }
-      ]
+  "vendor": [
+    {
+      "id": 1,
+      "name": "testing",
+      "about": "",
+      "email": "",
+      "webpage": "",
+      "contact": 78945672,
+      "portfolioURL": ""
+    },
+    {
+      "id": 2,
+      "name": "test vendor",
+      "about": "",
+      "email": "",
+      "webpage": "",
+      "contact": 78945672,
+      "address": "Melbourne",
+      "portfolioURL": ""
     }
-  }
+  ]
+}
