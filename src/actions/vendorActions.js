@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import axios from 'axios'
+import axios from 'axios';
 
 const API_URL = 'http://ts.ausgrads.academy:8765';
 
@@ -16,8 +16,8 @@ const SEARCH = "";
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
 export function vendorsFetchData(){
    // const urlParams = `search=&page=&size=&sort=`;
-    const url = `${API_URL}/vendors`;
-    //const  url ='http://localhost:3005/vendor/';
+    //const url = `${API_URL}/vendors`;
+    const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadVendorsLoading(true));
@@ -47,8 +47,12 @@ const addVendorError = (error) => ({type : types.ADD_VENDORS_ERROR, payload: err
 export function addVendorAction(name,about,email,webpage,contact,address,portfolioURL){
 
     return(dispatch) => {
-        const request = axios.post(`${API_URL}/vendors/add`, {name: name, about: about, email:email,webpage:webpage,
+
+        //const  url ='http://localhost:3005/vendor/add';
+        const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
             contact:contact, address:address,  portfolioURL:portfolioURL });
+       // const request = axios.post(`${API_URL}/vendors/add`, {name: name, about: about, email:email,webpage:webpage,
+            //contact:contact, address:address,  portfolioURL:portfolioURL });
         request
             .then(( response) => {
                 if (!response.status == 200) {
@@ -68,4 +72,26 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
                 dispatch(addVendorError(error));
             })
     };
+}
+
+const deleteVendorSuccess =(id) => ({type:types.DELETE_VENDORS_SUCCESS, payload:id});
+const deleteVendorError = (error) => ({type:types.DELETE_VENDORS_ERROR ,payload:error});
+
+export function deleteVendorAction(id) {
+    console.log(id);
+    return(dispatch) => {
+        const request = axios.delete(`http://localhost:3005/vendor/${id}`);
+        //const request = axios.delete(`${API_URL}/vendors/${id}`);
+        request
+            .then((response) =>{
+                if(!response.status == 200){
+                    throw Error(response.statusText);
+                }
+                dispatch(deleteVendorSuccess(id));
+            })
+            .catch((error) =>{
+                dispatch(deleteVendorError(error));
+            })
+    };
+
 }

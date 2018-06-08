@@ -1,10 +1,16 @@
 import React from 'react';
 import VendorRows from './VendorRows';
 import { Table,Container, Row, Col } from 'reactstrap';
+import ConfirmVendorDeleteModal from './Modals/VendorConfirmDeleteModal';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroller';
 
 class VendorTable extends React.Component{
+
+    constructor() {
+        super();
+        this.deleteVendorClicked = this.deleteVendorClicked.bind(this);
+    }
     render() {
         const divStyle = {
             marginLeft: '50%',
@@ -12,7 +18,6 @@ class VendorTable extends React.Component{
       // const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
         return (
             <Container>
-
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
@@ -30,9 +35,9 @@ class VendorTable extends React.Component{
                                     </thead>
                                     <tbody>
 
-                                    {   _.map(this.props.vendors, ven => {
-                                           // console.log(ven);
-                                            return (<VendorRows vendor={ven} />)}
+                                    {   _.map(this.props.vendors, vend => {
+
+                                            return (<VendorRows key = {vend.id} vendor={vend} delete={this.deleteVendorClicked} />)}
                                         )
                                     }
                                     </tbody>
@@ -40,11 +45,21 @@ class VendorTable extends React.Component{
                             </div>
                         </Col>
                     </Row>
-
+                    <ConfirmVendorDeleteModal ref = 'deleteVendorModal' confirm = {this.deleteVendorConfirmed}/>
             </Container>
         )
     }
+deleteVendorClicked = (vend) =>
+{
+    console.log("delete vendor clicked");
+    console.log(vend);
+    this.refs.deleteVendorModal.openModal(vend);
+}
 
+deleteVendorConfirmed = (vend) =>
+{console.log(vend);
+    this.props.delete(vend);
+}
 
 }
 export default VendorTable;

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import VendorTable from './VendorTable';
-import {vendorsFetchData,addVendorAction} from "../../actions/vendorActions";
+import {vendorsFetchData,addVendorAction,deleteVendorAction} from "../../actions/vendorActions";
 import VendorAddModal from './Modals/VendorAddModal'
 
 class Vendor extends React.Component{
@@ -10,6 +10,7 @@ class Vendor extends React.Component{
     {
         super();
         this.addConfirm = this.addConfirm.bind(this);
+        this.deleteVendors = this.deleteVendors.bind(this);
     }
     componentDidMount(){
         this.props.fetchData();
@@ -33,7 +34,9 @@ class Vendor extends React.Component{
                 </Row>
                 <Row>
                     <Col md="12">
-                        { <VendorTable vendors={this.props.vendors} />}
+                        { <VendorTable
+                            vendors={this.props.vendors} delete={this.deleteVendors}
+                        />}
                     </Col>
                 </Row>
             </div>
@@ -45,6 +48,12 @@ class Vendor extends React.Component{
 
     addConfirm(vend){
         this.props.add(vend.name, vend.about,vend.email,vend.webpage,vend.contact,vend.address,vend.portfolioURL);
+    }
+    deleteVendors(vend)
+    {
+        console.log("parent deleting category");
+        console.log(vend);
+        this.props.delete(vend.id);
     }
 }
 
@@ -61,8 +70,8 @@ const mapDispatchToProps = (dispatch) => { //console.log(dispatch);
     return {
         // fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort))
        fetchData: ()=>dispatch(vendorsFetchData()),
-       add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL))
-
+       add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL)),
+        delete: (id) => dispatch(deleteVendorAction(id))
     }
 };
 
