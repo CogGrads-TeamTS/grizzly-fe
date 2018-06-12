@@ -16,6 +16,60 @@ html, body {
   padding-top: .375rem;
   padding-bottom: .375rem;
 }
+
+/*Header & Nav styling */
+.header{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+
+.header {
+  position: relative;
+  height: 70px;
+  width: 600px;
+  background: #fff;
+}
+
+.header:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 70px;
+  background-color: #071D67;
+  left: 50%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+
+}
+.header:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 70px;
+  background-color: #556FC4;
+  left: 57%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+
+}
+.nav-row:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 70px;
+  background-color: #2144B9;
+  left: 53%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+
+}
+
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
