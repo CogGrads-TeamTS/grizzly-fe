@@ -3,7 +3,7 @@ import VendorRows from './VendorRows';
 import { Table,Container, Row, Col } from 'reactstrap';
 import ConfirmVendorDeleteModal from './Modals/VendorConfirmDeleteModal';
 import _ from 'lodash';
-import InfiniteScroll from 'react-infinite-scroller';
+import VendorEditModal from './Modals/VendorEditModal';
 
 class VendorTable extends React.Component{
 
@@ -37,7 +37,7 @@ class VendorTable extends React.Component{
 
                                     {   _.map(this.props.vendors, vend => {
 
-                                            return (<VendorRows key = {vend.id} vendor={vend} delete={this.deleteVendorClicked} />)}
+                                            return (<VendorRows key = {vend.id} vendor={vend} delete={this.deleteVendorClicked} edit={this.editClicked}/>)}
                                         )
                                     }
                                     </tbody>
@@ -46,6 +46,7 @@ class VendorTable extends React.Component{
                         </Col>
                     </Row>
                     <ConfirmVendorDeleteModal ref = 'deleteVendorModal' confirm = {this.deleteVendorConfirmed}/>
+                    <VendorEditModal ref="editModal" confirm={this.editConfirmed}/>
             </Container>
         )
     }
@@ -59,6 +60,14 @@ deleteVendorClicked = (vend) =>
 deleteVendorConfirmed = (vend) =>
 {console.log(vend);
     this.props.delete(vend);
+}
+
+editConfirmed = (ven) => {
+    console.log("Edit confirmed: ");
+    this.props.edit(ven);
+}
+editClicked = (ven) => {
+    this.refs.editModal.openModal(ven);
 }
 
 }

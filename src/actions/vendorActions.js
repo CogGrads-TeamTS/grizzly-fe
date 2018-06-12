@@ -16,8 +16,8 @@ const SEARCH = "";
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
 export function vendorsFetchData(){
    // const urlParams = `search=&page=&size=&sort=`;
-    //const url = `${API_URL}/vendors`;
-    const  url ='http://localhost:3005/vendor/';
+    const url = `${API_URL}/vendors`;
+    //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadVendorsLoading(true));
@@ -36,6 +36,31 @@ export function vendorsFetchData(){
     }
 }
 
+const editVendorSuccess = (payload) => ({ type: types.EDIT_VENDOR_SUCCESS, payload });
+const editVendorLoading = (loading) => ({ type: types.EDIT_VENDOR_LOADING, payload: loading });
+const editVendorError = (error) => ({ type: types.EDIT_VENDOR_ERROR, payload: error });
+
+export function editVendorAction(payload) {
+    console.log( payload);
+
+    return (dispatch) => {
+        // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/vendors/${payload.id}`, payload );
+        request
+            .then((response) => {
+                console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(editVendorSuccess(payload))
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                console.log(error);
+                dispatch(editVendorError(error));
+            })
+    };
+}
+
 
 const addVendorSuccess = (id,name,about,email,webpage,contact,address,portfolioURL) =>
     ({  type: types.ADD_VENDORS_SUCCESS ,
@@ -49,16 +74,16 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
     return(dispatch) => {
 
         //const  url ='http://localhost:3005/vendor/add';
-        const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
+       // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
+           // contact:contact, address:address,  portfolioURL:portfolioURL });
+        const request = axios.post(`${API_URL}/vendors/add`, {name: name, about: about, email:email,webpage:webpage,
             contact:contact, address:address,  portfolioURL:portfolioURL });
-       // const request = axios.post(`${API_URL}/vendors/add`, {name: name, about: about, email:email,webpage:webpage,
-            //contact:contact, address:address,  portfolioURL:portfolioURL });
         request
             .then(( response) => {
-                if (!response.status == 200) {
+                if (!response.status == 201) {
                     throw Error(response.statusText);
-                }
-                dispatch(addVendorSuccess(
+                }console.log(response);
+                dispatch(addVendorSuccess( 
                     response.data.id,
                     response.data.name,
                     response.data.about,
@@ -70,6 +95,7 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addVendorError(error));
+                console.log(error);
             })
     };
 }
@@ -80,8 +106,8 @@ const deleteVendorError = (error) => ({type:types.DELETE_VENDORS_ERROR ,payload:
 export function deleteVendorAction(id) {
     console.log(id);
     return(dispatch) => {
-        const request = axios.delete(`http://localhost:3005/vendor/${id}`);
-        //const request = axios.delete(`${API_URL}/vendors/${id}`);
+        //const request = axios.delete(`http://localhost:3005/vendor/${id}`);
+        const request = axios.delete(`${API_URL}/vendors/${id}`);
         request
             .then((response) =>{
                 if(!response.status == 200){
