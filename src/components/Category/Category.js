@@ -106,7 +106,7 @@ class Category extends React.Component{
     }
 } 
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => { console.log(state)
     return{
         categories: state.category.content,
         last: state.category.last

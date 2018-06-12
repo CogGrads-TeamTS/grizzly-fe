@@ -4,6 +4,7 @@ import { Table,Container, Row, Col } from 'reactstrap';
 import ConfirmVendorDeleteModal from './Modals/VendorConfirmDeleteModal';
 import _ from 'lodash';
 import VendorEditModal from './Modals/VendorEditModal';
+import InfiniteScroll from 'react-infinite-scroller';
 
 class VendorTable extends React.Component{
 
@@ -15,9 +16,41 @@ class VendorTable extends React.Component{
         const divStyle = {
             marginLeft: '50%',
         };
+
+        console.log(this.props.last);
+
+        const loader = 
+        <div className="loader" key="loader" style={divStyle}>
+            <div className="flip-preloader example-3">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>;
+        
+        // This method is used to determine what rows to load in table based on categories length using a ternary operator
+        const tableIsEmpty = _.isEmpty(this.props.vendors) ?
+            (  
+                <tr>
+                    <td colSpan={6}>There are no vendors to display.</td>
+                </tr>
+            ) : (
+                _.map(this.props.vendors, vend => {
+                    return (
+                        <VendorRows key={vend.id} vendor={vend} delete={this.deleteClicked} edit={this.editClicked} />   
+                    )
+                })
+            );
       // const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
         return (
             <Container>
+                <InfiniteScroll
+                    pageStart={0}
+                    loadMore={this.props.fetchNextPage}
+                    hasMore={!this.props.last} 
+                    loader={loader}>
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
@@ -34,17 +67,13 @@ class VendorTable extends React.Component{
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    {   _.map(this.props.vendors, vend => {
-
-                                            return (<VendorRows key = {vend.id} vendor={vend} delete={this.deleteVendorClicked} edit={this.editClicked}/>)}
-                                        )
-                                    }
+                                        {tableIsEmpty}
                                     </tbody>
                                 </Table>
                             </div>
                         </Col>
                     </Row>
+                    </InfiniteScroll>
                     <ConfirmVendorDeleteModal ref = 'deleteVendorModal' confirm = {this.deleteVendorConfirmed}/>
                     <VendorEditModal ref="editModal" confirm={this.editConfirmed}/>
             </Container>
