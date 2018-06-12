@@ -39,13 +39,12 @@ class CategoryTable extends React.Component {
             );
 
         return (
-            <Container>
+            <Container className="helpme">
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.props.fetchNextPage}
                     hasMore={!this.props.last} 
                     loader={loader}>
-
                     <Row>
                         <Col md="12" sm="12">
                             <Table>
@@ -57,7 +56,7 @@ class CategoryTable extends React.Component {
                                     <th colSpan={3}></th>
                                 </tr>
                                 </thead>
-                                <tbody> 
+                                <tbody className="goodstuff"> 
                                     {tableIsEmpty}
                                 </tbody>
 

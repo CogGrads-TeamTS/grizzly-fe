@@ -1,3 +1,64 @@
+html, body {
+  height: 100%;
+}
+
+.helpme{
+  height: 100%; 
+  overflow: auto;
+}
+
+/* Used for profile tab */
+.profile-card.card {
+  height: 80vh;
+  margin-top: 5%;
+  background-color: rgb(236, 233, 233);
+}
+
+.profile-header {
+  width:100%;
+  background-color: darkgray;
+  padding-top:1%;
+  color:white;
+}
+
+.profile-header p{
+  padding-left:20px;
+  margin-top: 2%;
+  padding-bottom: 2%;
+}
+
+.profile-image {
+  margin: 0 auto;
+  width:40%;
+  background-color: darkgray;
+}
+
+.profile-head {
+  margin: 0 auto;
+  padding-top: 5%;
+}
+
+.profile-head.head {
+  font-weight: bold;
+}
+
+.profile-head.name {
+  font-weight: bold;
+}
+
+.profile-head.id {
+  padding-top: 0%;
+}
+
+.profile-head.designation {
+  padding-top: 0%;
+}
+
+.profile-head.office {
+  padding-top: 0%;
+}
+
+
 .App {
   text-align: center;
 }
