@@ -1,5 +1,6 @@
-import { combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import {vendor,vendorHasErrored,vendorIsLoading} from './vendorReducer';
+import { reducer as formReducer } from 'redux-form';
 import { category, categoryHasErrored, categoryIsLoading } from './categoryReducer';
 
 const rootReducer = combineReducers({
@@ -8,7 +9,8 @@ const rootReducer = combineReducers({
     categoryIsLoading:categoryIsLoading,
     vendor:vendor,
     vendorHasErrored:vendorHasErrored,
-    vendorIsLoading:vendorIsLoading
+    vendorIsLoading:vendorIsLoading,
+    form:formReducer // Used for Redux Form
 });
 
 export default rootReducer;

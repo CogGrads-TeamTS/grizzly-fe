@@ -9,7 +9,7 @@ import { Container, Row, Col } from 'reactstrap';
 class App extends Component {
   render() {
     return (
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Col xs="12">
             <Header />
