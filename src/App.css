@@ -7,6 +7,15 @@ html, body {
   overflow: auto;
 }
 
+.p-0 > .nav-link{
+  padding: 0;
+}
+/*Used for nav bar */
+#btn-rounded{
+  border-radius: 4em;
+  padding-top: .375rem;
+  padding-bottom: .375rem;
+}
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
