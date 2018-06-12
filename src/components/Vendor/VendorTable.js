@@ -33,7 +33,7 @@ class VendorTable extends React.Component{
                                     <tbody>
 
                                     {   _.map(this.props.vendors, ven => {
-                                           console.log(ven);
+                                          
                                             return (<VendorRows key={ven.id} vendor={ven} edit={this.editClicked}/>)}
                                         )
                                     }
@@ -46,11 +46,11 @@ class VendorTable extends React.Component{
             </Container>
         )
     }
-    editConfirmed = (ven) => { console.log(ven);
+    editConfirmed = (ven) => { 
         console.log("Edit confirmed: ");
         this.props.edit(ven);
     }
-    editClicked = (ven) => { console.log(ven);
+    editClicked = (ven) => { 
         this.refs.editModal.openModal(ven);
     }
 

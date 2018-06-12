@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import VendorTable from './VendorTable';
 import {vendorsFetchData,addVendorAction, editVendorAction} from "../../actions/vendorActions";
-import {vendorsFetchData, } from "../../actions/vendorActions";
-import {vendorsFetchData, editVendorAction} from "../../actions/vendorActions";
-import {addVendorAction} from "../../actions/vendorActions";
 import VendorAddModal from './Modals/VendorAddModal'
 
 class Vendor extends React.Component{
@@ -56,9 +53,9 @@ class Vendor extends React.Component{
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
     return{
-        vendors: state.vendor.content,
+        vendors: state.vendor.vendors,
     };
 };
 
@@ -66,7 +63,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         // fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort))
        fetchData: ()=>dispatch(vendorsFetchData()),
-       add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL))
+       add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL)),
 
   
        edit: (payload) => dispatch(editVendorAction(payload))

@@ -45,7 +45,7 @@ export function editVendorAction(payload) {
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-        const request = axios.put(`http://localhost:3004/vendor/${payload.id}`, payload );
+        const request = axios.put(`${API_URL}/vendors/${payload.id}`, payload );
         request
             .then((response) => {
                 console.log(response);
@@ -76,10 +76,10 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
             contact:contact, address:address,  portfolioURL:portfolioURL });
         request
             .then(( response) => {
-                if (!response.status == 200) {
+                if (!response.status == 201) {
                     throw Error(response.statusText);
-                }
-                dispatch(addVendorSuccess(
+                }console.log(response);
+                dispatch(addVendorSuccess( 
                     response.data.id,
                     response.data.name,
                     response.data.about,
@@ -91,6 +91,7 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addVendorError(error));
+                console.log(error);
             })
     };
 }

@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 
 const CategoryRows = (props) => { //console.log(props.category);
     const  category  = props.category;
-    console.log(props);
+
     return (
     <tr>
         <td>{category.name}</td>

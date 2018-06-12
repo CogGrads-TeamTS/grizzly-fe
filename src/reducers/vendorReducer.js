@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import _ from 'lodash';
 
 export function vendor(state = {}, action) {
-
+    
     switch (action.type) {
         case types.LOAD_VENDORS_SUCCESS:
           //  const vendorArray=action.data.content;
@@ -37,7 +37,7 @@ export function vendor(state = {}, action) {
         case types.ADD_VENDORS_SUCCESS:
             // create a new state
             const addState = {...state};
-            addState.content =
+            addState.vendors =
                 [
                     {
                         id:action.id,
@@ -49,7 +49,7 @@ export function vendor(state = {}, action) {
                         address:action.address,
                         portfolioURL:action.portfolioURL
                     },
-                ...addState.content
+                ...addState.vendors
                 ];
 
             // returns a new state with the added category appended
@@ -74,6 +74,9 @@ export function vendorHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_VENDORS_ERROR:
             return action.vendorHasErrored
+        case types.ADD_VENDORS_ERROR:
+            console.log(action.payload)
+            return state
         default:
             return state
     }

@@ -28,17 +28,17 @@ class VendorEditModal extends Component{
         this.handleportfolioURLChange = this.handleportfolioURLChange.bind(this);
     }
 
-    openModal(ven) {{console.log(ven.id)}
+    openModal(ven) {
         this.setState({ 
             modal: !this.state.modal, 
             id: ven.id,
             name: ven.name,
-            about: "",
-            email: "",
-            webpage: "",
+            about: ven.about,
+            email: ven.email,
+            webpage: ven.webpage,
             contact: ven.contact,
-            address: ven.location,
-            portfolioURL: ""
+            address: ven.address,
+            portfolioURL: ven.portfolioURL
         });
     }
     toggle() {
@@ -100,7 +100,7 @@ class VendorEditModal extends Component{
         this.toggle()
     };
     render() {
-        return (
+        return ( 
             <div> 
                 <Button color="success" onClick={this.toggle}>{this.props.buttonLabel}</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -116,25 +116,25 @@ class VendorEditModal extends Component{
                             <FormGroup row>
                             <Label sm={4}>About : </Label>
                                 <Col sm={8}>
-                                    <Input type="textarea" name="about" placeholder="About Vendor" onChange={this.handleAboutChange} />
+                                    <Input type="textarea" name="about" value={this.state.about} onChange={this.handleAboutChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={4}>Email : </Label>
                                 <Col sm={8}>
-                                    <Input type="email" name="email" placeholder="Email" onChange={this.handleEmailChange} />
+                                    <Input type="email" name="email" value={this.state.email} onChange={this.handleEmailChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={4}>Web Page : </Label>
                                 <Col sm={8}>
-                                    <Input type="url" name="webpage" placeholder="Web Page" onChange={this.handleWebPageChange} />
+                                    <Input type="url" name="webpage" value={this.state.webpage} onChange={this.handleWebPageChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={4}>Contact : </Label>
                                 <Col sm={8}>
-                                    <Input type="number" name="contact" value={this.state.contact} onChange={this.handleContactChange} />
+                                    <Input type="text" name="contact" value={this.state.contact} onChange={this.handleContactChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -146,7 +146,7 @@ class VendorEditModal extends Component{
                             <FormGroup row>
                                 <Label sm={4}>Portfolio URL : </Label>
                                 <Col sm={8}>
-                                    <Input type="url" name="portfolioURL" placeholder="Portfolio URL" onChange={this.handleportfolioURLChange} />
+                                    <Input type="url" name="portfolioURL" value={this.state.portfolioURL} onChange={this.handleportfolioURLChange} />
                                 </Col>
                             </FormGroup>
                         </Form>
