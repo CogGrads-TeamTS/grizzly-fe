@@ -1,16 +1,24 @@
+
 {
-  "categories": [
+  "vendor": [
     {
       "id": 1,
-      "name": "Test Category",
-      "description": "This is a test category.",
-      "products": 12
+      "name": "testing",
+      "about": "",
+      "email": "",
+      "webpage": "",
+      "contact": 78945672,
+      "portfolioURL": ""
     },
     {
       "id": 2,
-      "name": "Second Category",
-      "description": "This is another test category.",
-      "products": 1392
+      "name": "test vendor",
+      "about": "",
+      "email": "",
+      "webpage": "",
+      "contact": 78945672,
+      "address": "Melbourne",
+      "portfolioURL": ""
     }
   ]
 }

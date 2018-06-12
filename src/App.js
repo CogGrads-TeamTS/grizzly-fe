@@ -9,17 +9,17 @@ import { Container, Row, Col } from 'reactstrap';
 class App extends Component {
   render() {
     return (
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Col xs="12">
             <Header />
           </Col>
         </Row>
         <Row>
-          <Col xs="12" sm="4">
+          <Col xs="12" sm="3">
             <Sidebar />
           </Col>
-          <Col xs="12" sm="8">
+          <Col xs="12" sm="9">
             <Routes />
           </Col>
         </Row>

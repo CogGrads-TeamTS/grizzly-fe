@@ -12,7 +12,7 @@ import _ from 'lodash';
 
 class Category extends React.Component{
     constructor() {
-        super()
+        super();
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
         this.addConfirm = this.addConfirm.bind(this);
@@ -21,7 +21,7 @@ class Category extends React.Component{
         // Change paginate values here
         this.page = 0;
         this.size = 20; 
-        this.sort = "";
+        this.sort = "id,desc";
         this.search = "";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
@@ -29,7 +29,7 @@ class Category extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchData(null);
+        this.props.fetchData(); // Initial fetch
     }
 
     fetchDataWithFilter() {
@@ -50,12 +50,12 @@ class Category extends React.Component{
         this.fetchDataWithFilter();
     }
 
-    incrementPage() {
+    incrementPage() { // Note that the infinite scroller pre-loads the next page
         this.page += 1;
         this.fetchDataWithFilter();
     }
 
-    render(){
+    render(){console.log(this.props.categories);
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
         
@@ -72,11 +72,15 @@ class Category extends React.Component{
                         <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
-                {<CategoryTable categories={this.props.categories} 
+                <Row>
+                    <Col md="12" sm="12" xs="12">
+                {<CategoryTable categories={this.props.categories}
                     delete={this.deleteCategory} 
                     edit={this.editCategory} 
                     fetchNextPage={this.incrementPage}
-                    last={this.props.last} />}   
+                    last={this.props.last} />}
+                    </Col>
+                </Row>
             </div>
     )}
     // dispatches an action to delete the category using its id

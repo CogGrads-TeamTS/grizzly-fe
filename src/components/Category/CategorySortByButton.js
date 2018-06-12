@@ -54,10 +54,10 @@ class CategorySortByButton extends Component {
                     {this.state.dropdownValue}
                 </DropdownToggle>
                 <DropdownMenu id="categoryDropdown">
+                    <DropdownItem onClick={this.changeValue} value="id,desc">Recently Added</DropdownItem>
                     <DropdownItem onClick={this.changeValue} value="name,asc">Name A-Z</DropdownItem>
                     <DropdownItem onClick={this.changeValue} value="name,desc">Name Z-A</DropdownItem>
                     <DropdownItem onClick={this.changeValue} value="id,asc">Id - Low to High</DropdownItem>
-                    <DropdownItem onClick={this.changeValue} value="id,desc">Id - High to Low</DropdownItem>
                 </DropdownMenu>
             </ButtonDropdown>
           </div>
