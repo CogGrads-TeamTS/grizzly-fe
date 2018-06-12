@@ -1,9 +1,8 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
 import PropTypes from 'prop-types'
-import { deleteCategory } from '../../../actions/categoryActions';
 
-class ConfirmVendorDeleteModal extends React.Component {
+class ConfirmDeleteModal extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
@@ -15,47 +14,48 @@ class ConfirmVendorDeleteModal extends React.Component {
     this.confirmDelete = this.confirmDelete.bind(this);
   }
 
-  openModal(cat) {
+  openModal(vend) {
     this.setState({
-      modal:true,
-      id: cat.id,
-      name: cat.name,
-      description: cat.description
+        modal:true,
+        id: vend.id,
+        name: vend.name,
+        about: vend.about,
+        email: vend.email,
+        webpage: vend.webpage,
+        contact: vend.contact,
+        address: vend.address,
+        portfolioURL: vend.portfolioURL
     });
   }
 
   confirmDelete() {
-    const cat = {name: this.state.name, description: this.state.description, id: this.state.id}
-    this.props.confirm(cat);
+    const vend = {
+        id:this.state.id,
+        name: this.state.name,
+        about: this.state.about,
+        email: this.state.email,
+        webpage: this.state.webpage,
+        contact: this.state.contact,
+        address: this.state.address,
+        portfolioURL: this.state.portfolioURL
+    };
+    this.props.confirm(vend);
     this.toggle();
   }
 
-  toggle() {
+  toggle() { console.log(this.state.modal);
     this.setState({
-      modal: !this.state.modal
+      modal: false
     });
+      console.log(this.state.modal);
   }
-
-  handleNameChange(event) {
-    this.setState({
-        name: event.target.value,
-        description: this.state.description
-    })
-}
-
-handleDescriptionChange(event) {
-    this.setState({
-        name: this.state.name,
-        description: event.target.value
-    })
-}
 
   render() {
     return (
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Delete Confirmation</ModalHeader>
           <ModalBody>
-            <p>Are you sure you want to delete the category <b>{this.state.name}</b>?</p>
+            <p>Are you sure you want to delete the vendor <b>{this.state.name}</b>?</p>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
@@ -66,7 +66,7 @@ handleDescriptionChange(event) {
   }
 }
 
-ConfirmVendorDeleteModal.propTypes = {
+ConfirmDeleteModal.propTypes = {
     // boolean to control the state of the popover
     isOpen:  PropTypes.bool,
     autoFocus: PropTypes.bool,
@@ -123,4 +123,4 @@ ConfirmVendorDeleteModal.propTypes = {
     formName: PropTypes.string
   }
 
-export default ConfirmVendorDeleteModal;
+export default ConfirmDeleteModal;

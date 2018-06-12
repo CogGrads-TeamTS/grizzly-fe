@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink,Container, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import Category from '../Category/Category';
+import Vendor from "../Vendor/Vendor";
 
 class Tabs extends Component {
     constructor(props) {
@@ -61,7 +62,7 @@ class Tabs extends Component {
                                 <TabPane tabId="2">
                                     <Row>
                                         <Col sm="12">
-                                            <h4>Vendors</h4>
+                                            <Vendor/>
                                         </Col>
                                     </Row>
                                 </TabPane>

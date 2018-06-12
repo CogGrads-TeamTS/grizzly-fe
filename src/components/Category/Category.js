@@ -12,7 +12,7 @@ import _ from 'lodash';
 
 class Category extends React.Component{
     constructor() {
-        super()
+        super();
         this.deleteCategory = this.deleteCategory.bind(this);
         this.editCategory = this.editCategory.bind(this);
         this.addConfirm = this.addConfirm.bind(this);
@@ -55,7 +55,7 @@ class Category extends React.Component{
         this.fetchDataWithFilter();
     }
 
-    render(){
+    render(){console.log(this.props.categories);
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
         
@@ -72,11 +72,15 @@ class Category extends React.Component{
                         <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
-                {<CategoryTable categories={this.props.categories} 
+                <Row>
+                    <Col md="12" sm="12" xs="12">
+                {<CategoryTable categories={this.props.categories}
                     delete={this.deleteCategory} 
                     edit={this.editCategory} 
                     fetchNextPage={this.incrementPage}
-                    last={this.props.last} />}   
+                    last={this.props.last} />}
+                    </Col>
+                </Row>
             </div>
     )}
     // dispatches an action to delete the category using its id
