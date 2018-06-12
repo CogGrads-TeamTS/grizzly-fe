@@ -54,6 +54,7 @@ class ProductTable extends React.Component {
                             <Table className={"table table-hover"}>
                                 <thead>
                                 <tr>
+                                    <th scope={"col"}>ID</th>
                                     <th scope={"col"}>Product</th>
                                     <th scope={"col"}>Brand</th>
                                     <th scope={"col"}>Categories</th>

@@ -6,6 +6,7 @@ const ProductRows = (props) => { //console.log(props.category);
 
     return (
     <tr>
+        <td>{products.id}</td>
         <td>{products.name}</td>
         <td>{products.brand}</td>
         <td>{products.categories}</td>
