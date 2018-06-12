@@ -15,7 +15,7 @@ export function vendor(state = {}, action) {
             //    content: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
              //   vendorFirst,
               //  vendorLast
-                content: action.data
+                vendors: action.data
             };
         
         case types.EDIT_VENDOR_SUCCESS:
@@ -33,6 +33,27 @@ export function vendor(state = {}, action) {
 
             // return the new state with the updated category
             return newState;
+
+        case types.ADD_VENDORS_SUCCESS:
+            // create a new state
+            const addState = {...state};
+            addState.content =
+                [
+                    {
+                        id:action.id,
+                        name:action.name,
+                        about:action.about,
+                        email:action.email,
+                        webpage:action.webpage,
+                        contact:action.contact,
+                        address:action.address,
+                        portfolioURL:action.portfolioURL
+                    },
+                ...addState.content
+                ];
+
+            // returns a new state with the added category appended
+            return addState;
 
         default:
             return state
