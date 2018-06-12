@@ -13,15 +13,38 @@ class CategoryTable extends React.Component {
         const divStyle = {
             marginLeft: '50%',
           };
-        const loader = <div className="loader" key="loader" style={divStyle}><img src="http://alt.ausgrads.academy/static/media/loading.ba28264b.svg" width="25%"/></div>;
+        const loader = 
+        <div className="loader" key="loader" style={divStyle}>
+            <div className="flip-preloader example-3">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>;
+        
+        // This method is used to determine what rows to load in table based on categories length using a ternary operator
+        const tableIsEmpty = _.isEmpty(this.props.categories) ?
+            (  
+                <tr>
+                    <td colSpan={6}>There are no categories to display.</td>
+                </tr>
+            ) : (
+                _.map(this.props.categories, cat => {
+                    return (
+                        <CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />   
+                    )
+                })
+            );
+
         return (
-            <Container>
+            <Container className="helpme">
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.props.fetchNextPage}
                     hasMore={!this.props.last} 
                     loader={loader}>
-
                     <Row>
                         <Col md="12" sm="12">
                             <Table>
@@ -30,17 +53,13 @@ class CategoryTable extends React.Component {
                                     <th>Category</th>
                                     <th>Description</th>
                                     <th>Products</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th colSpan={3}></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                    {  
-                                        _.map(this.props.categories, cat => {
-                                        return (<CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />)}
-                                    )}
+                                <tbody className="goodstuff"> 
+                                    {tableIsEmpty}
                                 </tbody>
+
                             </Table>
                         </Col>
                     </Row>

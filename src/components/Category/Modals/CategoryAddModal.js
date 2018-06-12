@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
 import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form';
+import CategoryForm from '../CategoryForm';
 
 class AddModal extends Component {
     constructor(props) {
@@ -38,32 +40,28 @@ class AddModal extends Component {
     }
 
     handleSubmit(event) {
-        this.props.confirm({name: this.state.name, description: this.state.description});
+        this.props.confirm({name: event.name, description: event.description});
     }
 
-    submitAndClose = () => {
-        this.handleSubmit()
+    submitAndClose = (event) => {
+        console.log(event)
+        this.handleSubmit(event)
         this.toggle()
     }
-    
+
+    submit = values => {
+        // console.log(values)
+    }
+
+    // FIXME - add return key to submit for modal actions
     render() {
         return (
             <div>
             <Button color="success" onClick={this.toggle}>{this.props.buttonLabel}</Button>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
-                <ModalBody>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Category Name:</label>
-                    <input name="name" placeholder="Add Name" onChange={this.handleNameChange} style={{width: "60%", float: "right"}}/><br/>
-                    <label>Category Description:</label>
-                    <input name="description" placeholder="Add Description" onChange={this.handleDescriptionChange} style={{width: "60%", float: "right"}}/><br/>
-                </form>
-                </ModalBody>
-                <ModalFooter>
-                <Button color="primary" onClick={this.submitAndClose}>{this.props.actionLabel}</Button>{' '}
-                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                </ModalFooter>
+                {/* Added the redux form below */}
+                <CategoryForm onSubmit={this.submitAndClose} toggle={this.toggle} actionLabel={this.props.actionLabel} /> 
             </Modal>
             </div>
         );

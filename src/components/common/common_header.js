@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap';
 import GlobalSearch from './global_search';
+import grizzlogo from '../../Asset/griz-logo.png';
 
 class Header extends Component {
     render() {
         return (
                 <Row>
                     <Col xs="5">
-                        <img src="http://alt.ausgrads.academy/static/media/logo.b7468bce.png" width="100%" />
+                        <img src={grizzlogo} width="60%" />
                     </Col>
                     <Col xs="4">
                         <GlobalSearch placeholder="Search"/>

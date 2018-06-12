@@ -21,7 +21,7 @@ class Category extends React.Component{
         // Change paginate values here
         this.page = 0;
         this.size = 20; 
-        this.sort = "";
+        this.sort = "id,desc";
         this.search = "";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
@@ -29,7 +29,7 @@ class Category extends React.Component{
     }
     
     componentDidMount(){
-        this.props.fetchData();
+        this.props.fetchData(); // Initial fetch
     }
 
     fetchDataWithFilter() {
@@ -50,7 +50,7 @@ class Category extends React.Component{
         this.fetchDataWithFilter();
     }
 
-    incrementPage() {
+    incrementPage() { // Note that the infinite scroller pre-loads the next page
         this.page += 1;
         this.fetchDataWithFilter();
     }
