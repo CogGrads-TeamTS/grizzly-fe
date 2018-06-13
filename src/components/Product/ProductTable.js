@@ -2,6 +2,7 @@ import React from 'react';
 import { Table,Container, Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroller';
+import {Link} from 'react-router-dom';
 
 import ProductRows from './ProductRows';
 // import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
@@ -51,6 +52,7 @@ class ProductTable extends React.Component {
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
+                            <Link to="/product">PRODUCT</Link>
                             <Table className={"table table-hover"}>
                                 <thead>
                                 <tr>
