@@ -10,6 +10,22 @@ tbody {
 .prod-footer{
   position: absolute;
   bottom: 0;
+  width: 100%;
+}
+
+.prod-image-caption {
+  position: absolute;
+  text-align:center;
+  width: 94%;
+  bottom: 2%;
+}
+
+.prod-body-title {
+  font-weight: 600;
+}
+
+.prod-body-content {
+  font-weight: 200;
 }
 
 .prod-body-price{
@@ -18,7 +34,7 @@ tbody {
 
 .prod-body-discount{
   display: inline;
-  padding-left:50%;
+  padding-left:5%;
 }
 
 .helpme{

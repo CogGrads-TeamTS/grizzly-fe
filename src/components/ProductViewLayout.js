@@ -3,23 +3,27 @@ import { Table,Container, Row, Col} from 'reactstrap';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { productFetchDataByID, deleteCategory, editCategoryAction, addCategoryAction } from '../actions/ProductActions';
-import star from '../Asset/star-2-16.png';
+import star from '../Asset/star-full.png';
 
 class ProductViewLayout extends Component {
+
+    renderStars(){
+        console.log("RENDERING STARS")
+        var i;
+        const stars = [];
+        for (i = 1; i < this.props.product.rating; i++){
+            stars.push(<img src={star} style={{marginBottom:4}}/>)
+        }
+        return stars;
+    }
+
     render(){
 
         console.log("is here")
         console.log(this.props.product)
 
-        // if (!this.props.product.name) {
-        //     return (
-        //         <div></div>
-        //     )
-        // }
-
         return (
             <Container fluid={true}>
-                <Table>
                     <Row>
                         <Col>
                             <div className="prod-title">
@@ -34,14 +38,15 @@ class ProductViewLayout extends Component {
                     <Row>
                         <Col>
                             <div className="prod-title-rating">
-                                <img src={star}/>{" " + this.props.product.rating}
+                                {this.renderStars()} {this.props.product.rating} 
                             </div>
                         </Col>
                     </Row>
 
                     <Row>
                         <Col md="6" sm="6">
-                            <img src="https://via.placeholder.com/450x370" width="100%"/>
+                            <img className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>
+                            <div className="prod-image-caption">Product Image Carousel</div>
                         </Col>
 
                         <Col md="6" sm="6" height="100%">
@@ -59,12 +64,11 @@ class ProductViewLayout extends Component {
                                 </div>
 
                                 <div className="prod-body-discount">
-                                    {this.props.product.discount}
+                                    {`${this.props.product.discount}% OFF`}
                                 </div>
                             </div>
                         </Col>
                     </Row>
-                </Table>
             </Container>
 
         )
