@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink,Container, Row, Col } from '
 import classnames from 'classnames';
 import Category from '../Category/Category';
 import Vendor from "../Vendor/Vendor";
+import Product from "../Product/Product";
 
 class Tabs extends Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class Tabs extends Component {
                                 <TabPane tabId="1">
                                     <Row>
                                         <Col sm="12">
-                                            <h4>Products</h4>
+                                            <Product />
                                         </Col>
                                     </Row>
                                 </TabPane>
