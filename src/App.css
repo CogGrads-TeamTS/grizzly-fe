@@ -2,6 +2,25 @@ html, body {
   height: 100%;
 }
 
+/* Change the cursor to pointer if hovering on table elements in body */
+tbody {
+  cursor: pointer;
+}
+
+.prod-footer{
+  position: absolute;
+  bottom: 0;
+}
+
+.prod-body-price{
+  display: inline;
+}
+
+.prod-body-discount{
+  display: inline;
+  padding-left:50%;
+}
+
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;

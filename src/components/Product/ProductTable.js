@@ -37,7 +37,7 @@ class ProductTable extends React.Component {
             ) : (
                 _.map(this.props.products, prod => {
                     return (
-                        <ProductRows key={prod.id} products={prod} delete={this.deleteClicked} edit={this.editClicked} />   
+                        <ProductRows key={prod.id} products={prod} delete={this.deleteClicked} edit={this.editClicked} />
                     )
                 })
             );
@@ -52,7 +52,6 @@ class ProductTable extends React.Component {
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
-                            <Link to="/product">PRODUCT</Link>
                             <Table className={"table table-hover"}>
                                 <thead>
                                 <tr>

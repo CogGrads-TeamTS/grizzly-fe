@@ -16,7 +16,14 @@ export function product(state = {}, action) {
                    //vendorFirst,
                 //vendorLast
                 content: action.data.content,
-                last: action.data.last
+                last: action.data.last,
+                selected: undefined
+            };
+
+        case types.LOAD_SINGLE_PRODUCT_SUCCESS:
+            console.log(action.data.content)
+            return {
+                selected: action.data.content[0]
             };
         // case types.DELETE_PRODUCT_SUCCESS:
         //     // returns a new state that has the deleted category removed
@@ -83,6 +90,27 @@ export function productIsLoading(state = false, action) {
 export function productHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_PRODUCT_ERROR:
+            return action.productHasErrored
+        // case types.ADD_PRODUCT_ERROR:
+        //     console.log(action.payload)
+        //     return state
+        default:
+            return state
+    }
+}
+
+export function singleProductIsLoading(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_LOADING:
+            return action.productIsLoading
+        default:
+            return state
+    }
+}
+
+export function singleProductHasErrored(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_ERROR:
             return action.productHasErrored
         // case types.ADD_PRODUCT_ERROR:
         //     console.log(action.payload)
