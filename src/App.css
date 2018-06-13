@@ -10,6 +10,25 @@ html, body {
 .p-0 > .nav-link{
   padding: 0;
 }
+
+.white{
+  color: #fff !important;
+}
+
+.p-t-5{
+  padding-top: 5px !important;
+}
+
+.p-t-10{
+  padding-top: 10px !important;
+}
+.no-padding{
+  padding: 0 !important;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  cursor: pointer;
+}
 /*Used for nav bar */
 #btn-rounded{
   border-radius: 4em;
@@ -19,7 +38,7 @@ html, body {
 
 /*Header & Nav styling */
 .header{
-  margin-left: 0 !important;
+  margin-left: -2px !important;
   margin-right: 0 !important;
   -webkit-box-shadow: 0 4px 6px -6px #222;
   -moz-box-shadow: 0 4px 6px -6px #222;
@@ -27,10 +46,10 @@ html, body {
 }
 
 .header {
-  position: relative;
-  height: 70px;
-  width: 600px;
+  position: fixed;
+  height: 75px;
   background: #fff;
+  z-index: 1000;
 }
 
 .header:before {
@@ -38,7 +57,7 @@ html, body {
   display: block;
   position: absolute;
   width: 45%;
-  height: 70px;
+  height: 75px;
   background-color: #071D67;
   left: 50%;
   top: 0;
@@ -51,7 +70,7 @@ html, body {
   display: block;
   position: absolute;
   width: 45%;
-  height: 70px;
+  height: 75px;
   background-color: #556FC4;
   left: 55%;
   top: 0;
@@ -64,7 +83,7 @@ html, body {
   display: block;
   position: absolute;
   width: 45%;
-  height: 70px;
+  height: 75px;
   background-color: #2144B9;
   left: 53%;
   top: 0;
@@ -106,7 +125,12 @@ html, body {
 .griz-logo{
   width:95%;
 }
-
+.main{
+  position: absolute;
+  margin-top: 60px;
+  padding-top: 50px;
+  width: 100%;
+}
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;

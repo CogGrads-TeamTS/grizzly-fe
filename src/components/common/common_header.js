@@ -40,12 +40,12 @@ class Header extends React.Component {
               <Nav className="ml-auto" navbar>
               <GlobalSearch classname="global-search" rounded="search-rounded" placeholder="Search" />
                 <NavItem>
-                  <NavLink href="/components/"><i class="far fa-bell"></i><span className="user-msg">Messages</span></NavLink>
+                  <NavLink href="/components/"><i class="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
                 </NavItem>
-                <span className="nav-link welcome-admin">Welcome, Admin John</span>
+                <span className="nav-link welcome-admin p-t-10 white">Welcome, Admin John</span>
                 <NavItem className="p-0">
                   <NavLink href="https://github.com/reactstrap/reactstrap"> 
-                    <Button color="secondary" className="logout-button" id="btn-rounded">Logout</Button>
+                    <Button color="secondary" className="logout-button p-t-10" id="btn-rounded">Logout</Button>
                     <span className="logout-text">Logout</span>
                   </NavLink>
                 </NavItem>
