@@ -2,7 +2,6 @@ html, body {
   height: 100%;
 }
 
-<<<<<<< HEAD
 /* Change the cursor to pointer if hovering on table elements in body */
 tbody {
   cursor: pointer;
@@ -22,7 +21,6 @@ tbody {
   padding-left:50%;
 }
 
-=======
 .helpme{
   height: 100%; 
   overflow: auto;
@@ -152,7 +150,6 @@ tbody {
   padding-top: 50px;
   width: 100%;
 }
->>>>>>> development
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
