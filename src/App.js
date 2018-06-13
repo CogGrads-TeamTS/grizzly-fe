@@ -9,13 +9,15 @@ import { Container, Row, Col } from 'reactstrap';
 class App extends Component {
   render() {
     return (
-      <div className="container-fluid header">
+      <div className="container-fluid no-padding">
+        <div className="header">
         <Row className="nav-row">
           <Col xs="12">
             <Header />
           </Col>
         </Row>
-        <Row>
+        </div>
+        <Row className="main">
           <Col xs="12" sm="3">
             <Sidebar />
           </Col>
