@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import _ from 'lodash';
-
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
 import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/ProductActions';
