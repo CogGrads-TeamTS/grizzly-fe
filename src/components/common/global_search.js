@@ -10,24 +10,25 @@ import {
 
 class GlobalSearch extends React.Component {
  
-  render() {
+  render() { 
+    const classes = `col-12 btn-left-curve ${this.props.rounded}`;
     return (
       <Form>
         <FormGroup>
-        <InputGroup>
+        <InputGroup className={this.props.classname}>
           <Input 
-          className="col-12 btn-left-curve" 
+          className={classes}
           type="search" 
           name="search" 
           id="exampleSearch" 
-          placeholder={this.placeholder} 
+          placeholder={this.props.placeholder} 
           />
-            <InputGroupAddon addonType="prepend">
+            {/* <InputGroupAddon addonType="prepend">
               <Button 
               className="btn-search btn-right-curve">
                 <i className="fa fa-search"></i>
               </Button>
-            </InputGroupAddon>
+            </InputGroupAddon> */}
             </InputGroup>
         </FormGroup>
       </Form>

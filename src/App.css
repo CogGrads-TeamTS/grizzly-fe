@@ -2,6 +2,7 @@ html, body {
   height: 100%;
 }
 
+<<<<<<< HEAD
 /* Change the cursor to pointer if hovering on table elements in body */
 tbody {
   cursor: pointer;
@@ -21,6 +22,137 @@ tbody {
   padding-left:50%;
 }
 
+=======
+.helpme{
+  height: 100%; 
+  overflow: auto;
+}
+
+.p-0 > .nav-link{
+  padding: 0;
+}
+
+.white{
+  color: #fff !important;
+}
+
+.p-t-5{
+  padding-top: 5px !important;
+}
+
+.p-t-10{
+  padding-top: 10px !important;
+}
+.no-padding{
+  padding: 0 !important;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  cursor: pointer;
+}
+/*Used for nav bar */
+#btn-rounded{
+  border-radius: 4em;
+  padding-top: .375rem;
+  padding-bottom: .375rem;
+}
+
+/*Header & Nav styling */
+.header{
+  margin-left: -2px !important;
+  margin-right: 0 !important;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+
+.header {
+  position: fixed;
+  height: 75px;
+  background: #fff;
+  z-index: 1000;
+}
+
+.header:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 45%;
+  height: 75px;
+  background-color: #071D67;
+  left: 50%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+  z-index: 1;
+
+}
+.header:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 45%;
+  height: 75px;
+  background-color: #556FC4;
+  left: 55%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+  z-index: 3;
+
+}
+.nav-row:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 45%;
+  height: 75px;
+  background-color: #2144B9;
+  left: 53%;
+  top: 0;
+  border-bottom-left-radius: 36% 100%;
+  z-index: 2;
+
+}
+
+.navbar{
+  z-index: 4;
+    background: transparent;
+}
+
+.fa-bell{
+  color: #000;
+}
+
+.logout-text, .user-msg{
+  display: none;
+}
+
+.global-search{
+  right: 50%;
+  top: 7px;
+  border: 1px solid #556FC4 !important;
+  border-radius: 4em !important;
+}
+
+.search-rounded{
+  border: 1px solid #556FC4 !important;
+  border-radius: 4em !important;
+  width: 320px !important;
+}
+
+.navbar-brand{
+  width:20%;
+}
+
+.griz-logo{
+  width:95%;
+}
+.main{
+  position: absolute;
+  margin-top: 60px;
+  padding-top: 50px;
+  width: 100%;
+}
+>>>>>>> development
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
@@ -545,3 +677,44 @@ tbody {
   }
 }
 
+@media (max-width: 768px) {
+  
+  .header:before {
+    display: none;
+  }
+  .header:after {
+    display: none;
+  }
+  .nav-row:before {
+    display: none;
+  }
+
+  .griz-logo{
+    width: 200%;
+  }
+  .welcome-admin, .far, .logout-button{
+    display: none !important;
+  }
+
+  .navbar-collapse{
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    margin-top: 17px;
+  }
+
+  .logout-text, .user-msg{
+    display: block;
+  }
+}
+
+@media (max-width: 400px) {
+  .griz-logo{
+    width: 300%;
+  }
+}
+
+@media (max-width: 1057px) {
+  .global-search{
+    display: none !important;
+  }
+}
