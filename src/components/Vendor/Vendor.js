@@ -11,17 +11,17 @@ class Vendor extends React.Component{
     {
         super();
 
+        this.deleteVendors = this.deleteVendors.bind(this);
+        this.editVendor = this.editVendor.bind(this);
+        this.addConfirm = this.addConfirm.bind(this);
+        this.incrementPage = this.incrementPage.bind(this);
+
         this.page = 0;
         this.size = 20;
         this.sort = "id,desc";
         this.search = "";
         this.hasMore = true;
-
-        this.editVendor = this.editVendor.bind(this);
-        this.addConfirm = this.addConfirm.bind(this);
-        this.deleteVendors = this.deleteVendors.bind(this);
         this.updateSort = this.updateSort.bind(this);
-        this.incrementPage = this.incrementPage.bind(this);
     }
     componentDidMount(){
         this.props.fetchData();
@@ -44,8 +44,6 @@ class Vendor extends React.Component{
     }
 
     render(){
-        console.log("vendor component");
-        console.log(this.props.vendors);
         return(
             <div>
                 <Row>
@@ -61,21 +59,18 @@ class Vendor extends React.Component{
                 </Row>
                 <Row>
                     <Col md="12">
-                    {console.log(this.props.vendors)}
-                        { <VendorTable vendors={this.props.vendors} edit={this.editVendor} delete={this.deleteVendors} fetchNextPage={this.incrementPage} last={this.props.last} />}
+                        { <VendorTable 
+                        vendors={this.props.vendors} 
+                        delete={this.deleteVendors}
+                        edit={this.editVendor} 
+                        fetchNextPage={this.incrementPage} 
+                        last={this.props.last} />}
                     </Col>
                 </Row>
             </div>
         )};
 
-    fetchData(){
-        this.props.fetchData();
-    }
-
-    addConfirm(vend){
-        this.props.add(vend.name, vend.about,vend.email,vend.webpage,vend.contact,vend.address,vend.portfolioURL);
-    }
-
+    
     deleteVendors(vend)
     {
         console.log("parent deleting category");
@@ -87,11 +82,19 @@ class Vendor extends React.Component{
         this.props.edit(ven);
     }
 
+    addConfirm(vend){
+        this.props.add(vend.name, vend.about,vend.email,vend.webpage,vend.contact,vend.address,vend.portfolioURL);
+    }
+
+    fetchData(){
+        this.props.fetchData();
+    }
+
 }
 
 
 
-const mapStateToProps = (state) => { console.log(state)
+const mapStateToProps = (state) => {
     return{
         vendors: state.vendor.content,
         last: state.vendor.vendorLast
@@ -100,11 +103,10 @@ const mapStateToProps = (state) => { console.log(state)
 
 const mapDispatchToProps = (dispatch) => { 
     return {
-        // fetchData: (search, page, size, sort)=> dispatch(vendorsFetchData(search, page, size, sort))
-       fetchData: (search, page, size, sort)=>dispatch(vendorsFetchData(search, page, size, sort)),
-       add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL)),
+        fetchData: (search, page, size, sort)=>dispatch(vendorsFetchData(search, page, size, sort)),
+        add: (name, about, email, webpage, contact, address, portfolioURL) =>dispatch(addVendorAction(name, about, email, webpage, contact, address, portfolioURL)),
         delete: (id) => dispatch(deleteVendorAction(id)),
-       edit: (payload) => dispatch(editVendorAction(payload))
+        edit: (payload) => dispatch(editVendorAction(payload))
     }
 };
 

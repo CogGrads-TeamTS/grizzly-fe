@@ -8,16 +8,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 class VendorTable extends React.Component{
 
-    constructor() {
-        super();
-        this.deleteVendorClicked = this.deleteVendorClicked.bind(this);
-    }
     render() {
         const divStyle = {
             marginLeft: '50%',
         };
-
-        console.log(this.props.last);
 
         const loader = 
         <div className="loader" key="loader" style={divStyle}>
@@ -47,24 +41,22 @@ class VendorTable extends React.Component{
         return (
             <Container>
                 <InfiniteScroll
-                    pageStart={0}
-                    loadMore={this.props.fetchNextPage}
-                    hasMore={!this.props.last} 
-                    loader={loader}>
+                pageStart={0}
+                loadMore={this.props.fetchNextPage}
+                hasMore={!this.props.last} 
+                loader={loader}>
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
                                 <Table className={"table table-hover"}>
                                     <thead>
-                                    <tr>
-                                        <th scope={"col"}>Id</th>
-                                        <th scope={"col"}>Vendor Name</th>
-                                        <th scope={"col"}>Email</th>
-                                        <th scope={"col"}>Contact</th>
-                                        <th scope={"col"}></th>
-                                        <th scope={"col"}></th>
-                                        <th scope={"col"}></th>
-                                    </tr>
+                                        <tr>
+                                            <th scope={"col"}>Id</th>
+                                            <th scope={"col"}>Vendor Name</th>
+                                            <th scope={"col"}>Email</th>
+                                            <th scope={"col"}>Contact</th>
+                                            <th colSpan={3}></th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         {tableIsEmpty}
@@ -73,21 +65,20 @@ class VendorTable extends React.Component{
                             </div>
                         </Col>
                     </Row>
-                    </InfiniteScroll>
-                    <ConfirmVendorDeleteModal ref = 'deleteVendorModal' confirm = {this.deleteVendorConfirmed}/>
-                    <VendorEditModal ref="editModal" confirm={this.editConfirmed}/>
+                </InfiniteScroll>
+            <ConfirmVendorDeleteModal ref = 'deleteVendorModal' confirm = {this.deleteVendorConfirmed}/>
+            <VendorEditModal ref="editModal" confirm={this.editConfirmed}/>
             </Container>
         )
     }
 deleteVendorClicked = (vend) =>
 {
     console.log("delete vendor clicked");
-    console.log(vend);
     this.refs.deleteVendorModal.openModal(vend);
 }
 
 deleteVendorConfirmed = (vend) =>
-{console.log(vend);
+{
     this.props.delete(vend);
 }
 
