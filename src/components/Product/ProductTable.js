@@ -1,12 +1,14 @@
 import React from 'react';
-import CategoryRows from './CategoryRows';
 import { Table,Container, Row, Col } from 'reactstrap';
-import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
-import EditModal from './Modals/CategoryEditModal';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroller';
+import {Link} from 'react-router-dom';
 
-class CategoryTable extends React.Component {
+import ProductRows from './ProductRows';
+// import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
+// import EditModal from './Modals/CategoryEditModal';
+
+class ProductTable extends React.Component {
     
       
     render() {
@@ -23,17 +25,19 @@ class CategoryTable extends React.Component {
                 <div></div>
             </div>
         </div>;
+
+        console.log("TESTING" + this.props.last);
         
         // This method is used to determine what rows to load in table based on categories length using a ternary operator
-        const tableIsEmpty = _.isEmpty(this.props.categories) ?
+        const tableIsEmpty = _.isEmpty(this.props.products) ?
             (  
                 <tr>
-                    <td colSpan={6}>There are no categories to display.</td>
+                    <td colSpan={6}>There are no products to display.</td>
                 </tr>
             ) : (
-                _.map(this.props.categories, cat => {
+                _.map(this.props.products, prod => {
                     return (
-                        <CategoryRows key={cat.id} category={cat} delete={this.deleteClicked} edit={this.editClicked} />   
+                        <ProductRows key={prod.id} products={prod} delete={this.deleteClicked} edit={this.editClicked} />   
                     )
                 })
             );
@@ -48,12 +52,15 @@ class CategoryTable extends React.Component {
                     <Row>
                         <Col md="12" sm="12">
                             <div className={"table-responsive"}>
+                            <Link to="/product">PRODUCT</Link>
                             <Table className={"table table-hover"}>
                                 <thead>
                                 <tr>
-                                    <th scope={"col"}>Category</th>
-                                    <th scope={"col"}>Description</th>
-                                    <th scope={"col"}>Products</th>
+                                    <th scope={"col"}>ID</th>
+                                    <th scope={"col"}>Product</th>
+                                    <th scope={"col"}>Brand</th>
+                                    <th scope={"col"}>Categories</th>
+                                    <th scope={"col"}>Rating</th>
                                     <th colSpan={3}></th>
                                 </tr>
                                 </thead>
@@ -66,31 +73,32 @@ class CategoryTable extends React.Component {
                         </Col>
                     </Row>
                 </InfiniteScroll>
-                <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
-                <EditModal ref="editModal" confirm={this.editConfirmed}/>
+                {/* TODO: ADD MODALS HERE */}
+                {/* <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
+                <EditModal ref="editModal" confirm={this.editConfirmed}/> */}
             </Container>
                 
 
         )
     }
 
-    deleteConfirmed = (cat) => {
-        console.log("delete confirmed: " + cat.id);
-        this.props.delete(cat);
+    deleteConfirmed = (prod) => {
+        console.log("delete confirmed: " + prod.id);
+        // this.props.delete(prod);
     }
 
-    editConfirmed = (cat) => {
-        console.log("Edit confirmed: " + cat.id);
-        this.props.edit(cat);
+    editConfirmed = (prod) => {
+        console.log("Edit confirmed: " + prod.id);
+        // this.props.edit(cat);
     }
 
-    deleteClicked = (cat) => {
-        this.refs.deleteModal.openModal(cat);
+    deleteClicked = (prod) => {
+        // this.refs.deleteModal.openModal(prod);
     };
 
-    editClicked = (cat) => {
-        this.refs.editModal.openModal(cat);
+    editClicked = (prod) => {
+        // this.refs.editModal.openModal(prod);
     }
 }
 
-export default CategoryTable;
+export default ProductTable;

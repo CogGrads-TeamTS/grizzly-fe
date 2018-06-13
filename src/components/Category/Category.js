@@ -55,7 +55,7 @@ class Category extends React.Component{
         this.fetchDataWithFilter();
     }
 
-    render(){console.log(this.props.categories);
+    render(){
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
         
@@ -106,14 +106,14 @@ class Category extends React.Component{
     }
 } 
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
     return{
         categories: state.category.content,
         last: state.category.last
     };
 };
 
-const mapDispatchToProps = (dispatch) => { console.log(dispatch);
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (search, page, size, sort)=> dispatch(categoriesFetchData(search, page, size, sort)),
         delete: (id) => dispatch(deleteCategory(id)),

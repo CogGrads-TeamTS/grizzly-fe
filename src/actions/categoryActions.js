@@ -29,7 +29,7 @@ export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_D
 
         const request = axios.get(url);
         request
-            .then((response) => {
+            .then((response) => { console.log(response)
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
