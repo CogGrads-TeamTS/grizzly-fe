@@ -37,37 +37,74 @@ html, body {
   content: "";
   display: block;
   position: absolute;
-  width: 50%;
+  width: 45%;
   height: 70px;
   background-color: #071D67;
   left: 50%;
   top: 0;
   border-bottom-left-radius: 36% 100%;
+  z-index: 1;
 
 }
 .header:after {
   content: "";
   display: block;
   position: absolute;
-  width: 50%;
+  width: 45%;
   height: 70px;
   background-color: #556FC4;
-  left: 57%;
+  left: 55%;
   top: 0;
   border-bottom-left-radius: 36% 100%;
+  z-index: 3;
 
 }
 .nav-row:before {
   content: "";
   display: block;
   position: absolute;
-  width: 50%;
+  width: 45%;
   height: 70px;
   background-color: #2144B9;
   left: 53%;
   top: 0;
   border-bottom-left-radius: 36% 100%;
+  z-index: 2;
 
+}
+
+.navbar{
+  z-index: 4;
+    background: transparent;
+}
+
+.fa-bell{
+  color: #000;
+}
+
+.logout-text, .user-msg{
+  display: none;
+}
+
+.global-search{
+  right: 50%;
+  top: 7px;
+  border: 1px solid #556FC4 !important;
+  border-radius: 4em !important;
+}
+
+.search-rounded{
+  border: 1px solid #556FC4 !important;
+  border-radius: 4em !important;
+  width: 320px !important;
+}
+
+.navbar-brand{
+  width:20%;
+}
+
+.griz-logo{
+  width:95%;
 }
 
 /* Used for profile tab */
@@ -594,3 +631,44 @@ html, body {
   }
 }
 
+@media (max-width: 768px) {
+  
+  .header:before {
+    display: none;
+  }
+  .header:after {
+    display: none;
+  }
+  .nav-row:before {
+    display: none;
+  }
+
+  .griz-logo{
+    width: 200%;
+  }
+  .welcome-admin, .far, .logout-button{
+    display: none !important;
+  }
+
+  .navbar-collapse{
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    margin-top: 17px;
+  }
+
+  .logout-text, .user-msg{
+    display: block;
+  }
+}
+
+@media (max-width: 400px) {
+  .griz-logo{
+    width: 300%;
+  }
+}
+
+@media (max-width: 1057px) {
+  .global-search{
+    display: none !important;
+  }
+}

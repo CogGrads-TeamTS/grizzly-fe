@@ -32,18 +32,22 @@ class Header extends React.Component {
     render() {
       return (
         <div>
-          <Navbar color="light" light expand="md">
-          <img src={grizzlogo} width="20%" />
-            <NavbarBrand href="/"></NavbarBrand>
+          <Navbar  light expand="md">
+          
+            <NavbarBrand href="/"><img className="griz-logo" src={grizzlogo}  /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
+              <GlobalSearch classname="global-search" rounded="search-rounded" placeholder="Search" />
                 <NavItem>
-                  <NavLink href="/components/"><i class="far fa-bell"></i></NavLink>
+                  <NavLink href="/components/"><i class="far fa-bell"></i><span className="user-msg">Messages</span></NavLink>
                 </NavItem>
-                <span className="nav-link">Welcome, Admin John</span>
+                <span className="nav-link welcome-admin">Welcome, Admin John</span>
                 <NavItem className="p-0">
-                  <NavLink href="https://github.com/reactstrap/reactstrap"> <Button color="secondary" id="btn-rounded">Logout</Button></NavLink>
+                  <NavLink href="https://github.com/reactstrap/reactstrap"> 
+                    <Button color="secondary" className="logout-button" id="btn-rounded">Logout</Button>
+                    <span className="logout-text">Logout</span>
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
@@ -52,21 +56,5 @@ class Header extends React.Component {
       );
     }
   }
-
-// class Header extends Component {
-//     render() {
-//         return (
-//                 <Row>
-//                     <Col md="5" sm="12">
-//                         <img src={grizzlogo} width="60%" />
-//                     </Col>
-//                     <Col md="4" sm="12">
-//                         <GlobalSearch placeholder="Search"/>
-//                     </Col>
-//                     <Col md="3" sm="12"></Col>
-//                 </Row>
-//             );
-//     }
-// }
 
 export default Header;
