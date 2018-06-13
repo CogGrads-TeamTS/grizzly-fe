@@ -2,11 +2,6 @@ html, body {
   height: 100%;
 }
 
-.helpme{
-  height: 100%; 
-  overflow: auto;
-}
-
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
