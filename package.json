@@ -9,6 +9,7 @@
     "jquery": "^3.0.0",
     "json-server": "^0.12.2",
     "lodash": "^4.17.10",
+    "mock-json-server": "^1.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",

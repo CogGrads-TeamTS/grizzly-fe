@@ -47,7 +47,7 @@ export function editVendorAction(payload) {
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-        const request = axios.put(`${API_URL}/vendors/${payload.id}`, payload );
+        const request = axios.put(`${API_URL}/vendors/edit/${payload.id}`, payload );
         request
             .then((response) => {
                 console.log(response);
