@@ -8,20 +8,21 @@ const loadVendorsError = (error) => ({type: types.LOAD_VENDORS_ERROR, vendorHasE
 const loadVendorsLoading = (loading) =>({type: types.LOAD_VENDORS_LOADING, vendorIsLoading:loading});
 
 
-const FIRST_PAGE = 0;
-const DEFAULT_PAGE_SIZE = 20;
-const NO_PARAM = "";
-const SEARCH = "";
+const PAGE_DEFAULT = 0;
+const SIZE_DEFAULT = 20;
+const SORT_DEFAULT = "id,desc";
+const SEARCH_DEFAULT = "";
 
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
-export function vendorsFetchData(){
-   // const urlParams = `search=&page=&size=&sort=`;
-    const url = `${API_URL}/vendors`;
-    //const  url ='http://localhost:3005/vendor/';
-    return function (dispatch) {
+export function vendorsFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
+    size = SIZE_DEFAULT, sortParam = SORT_DEFAULT){
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const url = `${API_URL}/vendors/page?${urlParams}`;
+    console.log(url);
+    return (dispatch) => {
         // get data from external data source
         dispatch(loadVendorsLoading(true));
-        const request=axios.get(url);
+        const request = axios.get(url);
         request
             .then((response) =>{ console.log(response);
                 if(!response.status == 200)
@@ -29,6 +30,7 @@ export function vendorsFetchData(){
                     throw Error(response.statusText);
                 }
                 dispatch(loadVendorsLoading(false));
+                console.log(response.data);
                 return response.data;
             })
             .then((data)=>dispatch(loadVendorsSuccess(data)))

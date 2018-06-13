@@ -11,11 +11,10 @@ export function vendor(state = {}, action) {
 
             // create a new copy of the current state
             return {
-                    //...state,
-                   // vendors: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
-                   //vendorFirst,
-                //vendorLast
-                content: action.data
+                    ...state,
+                   content: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
+                   vendorFirst,
+                   vendorLast
             };
         case types.DELETE_VENDORS_SUCCESS:
             // returns a new state that has the deleted category removed
