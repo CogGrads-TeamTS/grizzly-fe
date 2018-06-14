@@ -3,48 +3,32 @@
   "/products": {
     "get": {
       "content": [
-      {
-        "id": 1,
-        "name": "testing",
-        "brand": "brand1",
-        "description": "This is a test product",
-        "rating": "5",
-        "price": "12.0", 
-        "discount": "5",
-        "categories": ["Cat1", "Cat2", "Cat3"], 
-        "images": ["Image1", "Image2", "Image3"]
-      },
-      {
-        "id": 2,
-        "name": "test product",
-        "brand": "brand2",
-        "description": "This is another test product",
-        "rating": "1",
-        "price": "50.0",
-        "discount": "50",
-        "categories": ["Cat3", "Cat1", "Cat2"], 
-        "images": ["Image2", "Image3", "Image1"]
-      }
-     ],
-     "last": true
+        {
+          "id": 1,
+          "name": "test product",
+          "brand": "brand2",
+          "description": "This is another test product",
+          "rating": "1",
+          "price": "50.0",
+          "discount": "50",
+          "categories": ["Cat3", "Cat1", "Cat2"], 
+          "images": ["Image2", "Image3", "Image1"]
+        }
+      ],
+      "last": true
     }
   },
   "/products/1": {
     "get": {
-      "content": [
-      {
-        "id": 1,
-        "name": "testing",
-        "brand": "brand1",
-        "description": "This is a test product",
-        "rating": "3.2",
-        "price": "12.0", 
-        "discount": "10",
-        "categories": ["Cat1", "Cat2", "Cat3"], 
-        "images": ["Image1", "Image2", "Image3"]
-      }
-     ],
-     "last": true
+      "id": 1,
+      "name": "testing",
+      "brand": "brand1",
+      "description": "This is a test product",
+      "rating": "3.2",
+      "price": "12.0", 
+      "discount": "10",
+      "categories": ["Cat1", "Cat2", "Cat3"], 
+      "images": ["Image1", "Image2", "Image3"]
     }
   }
 }
