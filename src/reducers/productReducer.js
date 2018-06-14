@@ -21,9 +21,9 @@ export function product(state = {}, action) {
             };
 
         case types.LOAD_SINGLE_PRODUCT_SUCCESS:
-            console.log(action.data.content)
+            console.log(action.data)
             return {
-                selected: action.data.content[0]
+                selected: action.data
             };
         // case types.DELETE_PRODUCT_SUCCESS:
         //     // returns a new state that has the deleted category removed

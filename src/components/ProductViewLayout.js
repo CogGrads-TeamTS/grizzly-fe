@@ -7,16 +7,6 @@ import star from '../Asset/star-full.png';
 
 class ProductViewLayout extends Component {
 
-    renderStars(){
-        console.log("RENDERING STARS")
-        var i;
-        const stars = [];
-        for (i = 1; i < this.props.product.rating; i++){
-            stars.push(<img src={star} style={{marginBottom:4}}/>)
-        }
-        return stars;
-    }
-
     render(){
 
         console.log("is here")
@@ -75,9 +65,20 @@ class ProductViewLayout extends Component {
     }
 
     upper = (string) => { // Convert string into uppercase
+        if(string === null) {return "Undefined Brand"}
         return string.toLowerCase().replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();
         })
+    }
+
+    renderStars(){
+
+        var i;
+        const stars = [];
+        for (i = 1; i < this.props.product.rating; i++){
+            stars.push(<img src={star} style={{marginBottom:4}}/>)
+        }
+        return stars;
     }
 }
 
