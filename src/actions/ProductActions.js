@@ -18,10 +18,11 @@ const NO_PARAM = "";
 const SEARCH = "";
 
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
-export function productFetchData(){
+export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM){
 
-   // const urlParams = `search=&page=&size=&sort=`;
-    const url = `${API_URL}`;
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const url = `${API_URL}?${urlParams}`;
+    console.log("URL: " + url);
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source

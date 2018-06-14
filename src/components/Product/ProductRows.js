@@ -11,12 +11,12 @@ const ProductRows = (props) => { //console.log(props.category);
     }
 
     return (
-            <tr onClick={() => handleClick()}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.brand}</td>
-                <td>{product.catName}</td>
-                <td>{product.rating}</td>
+            <tr>
+                <td onClick={handleClick}>{product.id}</td>
+                <td onClick={handleClick}>{product.name}</td>
+                <td onClick={handleClick}>{product.brand}</td>
+                <td onClick={handleClick}>{product.catName}</td>
+                <td onClick={handleClick}>{product.rating}</td>
                 <td><Button color="info" onClick={() => props.edit(product)}>Edit</Button></td>
                 <td><Button color="secondary">Block </Button></td>
                 <td><Button color="danger" onClick={() => props.delete(product)}>Delete</Button></td>

@@ -25,8 +25,6 @@ class ProductTable extends React.Component {
                 <div></div>
             </div>
         </div>;
-
-        console.log("TESTING" + this.props.last);
         
         // This method is used to determine what rows to load in table based on categories length using a ternary operator
         const tableIsEmpty = _.isEmpty(this.props.products) ?

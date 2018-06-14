@@ -1,23 +1,23 @@
 import * as types from '../actions/actionTypes';
 import _ from 'lodash';
 
-export function product(state = {}, action) {
+export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
             const productArray = action.data.content;
             const productFirst = action.data.first;
             const productLast = action.data.last;
+            const selected = undefined;
 
-            // create a new copy of the current state
+            console.log(productArray)
+
             return {
-                    //...state,
-                   // vendors: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
-                   //vendorFirst,
-                //vendorLast
-                content: action.data.content,
-                last: action.data.last,
-                selected: undefined
+                    ...state,
+                   content: (!productFirst ? [ ...state.content, ...productArray] : productArray),
+                   productFirst,
+                   productLast,
+                   selected
             };
 
         case types.LOAD_SINGLE_PRODUCT_SUCCESS:
