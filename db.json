@@ -28,5 +28,23 @@
      ],
      "last": true
     }
+  },
+  "/products/1": {
+    "get": {
+      "content": [
+      {
+        "id": 1,
+        "name": "testing",
+        "brand": "brand1",
+        "description": "This is a test product",
+        "rating": "3.2",
+        "price": "12.0", 
+        "discount": "10",
+        "categories": ["Cat1", "Cat2", "Cat3"], 
+        "images": ["Image1", "Image2", "Image3"]
+      }
+     ],
+     "last": true
+    }
   }
 }

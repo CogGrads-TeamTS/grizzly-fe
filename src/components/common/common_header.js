@@ -40,7 +40,7 @@ class Header extends React.Component {
               <Nav className="ml-auto" navbar>
               <GlobalSearch classname="global-search" rounded="search-rounded" placeholder="Search" />
                 <NavItem>
-                  <NavLink href="/components/"><i class="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
+                  <NavLink href="/components/"><i className="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
                 </NavItem>
                 <span className="nav-link welcome-admin p-t-10 white">Welcome, Admin John</span>
                 <NavItem className="p-0">
