@@ -15,7 +15,7 @@ const ProductRows = (props) => { //console.log(props.category);
                 <td>{product.id}</td>
                 <td>{product.name}</td>
                 <td>{product.brand}</td>
-                <td>{product.category}</td>
+                <td>{product.catName}</td>
                 <td>{product.rating}</td>
                 <td><Button color="info" onClick={() => props.edit(product)}>Edit</Button></td>
                 <td><Button color="secondary">Block </Button></td>

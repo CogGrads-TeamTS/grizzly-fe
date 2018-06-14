@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { productFetchDataByID, deleteCategory, editCategoryAction, addCategoryAction } from '../actions/ProductActions';
 import star from '../Asset/star-full.png';
+import StarRatings from 'react-star-ratings';
 
 class ProductViewLayout extends Component {
 
@@ -28,7 +29,16 @@ class ProductViewLayout extends Component {
                     <Row>
                         <Col>
                             <div className="prod-title-rating">
-                                {this.renderStars()} {this.props.product.rating} 
+                                {/* {this.renderStars()} {this.props.product.rating} */}
+                                <StarRatings 
+                                    rating={this.props.product.rating}
+                                    numberOfStars={5}
+                                    changeRating={false}
+                                    name='rating'
+                                    starDimension="20px"
+                                    starSpacing="2px"
+                                    starRatedColor='rgb(108, 116, 217)'
+                                />
                             </div>
                         </Col>
                     </Row>
@@ -65,7 +75,7 @@ class ProductViewLayout extends Component {
     }
 
     upper = (string) => { // Convert string into uppercase
-        if(string === null) {return "Undefined Brand"}
+        if(string === null) {return "Not Specified"}
         return string.toLowerCase().replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();
         })

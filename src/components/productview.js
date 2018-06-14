@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { productFetchDataByID, deleteCategory, editCategoryAction, addCategoryAction } from '../actions/ProductActions';
 import ProductViewLayout from './ProductViewLayout';
 

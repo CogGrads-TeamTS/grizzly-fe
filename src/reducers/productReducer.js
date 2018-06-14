@@ -21,7 +21,6 @@ export function product(state = {}, action) {
             };
 
         case types.LOAD_SINGLE_PRODUCT_SUCCESS:
-            console.log(action.data)
             return {
                 selected: action.data
             };
