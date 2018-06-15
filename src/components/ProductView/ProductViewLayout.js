@@ -78,7 +78,6 @@ class ProductViewLayout extends Component {
     }
 
     returnToHome = () => {
-        console.log("This is running")
         this.props.history.push("/");
     }
 
