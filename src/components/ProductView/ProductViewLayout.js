@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import { Container, Row, Col, Button } from 'reactstrap';
+import {Glyphicon } from 'react-bootstrap'
+import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
 
@@ -9,11 +10,21 @@ class ProductViewLayout extends Component {
     render(){
         return (
             <Container fluid={true} className="prod-view-container">
-
+                <Row>
                     {/* HEAD OF THE PRODUCT VIEW */}
-                    <div className="prod-view-head">
-                        <Button className="prod-view-btn-return" color="info" onClick={this.returnToHome}>{"Back"}</Button> 
-                    </div>
+                    <Col md="6" sm="6" xs="6">
+                        <div className="prod-view-head">
+                            <Button outline className="prod-view-btn-return" color="info" onClick={this.returnToHome}>{"Back"}</Button>
+                        </div>
+                    </Col>
+                    <Col md="6" sm="6" xs="6">
+                        <div className="prod-view-head">
+                            <Button outline color="info" className="float-right" onClick={this.handleEdit}>
+                                <i className="fas fa-pencil-alt"></i> Edit
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
                     
 
                     {/* BODY OF THE PRODUCT VIEW */}
@@ -77,9 +88,15 @@ class ProductViewLayout extends Component {
         )
     }
 
+    handleEdit = () => {
+        this.props.history.push(`/product/${this.props.product.id}/edit`);
+    }
+
     returnToHome = () => {
         this.props.history.push("/");
     }
+
+
 
     upper = (string) => { // Convert string into uppercase
         if(string === null) {return "Not Specified"}
