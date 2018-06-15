@@ -48,26 +48,22 @@ export function product(state = {}, action) {
         //     // return the new state with the updated category
         //     return newState;
 
-        // case types.ADD_PRODUCT_SUCCESS:
-        //     console.log('product Reducer');
-        //     // create a new state
-        //     const addState = {...state};
-        //     addState.content =
-        //         [
-        //             {
-        //                 id:action.id,
-        //                 name:action.name,
-        //                 description:action.description,
-        //                 price:action.price,
-        //                 discount:action.discount,
-        //                 categories:action.categories,
-        //                 images:action.images
-        //             },
-        //         ...addState.content
-        //         ];
+        
+        case types.ADD_PRODUCT_SUCCESS:
+            console.log('product Reducer');
+            // create a new state
+            const addState = {...state};
+            addState.content =
+                [
+                    {
+                        name:action.name,
+                        description:action.description
+                    },
+                ...addState.content
+                ];
 
-        //     // returns a new state with the added product appended
-        //     return addState;
+            // returns a new state with the added product appended
+            return addState;
 
 
 

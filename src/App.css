@@ -731,3 +731,9 @@ tbody {
     display: none !important;
   }
 }
+
+.materialInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}

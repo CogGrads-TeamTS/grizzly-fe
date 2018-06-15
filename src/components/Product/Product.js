@@ -6,7 +6,7 @@ import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
 import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/ProductActions';
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
-// import CategoryAddModal from './Modals/CategoryAddModal';
+import ProductAddButton from './ProductAddButton';
 // import Search from './CategorySearch';
 
 
@@ -73,7 +73,7 @@ class Product extends React.Component{
                         {/* <CategorySortByButton update={this.updateSort}/> */}
                     </Col>
                     <Col md="3" sm="3" xs="12">
-                        {/* <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} /> */}
+                        <ProductAddButton buttonLabel="Add Product" title="Add Product" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>
                 <Row>

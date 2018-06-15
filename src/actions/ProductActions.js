@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import axios from 'axios';
 
 const API_URL = 'http://ts.ausgrads.academy:8765/products';
-// const API_URL = 'http://localhost:8000/products';
+const API_URL_DEV = 'http://localhost:3004/product';
 
 const loadProductSuccess = (data) => ({type: types.LOAD_PRODUCT_SUCCESS, data});
 const loadProductError = (error) => ({type: types.LOAD_PRODUCT_ERROR, productHasErrored:error});
@@ -90,44 +90,39 @@ export function productFetchDataByID(id){
 // }
 
 
-// // FIXME: Change the fields
-// const addProductSuccess = (id,name,about,email,webpage,contact,address,portfolioURL) =>
-//     ({  type: types.ADD_PRODUCT_SUCCESS ,
-//         id:id, name:name, about:about, email:email, webpage:webpage, contact:contact,
-//         address:address,portfolioURL:portfolioURL });
-// const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
+// FIXME: Change the fields
+const addProductSuccess = (name, description, category, price, img) => ({  
+    type: types.ADD_PRODUCT_SUCCESS , 
+    name, 
+    description, 
+    category,
+    price,
+    img 
+});
+const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
 
+export function addProductAction(name, description, category, price, img){
 
-// export function addProductAction(name,about,email,webpage,contact,address,portfolioURL){
+    return(dispatch) => {
 
-//     return(dispatch) => {
-
-//         //const  url ='http://localhost:3005/vendor/add';
-//        // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
-//            // contact:contact, address:address,  portfolioURL:portfolioURL });
-//         const request = axios.post(`${API_URL}/product/add`, {name: name, about: about, email:email,webpage:webpage,
-//             contact:contact, address:address,  portfolioURL:portfolioURL });
-//         request
-//             .then(( response) => {
-//                 if (!response.status == 201) {
-//                     throw Error(response.statusText);
-//                 }console.log(response);
-//                 dispatch(addProductSuccess( 
-//                     response.data.id,
-//                     response.data.name,
-//                     response.data.about,
-//                     response.data.email,
-//                     response.data.webpage,
-//                     response.data.contact,
-//                     response.data.address,
-//                     response.data.portfolioURL))
-//             })
-//             .catch((error) => { // Catch the error thrown if status isn't 200
-//                 dispatch(addProductError(error));
-//                 console.log(error);
-//             })
-//     };
-// }
+        //const  url ='http://localhost:3005/vendor/add';
+       // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
+           // contact:contact, address:address,  portfolioURL:portfolioURL });
+        const request = axios.post(`${API_URL_DEV}/`, name, description, category, price, img);
+        request
+            .then(( response) => {
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }console.log(response);
+                dispatch(addProductSuccess( 
+                    response.data.name))
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                dispatch(addProductError(error));
+                console.log(error);
+            })
+    };
+}
 
 // const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
 // const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});

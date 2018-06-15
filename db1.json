@@ -1,0 +1,54 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "testing",
+      "brand": "brand1",
+      "description": "This is a test product",
+      "rating": "5",
+      "price": "12.0",
+      "discount": "5",
+      "categories": [
+        "Cat1",
+        "Cat2",
+        "Cat3"
+      ],
+      "images": [
+        "Image1",
+        "Image2",
+        "Image3"
+      ]
+    },
+    {
+      "name": "asdad",
+      "description": "adsadasda",
+      "category": "Industrial",
+      "id": 2
+    },
+    {
+      "name": "Test123",
+      "description": "test Desc",
+      "category": "Industrial",
+      "id": 3
+    },
+    {
+      "name": "Test123",
+      "description": "test Desc",
+      "category": "Industrial",
+      "price": "102121212",
+      "id": 4
+    },
+    {
+      "name": "tsdf",
+      "description": "sdfsdf",
+      "id": 5
+    },
+    {
+      "name": "TestName",
+      "description": "Desc",
+      "category": "Industrial",
+      "price": "100",
+      "id": 6
+    }
+  ]
+}

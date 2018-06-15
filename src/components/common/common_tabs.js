@@ -11,7 +11,7 @@ class Tabs extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            activeTab: '3'
+            activeTab: '1'
         };
     }
     toggle(tab) {
