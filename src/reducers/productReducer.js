@@ -1,22 +1,28 @@
 import * as types from '../actions/actionTypes';
 import _ from 'lodash';
 
-export function product(state = {}, action) {
+export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
             const productArray = action.data.content;
             const productFirst = action.data.first;
             const productLast = action.data.last;
+            const selected = undefined;
 
-            // create a new copy of the current state
+            console.log(productArray)
+
             return {
-                    //...state,
-                   // vendors: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
-                   //vendorFirst,
-                //vendorLast
-                content: action.data.content,
-                last: action.data.last
+                    ...state,
+                   content: (!productFirst ? [ ...state.content, ...productArray] : productArray),
+                   productFirst,
+                   productLast,
+                   selected
+            };
+
+        case types.LOAD_SINGLE_PRODUCT_SUCCESS:
+            return {
+                selected: action.data
             };
         // case types.DELETE_PRODUCT_SUCCESS:
         //     // returns a new state that has the deleted category removed
@@ -83,6 +89,27 @@ export function productIsLoading(state = false, action) {
 export function productHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_PRODUCT_ERROR:
+            return action.productHasErrored
+        // case types.ADD_PRODUCT_ERROR:
+        //     console.log(action.payload)
+        //     return state
+        default:
+            return state
+    }
+}
+
+export function singleProductIsLoading(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_LOADING:
+            return action.productIsLoading
+        default:
+            return state
+    }
+}
+
+export function singleProductHasErrored(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_ERROR:
             return action.productHasErrored
         // case types.ADD_PRODUCT_ERROR:
         //     console.log(action.payload)

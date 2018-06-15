@@ -2,10 +2,65 @@ html, body {
   height: 100%;
 }
 
-.helpme{
-  height: 100%; 
-  overflow: auto;
+/* Change the cursor to pointer if hovering on table elements in body */
+tbody {
+  cursor: pointer;
 }
+
+.prod-view-container {
+  height: 80vh;
+  margin-top: 2%;
+}
+
+.prod-view-head {
+  width: 100%;
+}
+
+/* .prod-view-btn-return {
+  margin-top: 2%;
+} */
+
+.prod-view-body {
+  margin-top: 3%;
+  width: 100%;
+
+}
+
+.prod-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.prod-image-caption {
+  position: absolute;
+  text-align:center;
+  width: 94%;
+  bottom: 2%;
+}
+
+.prod-body-title {
+  font-weight: 600;
+}
+
+.prod-body-content {
+  font-weight: 200;
+}
+
+.prod-body-price{
+  display: inline;
+  font-weight: 600;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(75, 75, 75);
+}
+
+.prod-body-discount{
+  display: inline;
+  padding-left:5%;
+  font-size: 12px;
+}
+
 
 .p-0 > .nav-link{
   padding: 0;

@@ -1,12 +1,16 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-// const API_URL = 'http://ts.ausgrads.academy:8765/products';
-const API_URL = 'http://localhost:8000/products';
+const API_URL = 'http://ts.ausgrads.academy:8765/products';
+// const API_URL = 'http://localhost:8000/products';
 
 const loadProductSuccess = (data) => ({type: types.LOAD_PRODUCT_SUCCESS, data});
 const loadProductError = (error) => ({type: types.LOAD_PRODUCT_ERROR, productHasErrored:error});
 const loadProductLoading = (loading) =>({type: types.LOAD_PRODUCT_LOADING, productIsLoading:loading});
+
+const loadSingleProductSuccess = (data) => ({type: types.LOAD_SINGLE_PRODUCT_SUCCESS, data});
+const loadSingleProductError = (error) => ({type: types.LOAD_SINGLE_PRODUCT_ERROR, singleProductHasErrored:error});
+const loadSingleProductLoading = (loading) =>({type: types.LOAD_SINGLE_PRODUCT_LOADING, singleProductIsLoading:loading});
 
 const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
@@ -14,10 +18,11 @@ const NO_PARAM = "";
 const SEARCH = "";
 
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
-export function productFetchData(){
+export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM){
 
-   // const urlParams = `search=&page=&size=&sort=`;
-    const url = `${API_URL}`;
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const url = `${API_URL}?${urlParams}`;
+    console.log("URL: " + url);
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
@@ -36,6 +41,29 @@ export function productFetchData(){
             .catch((error)=>dispatch(loadProductError(error)));
     }
 }
+
+export function productFetchDataByID(id){
+
+    // const urlParams = `search=&page=&size=&sort=`;
+     const url = `${API_URL}/${id}`;
+     //const  url ='http://localhost:3005/vendor/';
+     return function (dispatch) {
+         // get data from external data source
+         dispatch(loadSingleProductLoading(true));
+         const request=axios.get(url);
+         request
+             .then((response) =>{ console.log(response);
+                 if(!response.status == 200)
+                 {
+                     throw Error(response.statusText);
+                 }
+                 dispatch(loadSingleProductLoading(false));
+                 return response.data;
+             })
+             .then((data)=>dispatch(loadSingleProductSuccess(data)))
+             .catch((error)=>dispatch(loadSingleProductError(error)));
+     }
+ }
 
 // const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
 // const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });

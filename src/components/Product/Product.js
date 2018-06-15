@@ -55,7 +55,7 @@ class Product extends React.Component{
     incrementPage() { // Note that the infinite scroller pre-loads the next page
         this.page += 1;
         this.fetchDataWithFilter();
-        console.log("TESTING" + this.props.last);
+        console.log("isLastOnProductIncrement: " + this.props.last);
     }
 
     render(){
@@ -113,6 +113,7 @@ class Product extends React.Component{
 } 
 
 const mapStateToProps = (state) => { 
+    console.log(state.products.content)
     return{
         products: state.products.content,
         last: state.products.last
