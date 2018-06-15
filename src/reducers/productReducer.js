@@ -5,9 +5,9 @@ export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
-            const productArray = action.data.content;
-            const productFirst = action.data.first;
-            const productLast = action.data.last;
+            const productArray = action.data.products.content;
+            const productFirst = action.data.products.first;
+            const productLast = action.data.products.last;
             const selected = undefined;
 
             console.log(productArray)

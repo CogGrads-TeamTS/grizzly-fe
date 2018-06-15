@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Glyphicon } from 'react-bootstrap'
 import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
