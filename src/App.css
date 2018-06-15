@@ -737,3 +737,9 @@ tbody {
   border-left: none;
   border-right: none;
 }
+
+.cat-collapse {
+  max-height: 8em;
+  overflow-y: scroll;
+  x-height: 100px;
+}

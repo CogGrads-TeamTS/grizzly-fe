@@ -25,19 +25,21 @@ let ProductAddForm = (props) => {
                         <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >Category</Button>
                         <UncontrolledCollapse toggler="#toggler">
                         <Card>
-                            <CardBody>
+                            <CardBody className="cat-collapse">
                                 <div>
                                     <div>
-                                        <label>
-                                            <Field name="category" component="input" type="radio" value="Industrial"/>{' '}
-                                            Industrial
-                                        </label>
-                                        </div>
-                                        <div>
-                                        <label>
-                                            <Field name="category" component="input" type="radio" value="Tools"/>{' '}
-                                            Tools
-                                        </label>
+                                       
+                                        {_.map(props.categories, cat => {
+                                             
+                                            return (
+                                                <div>
+                                                    <label>
+                                                    <Field name="category" component="input" type="radio" value={cat.name}/>{' '}
+                                                    {cat.name}
+                                                    </label>
+                                                </div>
+                                            )
+                                        })}
                                         </div>
                                 </div>
                             </CardBody>
