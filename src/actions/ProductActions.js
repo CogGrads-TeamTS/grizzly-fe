@@ -17,7 +17,6 @@ const DEFAULT_PAGE_SIZE = 20;
 const NO_PARAM = "";
 const SEARCH = "";
 
-//export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
 export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM){
 
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;

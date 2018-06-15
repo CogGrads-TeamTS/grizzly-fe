@@ -7,7 +7,7 @@ import ProductTable from './ProductTable';
 import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/ProductActions';
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 // import CategoryAddModal from './Modals/CategoryAddModal';
-// import Search from './CategorySearch';
+ import Search from './ProductSearch';
 
 
 class Product extends React.Component{
@@ -25,7 +25,7 @@ class Product extends React.Component{
         this.search = "";
         this.hasMore = true;
         // this.updateSort = this.updateSort.bind(this);
-        // this.updateSearch = this.updateSearch.bind(this);
+         this.updateSearch = this.updateSearch.bind(this);
     }
     
     componentDidMount(){
@@ -66,8 +66,7 @@ class Product extends React.Component{
             <div>
                 <Row>
                     <Col md="6" sm="6" xs="12">
-                        {/* TODO: ADD SEARCH HERE */}
-                        {/* <Search placeholder="Search by Product" updateSearch={searchDebounce} /> */}
+                        <Search placeholder="Search by Product" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         {/* <CategorySortByButton update={this.updateSort}/> */}

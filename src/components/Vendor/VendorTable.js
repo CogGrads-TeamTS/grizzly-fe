@@ -33,7 +33,7 @@ class VendorTable extends React.Component{
             ) : (
                 _.map(this.props.vendors, vend => {
                     return (
-                        <VendorRows key={vend.id} vendor={vend} delete={this.deleteClicked} edit={this.editClicked} />   
+                        <VendorRows key={vend.id} vendor={vend} delete={this.deleteVendorClicked} edit={this.editClicked} />
                     )
                 })
             );
