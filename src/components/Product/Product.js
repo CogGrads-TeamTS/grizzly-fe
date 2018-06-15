@@ -4,7 +4,7 @@ import { Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
-import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/ProductActions';
+import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/productActions';
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
@@ -112,7 +112,6 @@ class Product extends React.Component{
 } 
 
 const mapStateToProps = (state) => { 
-    console.log(state.products.content)
     return{
         products: state.products.content,
         last: state.products.last

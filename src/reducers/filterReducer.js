@@ -6,6 +6,7 @@ export function categoryFilter(state = {}, action) {
     // NOT CURRENTLY BEING USED!
     const page = 1;
 
+    console.log("Type is: " + action.type);
     switch(action.type) {
         case types.SORT_CATEGORY_CHANGE:
             return {...state, ['sort']:action.sortParam};
