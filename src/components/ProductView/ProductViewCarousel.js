@@ -7,23 +7,21 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const items = [
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 1',
-    caption: 'Slide 1'
-  },
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 2',
-    caption: 'Slide 2'
-  },
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 3',
-    caption: 'Slide 3'
+const items = [];
+
+const urladdition="http://ts.ausgrads.academy/images/"
+const buildImages = (images) => {
+  console.log(images)
+  let i;
+  for(i = 0; i < images.length; i++){
+    console.log(images[i].url)
+    items.push({
+      src: urladdition+images[i].url
+    })
   }
-];
+
+  console.log(items)
+};
 
 class ProductViewCarousel extends Component {
   constructor(props) {
@@ -64,6 +62,9 @@ class ProductViewCarousel extends Component {
   render() {
     const { activeIndex } = this.state;
 
+    // addItems();
+    buildImages(this.props.images)
+
     const slides = items.map((item) => {
       return (
         <CarouselItem
@@ -71,7 +72,7 @@ class ProductViewCarousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} />
+          <img src={item.src} alt={item.altText} style={{width: '100%'}}/>
           <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );

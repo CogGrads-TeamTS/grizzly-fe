@@ -7,6 +7,8 @@ import ProductViewCarousel from './ProductViewCarousel';
 class ProductViewLayout extends Component {
 
     render(){
+
+        console.log(this.props.images);
         return (
             <Container fluid={true} className="prod-view-container">
                 <Row>
@@ -57,7 +59,9 @@ class ProductViewLayout extends Component {
 
                         <Row>
                             <Col md="6" sm="6">
-                                <ProductViewCarousel />
+                                <div className="prod-body-images">
+                                    <ProductViewCarousel images={this.props.images}/>
+                                </div>
                             </Col>
 
                             <Col md="6" sm="6" height="100%">

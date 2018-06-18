@@ -20,6 +20,10 @@ tbody {
   margin-top: 2%;
 } */
 
+.prod-body-images {
+  width: 100%;
+}
+
 .prod-view-body {
   margin-top: 3%;
   width: 100%;
