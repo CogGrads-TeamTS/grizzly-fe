@@ -16,10 +16,12 @@ const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
 const NO_PARAM = "id,desc";
 const SEARCH = "";
+const CATEGORY = "";
 
-export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM){
+//export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
+export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM, catId=CATEGORY){
 
-    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}&category=${catId}`;
     const url = `${API_URL}/page?${urlParams}`;
     console.log("URL: " + url);
     //const  url ='http://localhost:3005/vendor/';

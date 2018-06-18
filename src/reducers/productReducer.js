@@ -9,15 +9,17 @@ export function products(state = {}, action) {
             const productFirst = action.data.products.first;
             const productLast = action.data.products.last;
             const selected = undefined;
-
+            const filterByCat = action.data.filterCats;
+            console.log(action.data);
             console.log(productArray)
 
             return {
-                    ...state,
-                   content: (!productFirst ? [ ...state.content, ...productArray] : productArray),
-                   productFirst,
-                   productLast,
-                   selected
+                ...state,
+                content: (!productFirst ? [ ...state.content, ...productArray] : productArray),
+                productFirst,
+                last: productLast,
+                selected,
+                filterByCat
             };
 
         case types.LOAD_SINGLE_PRODUCT_SUCCESS:
