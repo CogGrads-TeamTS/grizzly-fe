@@ -4,7 +4,7 @@ import { Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
-import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/productActions';
+import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/productActions';
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
@@ -13,9 +13,10 @@ import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction
 class Product extends React.Component{
     constructor() {
         super();
-        // this.deleteProduct = this.deleteProduct.bind(this);
+
         // this.editProduct = this.editProduct.bind(this);
         // this.addConfirm = this.addConfirm.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
         this.incrementPage = this.incrementPage.bind(this);
 
         // Change paginate values here
@@ -80,7 +81,7 @@ class Product extends React.Component{
                     {console.log(this.props.products)}
                     {/* TODO: ADD TABLE HERE */}
                 {<ProductTable products={this.props.products}
-                    // delete={this.deleteCategory} 
+                    delete={this.deleteProduct} 
                     // edit={this.editCategory} 
                     fetchNextPage={this.incrementPage}
                     last={this.props.last} />}
@@ -88,13 +89,12 @@ class Product extends React.Component{
                 </Row>
             </div>
     )}
-    // dispatches an action to delete the category using its id
-    // this function is passed down to the table and its rows
-    // deleteProduct(prod) {
-    //     console.log("parent deleting product");
-    //     console.log(prod);
-    //     this.props.delete(cat.id);
-    // }
+
+    deleteProduct(prod) {
+         console.log("parent deleting product");
+         console.log(prod);
+         this.props.delete(prod.id);
+    }
 
     // editProduct(prod) {
     //     console.log("parent editing product");
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { console.log(dispatch);
     return {
         fetchData: (search, page, size, sort)=> dispatch(productFetchData(search, page, size, sort)),
-        // delete: (id) => dispatch(deleteCategory(id)),
+        delete: (id) => dispatch(deleteProductAction(id)),
         // edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         // add: (name, description) => dispatch(addCategoryAction(name, description))
     };

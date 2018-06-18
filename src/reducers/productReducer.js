@@ -24,12 +24,11 @@ export function products(state = {}, action) {
             return {
                 selected: action.data
             };
-        // case types.DELETE_PRODUCT_SUCCESS:
-        //     // returns a new state that has the deleted category removed
-        //     return {
-        //         ...state,
-        //         content: state.content.filter(vend => vend.id !== action.payload)
-        //     };
+        case types.DELETE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                content: state.content.filter(prod => prod.id !== action.payload)
+            };
 
         
         // case types.EDIT_PRODUCT_SUCCESS:

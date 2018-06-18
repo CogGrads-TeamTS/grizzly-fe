@@ -129,24 +129,24 @@ export function productFetchDataByID(id){
 //     };
 // }
 
-// const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
-// const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
+const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
+const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
-// export function deleteProductAction(id) {
-//     console.log(id);
-//     return(dispatch) => {
-//         //const request = axios.delete(`http://localhost:3005/vendor/${id}`);
-//         const request = axios.delete(`${API_URL}/product/${id}`);
-//         request
-//             .then((response) =>{
-//                 if(!response.status == 200){
-//                     throw Error(response.statusText);
-//                 }
-//                 dispatch(deleteProductSuccess(id));
-//             })
-//             .catch((error) =>{
-//                 dispatch(deleteProductError(error));
-//             })
-//     };
+export function deleteProductAction(id) {
+    console.log(id);
+    return(dispatch) => {
+        //const request = axios.delete(`http://localhost:3005/vendor/${id}`);
+        const request = axios.delete(`${API_URL}/${id}`);
+        request
+            .then((response) =>{
+                if(!response.status == 200){
+                    throw Error(response.statusText);
+                }
+                dispatch(deleteProductSuccess(id));
+            })
+            .catch((error) =>{
+                dispatch(deleteProductError(error));
+            })
+    };
 
-// }
+}
