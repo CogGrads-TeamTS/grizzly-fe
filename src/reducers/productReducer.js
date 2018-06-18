@@ -5,7 +5,7 @@ export function product(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
-            const productArray = action.data.content;
+            const productArray = action.data.products.content;
             const productFirst = action.data.first;
             const productLast = action.data.last;
 
@@ -15,8 +15,8 @@ export function product(state = {}, action) {
                    // vendors: (!vendorFirst ? [ ...state.content, ...vendorArray] : vendorArray),
                    //vendorFirst,
                 //vendorLast
-                content: action.data.content,
-                last: action.data.last,
+                content: productArray,
+                last: productLast,
                 selected: undefined
             };
 
@@ -50,18 +50,20 @@ export function product(state = {}, action) {
 
         
         case types.ADD_PRODUCT_SUCCESS:
-            console.log('product Reducer');
+            console.log(action.id);
             // create a new state
-            const addState = {...state};
+            const addState = [{...state}];
+            console.log(addState)
             addState.content =
                 [
                     {
+                        id:action.id,
                         name:action.name,
                         description:action.description
-                    },
-                ...addState.content
+                    }
                 ];
 
+                console.log(addState.content);
             // returns a new state with the added product appended
             return addState;
 
@@ -85,10 +87,12 @@ export function productIsLoading(state = false, action) {
 export function productHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_PRODUCT_ERROR:
+            console.log(action.productHasErrored);
             return action.productHasErrored
-        // case types.ADD_PRODUCT_ERROR:
-        //     console.log(action.payload)
-        //     return state
+        case types.ADD_PRODUCT_ERROR:
+            console.log(action.payload)
+            return action.payload
+
         default:
             return state
     }

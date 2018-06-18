@@ -62,7 +62,6 @@ let ProductAddForm = (props) => {
                     </div>
                     
                     </form>
-                    {console.log(categories)}
                     
 
                 </Col>

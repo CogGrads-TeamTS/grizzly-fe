@@ -18,14 +18,15 @@ const NO_PARAM = "";
 const SEARCH = "";
 
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
-export function productFetchData(){
+export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM){
 
-   // const urlParams = `search=&page=&size=&sort=`;
-    const url = `${API_URL}`;
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const url = `${API_URL}/page?${urlParams}`;
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadProductLoading(true));
+        console.log("URL IS: " + url)
         const request=axios.get(url);
         request
             .then((response) =>{ console.log(response);
@@ -91,8 +92,9 @@ export function productFetchDataByID(id){
 
 
 // FIXME: Change the fields
-const addProductSuccess = (name, description, category, price, img) => ({  
-    type: types.ADD_PRODUCT_SUCCESS , 
+const addProductSuccess = (id, name, description, category, price, img) => ({  
+    type: types.ADD_PRODUCT_SUCCESS ,
+    id, 
     name, 
     description, 
     category,
@@ -115,7 +117,12 @@ export function addProductAction(name, description, category, price, img){
                     throw Error(response.statusText);
                 }console.log(response);
                 dispatch(addProductSuccess( 
-                    response.data.name))
+                    response.data.id,
+                    response.data.name,
+                    response.data.description,
+                    response.data.category,
+                    response.data.price,
+                    response.data.img))
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addProductError(error));
