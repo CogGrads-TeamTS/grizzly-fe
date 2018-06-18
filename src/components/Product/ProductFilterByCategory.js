@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { 
-    Button, 
-    Dropdown, 
     DropdownToggle,
     DropdownItem,
     DropdownMenu,
@@ -11,7 +9,7 @@ import { categoriesFetchData } from '../../actions/categoryActions';
 import { connect } from 'react-redux';
 
 
-class ProductSortByCategory extends Component{
+class ProductFilterByCategory extends Component{
     constructor(props) {
         super(props);
 
@@ -30,22 +28,24 @@ class ProductSortByCategory extends Component{
     }
 
     changeValue(e){  console.log(e)
+        const value = e.currentTarget.value;
         this.setState({
-            dropdownValue: "Filtering by Category: " + e.currentTarget.textContent
+            dropdownValue: value == "" ? 'Filter By Category':"Filtering by Category: " + e.currentTarget.textContent
         })
-        this.props.update(e.currentTarget.value);
+        this.props.update(value);
     }
 
     render(){ console.log(this.props.categories)
         if (this.props.categories) {
             return(
                 <div>
-                    <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                        <DropdownToggle caret>
+                    <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} color="info">
+                        <DropdownToggle color="info" caret>
                             {this.state.dropdownValue}
                         </DropdownToggle>
                         <DropdownMenu id="categoryDropdown">
-                        <DropdownItem onClick={this.changeValue} value="">Display ALL</DropdownItem>
+                        <DropdownItem onClick={this.changeValue} value="">All</DropdownItem>
+                        <DropdownItem header>Categories</DropdownItem>
                         {
                             Object.values(this.props.categories).map(category => 
                                 <DropdownItem  onClick={this.changeValue} value={category.id}>{category.name}</DropdownItem>
@@ -76,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductSortByCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductFilterByCategory);
