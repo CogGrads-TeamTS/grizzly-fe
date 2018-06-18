@@ -1,5 +1,5 @@
 {
-  "name": "Grizzly Admin Portal",
+  "name": "grizzly-admin-portal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
