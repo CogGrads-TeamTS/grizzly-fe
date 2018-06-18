@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import {Link} from 'react-router-dom';
 
 import ProductRows from './ProductRows';
-// import ConfirmDeleteModal from './Modals/CategoryConfirmDeleteModal';
+import ConfirmDeleteModal from './Modals/ProductConfirmDeleteModal';
 // import EditModal from './Modals/CategoryEditModal';
 
 class ProductTable extends React.Component {
@@ -25,8 +25,6 @@ class ProductTable extends React.Component {
                 <div></div>
             </div>
         </div>;
-
-        console.log("TESTING" + this.props.last);
         
         // This method is used to determine what rows to load in table based on categories length using a ternary operator
         const tableIsEmpty = _.isEmpty(this.props.products) ?
@@ -73,8 +71,8 @@ class ProductTable extends React.Component {
                     </Row>
                 </InfiniteScroll>
                 {/* TODO: ADD MODALS HERE */}
-                {/* <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
-                <EditModal ref="editModal" confirm={this.editConfirmed}/> */}
+                <ConfirmDeleteModal ref="deleteModal" confirm={this.deleteConfirmed} />
+                {/* <EditModal ref="editModal" confirm={this.editConfirmed}/> */}
             </Container>
                 
 
@@ -83,7 +81,7 @@ class ProductTable extends React.Component {
 
     deleteConfirmed = (prod) => {
         console.log("delete confirmed: " + prod.id);
-        // this.props.delete(prod);
+        this.props.delete(prod);
     }
 
     editConfirmed = (prod) => {
@@ -92,7 +90,7 @@ class ProductTable extends React.Component {
     }
 
     deleteClicked = (prod) => {
-        // this.refs.deleteModal.openModal(prod);
+        this.refs.deleteModal.openModal(prod);
     };
 
     editClicked = (prod) => {

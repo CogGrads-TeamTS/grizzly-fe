@@ -14,7 +14,7 @@ const loadSingleProductLoading = (loading) =>({type: types.LOAD_SINGLE_PRODUCT_L
 
 const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
-const NO_PARAM = "";
+const NO_PARAM = "id,desc";
 const SEARCH = "";
 
 //export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
@@ -134,21 +134,20 @@ export function addProductAction(name, description, category, price, img){
 // const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
 // const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
-// export function deleteProductAction(id) {
-//     console.log(id);
-//     return(dispatch) => {
-//         //const request = axios.delete(`http://localhost:3005/vendor/${id}`);
-//         const request = axios.delete(`${API_URL}/product/${id}`);
-//         request
-//             .then((response) =>{
-//                 if(!response.status == 200){
-//                     throw Error(response.statusText);
-//                 }
-//                 dispatch(deleteProductSuccess(id));
-//             })
-//             .catch((error) =>{
-//                 dispatch(deleteProductError(error));
-//             })
-//     };
+export function deleteProductAction(id) {
+    console.log(id);
+    return(dispatch) => {
+        const request = axios.delete(`${API_URL}/${id}`);
+        request
+            .then((response) =>{
+                if(!response.status == 200){
+                    throw Error(response.statusText);
+                }
+                dispatch(deleteProductSuccess(id));
+            })
+            .catch((error) =>{
+                dispatch(deleteProductError(error));
+            })
+    };
 
-// }
+}
