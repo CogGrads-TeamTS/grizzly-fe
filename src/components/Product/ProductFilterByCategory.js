@@ -30,7 +30,7 @@ class ProductFilterByCategory extends Component{
     changeValue(e){  console.log(e)
         const value = e.currentTarget.value;
         this.setState({
-            dropdownValue: value == "" ? 'Filter By Category':"Filtering by Category: " + e.currentTarget.textContent
+            dropdownValue: value == "" ? 'Filter By Category':"Filtering by: " + e.currentTarget.textContent
         })
         this.props.update(value);
     }
