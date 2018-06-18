@@ -6,7 +6,7 @@ import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
 import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/productActions';
 import ProductSortByCategory from './ProductSortByCategory';
-import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/ProductActions';
+
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
