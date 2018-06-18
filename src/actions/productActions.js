@@ -135,7 +135,6 @@ const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload
 export function deleteProductAction(id) {
     console.log(id);
     return(dispatch) => {
-        //const request = axios.delete(`http://localhost:3005/vendor/${id}`);
         const request = axios.delete(`${API_URL}/${id}`);
         request
             .then((response) =>{
