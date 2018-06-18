@@ -17,7 +17,6 @@ const ProductRows = (props) => { //console.log(props.category);
                 <td onClick={handleClick}>{product.brand}</td>
                 <td onClick={handleClick}>{product.catName}</td>
                 <td onClick={handleClick}>{product.rating}</td>
-                <td><Button color="info" onClick={() => props.edit(product)}>Edit</Button></td>
                 <td><Button color="secondary">Block </Button></td>
                 <td><Button color="danger" onClick={() => props.delete(product)}>Delete</Button></td>
             </tr>

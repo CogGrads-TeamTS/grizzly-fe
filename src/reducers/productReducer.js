@@ -5,9 +5,9 @@ export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
-            const productArray = action.data.content;
-            const productFirst = action.data.first;
-            const productLast = action.data.last;
+            const productArray = action.data.products.content;
+            const productFirst = action.data.products.first;
+            const productLast = action.data.products.last;
             const selected = undefined;
 
             console.log(productArray)
@@ -24,12 +24,11 @@ export function products(state = {}, action) {
             return {
                 selected: action.data
             };
-        // case types.DELETE_PRODUCT_SUCCESS:
-        //     // returns a new state that has the deleted category removed
-        //     return {
-        //         ...state,
-        //         content: state.content.filter(vend => vend.id !== action.payload)
-        //     };
+        case types.DELETE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                content: state.content.filter(prod => prod.id !== action.payload)
+            };
 
         
         // case types.EDIT_PRODUCT_SUCCESS:

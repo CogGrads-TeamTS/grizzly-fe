@@ -5,6 +5,9 @@ import VendorTable from './VendorTable';
 import {vendorsFetchData,addVendorAction,deleteVendorAction,editVendorAction} from "../../actions/vendorActions";
 import VendorAddModal from './Modals/VendorAddModal'
 import VendorSortByButton from './VendorSortByButton';
+import VendorSearch from './VendorSearch';
+
+import _ from 'lodash';
 
 class Vendor extends React.Component{
     constructor()
@@ -38,17 +41,26 @@ class Vendor extends React.Component{
         this.fetchDataWithFilter();
     }
 
+    updateSearch(search) {
+        this.search = search;
+        this.page = 0;
+        this.fetchDataWithFilter();
+    }
+
     incrementPage() { // Note that the infinite scroller pre-loads the next page
         this.page += 1;
         this.fetchDataWithFilter();
     }
 
     render(){
+        // waits for the user to stop typing before issuing the search request to the server.
+        const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
+        
         return(
             <div>
                 <Row>
                     <Col md="6" sm="6" xs="12">
-
+                        <VendorSearch placeholder="Search by Vendor" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                     <VendorSortByButton update={this.updateSort} />
