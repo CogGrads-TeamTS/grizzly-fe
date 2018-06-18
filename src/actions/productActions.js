@@ -64,30 +64,30 @@ export function productFetchDataByID(id){
      }
  }
 
-// const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
-// const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
-// const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
+ const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
+ const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
+ const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
 
-// export function editProductAction(payload) {
-//     console.log( payload);
+ export function editProductAction(payload) {
+    console.log( payload);
 
-//     return (dispatch) => {
-//         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-//         const request = axios.put(`${API_URL}/products/${payload.id}`, payload );
-//         request
-//             .then((response) => {
-//                 console.log(response);
-//                 if (!response.status == 200) {
-//                     throw Error(response.statusText);
-//                 }
-//                 dispatch(editProductSuccess(payload))
-//             })
-//             .catch((error) => { // Catch the error thrown if status isn't 200
-//                 console.log(error);
-//                 dispatch(editProductError(error));
-//             })
-//     };
-// }
+    return (dispatch) => {
+        // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/products/${payload.id}`, payload);
+        request
+            .then((response) => {
+                console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(editProductSuccess(payload))
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                console.log(error);
+                dispatch(editProductError(error));
+            })
+    };
+}
 
 
 // // FIXME: Change the fields
