@@ -45,6 +45,7 @@ class ProductSortByCategory extends Component{
                             {this.state.dropdownValue}
                         </DropdownToggle>
                         <DropdownMenu id="categoryDropdown">
+                        <DropdownItem onClick={this.changeValue} value="">Display ALL</DropdownItem>
                         {
                             Object.values(this.props.categories).map(category => 
                                 <DropdownItem  onClick={this.changeValue} value={category.id}>{category.name}</DropdownItem>

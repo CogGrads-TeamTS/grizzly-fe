@@ -186,6 +186,14 @@ tbody {
   padding-top: 50px;
   width: 100%;
 }
+
+/*Category Dropdown */
+#categoryDropdown{
+  transform: translate3d(0px, 36px, 0px) !important;
+  max-height: 300px;
+  overflow-y: scroll;
+  background-color: #eee;
+}
 /* Used for profile tab */
 .profile-card.card {
   height: 80vh;
