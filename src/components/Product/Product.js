@@ -5,11 +5,12 @@ import _ from 'lodash';
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
 import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/productActions';
-import ProductSortByCategory from './ProductSortByCategory';
+import ProductFilterByCategory from './ProductFilterByCategory';
 
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
+import ProductSortByButton from './ProductSortByButton';
 
 
 class Product extends React.Component{
@@ -21,6 +22,7 @@ class Product extends React.Component{
         this.deleteProduct = this.deleteProduct.bind(this);
         this.incrementPage = this.incrementPage.bind(this);
         this.updateCategoryFilter = this.updateCategoryFilter.bind(this);
+        this.updateSort = this.updateSort.bind(this);
 
         // Change paginate values here
         this.page = 0;
@@ -81,10 +83,10 @@ class Product extends React.Component{
                         <Search placeholder="Search by Product" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
-                        <ProductSortByCategory update={this.updateCategoryFilter} />
+                        <ProductFilterByCategory update={this.updateCategoryFilter} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
-                        {/* <CategorySortByButton update={this.updateSort}/> */}
+                        <ProductSortByButton update={this.updateSort} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         {/* <CategoryAddModal buttonLabel="Add Category" title="Add Category" actionLabel="Done" confirm={this.addConfirm} /> */}
