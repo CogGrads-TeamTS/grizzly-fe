@@ -18,7 +18,7 @@ const SEARCH_DEFAULT = "";
 export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
 
-        const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
     // BUILD URL
     
     console.log("url param: " + urlParams);
@@ -45,7 +45,7 @@ export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_D
 }
 
 
-const loadAllCategoriesSuccess = (data) => ({type: types.LOAD_CATEGORIES_SUCCESS, data})
+const loadAllCategoriesSuccess = (data) => ({type: types.LOAD_ALL_CATEGORIES_SUCCESS, data})
 
 export function categoriesFetchNames() {
 
@@ -53,6 +53,7 @@ export function categoriesFetchNames() {
    
    const url = `${API_URL}/categories`;
    console.log(url);
+   console.log("is mounting")
 
    return (dispatch) => {
        dispatch(loadCategoriesLoading(true));
@@ -66,6 +67,7 @@ export function categoriesFetchNames() {
 
                dispatch(loadCategoriesLoading(false));
 
+               console.log("DATA: " + response.data);
                return response.data;
            })
            .then((data) => dispatch(loadAllCategoriesSuccess(data)))

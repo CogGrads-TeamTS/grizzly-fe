@@ -221,8 +221,19 @@ const addProductImageSuccess = (name, sort) => ({ type: types.ADD_PRODUCT_IMAGE_
 export function addProductImages(id, file, sort) {
     console.log(file[0]);
     console.log(sort);
+
+    const url = `${API_URL}/${id}/images/add`;
+    const formData = new FormData();
+    formData.append('file', file[0]);
+    formData.append('sort', 1);
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+
     return (dispatch) => {
-        const request = axios.post(`${API_URL}/${id}/images/add`, file[0], sort);
+        const request = axios.post(url, formData, config);
         request
         .then(( response) => {
             if (!response.status == 201) {

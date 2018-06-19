@@ -50,6 +50,7 @@ class ProductAdd extends Component {
     }
 
     componentDidMount(){
+        console.log("Did mount")
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
     fetchDataWithFilter() {
@@ -82,7 +83,7 @@ class ProductAdd extends Component {
         return (
             <div>
                 
-                <ProductAddForm onSubmit={this.handleSubmit} categories={this.props.categories} returnToHome={this.returnToHome} onDrop={this.onDrop}/>
+                <ProductAddForm onSubmit={this.handleSubmit} categories={this.props.names} returnToHome={this.returnToHome} onDrop={this.onDrop}/>
             </div>
         );
     }
@@ -91,7 +92,7 @@ class ProductAdd extends Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        categories: state.category.content,
+        names: state.category.names,
         last: state.category.last
     }
 }

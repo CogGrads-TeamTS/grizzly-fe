@@ -47,9 +47,10 @@ class ProductFilterByCategory extends Component{
                         <DropdownItem onClick={this.changeValue} value="">All</DropdownItem>
                         <DropdownItem header>Categories</DropdownItem>
                         {
-                            Object.values(this.props.categories).map(category => 
+                            // Requires curly brackets or there is an issue mapping the key
+                            Object.values(this.props.categories).map(category => { 
                                 <DropdownItem  onClick={this.changeValue} value={category.id}>{category.name}</DropdownItem>
-                            )
+                            })
                         }
                         </DropdownMenu>
                     </ButtonDropdown>

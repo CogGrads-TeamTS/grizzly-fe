@@ -20,6 +20,7 @@ export function category(state = {}, action) {
 
             case types.LOAD_ALL_CATEGORIES_SUCCESS:
             // create array from fetched data from database
+            console.log(action.data)
             const nameArray = action.data.content;
             // create a new copy of the current state
             return {
