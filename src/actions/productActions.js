@@ -68,12 +68,12 @@ export function productFetchDataByID(id){
  const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
  const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
 
- export function editProductAction(payload) {
+ export function editProductAction(payload,id) {
     console.log( payload);
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-        const request = axios.put(`${API_URL}/products/${payload.id}`, payload);
+        const request = axios.put(`${API_URL}/${id}`, payload);
         request
             .then((response) => {
                 console.log(response);

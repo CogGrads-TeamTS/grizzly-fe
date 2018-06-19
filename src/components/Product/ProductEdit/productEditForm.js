@@ -2,81 +2,35 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom';
 import _ from 'lodash';
 import { Container, Row, Col, Form,Input,Label, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
+const returnToHome = () => {
+    this.props.history.push("/");
+}
 
 class ProductEditForm extends Component{
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
-       console.log(props.product.category.id);
         this.state = {
-            id:props.product.id,
-            name: props.product.name,
-            brand: props.product.brand,
-            description: props.product.description,
-            price:props.product.price,
-            category:props.product.category.id,
-            discount:props.product.discount
+            id: this.props.product.id,
+            name: this.props.product.name,
+            brand: this.props.product.brand,
+            description: this.props.product.description,
+            price: this.props.product.price,
+            category: this.props.product.category.id,
+            discount: this.props.product.discount
+
         };
-
-        this.handleSubmit=this.handleSubmit.bind(this);
-        this.handleProductNameChange = this.handleProductNameChange.bind(this);
-        this.handleProductBrandChange = this.handleProductBrandChange.bind(this);
-        this.handleProductDescChange = this.handleProductDescChange.bind(this);
-        this.handleProductPriceChange = this.handleProductPriceChange.bind(this);
-        this.handleProductDiscountChange = this.handleProductDiscountChange.bind(this);
-
-
-        //const {handleSubmit} = props;
-        //const { categories } = props;
     }
+    render(){
 
+    const {handleSubmit,categories,product} = this.props;
 
-
-    handleProductNameChange(event) {
-        console.log(event.target.value);
-        this.setState = {
-            name: event.target.value
-        }
-    }
-    handleProductBrandChange(event){
-        this.setState = {
-            brand: event.target.value
-        }
-    }
-    handleProductDescChange(event){
-        this.setState = {
-            description: event.target.value
-        }
-    }
-    handleProductPriceChange(event){
-        this.setState = {
-            price: event.target.value
-        }
-    }
-    handleProductDiscountChange(event){
-        this.setState = {
-            discount: event.target.value
-        }
-    }
-    handleSubmit(event) {
-        console.log('test');
-        this.props.confirm({
-            id: this.state.id,
-            name: this.state.name,
-            brand: this.state.brand,
-            description: this.state.description,
-            price: this.state.price,
-            category: this.state.category,
-            discount: this.state.discount
-        });
-    }
-
-    returnToHome = () => {
-        this.props.history.push("/");
-    };
-
-render(){ console.log(this.props.product);
+        console.log(this.props.product);
+        console.log(this.state);
+        console.log(this.props.categories);
     return (
         <Container fluid={true}>
 
@@ -87,16 +41,16 @@ render(){ console.log(this.props.product);
                     <div className="prod-image-caption">Product Image Carousel</div>
                 </Col>
                 <Col md="6" sm="6" height="100%">
-                    <Form onSubmit={this.handleSubmit}>
-                        <FormGroup>
-                            <Input type="text" name="name" defaultValue={this.state.name} onChange= {this.handleProductNameChange} /><br/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Input type="text" name="brand" defaultValue={this.state.brand} onChange= {this.handleProductBrandChange} /><br/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Input name="description" type="textarea" onChange= {this.handleProductDescChange} defaultValue={this.state.description}/>
-                        </FormGroup>
+                    <form onSubmit={handleSubmit}>
+                        <fieldset className="form-group">
+                            <Field  className="form-control" component="input" type="text" name="name" value={this.state.name}  /><br/>
+                        </fieldset>
+                        <fieldset className="form-group">
+                            <Field  className="form-control"  component="input" type="text" name="brand" value={this.state.brand} /><br/>
+                        </fieldset>
+                        <fieldset className="form-group">
+                            <Field  className="form-control"  component="input" name="description" type="textarea" value={this.state.description}/>
+                        </fieldset>
 
                         <div className="text-left">
                             <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >Category</Button>
@@ -111,8 +65,7 @@ render(){ console.log(this.props.product);
                                                     return (
                                                         <div>
                                                             <label>
-                                                                <Input name="category" component="input" type="radio" defaultValue={cat.name}
-                                                                      /> {' '}
+                                                                <Field name="category" component="input" type="radio" value={cat.name}/>{' '}
                                                                 {cat.name}
                                                             </label>
                                                         </div>
@@ -127,22 +80,22 @@ render(){ console.log(this.props.product);
 
                         <Row>
                             <Col md="6" sm="6" height="100%">
-                                <FormGroup>
-                                    <Input name="price" type="text" onChange= {this.handleProductPriceChange} defaultValue={this.state.price} style={{marginTop: "5%"}}/><br/>
-                                </FormGroup>
+                                <fieldset className="form-group">
+                                    <Field  className="form-control"  component="input"  name="price" type="text" value={this.state.price} style={{marginTop: "5%"}}/><br/>
+                                </fieldset>
                             </Col>
                         </Row>
                         <Row>
                             <Col md="6" sm="6" height="100%">
-                                <FormGroup>
-                                    <Input name="discount" type="text" defaultValue={this.state.discount} onChange= {this.handleProductDiscountChange} style={{marginTop: "5%"}}/><br/>
-                                </FormGroup>
+                                <fieldset className="form-group">
+                                    <Field  className="form-control"  component="input" name="discount" type="text" value={this.state.discount}  style={{marginTop: "5%"}}/><br/>
+                                </fieldset>
                             </Col>
                         </Row>
 
                         <div className="prod-footer">
                             <div className="prod-body-price">
-                                <Button outline color="primary" type="submit">Edit</Button>
+                                <Button outline color="primary"  onClick={handleSubmit} type="submit">Edit</Button>
                             </div>
 
                             <div className="prod-body-discount">
@@ -150,7 +103,7 @@ render(){ console.log(this.props.product);
                             </div>
                         </div>
 
-                    </Form>
+                    </form>
 
 
                 </Col>
@@ -159,9 +112,25 @@ render(){ console.log(this.props.product);
         </Container>
 
     )
-}
 
 }
 
 
-export default withRouter(ProductEditForm);
+
+}
+
+ProductEditForm = reduxForm({
+    // a unique name for the form
+    form: 'editProduct'
+})(ProductEditForm)
+
+// now set initialValues using data from your store state
+ProductEditForm = connect(
+    state => ({
+        initialValues: this.state
+
+    })
+
+)(ProductEditForm)
+
+export default ProductEditForm;

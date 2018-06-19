@@ -13,17 +13,20 @@ class ProductEdit extends Component{
         this.size = 20;
         this.sort = "id,desc";
         this.search = "";
-        this.editConfirm=this.editConfirm.bind(this);
-
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handleSubmit = (data) => {
+        console.log('TESTESTTESTESTSET');
+        console.log(data);
+        this.props.edit(data,this.props.match.params.id);
+    };
     componentDidMount(){
 
         this.props.fetchData(this.props.match.params.id);
         this.props.categoryFetchData();
     }
-    fetchDataWithFilter() {
-        this.props.categoryFetchData(this.search, this.page, this.size, this.sort)
-    }
+
 
    render(){
 
@@ -31,7 +34,8 @@ class ProductEdit extends Component{
            (
                <p>The product is loading...</p>
            ) : (
-               <ProductEditForm  product={this.props.product} categories={this.props.categories} confirm={this.editConfirm} />
+               <ProductEditForm  product={this.props.product} categories={this.props.categories}
+                                 onSubmit={this.handleSubmit.bind(this)} />
            );
 
        return (
@@ -41,10 +45,6 @@ class ProductEdit extends Component{
 
        )
    }
-   editConfirm(prod) {
-      console.log('test');
-      this.props.edit(prod);
-    }
 }
 
 
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => { console.log();
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
         categoryFetchData: (search, page, size, sort)=> dispatch(categoriesFetchData(search, page, size, sort)),
-        edit: (payload) => dispatch(editProductAction(payload))
+        edit: (payload,id) => dispatch(editProductAction(payload,id))
     };
 };
 
