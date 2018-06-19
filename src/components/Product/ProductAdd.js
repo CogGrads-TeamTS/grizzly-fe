@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { productFetchDataByID, deleteCategory, editCategoryAction, addProductImages, addProductAction } from '../../actions/productActions';
+import { productFetchDataByID, deleteCategory, editCategoryAction, addProductImages, addProductAction } from '../../actions/ProductActions';
 import ProductAddForm from './ProductAddForm';
 import { connect } from 'react-redux';
 import { categoriesFetchNames } from '../../actions/categoryActions';

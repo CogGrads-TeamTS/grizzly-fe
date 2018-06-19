@@ -4,12 +4,15 @@ import { Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
-import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/productActions';
+import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/ProductActions';
+import ProductFilterByCategory from './ProductFilterByCategory';
+
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import ProductAddButton from './ProductAddButton';
 // import Search from './CategorySearch';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
+import ProductSortByButton from './ProductSortByButton';
 
 
 class Product extends React.Component{
@@ -20,6 +23,8 @@ class Product extends React.Component{
         // this.addConfirm = this.addConfirm.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
         this.incrementPage = this.incrementPage.bind(this);
+        this.updateCategoryFilter = this.updateCategoryFilter.bind(this);
+        this.updateSort = this.updateSort.bind(this);
 
         // Change paginate values here
         this.page = 0;
@@ -27,6 +32,7 @@ class Product extends React.Component{
         this.sort = "id,desc";
         this.search = "";
         this.hasMore = true;
+        this.catId = "";
         // this.updateSort = this.updateSort.bind(this);
          this.updateSearch = this.updateSearch.bind(this);
     }
@@ -37,9 +43,16 @@ class Product extends React.Component{
     }
 
     fetchDataWithFilter() {
-        this.props.fetchData(this.search, this.page, this.size, this.sort)
+        this.props.fetchData(this.search, this.page, this.size, this.sort, this.catId)
+        console.log(this.catId);
         console.log('fetch data with filter page: ' + this.search);
                 
+    }
+
+    updateCategoryFilter(catId) {
+        this.catId = catId;
+        this.page = 0;
+        this.fetchDataWithFilter();
     }
 
     updateSort(sort) {
@@ -75,7 +88,10 @@ class Product extends React.Component{
                         <Search placeholder="Search by Product" updateSearch={searchDebounce} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
-                        {/* <CategorySortByButton update={this.updateSort}/> */}
+                        <ProductFilterByCategory update={this.updateCategoryFilter} />
+                    </Col>
+                    <Col md="3" sm="3" xs="12">
+                        <ProductSortByButton update={this.updateSort} />
                     </Col>
                     <Col md="3" sm="3" xs="12">
                         <ProductAddButton buttonLabel="Add Product" title="Add Product" actionLabel="Done" confirm={this.addConfirm} />
@@ -125,7 +141,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { console.log(dispatch);
     return {
-        fetchData: (search, page, size, sort)=> dispatch(productFetchData(search, page, size, sort)),
+        fetchData: (search, page, size, sort, catId)=> dispatch(productFetchData(search, page, size, sort, catId)),
         delete: (id) => dispatch(deleteProductAction(id)),
         // edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         // add: (name, description) => dispatch(addCategoryAction(name, description))

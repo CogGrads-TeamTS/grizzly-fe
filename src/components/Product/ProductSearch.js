@@ -8,7 +8,7 @@ import {
     Button,
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import {productFetchData} from "../../actions/productActions";
+import {productFetchData} from "../../actions/ProductActions";
 
 class Search extends React.Component {
     constructor(props) {
