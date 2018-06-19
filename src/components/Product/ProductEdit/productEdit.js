@@ -3,6 +3,7 @@ import { productFetchDataByID,editProductAction } from '../../../actions/product
 import ProductEditForm from "./productEditForm";
 import { categoriesFetchData } from '../../../actions/categoryActions';
 import {connect} from "react-redux";
+import {withRouter} from 'react-router-dom';
 
 class ProductEdit extends Component{
 
@@ -15,11 +16,16 @@ class ProductEdit extends Component{
         this.search = "";
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
+    returnToHome = () => {
+        this.props.history.push("/");
+    }
 
     handleSubmit = (data) => {
         console.log('TESTESTTESTESTSET');
         console.log(data);
         this.props.edit(data);
+        this.returnToHome();
 
     };
     componentDidMount(){
@@ -61,7 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { console.log();
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
-        categoryFetchData: (search, page, size, sort)=> dispatch(categoriesFetchData(search, page, size, sort)),
+        categoryFetchData: ()=> dispatch(categoriesFetchData()),
         edit: (payload) => dispatch(editProductAction(payload))
     };
 };

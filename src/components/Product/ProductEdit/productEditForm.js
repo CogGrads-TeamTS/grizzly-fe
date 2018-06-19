@@ -31,7 +31,7 @@ class ProductEditForm extends Component{
         
         // console.log(this.props.product);
         // console.log(this.state);
-        // console.log(this.props.categories);
+        console.log(this.props.categories);
     return (
         <Container fluid={true}>
 
