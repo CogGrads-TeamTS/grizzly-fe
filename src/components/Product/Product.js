@@ -137,7 +137,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { console.log(dispatch);
     return {
         fetchData: (search, page, size, sort, catId)=> dispatch(productFetchData(search, page, size, sort, catId)),
-        // delete: (id) => dispatch(deleteCategory(id)),
+        delete: (id) => dispatch(deleteProductAction(id)),
         // edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         // add: (name, description) => dispatch(addCategoryAction(name, description))
     };
