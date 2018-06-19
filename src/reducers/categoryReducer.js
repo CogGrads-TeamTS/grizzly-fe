@@ -3,7 +3,7 @@ import * as types from '../actions/actionTypes';
 import _ from 'lodash';
 
 export function category(state = {}, action) { 
-    console.log(action.type);
+   // console.log(action.type);
     switch (action.type) {
         case types.LOAD_CATEGORIES_SUCCESS:
             // create array from fetched data from database

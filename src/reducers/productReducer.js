@@ -10,8 +10,8 @@ export function products(state = {}, action) {
             const productLast = action.data.products.last;
             const selected = undefined;
             const filterByCat = action.data.filterCats;
-            console.log(action.data);
-            console.log(productArray)
+         //   console.log(action.data);
+            //console.log(productArray)
 
             return {
                 ...state,

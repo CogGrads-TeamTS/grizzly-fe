@@ -27,11 +27,15 @@ class ProductEditForm extends Component{
     render(){
         // console.log(this.state.name);
     const {handleSubmit,categories,product} = this.props;
-    let isChecked = false;
         
-        // console.log(this.props.product);
+        console.log(this.props.product);
         // console.log(this.state);
-        console.log(this.props.categories);
+       // console.log(this.props.categories);
+
+        let catChanged=(event)=>
+        {
+            (this.props.categories.name)? this.props.product.catId=this.props.categories.id :this.props.product.catID
+        };
     return (
         <Container fluid={true}>
 
@@ -44,17 +48,27 @@ class ProductEditForm extends Component{
                 <Col md="6" sm="6" height="100%">
                     <form onSubmit={handleSubmit}>
                         <fieldset className="form-group">
+                            <label>Name: </label>
                             <Field  className="form-control" component="input" type="text" name="name" /><br/>
                         </fieldset>
                         <fieldset className="form-group">
+                            <label>Brand: </label>
                             <Field  className="form-control"  component="input" type="text" name="brand" /><br/>
                         </fieldset>
                         <fieldset className="form-group">
-                            <Field  className="form-control"  component="input" name="description" type="textarea" />
+                            <label>Description: </label>
+                            <Field  className="form-control"  component="textarea" name="description" type="textarea" />
                         </fieldset>
+                        <div>
+                            <fieldset className="form-group">
+                                <label>Category Selected: </label>
+                                <Field  className="form-control"  component="input" name="catName" type="text" disabled />
+                            </fieldset>
+                        </div>
 
                         <div className="text-left">
-                            <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >Category</Button>
+                            <label>Change Category : </label>
+                            <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
                             <UncontrolledCollapse toggler="#toggler">
                                 <Card>
                                     <CardBody className="cat-collapse">
@@ -67,10 +81,9 @@ class ProductEditForm extends Component{
                                                         <div>
                                                             <label>
 
-                                                                
-                                                                {this.props.initialValues.category.name === cat.name? isChecked = true : isChecked = false}
-                                                                {console.log(isChecked)}
-                                                                <Field name="category" component="input" type="radio" value={cat.name} checked={isChecked} />{' '}
+                                                                {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
+                                                                {/*console.log(isChecked)*/}
+                                                                <Field name="catName" component="input" type="radio" value={cat.name} onChange={catChanged}/>{' '}
                                                                 {cat.name}
                                                             </label>
                                                         </div>
@@ -82,7 +95,6 @@ class ProductEditForm extends Component{
                                 </Card>
                             </UncontrolledCollapse>
                         </div>
-
                         <Row>
                             <Col md="6" sm="6" height="100%">
                                 <fieldset className="form-group">

@@ -23,14 +23,14 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
 
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}&category=${catId}`;
     const url = `${API_URL}/page?${urlParams}`;
-    console.log("URL: " + url);
+    //console.log("URL: " + url);
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadProductLoading(true));
         const request=axios.get(url);
         request
-            .then((response) =>{ console.log(response);
+            .then((response) =>{ //console.log(response);
                 if(!response.status == 200)
                 {
                     throw Error(response.statusText);
@@ -53,7 +53,7 @@ export function productFetchDataByID(id){
          dispatch(loadSingleProductLoading(true));
          const request=axios.get(url);
          request
-             .then((response) =>{ console.log(response);
+             .then((response) =>{ //console.log(response);
                  if(!response.status == 200)
                  {
                      throw Error(response.statusText);
@@ -78,7 +78,7 @@ export function productFetchDataByID(id){
         const request = axios.put(`${API_URL}/edit/${payload.id}`, payload);
         request
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }

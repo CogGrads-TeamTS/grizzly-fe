@@ -22,11 +22,10 @@ class ProductEdit extends Component{
     }
 
     handleSubmit = (data) => {
-        console.log('TESTESTTESTESTSET');
+       // console.log('TESTESTTESTESTSET');
         console.log(data);
         this.props.edit(data);
         this.returnToHome();
-
     };
     componentDidMount(){
 
