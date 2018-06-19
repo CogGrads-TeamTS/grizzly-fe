@@ -87,13 +87,13 @@ class Product extends React.Component{
                     <Col md="6" sm="6" xs="12">
                         <Search placeholder="Search by Product" updateSearch={searchDebounce} />
                     </Col>
-                    <Col md="3" sm="3" xs="12">
+                    <Col md="2" sm="2" xs="12">
                         <ProductFilterByCategory update={this.updateCategoryFilter} />
                     </Col>
-                    <Col md="3" sm="3" xs="12">
+                    <Col md="2" sm="2" xs="12">
                         <ProductSortByButton update={this.updateSort} />
                     </Col>
-                    <Col md="3" sm="3" xs="12">
+                    <Col md="2" sm="2" xs="12">
                         <ProductAddButton buttonLabel="Add Product" title="Add Product" actionLabel="Done" confirm={this.addConfirm} />
                     </Col>
                 </Row>

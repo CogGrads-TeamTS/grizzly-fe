@@ -49,7 +49,7 @@ class ProductSortByButton extends Component {
     render() {
         return ( 
             <div>
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} style={{paddingLeft: "26%"}}>
                 <DropdownToggle caret>
                     {this.state.dropdownValue}
                 </DropdownToggle>
