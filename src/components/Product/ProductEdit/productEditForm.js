@@ -13,29 +13,14 @@ class ProductEditForm extends Component{
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     id: this.props.product.id,
-        //     name: this.props.product.name,
-        //     brand: this.props.product.brand,
-        //     description: this.props.product.description,
-        //     price: this.props.product.price,
-        //     category: this.props.product.category,
-        //     discount: this.props.product.discount
-
-        // };
     }
     render(){
-        // console.log(this.state.name);
+
     const {handleSubmit,categories,product} = this.props;
         
         console.log(this.props.product);
-        // console.log(this.state);
-       // console.log(this.props.categories);
 
-        let catChanged=(event)=>
-        {
-            (this.props.categories.name)? this.props.product.catId=this.props.categories.id :this.props.product.catID
-        };
+
     return (
         <Container fluid={true}>
 
@@ -66,7 +51,7 @@ class ProductEditForm extends Component{
                             </fieldset>
                         </div>
 
-                        <div className="text-left">
+                        <div className="text-left">{console.log(this.props.initialValues.catId)}
                             <label>Change Category : </label>
                             <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
                             <UncontrolledCollapse toggler="#toggler">
@@ -83,7 +68,9 @@ class ProductEditForm extends Component{
 
                                                                 {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
                                                                 {/*console.log(isChecked)*/}
-                                                                <Field name="catName" component="input" type="radio" value={cat.name} onChange={catChanged}/>{' '}
+                                                                <Field name="catName" component="input" type="radio" value={cat.name}
+                                                                       onClick={
+                                                                           () => {this.props.initialValues.catId = cat.id}}/>{' '}
                                                                 {cat.name}
                                                             </label>
                                                         </div>
@@ -95,6 +82,7 @@ class ProductEditForm extends Component{
                                 </Card>
                             </UncontrolledCollapse>
                         </div>
+
                         <Row>
                             <Col md="6" sm="6" height="100%">
                                 <fieldset className="form-group">
