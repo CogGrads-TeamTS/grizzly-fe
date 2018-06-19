@@ -58,13 +58,35 @@ export function products(state = {}, action) {
                     {
                         id:action.id,
                         name:action.name,
-                        description:action.description
+                        description:action.description,
+                        brand:action.brand,
+                        catId:action.catId,
+                        price:action.price,
+                        discount:action.discount,
+                        rating:action.rating
                     }
                 ];
 
                 console.log(addState.content);
             // returns a new state with the added product appended
             return addState;
+
+        case types.ADD_PRODUCT_IMAGE_SUCCESS:
+        console.log(action.id);
+        // create a new state
+        const addImageState = [{...state}];
+        console.log(addImageState)
+        addImageState.content =
+            [
+                {
+                    name:action.url,
+                    sort:action.sort
+                }
+            ];
+
+            console.log(addImageState.content);
+        // returns a new state with the added product appended
+        return addImageState;
 
 
 

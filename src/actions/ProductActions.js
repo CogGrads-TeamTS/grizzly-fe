@@ -2,7 +2,6 @@ import * as types from './actionTypes';
 import axios from 'axios';
 
 const API_URL = 'http://ts.ausgrads.academy:8765/products';
-const API_URL_DEV = 'http://localhost:3004/product';
 
 const loadProductSuccess = (data) => ({type: types.LOAD_PRODUCT_SUCCESS, data});
 const loadProductError = (error) => ({type: types.LOAD_PRODUCT_ERROR, productHasErrored:error});
@@ -92,25 +91,27 @@ export function productFetchDataByID(id){
 
 
 // FIXME: Change the fields
-const addProductSuccess = (id, name, description, category, price, img) => ({  
+const addProductSuccess = (id, name, description, brand, catId, price, discount, rating) => ({  
     type: types.ADD_PRODUCT_SUCCESS ,
     id, 
     name, 
-    description, 
-    category,
+    description,
+    brand, 
+    catId,
     price,
-    img 
+    discount,
+    rating 
 });
 const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
 
-export function addProductAction(name, description, category, price, img){
+export function addProductAction(name, description, brand, catId, price, discount, rating){
 
     return(dispatch) => {
 
         //const  url ='http://localhost:3005/vendor/add';
        // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
            // contact:contact, address:address,  portfolioURL:portfolioURL });
-        const request = axios.post(`${API_URL_DEV}/`, name, description, category, price, img);
+        const request = axios.post(`${API_URL}/add`, name, description, brand, catId, price, discount, rating);
         request
             .then(( response) => {
                 if (!response.status == 200) {
@@ -120,9 +121,12 @@ export function addProductAction(name, description, category, price, img){
                     response.data.id,
                     response.data.name,
                     response.data.description,
-                    response.data.category,
+                    response.data.brand,
+                    response.data.catId,
                     response.data.price,
-                    response.data.img))
+                    response.data.discount,
+                    response.data.rating
+                ))
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addProductError(error));
@@ -131,8 +135,8 @@ export function addProductAction(name, description, category, price, img){
     };
 }
 
-// const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
-// const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
+const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
+const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
 export function deleteProductAction(id) {
     console.log(id);
@@ -150,4 +154,58 @@ export function deleteProductAction(id) {
             })
     };
 
+}
+
+// export function addProductAction(name, description, brand, catId, price, discount, rating){
+
+//     return(dispatch) => {
+
+//         //const  url ='http://localhost:3005/vendor/add';
+//        // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
+//            // contact:contact, address:address,  portfolioURL:portfolioURL });
+//         const request = axios.post(`${API_URL}/add`, name, description, brand, catId, price, discount, rating);
+//         request
+//             .then(( response) => {
+//                 if (!response.status == 200) {
+//                     throw Error(response.statusText);
+//                 }console.log(response);
+//                 dispatch(addProductSuccess( 
+//                     response.data.id,
+//                     response.data.name,
+//                     response.data.description,
+//                     response.data.brand,
+//                     response.data.catId,
+//                     response.data.price,
+//                     response.data.discount,
+//                     response.data.rating
+//                 ))
+//             })
+//             .catch((error) => { // Catch the error thrown if status isn't 200
+//                 dispatch(addProductError(error));
+//                 console.log(error);
+//             })
+//     };
+// }
+
+const addProductImageSuccess = (name, sort) => ({ type: types.ADD_PRODUCT_IMAGE_SUCCESS, name, sort});
+
+export function addProductImages(id, file, sort) {
+    console.log(file[0]);
+    console.log(sort);
+    return (dispatch) => {
+        const request = axios.post(`${API_URL}/${id}/images/add`, file[0], sort);
+        request
+        .then(( response) => {
+            if (!response.status == 201) {
+                throw Error(response.statusText);
+            }console.log(response);
+            dispatch(addProductImageSuccess( 
+                response.data,
+            ))
+        })
+        .catch((error) => { // Catch the error thrown if status isn't 200
+            dispatch(addProductError(error));
+            console.log(error);
+        })
+    };
 }

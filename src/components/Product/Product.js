@@ -60,6 +60,9 @@ class Product extends React.Component{
         this.fetchDataWithFilter();
         console.log("isLastOnProductIncrement: " + this.props.last);
     }
+    addConfirm = (e) => {
+        
+    }
 
     render(){
         // waits for the user to stop typing before issuing the search request to the server.

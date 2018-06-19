@@ -17,6 +17,15 @@ export function category(state = {}, action) {
                 isFirst,
                 last
             };
+
+            case types.LOAD_ALL_CATEGORIES_SUCCESS:
+            // create array from fetched data from database
+            const nameArray = action.data.content;
+            // create a new copy of the current state
+            return {
+                ...state,
+                names: nameArray
+            };
             
         case types.DELETE_CATEGORY_SUCCESS:
             // returns a new state that has the deleted category removed

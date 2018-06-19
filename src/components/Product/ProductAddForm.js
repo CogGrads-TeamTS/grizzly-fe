@@ -2,71 +2,77 @@ import _ from 'lodash';
 import React from 'react';
 import { Table,Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import ImageUploader from 'react-images-upload';
 
 let ProductAddForm = (props) => {
     console.log(props);
-    const {handleSubmit} = props;
-    const { categories } = props;
+    const {handleSubmit, returnToHome, onDrop} = props;
 
     return (
         <Container fluid={true}>
-        
-            <Row>
+           
             
-                <Col md="6" sm="6">
-                    <img name="img" className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>
-                    <div className="prod-image-caption">Product Image Carousel</div>
-                </Col>
+            <Row style={{marginTop: '50px'}}>
+            <Col md="6" sm="6">
+                <ImageUploader
+                    withIcon={true}
+                    buttonText='Choose images'
+                    onChange={onDrop}
+                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                    maxFileSize={5242880}
+                    withPreview={true}
+                />
+            </Col>
+            <form onSubmit={handleSubmit}>
+            <Row>
+                <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>
+                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
+            </Row>
                 <Col md="6" sm="6" height="100%">
-                <form onSubmit={handleSubmit}>
                     <Field name="name" component="input" placeholder="Product Name" className="materialInput"/><br/>
-                    <Field name="description" component="textarea" placeholder="Add Description"style={{marginTop: "5%"}}/><br/>
+                    <Field name="description" component="input" placeholder="Add Description" className="materialInput" style={{marginTop: "5%"}}/><br/>
+                    <Field name="brand" component="input" placeholder="Add Brand" className="materialInput" style={{marginTop: "5%", marginBottom: "5%"}}/><br/>
                     <div>
-                        <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >Category</Button>
-                        <UncontrolledCollapse toggler="#toggler">
+                        <div className="btn-dropdown" id="toggler" style={{ marginBottom: '1rem' }} >Category</div>
+                        <UncontrolledCollapse toggler="#toggler" className="btn-dropdown">
                         <Card>
                             <CardBody className="cat-collapse">
+                            <div>
                                 <div>
-                                    <div>
-                                       
-                                        {_.map(props.categories, cat => {
-                                             
-                                            return (
-                                                <div>
-                                                    <label>
-                                                    <Field name="category" component="input" type="radio" value={cat.name}/>{' '}
+                                    {_.map(props.categories, cat => {
+                                        return (
+                                            <div>
+                                                <label>
+                                                    <Field name="category" component="input" type="radio" value={String(cat.id)}/>{' '}
                                                     {cat.name}
-                                                    </label>
-                                                </div>
-                                            )
-                                        })}
-                                        </div>
+                                                </label>
+                                            </div>
+                                            )})}
                                 </div>
+                            </div>
                             </CardBody>
                         </Card>
-                        </UncontrolledCollapse>
+                    </UncontrolledCollapse>
                     </div>
                     <Row>
                     <Col md="6" sm="6" height="100%">
-                    <Field name="price" component="input" placeholder="Price"style={{marginTop: "5%"}}/><br/>
-</Col>
+                    <Field name="price" component="input" placeholder="Price" className="materialInput" style={{marginTop: "5%"}}/><br/>
+                    <Field name="discount" component="input" placeholder="Discount" className="materialInput" style={{marginTop: "5%"}}/><br/>
+                    <Field name="rating" component="input" placeholder="Rating" className="materialInput" style={{marginTop: "5%"}}/><br/>
+                    </Col>
                     </Row>
-
-                    <div className="prod-footer">
-                        <div className="prod-body-price">
-                        <Button color="primary" type="submit">Add</Button>
-                        </div>
-                        <div className="prod-body-discount">
-                        <Button color="secondary" type="submit">Cancel</Button>
-                        </div>
-                    </div>
                     
-                    </form>
+
+
+                    
+                    {console.log(returnToHome)}
+                  
                     
 
                 </Col>
-               
+                </form>
             </Row>
+            
         </Container>
         
     )
