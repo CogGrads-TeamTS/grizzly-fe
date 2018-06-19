@@ -13,24 +13,25 @@ class ProductEditForm extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {
-            id: this.props.product.id,
-            name: this.props.product.name,
-            brand: this.props.product.brand,
-            description: this.props.product.description,
-            price: this.props.product.price,
-            category: this.props.product.category.id,
-            discount: this.props.product.discount
+        // this.state = {
+        //     id: this.props.product.id,
+        //     name: this.props.product.name,
+        //     brand: this.props.product.brand,
+        //     description: this.props.product.description,
+        //     price: this.props.product.price,
+        //     category: this.props.product.category,
+        //     discount: this.props.product.discount
 
-        };
+        // };
     }
     render(){
-
+        // console.log(this.state.name);
     const {handleSubmit,categories,product} = this.props;
-
-        console.log(this.props.product);
-        console.log(this.state);
-        console.log(this.props.categories);
+    let isChecked = false;
+        
+        // console.log(this.props.product);
+        // console.log(this.state);
+        // console.log(this.props.categories);
     return (
         <Container fluid={true}>
 
@@ -43,13 +44,13 @@ class ProductEditForm extends Component{
                 <Col md="6" sm="6" height="100%">
                     <form onSubmit={handleSubmit}>
                         <fieldset className="form-group">
-                            <Field  className="form-control" component="input" type="text" name="name" value={this.state.name}  /><br/>
+                            <Field  className="form-control" component="input" type="text" name="name" /><br/>
                         </fieldset>
                         <fieldset className="form-group">
-                            <Field  className="form-control"  component="input" type="text" name="brand" value={this.state.brand} /><br/>
+                            <Field  className="form-control"  component="input" type="text" name="brand" /><br/>
                         </fieldset>
                         <fieldset className="form-group">
-                            <Field  className="form-control"  component="input" name="description" type="textarea" value={this.state.description}/>
+                            <Field  className="form-control"  component="input" name="description" type="textarea" />
                         </fieldset>
 
                         <div className="text-left">
@@ -65,7 +66,11 @@ class ProductEditForm extends Component{
                                                     return (
                                                         <div>
                                                             <label>
-                                                                <Field name="category" component="input" type="radio" value={cat.name}/>{' '}
+
+                                                                
+                                                                {this.props.initialValues.category.name === cat.name? isChecked = true : isChecked = false}
+                                                                {console.log(isChecked)}
+                                                                <Field name="category" component="input" type="radio" value={cat.name} checked={isChecked} />{' '}
                                                                 {cat.name}
                                                             </label>
                                                         </div>
@@ -81,14 +86,14 @@ class ProductEditForm extends Component{
                         <Row>
                             <Col md="6" sm="6" height="100%">
                                 <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input"  name="price" type="text" value={this.state.price} style={{marginTop: "5%"}}/><br/>
+                                    <Field  className="form-control"  component="input"  name="price" type="text"  style={{marginTop: "5%"}}/><br/>
                                 </fieldset>
                             </Col>
                         </Row>
                         <Row>
                             <Col md="6" sm="6" height="100%">
                                 <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input" name="discount" type="text" value={this.state.discount}  style={{marginTop: "5%"}}/><br/>
+                                    <Field  className="form-control"  component="input" name="discount" type="text"  style={{marginTop: "5%"}}/><br/>
                                 </fieldset>
                             </Col>
                         </Row>
@@ -125,12 +130,8 @@ ProductEditForm = reduxForm({
 })(ProductEditForm)
 
 // now set initialValues using data from your store state
-ProductEditForm = connect(
-    state => ({
-        initialValues: this.state
-
-    })
-
+ProductEditForm = connect(state => ({initialValues: state.products.selected})
+   
 )(ProductEditForm)
 
 export default ProductEditForm;

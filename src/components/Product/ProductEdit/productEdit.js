@@ -19,7 +19,7 @@ class ProductEdit extends Component{
     handleSubmit = (data) => {
         console.log('TESTESTTESTESTSET');
         console.log(data);
-        this.props.edit(data,this.props.match.params.id);
+        this.props.edit(data);
 
     };
     componentDidMount(){
@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => { console.log();
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
         categoryFetchData: (search, page, size, sort)=> dispatch(categoriesFetchData(search, page, size, sort)),
-        edit: (payload,id) => dispatch(editProductAction(payload,id))
+        edit: (payload) => dispatch(editProductAction(payload))
     };
 };
 
