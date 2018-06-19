@@ -12,6 +12,10 @@ const loadSingleProductSuccess = (data) => ({type: types.LOAD_SINGLE_PRODUCT_SUC
 const loadSingleProductError = (error) => ({type: types.LOAD_SINGLE_PRODUCT_ERROR, singleProductHasErrored:error});
 const loadSingleProductLoading = (loading) =>({type: types.LOAD_SINGLE_PRODUCT_LOADING, singleProductIsLoading:loading});
 
+const loadSingleProductImageSuccess = (data) => ({type: types.LOAD_SINGLE_PRODUCT_IMAGE_SUCCESS, data});
+const loadSingleProductImageError = (error) => ({type: types.LOAD_SINGLE_PRODUCT_IMAGE_ERROR, singleProductImageHasErrored:error});
+const loadSingleProductImageLoading = (loading) =>({type: types.LOAD_SINGLE_PRODUCT_IMAGE_LOADING, singleProductImageIsLoading:loading});
+
 const FIRST_PAGE = 0;
 const DEFAULT_PAGE_SIZE = 20;
 const NO_PARAM = "id,desc";
@@ -63,6 +67,30 @@ export function productFetchDataByID(id){
              })
              .then((data)=>dispatch(loadSingleProductSuccess(data)))
              .catch((error)=>dispatch(loadSingleProductError(error)));
+     }
+ }
+
+ export function productFetchImagesByID(id){
+
+    // const urlParams = `search=&page=&size=&sort=`;
+     const url = `${API_URL}/${id}/images`;
+     console.log(url)
+     //const  url ='http://localhost:3005/vendor/';
+     return function (dispatch) {
+         // get data from external data source
+         dispatch(loadSingleProductImageLoading(true));
+         const request=axios.get(url);
+         request
+             .then((response) =>{ console.log(response);
+                 if(!response.status == 200)
+                 {
+                     throw Error(response.statusText);
+                 }
+                 dispatch(loadSingleProductImageLoading(false));
+                 return response.data;
+             })
+             .then((data)=>dispatch(loadSingleProductImageSuccess(data)))
+             .catch((error)=>dispatch(loadSingleProductImageError(error)));
      }
  }
 

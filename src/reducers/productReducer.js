@@ -24,8 +24,17 @@ export function products(state = {}, action) {
 
         case types.LOAD_SINGLE_PRODUCT_SUCCESS:
             return {
+                ...state,
                 selected: action.data
             };
+
+        case types.LOAD_SINGLE_PRODUCT_IMAGE_SUCCESS:
+        console.log(action.data)
+            return {
+                ...state,
+                images:action.data
+            };
+
         case types.DELETE_PRODUCT_SUCCESS:
             return {
                 ...state,
@@ -111,6 +120,27 @@ export function singleProductIsLoading(state = false, action) {
 export function singleProductHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_SINGLE_PRODUCT_ERROR:
+            return action.productHasErrored
+        // case types.ADD_PRODUCT_ERROR:
+        //     console.log(action.payload)
+        //     return state
+        default:
+            return state
+    }
+}
+
+export function singleProductImageIsLoading(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_IMAGE_LOADING:
+            return action.productIsLoading
+        default:
+            return state
+    }
+}
+
+export function singleProductImageHasErrored(state = false, action) {
+    switch (action.type) {
+        case types.LOAD_SINGLE_PRODUCT_IMAGE_ERROR:
             return action.productHasErrored
         // case types.ADD_PRODUCT_ERROR:
         //     console.log(action.payload)
