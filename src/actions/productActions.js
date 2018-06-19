@@ -73,7 +73,7 @@ export function productFetchDataByID(id){
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-        const request = axios.put(`${API_URL}/${id}`, payload);
+        const request = axios.put(`${API_URL}/edit/${id}`, payload);
         request
             .then((response) => {
                 console.log(response);
@@ -81,6 +81,7 @@ export function productFetchDataByID(id){
                     throw Error(response.statusText);
                 }
                 dispatch(editProductSuccess(payload))
+               
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 console.log(error);

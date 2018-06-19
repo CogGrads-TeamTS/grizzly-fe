@@ -20,6 +20,7 @@ class ProductEdit extends Component{
         console.log('TESTESTTESTESTSET');
         console.log(data);
         this.props.edit(data,this.props.match.params.id);
+
     };
     componentDidMount(){
 
