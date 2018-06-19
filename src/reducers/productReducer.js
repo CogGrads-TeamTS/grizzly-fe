@@ -43,7 +43,7 @@ export function products(state = {}, action) {
         // find index of category in state
         var indexToEdit = _.findIndex(newState.content, { id: action.payload.id });
         // update the category in the new state using the index.
-        newState.content[indexToEdit].name = action.payload.name;
+        newState.content[indexToEdit] = action.payload;
         //newState.content[indexToEdit].description = action.description;
 
         // return the new state with the updated category
