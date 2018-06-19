@@ -6,22 +6,41 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import noimage from '../../Assets/noimage.jpg';
+import logo from '../../Assets/griz-logo.png'
 
-const items = [];
+let items = [];
 
 const urladdition="http://ts.ausgrads.academy/images/"
+
+
 const buildImages = (images) => {
+
+  items = [];
   console.log(images)
+
+  const size = images == null ? 0 : images.length;
   let i;
-  for(i = 0; i < images.length; i++){
-    console.log(images[i].url)
+
+  if(size == 0){
     items.push({
-      src: urladdition+images[i].url
+      src: noimage,
+      captionText: "Stop throwing errors pls"
     })
+  } else {
+
+    for(i = 0; i < size; i++){
+      console.log(images[i].url)
+      items.push({
+        src: urladdition + images[i].url,
+        captionText: "Stop throwing errors pls"
+      })
+    }
   }
 
   console.log(items)
 };
+
 
 class ProductViewCarousel extends Component {
   constructor(props) {
@@ -32,6 +51,10 @@ class ProductViewCarousel extends Component {
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  componentDidMount(){
+    
   }
 
   onExiting() {
@@ -72,7 +95,7 @@ class ProductViewCarousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} style={{width: '100%'}}/>
+          <img src={item.src} alt={item.altText} style={{width: '100%', height: '100%'}}/>
           <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
@@ -83,6 +106,7 @@ class ProductViewCarousel extends Component {
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
+        interval={30000}
       >
         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
         {slides}

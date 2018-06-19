@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
+import Carousel from 'nuka-carousel';
 
 class ProductViewLayout extends Component {
 
