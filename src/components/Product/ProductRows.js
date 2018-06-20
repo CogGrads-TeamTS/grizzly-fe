@@ -22,7 +22,7 @@ const ProductRows = (props) => { //console.log(props.category);
                     <StarRatings 
                         rating={product.rating}
                         numberOfStars={5}
-                        changeRating={false}
+                        isSelectable={false}
                         name='rating'
                         starDimension="20px"
                         starSpacing="2px"

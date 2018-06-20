@@ -96,7 +96,6 @@ class ProductViewCarousel extends Component {
           key={item.src}
         >
           <img src={item.src} alt={item.altText} style={{width: '100%', height: '100%'}}/>
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
     });

@@ -5,6 +5,7 @@ export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
+            console.log(action)
             const productArray = action.data.products.content;
             const productFirst = action.data.products.first;
             const productLast = action.data.products.last;
@@ -58,26 +59,41 @@ export function products(state = {}, action) {
         //     // return the new state with the updated category
         //     return newState;
 
+        
         // case types.ADD_PRODUCT_SUCCESS:
-        //     console.log('product Reducer');
+
+        //     console.log(state);
         //     // create a new state
         //     const addState = {...state};
         //     addState.content =
         //         [
         //             {
-        //                 id:action.id,
-        //                 name:action.name,
-        //                 description:action.description,
-        //                 price:action.price,
-        //                 discount:action.discount,
-        //                 categories:action.categories,
-        //                 images:action.images
+        //                 id:action.data.id,
+        //                 name:action.data.name,
+        //                 description:action.data.description,
+        //                 brand:action.data.brand,
+        //                 catId:action.data.catId,
+        //                 price:action.data.price,
+        //                 discount:action.data.discount,
+        //                 rating:action.data.rating
         //             },
-        //         ...addState.content
+        //             ...addState.content
         //         ];
 
+        //     console.log(addState);
         //     // returns a new state with the added product appended
         //     return addState;
+
+        case types.ADD_PRODUCT_IMAGE_SUCCESS:
+            return {
+                ...state,
+                images: [
+                    {
+                        name: action.url,
+                        sort: action.sort
+                    }
+                ]
+            }
 
 
 
@@ -88,6 +104,7 @@ export function products(state = {}, action) {
 
 
 export function productIsLoading(state = false, action) {
+    console.log("IS LOADING")
     switch (action.type) {
         case types.LOAD_PRODUCT_LOADING:
             return action.productIsLoading
@@ -99,10 +116,12 @@ export function productIsLoading(state = false, action) {
 export function productHasErrored(state = false, action) {
     switch (action.type) {
         case types.LOAD_PRODUCT_ERROR:
+            console.log(action.productHasErrored);
             return action.productHasErrored
-        // case types.ADD_PRODUCT_ERROR:
-        //     console.log(action.payload)
-        //     return state
+        case types.ADD_PRODUCT_ERROR:
+            console.log(action.payload)
+            return action.payload
+
         default:
             return state
     }

@@ -819,3 +819,36 @@ tbody {
     display: none !important;
   }
 }
+
+.materialInput {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.materialInput:focus {
+  border-bottom: 1px solid blueviolet;
+  outline: none;
+}
+
+.ProductAddBtns {
+  float: right;
+}
+
+.btn-width-100 {
+  /* width: 100%;
+  margin-bottom: 5%; */
+}
+
+.btn-dropdown {
+  display: inline-block;
+  width: 200%;
+  cursor: pointer;
+
+}
+
+.cat-collapse {
+  max-height: 8em;
+  overflow-y: scroll;
+  x-height: 100px;
+}

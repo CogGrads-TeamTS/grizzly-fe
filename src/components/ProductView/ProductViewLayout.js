@@ -48,7 +48,7 @@ class ProductViewLayout extends Component {
                                     <StarRatings 
                                         rating={this.props.product.rating}
                                         numberOfStars={5}
-                                        changeRating={false}
+                                        isSelectable={false}
                                         name='rating'
                                         starDimension="20px"
                                         starSpacing="2px"

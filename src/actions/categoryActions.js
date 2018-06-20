@@ -18,8 +18,9 @@ const SEARCH_DEFAULT = "";
 export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
 
-    // BUILD URL
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
+    // BUILD URL
+    
     console.log("url param: " + urlParams);
     const url = `${API_URL}/categories/page?${urlParams}`;
     console.log(url);
@@ -41,6 +42,34 @@ export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_D
             .then((data) => dispatch(loadCategoriesSuccess(data)))
             .catch((error) => dispatch(loadCategoriesError(error)));
     };
+}
+
+
+const loadAllCategoriesSuccess = (data) => ({type: types.LOAD_ALL_CATEGORIES_SUCCESS, data})
+
+export function categoriesFetchNames() {
+
+   // BUILD URL
+   
+   const url = `${API_URL}/categories`;
+
+   return (dispatch) => {
+       dispatch(loadCategoriesLoading(true));
+
+       const request = axios.get(url);
+       request
+           .then((response) => { console.log(response)
+               if (!response.status == 200) {
+                   throw Error(response.statusText);
+               }
+
+               dispatch(loadCategoriesLoading(false));
+
+               return response.data;
+           })
+           .then((data) => dispatch(loadAllCategoriesSuccess(data)))
+           .catch((error) => dispatch(loadCategoriesError(error)));
+   };
 }
 
 const deleteCategorySuccess = (id) => ({ type: types.DELETE_CATEGORY_SUCCESS, payload: id });
