@@ -4,14 +4,17 @@ import { Table,Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Butto
 import { Field, reduxForm } from 'redux-form';
 import ImageUploader from 'react-images-upload';
 
+
 let ProductAddForm = (props) => {
     console.log(props);
     const {handleSubmit, returnToHome, onDrop} = props;
 
+    if(props.categories == undefined){
+        return <div>loading...</div>
+    }
+
     return (
         <Container fluid={true}>
-           
-            
             <Row style={{marginTop: '50px'}}>
             <Col md="6" sm="6">
                 <ImageUploader
@@ -39,15 +42,16 @@ let ProductAddForm = (props) => {
                             <CardBody className="cat-collapse">
                             <div>
                                 <div>
-                                    {_.map(props.categories, cat => {
-                                        return (
-                                            <div>
-                                                <label>
-                                                    <Field name="category" component="input" type="radio" value={String(cat.id)}/>{' '}
-                                                    {cat.name}
-                                                </label>
-                                            </div>
-                                            )})}
+                                {_.map(props.categories, cat => {
+                                    // if(cat.name == null) return; // Skip null categories
+                                    return (
+                                        <div key={cat.id}>
+                                            <label>
+                                                <Field name="category" component="input" type="radio" value={String(cat.id)}/> {` ${cat.name}`}
+                                            </label>
+                                        </div>
+                                    )})
+                                }
                                 </div>
                             </div>
                             </CardBody>
@@ -58,17 +62,8 @@ let ProductAddForm = (props) => {
                     <Col md="6" sm="6" height="100%">
                     <Field name="price" component="input" placeholder="Price" className="materialInput" style={{marginTop: "5%"}}/><br/>
                     <Field name="discount" component="input" placeholder="Discount" className="materialInput" style={{marginTop: "5%"}}/><br/>
-                    <Field name="rating" component="input" placeholder="Rating" className="materialInput" style={{marginTop: "5%"}}/><br/>
                     </Col>
                     </Row>
-                    
-
-
-                    
-                    {console.log(returnToHome)}
-                  
-                    
-
                 </Col>
                 </form>
             </Row>

@@ -62,10 +62,11 @@ export function products(state = {}, action) {
         case types.ADD_PRODUCT_SUCCESS:
             console.log(action.id);
             // create a new state
-            const addState = [{...state}];
             console.log(addState)
+            const addState = []
             addState.content =
                 [
+                    ...state, 
                     {
                         id:action.id,
                         name:action.name,
@@ -77,8 +78,9 @@ export function products(state = {}, action) {
                         rating:action.rating
                     }
                 ];
+                addState.newId = action.id;
 
-                console.log(addState.content);
+                console.log(addState);
             // returns a new state with the added product appended
             return addState;
 

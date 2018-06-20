@@ -33,7 +33,7 @@ class ProductAdd extends Component {
 
         //postImageData(this.state.pictures.)
         // console.log(this.state.pictures[0]);
-        this.props.addImage(2, picture, 1);
+        // this.props.addImage(2, picture, 1);
     }
 
     notify = () => {
@@ -63,8 +63,10 @@ class ProductAdd extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log('TESTESTTESTESTSET');
-        console.log(e);
+
+        console.log(this.state.pictures)
+        const picture = this.state.pictures
+
         this.props.add({
             name:e.name,
             description: e.description,
@@ -72,9 +74,20 @@ class ProductAdd extends Component {
             catId: e.category,
             price: e.price,
             discount: e.discount,
-            rating: e.rating
+            rating: 0,
+            picture
         });
         
+
+        // IF SUCCESSFULLY PUSH SOME IMAGES BRO
+        // var i;
+        // const pictures = this.state.pictures;
+
+        // for(i = 0; i < pictures.length; i++){
+        //     const picture = pictures[i];
+        //     this.props.addImage(this.state.products.newId, picture, 1);
+        // }
+
         this.returnToHome();
 
     }
@@ -82,7 +95,6 @@ class ProductAdd extends Component {
     render() {
         return (
             <div>
-                
                 <ProductAddForm onSubmit={this.handleSubmit} categories={this.props.names} returnToHome={this.returnToHome} onDrop={this.onDrop}/>
             </div>
         );
@@ -90,7 +102,7 @@ class ProductAdd extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
+    console.log(state)
     return {
         names: state.category.names,
         last: state.category.last
@@ -101,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: ()=> dispatch(categoriesFetchNames()),
         addImage: (id, file, sort) => dispatch(addProductImages(id, file, sort)),
-        add: (name, description, brand, catId, price, discount, rating) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating))
+        add: (name, description, brand, catId, price, discount, rating, picture) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, picture))
     };
 };
 

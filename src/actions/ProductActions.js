@@ -133,19 +133,27 @@ const addProductSuccess = (id, name, description, brand, catId, price, discount,
 });
 const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
 
-export function addProductAction(name, description, brand, catId, price, discount, rating){
+export function addProductAction({name, description, brand, catId, price, discount, rating, picture}){
 
     return(dispatch) => {
 
         //const  url ='http://localhost:3005/vendor/add';
        // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
            // contact:contact, address:address,  portfolioURL:portfolioURL });
-        const request = axios.post(`${API_URL}/add`, name, description, brand, catId, price, discount, rating);
+           console.log(name)
+        const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating});
         request
             .then(( response) => {
                 if (!response.status == 200) {
                     throw Error(response.statusText);
-                }console.log(response);
+                }
+                
+                console.log(response);
+
+                // ADD IMAGES NOW
+                
+                if(picture.length > 0) {dispatch(addProductImages(response.data.id, picture, 1));}
+
                 dispatch(addProductSuccess( 
                     response.data.id,
                     response.data.name,
@@ -219,8 +227,7 @@ export function deleteProductAction(id) {
 const addProductImageSuccess = (name, sort) => ({ type: types.ADD_PRODUCT_IMAGE_SUCCESS, name, sort});
 
 export function addProductImages(id, file, sort) {
-    console.log(file[0]);
-    console.log(sort);
+    console.log(file);
 
     const url = `${API_URL}/${id}/images/add`;
     const formData = new FormData();

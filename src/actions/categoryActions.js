@@ -52,8 +52,6 @@ export function categoriesFetchNames() {
    // BUILD URL
    
    const url = `${API_URL}/categories`;
-   console.log(url);
-   console.log("is mounting")
 
    return (dispatch) => {
        dispatch(loadCategoriesLoading(true));
@@ -67,7 +65,6 @@ export function categoriesFetchNames() {
 
                dispatch(loadCategoriesLoading(false));
 
-               console.log("DATA: " + response.data);
                return response.data;
            })
            .then((data) => dispatch(loadAllCategoriesSuccess(data)))
