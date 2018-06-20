@@ -73,7 +73,7 @@ export function productFetchDataByID(id){
  export function productFetchImagesByID(id){
 
     // const urlParams = `search=&page=&size=&sort=`;
-     const url = `${API_URL}/${id}/images`;
+     const url = `${API_URL}/${id}/images`; 
      console.log(url)
      //const  url ='http://localhost:3005/vendor/';
      return function (dispatch) {
