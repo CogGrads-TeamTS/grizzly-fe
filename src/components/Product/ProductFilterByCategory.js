@@ -30,7 +30,7 @@ class ProductFilterByCategory extends Component{
     changeValue(e){  console.log(e)
         const value = e.currentTarget.value;
         this.setState({
-            dropdownValue: value == "" ? 'Filter By Category':"Filtering by Category: " + e.currentTarget.textContent
+            dropdownValue: value == "" ? 'Filter By Category':"Filtering by: " + e.currentTarget.textContent
         })
         this.props.update(value);
     }
@@ -47,9 +47,10 @@ class ProductFilterByCategory extends Component{
                         <DropdownItem onClick={this.changeValue} value="">All</DropdownItem>
                         <DropdownItem header>Categories</DropdownItem>
                         {
-                            Object.values(this.props.categories).map(category => 
+                            // Requires curly brackets or there is an issue mapping the key
+                            Object.values(this.props.categories).map(category => { 
                                 <DropdownItem  onClick={this.changeValue} value={category.id}>{category.name}</DropdownItem>
-                            )
+                            })
                         }
                         </DropdownMenu>
                     </ButtonDropdown>
