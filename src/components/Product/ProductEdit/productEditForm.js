@@ -47,9 +47,9 @@ class ProductEditForm extends Component{
                         <div>
                             <fieldset className="form-group">
                                 <label>Category Selected: </label>
-                                <Field  className="form-control"  component="input" name="catName" type="text" disabled />
+                                <Field  className="form-control"  component="input" name="catName" value={this.props.initialValues.catName} type="text" disabled />
                             </fieldset>
-                        </div>
+                    </div>
 
                         <div className="text-left">{console.log(this.props.initialValues.catId)}
                             <label>Change Category : </label>
@@ -68,9 +68,10 @@ class ProductEditForm extends Component{
 
                                                                 {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
                                                                 {/*console.log(isChecked)*/}
-                                                                <Field name="catName" component="input" type="radio" value={cat.name}
-                                                                       onClick={
-                                                                           () => {this.props.initialValues.catId = cat.id}}/>{' '}
+                                                                <Field name="catId" component="input" type="radio" value={cat.id}
+                                                                       onChange={
+                                                                           () => {this.props.initialValues.catName = cat.name}}/>{' '}
+
                                                                 {cat.name}
                                                             </label>
                                                         </div>
