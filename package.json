@@ -38,8 +38,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "^4.1.2"
+    "chai": "^4.1.2",
+    "mocha": "*"
   },
   "homepage": "/admin/"
 }

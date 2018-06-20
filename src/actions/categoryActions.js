@@ -17,10 +17,7 @@ const SEARCH_DEFAULT = "";
 // Use default values if none are specified
 export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
-
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
-    // BUILD URL
-    
     console.log("url param: " + urlParams);
     const url = `${API_URL}/categories/page?${urlParams}`;
     console.log(url);
