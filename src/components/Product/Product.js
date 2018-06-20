@@ -81,6 +81,8 @@ class Product extends React.Component{
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
         
+        console.log("IS RE RENDERING")
+
         return(
             <div>
                 <Row>

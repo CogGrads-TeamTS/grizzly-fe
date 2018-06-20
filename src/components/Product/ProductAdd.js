@@ -28,7 +28,7 @@ class ProductAdd extends Component {
         console.log(picture);
         
         this.setState({
-            pictures: this.state.pictures.concat(picture),
+            pictures: picture
         });
 
         //postImageData(this.state.pictures.)
@@ -65,7 +65,7 @@ class ProductAdd extends Component {
     handleSubmit = (e) => {
 
         console.log(this.state.pictures)
-        const picture = this.state.pictures
+        const pictures = this.state.pictures
 
         this.props.add({
             name:e.name,
@@ -75,21 +75,9 @@ class ProductAdd extends Component {
             price: e.price,
             discount: e.discount,
             rating: 0,
-            picture
+            pictures,
+            callback: this.returnToHome
         });
-        
-
-        // IF SUCCESSFULLY PUSH SOME IMAGES BRO
-        // var i;
-        // const pictures = this.state.pictures;
-
-        // for(i = 0; i < pictures.length; i++){
-        //     const picture = pictures[i];
-        //     this.props.addImage(this.state.products.newId, picture, 1);
-        // }
-
-        this.returnToHome();
-
     }
 
     render() {
@@ -113,7 +101,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: ()=> dispatch(categoriesFetchNames()),
         addImage: (id, file, sort) => dispatch(addProductImages(id, file, sort)),
-        add: (name, description, brand, catId, price, discount, rating, picture) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, picture))
+        add: (name, description, brand, catId, price, discount, rating, pictures, callback) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callback))
     };
 };
 

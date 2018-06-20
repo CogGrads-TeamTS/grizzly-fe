@@ -5,6 +5,7 @@ export function products(state = {}, action) {
     
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
+            console.log(action)
             const productArray = action.data.products.content;
             const productFirst = action.data.products.first;
             const productLast = action.data.products.last;
@@ -59,47 +60,40 @@ export function products(state = {}, action) {
         //     return newState;
 
         
-        case types.ADD_PRODUCT_SUCCESS:
-            console.log(action.id);
-            // create a new state
-            console.log(addState)
-            const addState = []
-            addState.content =
-                [
-                    ...state, 
-                    {
-                        id:action.id,
-                        name:action.name,
-                        description:action.description,
-                        brand:action.brand,
-                        catId:action.catId,
-                        price:action.price,
-                        discount:action.discount,
-                        rating:action.rating
-                    }
-                ];
-                addState.newId = action.id;
+        // case types.ADD_PRODUCT_SUCCESS:
 
-                console.log(addState);
-            // returns a new state with the added product appended
-            return addState;
+        //     console.log(state);
+        //     // create a new state
+        //     const addState = {...state};
+        //     addState.content =
+        //         [
+        //             {
+        //                 id:action.data.id,
+        //                 name:action.data.name,
+        //                 description:action.data.description,
+        //                 brand:action.data.brand,
+        //                 catId:action.data.catId,
+        //                 price:action.data.price,
+        //                 discount:action.data.discount,
+        //                 rating:action.data.rating
+        //             },
+        //             ...addState.content
+        //         ];
+
+        //     console.log(addState);
+        //     // returns a new state with the added product appended
+        //     return addState;
 
         case types.ADD_PRODUCT_IMAGE_SUCCESS:
-        console.log(action.id);
-        // create a new state
-        const addImageState = [{...state}];
-        console.log(addImageState)
-        addImageState.content =
-            [
-                {
-                    name:action.url,
-                    sort:action.sort
-                }
-            ];
-
-            console.log(addImageState.content);
-        // returns a new state with the added product appended
-        return addImageState;
+            return {
+                ...state,
+                images: [
+                    {
+                        name: action.url,
+                        sort: action.sort
+                    }
+                ]
+            }
 
 
 
@@ -110,6 +104,7 @@ export function products(state = {}, action) {
 
 
 export function productIsLoading(state = false, action) {
+    console.log("IS LOADING")
     switch (action.type) {
         case types.LOAD_PRODUCT_LOADING:
             return action.productIsLoading

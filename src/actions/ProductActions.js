@@ -39,6 +39,7 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
                     throw Error(response.statusText);
                 }
                 dispatch(loadProductLoading(false));
+                console.log("FINISHED RETRIEVING PRODUCTS")
                 return response.data;
             })
             .then((data)=>dispatch(loadProductSuccess(data)))
@@ -120,56 +121,38 @@ export function productFetchDataByID(id){
 
 
 // FIXME: Change the fields
-const addProductSuccess = (id, name, description, brand, catId, price, discount, rating) => ({  
-    type: types.ADD_PRODUCT_SUCCESS ,
-    id, 
-    name, 
-    description,
-    brand, 
-    catId,
-    price,
-    discount,
-    rating 
-});
+const addProductSuccess = (data) => ({type: types.ADD_PRODUCT_SUCCESS, data});
 const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
-
-export function addProductAction({name, description, brand, catId, price, discount, rating, picture}){
+export function addProductAction({name, description, brand, catId, price, discount, rating, pictures, callback}){
 
     return(dispatch) => {
 
-        //const  url ='http://localhost:3005/vendor/add';
-       // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
-           // contact:contact, address:address,  portfolioURL:portfolioURL });
-           console.log(name)
         const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating});
         request
-            .then(( response) => {
+            .then((response) => {
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
-                
-                console.log(response);
 
-                // ADD IMAGES NOW
+                // Only add pictures if they exist
+                if(pictures.length > 0) {
+                    var i;
+                    for(i = 0; i < pictures.length; i++){
+                        var picture = pictures[i]
+                        dispatch(addProductImages(response.data.id, picture, i));
+                    }
+                }
                 
-                if(picture.length > 0) {dispatch(addProductImages(response.data.id, picture, 1));}
-
-                dispatch(addProductSuccess( 
-                    response.data.id,
-                    response.data.name,
-                    response.data.description,
-                    response.data.brand,
-                    response.data.catId,
-                    response.data.price,
-                    response.data.discount,
-                    response.data.rating
-                ))
+                console.log("FINISHED SAVING THE PRODUCT.")
+                return response.data;
             })
-            .catch((error) => { // Catch the error thrown if status isn't 200
-                dispatch(addProductError(error));
-                console.log(error);
+            .then((data) => dispatch(addProductSuccess(data)))
+            .then(() => {
+                console.log("TRIGGERED CALLBACK");
+                callback()
             })
-    };
+            .catch((error) =>  dispatch(addProductError(error)))
+    }
 }
 
 const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
@@ -231,8 +214,8 @@ export function addProductImages(id, file, sort) {
 
     const url = `${API_URL}/${id}/images/add`;
     const formData = new FormData();
-    formData.append('file', file[0]);
-    formData.append('sort', 1);
+    formData.append('file', file);
+    formData.append('sort', sort);
     const config = {
         headers: {
             'content-type': 'multipart/form-data'
