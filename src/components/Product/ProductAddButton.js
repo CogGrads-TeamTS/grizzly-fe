@@ -8,7 +8,7 @@ const ProductAdd = (props) => {
         props.history.push(`/product/add`);
     }
     return (
-        <Button onClick={() => handleClick()}>{props.buttonLabel}</Button>
+        <Button color="success" onClick={() => handleClick()}>{props.buttonLabel}</Button>
     );
 }
 
