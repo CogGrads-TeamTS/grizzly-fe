@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-import { productFetchDataByID, productFetchImagesByID } from '../../actions/ProductActions';
+import { productFetchDataByID, productFetchImagesByID } from '../../actions/productActions';
 import ProductViewLayout from './ProductViewLayout';
 
 class ProductView extends Component {

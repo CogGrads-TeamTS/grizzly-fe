@@ -4,7 +4,7 @@ import { Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import ProductTable from './ProductTable';
 // import CategorySortByButton from './CategorySortByButton';
-import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/ProductActions';
+import { productFetchData, deleteCategory, editCategoryAction, addCategoryAction, deleteProductAction } from '../../actions/productActions';
 import ProductFilterByCategory from './ProductFilterByCategory';
 
 // import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
