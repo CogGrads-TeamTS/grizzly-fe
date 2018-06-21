@@ -13,7 +13,7 @@ import {
     Button,
     DropdownItem } from 'reactstrap';
 import GlobalSearch from './global_search';
-import grizzlogo from '../../Asset/griz-logo.png';
+import grizzlogo from '../../Assets/griz-logo.png';
 
 class Header extends React.Component {
     constructor(props) {

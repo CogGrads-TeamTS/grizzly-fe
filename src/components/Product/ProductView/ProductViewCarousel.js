@@ -6,24 +6,41 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import noimage from '../../../Assets/noimage.jpg';
+import logo from '../../../Assets/griz-logo.png';
 
-const items = [
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 1',
-    caption: 'Slide 1'
-  },
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 2',
-    caption: 'Slide 2'
-  },
-  {
-    src: 'https://via.placeholder.com/490x370',
-    altText: 'Slide 3',
-    caption: 'Slide 3'
+let items = [];
+
+const urladdition="http://ts.ausgrads.academy/images/"
+
+
+const buildImages = (images) => {
+
+  items = [];
+  console.log(images)
+
+  const size = images == null ? 0 : images.length;
+  let i;
+
+  if(size == 0){
+    items.push({
+      src: noimage,
+      captionText: "Stop throwing errors pls"
+    })
+  } else {
+
+    for(i = 0; i < size; i++){
+      console.log(images[i].url)
+      items.push({
+        src: urladdition + images[i].url,
+        captionText: "Stop throwing errors pls"
+      })
+    }
   }
-];
+
+  console.log(items)
+};
+
 
 class ProductViewCarousel extends Component {
   constructor(props) {
@@ -34,6 +51,10 @@ class ProductViewCarousel extends Component {
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  componentDidMount(){
+    
   }
 
   onExiting() {
@@ -64,6 +85,9 @@ class ProductViewCarousel extends Component {
   render() {
     const { activeIndex } = this.state;
 
+    // addItems();
+    buildImages(this.props.images)
+
     const slides = items.map((item) => {
       return (
         <CarouselItem
@@ -71,8 +95,7 @@ class ProductViewCarousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} />
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+          <img src={item.src} alt={item.altText} style={{width: '100%', height: '100%'}}/>
         </CarouselItem>
       );
     });
@@ -82,6 +105,7 @@ class ProductViewCarousel extends Component {
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
+        interval={30000}
       >
         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
         {slides}

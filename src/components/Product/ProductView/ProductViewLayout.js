@@ -3,10 +3,13 @@ import {withRouter} from 'react-router-dom';
 import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
+import Carousel from 'nuka-carousel';
 
 class ProductViewLayout extends Component {
 
     render(){
+
+        console.log(this.props.images);
         return (
             <Container fluid={true} className="prod-view-container">
                 <Row>
@@ -45,7 +48,7 @@ class ProductViewLayout extends Component {
                                     <StarRatings 
                                         rating={this.props.product.rating}
                                         numberOfStars={5}
-                                        changeRating={false}
+                                        isSelectable={false}
                                         name='rating'
                                         starDimension="20px"
                                         starSpacing="2px"
@@ -57,7 +60,9 @@ class ProductViewLayout extends Component {
 
                         <Row>
                             <Col md="6" sm="6">
-                                <ProductViewCarousel />
+                                <div className="prod-body-images">
+                                    <ProductViewCarousel images={this.props.images}/>
+                                </div>
                             </Col>
 
                             <Col md="6" sm="6" height="100%">
