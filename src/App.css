@@ -16,6 +16,13 @@ tbody {
   width: 100%;
 }
 
+.m-l-5{
+  margin-left: 5px;
+}
+
+.m-r-5{
+  margin-right: 5px;
+}
 /* .prod-view-btn-return {
   margin-top: 2%;
 } */
@@ -209,15 +216,50 @@ tbody {
   background-color: #eee;
 }
 /* Used for profile tab */
+.fa-edit{
+    color: #f1f1f1;
+    float: right;
+    font-size: 16px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+.btn-profile{
+    visibility: hidden;
+    margin-bottom: 10px;
+ }
+
+#UserProfile{
+  background-color: rgb(236, 233, 233);
+  border: none;
+  text-align: center;
+}
+
+#UserProfile.active{
+  background-color: white;
+  border: 1px solid #556FC4;
+}
+
+input[name=username]{
+  text-align: center; 
+  position: relative;
+  display: inline-block;
+  margin-top: 5%;
+  font-weight: 600;
+}
+
+.active{
+  visibility: visible;
+}
+
 .profile-card.card {
-  height: 80vh;
+  /* height: 80vh; */
   margin-top: 5%;
   background-color: rgb(236, 233, 233);
 }
 
 .profile-header {
   width:100%;
-  background-color: darkgray;
+  background-color: #556FC4;
   padding-top:1%;
   color:white;
 }
@@ -237,28 +279,13 @@ tbody {
 .profile-head {
   margin: 0 auto;
   padding-top: 5%;
+  width: 100%;
+  text-align: center;
 }
 
 .profile-head.head {
   font-weight: bold;
 }
-
-.profile-head.name {
-  font-weight: bold;
-}
-
-.profile-head.id {
-  padding-top: 0%;
-}
-
-.profile-head.designation {
-  padding-top: 0%;
-}
-
-.profile-head.office {
-  padding-top: 0%;
-}
-
 
 .App {
   text-align: center;

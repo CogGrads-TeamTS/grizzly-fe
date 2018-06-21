@@ -1,34 +1,37 @@
 import React, { Component } from 'react'
-import { Container, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
+import { fetchUserByID } from '../../actions/userActions';
+import User from '../User/User';
+
 class Sidebar extends Component {
+
+    componentDidMount(){
+        this.props.fetchUserData(1);
+    }
+    
+
     render() {
-        return (
-            <Row>
-                <Col>
-                    <Card className="profile-card">
-                        <CardTitle>
-                            <div className="profile-header">
-                                <p>PROFILE</p>
-                            </div>
-                        </CardTitle>
-                            <div className="profile-image">
-                                <img src="http://i.imgur.com/Esvthp8.gif" width="100%" height="100%"/>
-                            </div>
-                            <div className="profile-head name">Temp Name</div>
-                            <div className="profile-head head">ID</div>
-                            <div className="profile-head id">Temporary ID</div>
-                            <div className="profile-head head">Designation</div>
-                            <div className="profile-head designation">Temporary Designation</div>
-                            <div className="profile-head head">Office</div>
-                            <div className="profile-head office">Temporary Office</div>
-                        <CardText>
-                        
-                        </CardText>
-                    </Card>
-                </Col>
-            </Row>
+        const userData = this.props.userIsLoading  ? null : <User userData={this.props.user}/>;
+        console.log(this.props.user);
+        return ( 
+            
+            <div> {this.props.user !== undefined && <User userData={this.props.user}/>}</div>
+            // {this.props.userIsLoading ? <User userData={this.props.user}/> : null}
+           
         );
     }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => { console.log(state.user.user)
+    return{
+        user: state.user.user,
+        userIsLoading: state.userIsLoading
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        fetchUserData: (id) => dispatch(fetchUserByID(id))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

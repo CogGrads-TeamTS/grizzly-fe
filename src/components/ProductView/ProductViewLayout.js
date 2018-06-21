@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
+import {upper} from '../../lib/helper'
 
 class ProductViewLayout extends Component {
 
@@ -32,9 +33,9 @@ class ProductViewLayout extends Component {
                             <Col>
                                 <div className="prod-title">
                                         <b>
-                                            {this.upper(this.props.product.name) + " "}
+                                            {upper(this.props.product.name) + " "}
                                         </b>
-                                        {"by " + this.upper(this.props.product.brand)}
+                                        {"by " + upper(this.props.product.brand)}
                                 </div>
                             </Col>
                         </Row>
@@ -93,15 +94,6 @@ class ProductViewLayout extends Component {
 
     returnToHome = () => {
         this.props.history.push("/");
-    }
-
-
-
-    upper = (string) => { // Convert string into uppercase
-        if(string === null) {return "Not Specified"}
-        return string.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-            return letter.toUpperCase();
-        })
     }
 }
 
