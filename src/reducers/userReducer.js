@@ -1,13 +1,16 @@
 import * as types from '../actions/actionTypes';
 
 export function user(state = {}, action){
-
     switch (action.type){
         case types.LOAD_USER_SUCCESS:
             return {
                 user: action.data
             }
-        
+        case types.EDIT_USER_SUCCESS:
+
+            return {...state, 
+                user:action.data}
+
         default:
             return state;
     }

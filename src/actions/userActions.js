@@ -10,20 +10,41 @@ const loadUserLoading = (loading) =>({type: types.LOAD_USER_LOADING, userIsLoadi
 export function fetchUserByID(id){
 
      const url = `${API_URL}/${id}`;
-     return function (dispatch) { console.log(url);
+     return function (dispatch) { 
          dispatch(loadUserLoading(true));
          const request=axios.get(url);
          request
-             .then((response) =>{ console.log(response);
+             .then((response) =>{ 
                  if(!response.status == 200)
-                 {console.log('test');
+                 {
                      throw Error(response.statusText);
                  }
                  dispatch(loadUserLoading(false));
-                 console.log(response.data);
                  return response.data;
              })
              .then((data)=>dispatch(loadUserSuccess(data)))
              .catch((error)=>dispatch(loadUserError(error)));
-     }
+     };
  }
+
+const editUserSuccess = (data) => ({type: types.EDIT_USER_SUCCESS, data });
+const editUserError = (error) => ({type: types.EDIT_USER_ERROR, payload: error});
+const editUserLoading = (loading) => ({type: types.EDIT_USER_LOADING, payload: loading})
+
+export function editUserById(data){
+
+    return(dispatch) => { 
+        const request = axios.put(`${API_URL}/edit/${data.id}`, data);
+
+        request
+            .then((response) => {
+                if(!response.status == 200){
+                    throw Error(response.statusText);
+                }
+                dispatch(editUserSuccess(data));
+            })
+            .catch((error) => {
+                dispatch(editUserError(error));
+            })
+    };
+}
