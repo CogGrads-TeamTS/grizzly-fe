@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reacts
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form';
 import CategoryForm from '../CategoryForm';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class AddModal extends Component {
@@ -19,7 +19,7 @@ class AddModal extends Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.notify = this.notify.bind(this);
+        // this.notify = this.notify.bind(this);
     }
     
     notify = () => {

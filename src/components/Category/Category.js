@@ -40,7 +40,6 @@ class Category extends React.Component{
     }
 
     notify = () => {
-        console.log("CLICKME");
         toast.success('Delete Success', {
             position: "top-right",
             autoClose: 5000,
@@ -76,7 +75,6 @@ class Category extends React.Component{
         
         return(
             <div>
-                <ToastContainer />
                 <Row>
                     <Col md="6" sm="6" xs="12">
                         <Search placeholder="Search by Category" updateSearch={searchDebounce} />

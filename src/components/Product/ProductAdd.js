@@ -6,8 +6,6 @@ import { categoriesFetchNames } from '../../actions/categoryActions';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 class ProductAdd extends Component {
     constructor(props) {
         super(props);
@@ -18,10 +16,18 @@ class ProductAdd extends Component {
         this.search = "";
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.notify = this.notify.bind(this);
+        // this.notify = this.notify.bind(this);
 
         this.state = { pictures: [] };
         this.onDrop = this.onDrop.bind(this);
+
+        const Msg = ({ closeToast }) => (
+            <div>
+              Lorem ipsum dolor
+              <button>Retry</button>
+              <button onClick={closeToast}>Close</button>
+            </div>
+          )
     }
 
     onDrop(picture) {
@@ -35,12 +41,7 @@ class ProductAdd extends Component {
         // console.log(this.state.pictures[0]);
         // this.props.addImage(2, picture, 1);
     }
-
     notify = () => {
-        // toast("Success!");
-
-        // toast("Default Notification !");
-
         toast.success('Add Success', {
             position: "top-right",
             autoClose: 5000,
@@ -48,9 +49,9 @@ class ProductAdd extends Component {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true
-        });
-        
+        });        
     }
+    
 
     componentDidMount(){
         console.log("Did mount")
