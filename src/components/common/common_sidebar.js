@@ -22,13 +22,12 @@ class Sidebar extends Component {
         const userData = this.props.userIsLoading  ? null : <User userData={this.props.user}/>;
         
         return ( 
-            
-            <div> {this.props.user !== undefined && <User userData={this.props.user} edit={this.editUser} />}</div>
+            <div>{this.props.user !== undefined && <User userData={this.props.user} edit={this.editUser} />}</div>
         );
     }
 }
 
-const mapStateToProps = (state) => { console.log(state.user.user)
+const mapStateToProps = (state) => {
     return{
         user: state.user.user,
         userIsLoading: state.userIsLoading
