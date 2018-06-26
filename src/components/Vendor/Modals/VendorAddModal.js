@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Modal,Form,FormGroup,Label, Col,Input, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class VendorAddModal extends Component{
     constructor(props) {
@@ -24,6 +26,23 @@ class VendorAddModal extends Component{
         this.handleContactChange = this.handleContactChange.bind(this);
         this.handleAddressChange = this.handleAddressChange.bind(this);
         this.handleportfolioURLChange = this.handleportfolioURLChange.bind(this);
+        this.notify = this.notify.bind(this);
+    }
+
+    notify = () => {
+        // toast("Success!");
+
+        // toast("Default Notification !");
+
+        toast.success('Add Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+        
     }
 
     toggle() {
@@ -80,7 +99,8 @@ class VendorAddModal extends Component{
     }
     submitAndClose = () => {
         this.handleSubmit();
-        this.toggle()
+        this.toggle();
+        this.notify();
     };
     render() {
         return (

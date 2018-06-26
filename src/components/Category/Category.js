@@ -6,7 +6,8 @@ import CategorySortByButton from './CategorySortByButton';
 import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import CategoryAddModal from './Modals/CategoryAddModal';
 import Search from './CategorySearch';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import _ from 'lodash';
 
 
@@ -26,6 +27,7 @@ class Category extends React.Component{
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
         this.updateSearch = this.updateSearch.bind(this);
+        this.notify = this.notify.bind(this);
     }
     
     componentDidMount(){
@@ -35,6 +37,19 @@ class Category extends React.Component{
     fetchDataWithFilter() {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
         console.log('fetch data with filter page: ' + this.search);
+    }
+
+    notify = () => {
+        console.log("CLICKME");
+        toast.success('Delete Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+        
     }
 
     updateSort(sort) {
@@ -61,6 +76,7 @@ class Category extends React.Component{
         
         return(
             <div>
+                <ToastContainer />
                 <Row>
                     <Col md="6" sm="6" xs="12">
                         <Search placeholder="Search by Category" updateSearch={searchDebounce} />
@@ -89,6 +105,7 @@ class Category extends React.Component{
         console.log("parent deleting category");
         console.log(cat);
         this.props.delete(cat.id);
+        this.notify();
     }
 
     editCategory(cat) {
