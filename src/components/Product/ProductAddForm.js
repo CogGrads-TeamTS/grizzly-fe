@@ -15,61 +15,54 @@ let ProductAddForm = (props) => {
 
     return (
         <Container fluid={true}>
-            <Row style={{marginTop: '50px'}}>
-            <Col md="6" sm="6">
-                <ImageUploader
-                    withIcon={true}
-                    buttonText='Choose images'
-                    onChange={onDrop}
-                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                    maxFileSize={5242880}
-                    withPreview={true}
-                />
-            </Col>
-            <form onSubmit={handleSubmit}>
-            <Row>
-                <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>
-                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
-            </Row>
-                <Col md="6" sm="6" height="100%">
-                    <Field name="name" component="input" placeholder="Product Name" className="materialInput"/><br/>
-                    <Field name="description" component="input" placeholder="Add Description" className="materialInput" style={{marginTop: "5%"}}/><br/>
-                    <Field name="brand" component="input" placeholder="Add Brand" className="materialInput" style={{marginTop: "5%", marginBottom: "5%"}}/><br/>
-                    <div>
-                        <div className="btn-dropdown" id="toggler" style={{ marginBottom: '1rem' }} >Category</div>
-                        <UncontrolledCollapse toggler="#toggler" className="btn-dropdown">
-                        <Card>
-                            <CardBody className="cat-collapse">
-                            <div>
-                                <div>
-                                {_.map(props.categories, cat => {
-                                    // if(cat.name == null) return; // Skip null categories
-                                    return (
-                                        <div key={cat.id}>
-                                            <label>
-                                                <Field name="category" component="input" type="radio" value={String(cat.id)}/> {` ${cat.name}`}
-                                            </label>
-                                        </div>
-                                    )})
-                                }
-                                </div>
-                            </div>
-                            </CardBody>
-                        </Card>
-                    </UncontrolledCollapse>
-                    </div>
-                    <Row>
-                    <Col md="6" sm="6" height="100%">
-                    <Field name="price" component="input" placeholder="Price" className="materialInput" style={{marginTop: "5%"}}/><br/>
-                    <Field name="discount" component="input" placeholder="Discount" className="materialInput" style={{marginTop: "5%"}}/><br/>
-                    </Col>
-                    </Row>
+            <Row style={{marginTop: '30px'}}>
+                <Col md="5" sm="12" >
+                    <ImageUploader
+                        withIcon={true}
+                        buttonText='Choose images'
+                        onChange={onDrop}
+                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        maxFileSize={5242880}
+                        withPreview={true}
+                        className="image-uploader"
+                    />
                 </Col>
-                </form>
-            </Row>
-            
+                <Col md="6" sm="6">
+                    <form onSubmit={handleSubmit}>
+                        
+                        <label> Product Name </label>
+                            <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
+                    
+                        <label> Product Description </label>
+                            <Field name="description" component="input" placeholder="Add Description" className="form-fields"/>
+                    
+                        <label> Brand</label>
+                            <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
+                        <label>Product Category</label>
+                        <div className="product-category">
+                            {_.map(props.categories, cat => {
+                                return (
+                                    <div key={cat.id}>
+                                        <label>
+                                            <Field name="category" component="input" type="radio" value={String(cat.id)} /> {` ${cat.name}`}
+                                        </label>
+                                    </div>
+                                )})
+                            }
+                            </div>
+                        <label>Product Price</label>
+                            <Field name="price" component="input" placeholder="Price" className="form-fields"/>
+                        <label>Product Discount</label>
+                            <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
+
+                            <Row>
+                        <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>
+                        <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
+                    </Row>
+                    </form> 
+                </Col>
+            </Row>  
         </Container>
-        
     )
 }
 
