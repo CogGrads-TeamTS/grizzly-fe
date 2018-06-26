@@ -42,7 +42,7 @@ class Product extends React.Component{
     
     componentDidMount(){
         this.props.fetchData(); // Initial fetch
-        console.log("MOUNT FETCH")
+        //console.log("MOUNT FETCH")
     }
 
     notify = () => {
@@ -60,8 +60,8 @@ class Product extends React.Component{
 
     fetchDataWithFilter() {
         this.props.fetchData(this.search, this.page, this.size, this.sort, this.catId)
-        console.log(this.catId);
-        console.log('fetch data with filter page: ' + this.search);
+        //console.log(this.catId);
+        //console.log('fetch data with filter page: ' + this.search);
                 
     }
 
@@ -78,7 +78,7 @@ class Product extends React.Component{
     }
 
     updateSearch(search) {
-        console.log("search");
+       // console.log("search");
         this.search = search;
         this.page = 0;
         this.fetchDataWithFilter();
@@ -87,7 +87,7 @@ class Product extends React.Component{
     incrementPage() { // Note that the infinite scroller pre-loads the next page
         this.page += 1;
         this.fetchDataWithFilter();
-        console.log("isLastOnProductIncrement: " + this.props.last);
+        //console.log("isLastOnProductIncrement: " + this.props.last);
     }
     addConfirm = (e) => {
         console.log("HELLO");
@@ -118,7 +118,7 @@ class Product extends React.Component{
                 </Row>
                 <Row>
                     <Col md="12" sm="12" xs="12">
-                    {console.log(this.props.products)}
+                    {/*console.log(this.props.products) */}
                     {/* TODO: ADD TABLE HERE */}
                 {<ProductTable products={this.props.products}
                     delete={this.deleteProduct} 
@@ -131,8 +131,8 @@ class Product extends React.Component{
     )}
 
     deleteProduct(prod) {
-         console.log("parent deleting product");
-         console.log(prod);
+         //console.log("parent deleting product");
+        // console.log(prod);
          this.props.delete(prod.id);
          this.notify();
     }

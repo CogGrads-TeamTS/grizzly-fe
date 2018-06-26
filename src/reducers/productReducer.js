@@ -11,8 +11,8 @@ export function products(state = {}, action) {
             const productLast = action.data.products.last;
             const selected = undefined;
             const filterByCat = action.data.filterCats;
-            console.log(action.data);
-            console.log(productArray)
+         //   console.log(action.data);
+            //console.log(productArray)
 
             return {
                 ...state,
@@ -43,21 +43,22 @@ export function products(state = {}, action) {
             };
 
         
-        // case types.EDIT_PRODUCT_SUCCESS:
-        //     // create a new state
-        //     const newState = {
-        //         ...state,
-        //         content: [...state.content]
-        //     };
+        case types.EDIT_PRODUCT_SUCCESS:
+        // create a new state
+        const newState = {
+            ...state,
+            content: [...state.content]
+        };
 
-        //     // find index of category in state
-        //     var indexToEdit = _.findIndex(newState.content, { id: action.payload.id });
-        //     // update the category in the new state using the index.
-        //     newState.content[indexToEdit].name = action.payload.name;
-        //     //newState.content[indexToEdit].description = action.description;
+        // find index of category in state
+        var indexToEdit = _.findIndex(newState.content, { id: action.payload.id });
+        // update the category in the new state using the index.
+        newState.content[indexToEdit] = action.payload;
+        //newState.content[indexToEdit].description = action.description;
 
-        //     // return the new state with the updated category
-        //     return newState;
+        // return the new state with the updated category
+        return newState;
+
 
         
         // case types.ADD_PRODUCT_SUCCESS:

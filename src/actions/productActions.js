@@ -21,11 +21,11 @@ const NO_PARAM = "id,desc";
 const SEARCH = "";
 const CATEGORY = "";
 
-//export function vendorsFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM) {
 export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM, catId=CATEGORY){
 
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}&category=${catId}`;
     const url = `${API_URL}/page?${urlParams}`;
+
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
@@ -33,7 +33,7 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
         console.log("URL IS: " + url)
         const request=axios.get(url);
         request
-            .then((response) =>{ console.log(response);
+            .then((response) =>{ //console.log(response);
                 if(!response.status == 200)
                 {
                     throw Error(response.statusText);
@@ -57,7 +57,7 @@ export function productFetchDataByID(id){
          dispatch(loadSingleProductLoading(true));
          const request=axios.get(url);
          request
-             .then((response) =>{ console.log(response);
+             .then((response) =>{ //console.log(response);
                  if(!response.status == 200)
                  {
                      throw Error(response.statusText);
@@ -70,54 +70,57 @@ export function productFetchDataByID(id){
      }
  }
 
- export function productFetchImagesByID(id){
+export function productFetchImagesByID(id){
 
     // const urlParams = `search=&page=&size=&sort=`;
-     const url = `${API_URL}/${id}/images`; 
-     console.log(url)
-     //const  url ='http://localhost:3005/vendor/';
-     return function (dispatch) {
-         // get data from external data source
-         dispatch(loadSingleProductImageLoading(true));
-         const request=axios.get(url);
-         request
-             .then((response) =>{ console.log(response);
-                 if(!response.status == 200)
-                 {
-                     throw Error(response.statusText);
-                 }
-                 dispatch(loadSingleProductImageLoading(false));
-                 return response.data;
-             })
-             .then((data)=>dispatch(loadSingleProductImageSuccess(data)))
-             .catch((error)=>dispatch(loadSingleProductImageError(error)));
-     }
- }
+    const url = `${API_URL}/${id}/images`;
+    console.log(url)
+    //const  url ='http://localhost:3005/vendor/';
+    return function (dispatch) {
+        // get data from external data source
+        dispatch(loadSingleProductImageLoading(true));
+        const request=axios.get(url);
+        request
+            .then((response) =>{ console.log(response);
+                if(!response.status == 200)
+                {
+                    throw Error(response.statusText);
+                }
+                dispatch(loadSingleProductImageLoading(false));
+                return response.data;
+            })
+            .then((data)=>dispatch(loadSingleProductImageSuccess(data)))
+            .catch((error)=>dispatch(loadSingleProductImageError(error)));
+    }
+}
 
-// const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
-// const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
-// const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
+ const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
+ const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
+ const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
 
-// export function editProductAction(payload) {
-//     console.log( payload);
 
-//     return (dispatch) => {
-//         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-//         const request = axios.put(`${API_URL}/products/${payload.id}`, payload );
-//         request
-//             .then((response) => {
-//                 console.log(response);
-//                 if (!response.status == 200) {
-//                     throw Error(response.statusText);
-//                 }
-//                 dispatch(editProductSuccess(payload))
-//             })
-//             .catch((error) => { // Catch the error thrown if status isn't 200
-//                 console.log(error);
-//                 dispatch(editProductError(error));
-//             })
-//     };
-// }
+
+ export function editProductAction(payload) {
+    console.log( payload);
+
+    return (dispatch) => {
+        // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/edit/${payload.id}`, payload);
+        request
+            .then((response) => {
+                //console.log(response);
+                if (!response.status == 200) {
+                    throw Error(response.statusText);
+                }
+                dispatch(editProductSuccess(payload))
+               
+            })
+            .catch((error) => { // Catch the error thrown if status isn't 200
+                console.log(error);
+                dispatch(editProductError(error));
+            })
+    };
+}
 
 
 // FIXME: Change the fields
