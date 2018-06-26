@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { Container, Row, Col, Form,Input,Label, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import ProductViewCarousel from '../ProductView/ProductViewCarousel';
 
 const returnToHome = () => {
     this.props.history.push("/");
@@ -18,7 +19,7 @@ class ProductEditForm extends Component{
 
     const {handleSubmit,categories,product} = this.props;
         
-       // console.log(this.props.product);
+        console.log(this.props.product);
 
 
     return (
@@ -27,8 +28,12 @@ class ProductEditForm extends Component{
             <Row>
 
                 <Col md="6" sm="6">
-                    <img name="img" className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>
-                    <div className="prod-image-caption">Product Image Carousel</div>
+                    {/*<img name="img" className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>*/}
+                    {/*<div className="prod-image-caption">Product Image Carousel</div>*/}
+                    <div className="prod-body-images">
+                        <ProductViewCarousel images={this.props.product.images}/>
+                    </div>
+
                 </Col>
                 <Col md="6" sm="6" height="100%">
                     <form onSubmit={handleSubmit}>
@@ -51,7 +56,7 @@ class ProductEditForm extends Component{
                             </fieldset>
                     </div>
 
-                        <div className="text-left">{console.log(this.props.product)}
+                        <div className="text-left">
                             <label>Change Category : </label>
                             <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
                             <UncontrolledCollapse toggler="#toggler">
@@ -65,15 +70,11 @@ class ProductEditForm extends Component{
                                                     return (
                                                         <div>
                                                             <label>
-
-                                                                {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
-                                                                {/*console.log(isChecked)*/}
                                                                 <Field name="catName" component="input" type="radio" value={cat.name}
                                                                        onChange={
                                                                            () => {this.props.product.catName = cat.name;
                                                                            this.props.product.catId = cat.id;
-                                                                           this.props.product.category.id=cat.id;
-                                                                               this.props.product.category.name=cat.name;}}/>{' '}
+                                                                          }}/>{' '}
 
                                                                 {cat.name}
                                                             </label>
