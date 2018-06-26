@@ -14,6 +14,8 @@ import {
     DropdownItem } from 'reactstrap';
 import GlobalSearch from './global_search';
 import grizzlogo from '../../Assets/griz-logo.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Header extends React.Component {
     constructor(props) {
@@ -32,8 +34,8 @@ class Header extends React.Component {
     render() {
       return (
         <div>
+          <ToastContainer />
           <Navbar  light expand="md">
-          
             <NavbarBrand href="/"><img className="griz-logo" src={grizzlogo}  /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
