@@ -15,19 +15,21 @@ const SORT_DEFAULT = "id,desc";
 const SEARCH_DEFAULT = "";
 
 // Use default values if none are specified
-export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
+export function categoriesFetchData(param, search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
+    // BUILD URL
+
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
-    console.log("url param: " + urlParams);
+    //console.log("url param: " + urlParams);
     const url = `${API_URL}/categories/page?${urlParams}`;
-    console.log(url);
+    //console.log(url);
 
     return (dispatch) => {
         dispatch(loadCategoriesLoading(true));
 
         const request = axios.get(url);
         request
-            .then((response) => { console.log(response)
+            .then((response) => { //console.log(response)
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
@@ -80,14 +82,14 @@ export function deleteCategory(id) {
         const request = axios.delete(`${API_URL}/categories/${id}`);
         request
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
                 dispatch(deleteCategorySuccess(id))
             })
             .catch((error) => {
-                console.log(error);
+                //console.log(error);
                 dispatch(deleteCategoryError(error));
             })
     };
@@ -98,20 +100,20 @@ const editCategoryLoading = (loading) => ({ type: types.EDIT_CATEGORY_LOADING, p
 const editCategoryError = (error) => ({ type: types.EDIT_CATEGORY_ERROR, payload: error });
 
 export function editCategoryAction(id, name, description) {
-    console.log("Edit Category called, id: " + id);
+   // console.log("Edit Category called, id: " + id);
 
     return (dispatch) => {
         const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
         request
             .then((response) => {
-                console.log(response);
+                //console.log(response);
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
                 dispatch(editCategorySuccess(id, name, description))
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
-                console.log(error);
+                //console.log(error);
                 dispatch(editCategoryError(error));
             })
     };

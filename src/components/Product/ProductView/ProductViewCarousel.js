@@ -6,8 +6,8 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-import noimage from '../../Assets/noimage.jpg';
-import logo from '../../Assets/griz-logo.png'
+import noimage from '../../../Assets/noimage.jpg';
+import logo from '../../../Assets/griz-logo.png';
 
 let items = [];
 

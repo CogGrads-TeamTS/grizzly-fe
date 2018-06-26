@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Homepage from './components/homepage';
-import ProductView from './components/ProductView/productview';
-import ProductEdit from "./components/ProductView/productEdit";
+import ProductView from './components/Product/ProductView/productview';
+import ProductEdit from "./components/Product/ProductEdit/productEdit";
 import ProductAdd from './components/Product/ProductAdd';
 
 const Routes = () => (
