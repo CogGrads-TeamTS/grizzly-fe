@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import { globalFetchData, globalSaveSearch } from '../../actions/globalActions';
 import Select from 'react-select';
-import { Badge } from 'reactstrap';
+import optionComponent from './optionComponent';
 import searchIcon from '../../Assets/searchicon.svg';
 import _ from 'lodash';
 import 'react-select/dist/react-select.css';
@@ -28,14 +29,23 @@ class GlobalSearch extends React.Component {
 
   mapSearchElements() {
     _.map(this.props.results, (contents, service) => {
-      _.map(contents, (element) => {
+      _.map(contents, (element, i) => {
+        const isFirst = (i === 0)
         this.options.push({
           value: element.id,
           label: element.name,
-          service: service
+          service,
+          isFirst
         })
       })
     })
+  }
+
+  determinePath(selected) {
+    if(selected === null) return 
+    if(selected.service === "products"){
+      this.props.history.push(`/product/${selected.value}`);
+    }
   }
 
   render() {
@@ -46,23 +56,26 @@ class GlobalSearch extends React.Component {
       <div>
         <Select
           name="form-field-name"
+          custom={"hello"}
           value={this.props.selected}
           onInputChange={this.searchDebounce}
           placeholder={"Search all services..."}
           onChange={(selected) => {
+            this.determinePath(selected)
             this.props.saveSelected(selected)
           }}
           className="global-search-box"
           valueComponent={customValue}
-          optionComponent={optionValue}
+          optionComponent={optionComponent}
           options={this.options}
           isLoading={this.props.loading}
-          arrowRenderer={() => {return <span><img className="global-search-icon" src={searchIcon} /></span>}}
+          arrowRenderer={() => { return <span><img className="global-search-icon" src={searchIcon} /></span> }}
         />
       </div>
     )
   }
 }
+
 
 //  Component methods for Select Prop
 const customValue = props => {
@@ -73,40 +86,6 @@ const customValue = props => {
         <div className="srch-srvce-txt">{props.value.service}</div>
       </span>
     </div>
-  );
-};
-
-const optionValue = props => {
-  const handleMouseDown = (event) => {
-		event.preventDefault();
-		event.stopPropagation();
-		props.onSelect(props.option, event);
-  }
-  
-	const handleMouseEnter = (event) => {
-		props.onFocus(props.option, event);
-  }
-  
-	const handleMouseMove = (event) => {
-		if (props.isFocused) return;
-		props.onFocus(props.option, event);
-  }
-  
-  return (
-    <div className={props.className}
-				onMouseDown={handleMouseDown}
-				onMouseEnter={handleMouseEnter}
-				onMouseMove={handleMouseMove}
-				title={props.option.title}>
-				{props.children}
-        <div className="srch-srvce-txt">{props.option.service}</div>
-			</div>
-    // <div className="Select-value" title={props.option.value}>
-    //   <span className="Select-value-label">
-    //     {props.children}
-    //     <div className="srch-srvce-txt">{props.option.service}</div>
-    //   </span>
-    // </div>
   );
 };
 
@@ -130,4 +109,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalSearch);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GlobalSearch));

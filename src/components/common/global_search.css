@@ -11,3 +11,7 @@
     margin-bottom: 2px;
     padding-left: 2px
 }
+
+.search-val-first {
+    border-top: 2px groove rgba(185, 185, 185, 0.212);
+}
