@@ -68,8 +68,8 @@ class ProductEditForm extends Component{
 
                                                                 {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
                                                                 {/*console.log(isChecked)*/}
-                                                                <Field name="catId" component="input" type="radio" value={cat.id}
-                                                                       onClick={
+                                                                <Field name="catName" component="input" type="radio" value={cat.name}
+                                                                       onChange={
                                                                            () => {this.props.product.catName = cat.name;
                                                                            this.props.product.catId = cat.id;
                                                                            this.props.product.category.id=cat.id;
