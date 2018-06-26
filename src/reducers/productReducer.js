@@ -45,10 +45,10 @@ export function products(state = {}, action) {
         
         case types.EDIT_PRODUCT_SUCCESS:
         // create a new state
-        const newState = {
-            ...state,
-            content: [...state.content]
-        };
+                const newState = {
+                    ...state,
+                    content: [...state.content]
+                };
 
         // find index of category in state
         var indexToEdit = _.findIndex(newState.content, { id: action.payload.id });

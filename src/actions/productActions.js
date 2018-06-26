@@ -101,7 +101,7 @@ export function productFetchImagesByID(id){
 
 
  export function editProductAction(payload) {
-    console.log( payload);
+    //console.log( payload);
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
