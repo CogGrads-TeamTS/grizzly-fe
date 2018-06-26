@@ -27,7 +27,7 @@ class Vendor extends React.Component{
         this.search = "";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
-        this.notify = this.notify.bind(this);
+        // this.notify = this.notify.bind(this);
     }
 
     notify = () => {
@@ -41,6 +41,7 @@ class Vendor extends React.Component{
         });
         
     }
+
     componentDidMount(){
         this.props.fetchData();
     }
@@ -73,7 +74,6 @@ class Vendor extends React.Component{
         
         return(
             <div>
-                <ToastContainer />
                 <Row>
                     <Col md="6" sm="6" xs="12">
                         <VendorSearch placeholder="Search by Vendor" updateSearch={searchDebounce} />
