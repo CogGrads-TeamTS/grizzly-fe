@@ -18,7 +18,7 @@ class ProductEditForm extends Component{
 
     const {handleSubmit,categories,product} = this.props;
         
-        console.log(this.props.product);
+       // console.log(this.props.product);
 
 
     return (
@@ -51,7 +51,7 @@ class ProductEditForm extends Component{
                             </fieldset>
                     </div>
 
-                        <div className="text-left">{console.log(this.props.initialValues.catId)}
+                        <div className="text-left">{console.log(this.props.product)}
                             <label>Change Category : </label>
                             <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
                             <UncontrolledCollapse toggler="#toggler">
@@ -69,8 +69,11 @@ class ProductEditForm extends Component{
                                                                 {/*(cat.name)? this.props.initialValues.catId=cat.id : catId*/}
                                                                 {/*console.log(isChecked)*/}
                                                                 <Field name="catId" component="input" type="radio" value={cat.id}
-                                                                       onChange={
-                                                                           () => {this.props.initialValues.catName = cat.name}}/>{' '}
+                                                                       onClick={
+                                                                           () => {this.props.product.catName = cat.name;
+                                                                           this.props.product.catId = cat.id;
+                                                                           this.props.product.category.id=cat.id;
+                                                                               this.props.product.category.name=cat.name;}}/>{' '}
 
                                                                 {cat.name}
                                                             </label>

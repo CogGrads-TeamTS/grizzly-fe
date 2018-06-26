@@ -19,10 +19,9 @@ class ProductEdit extends Component{
     
     returnToHome = () => {
         this.props.history.push("/");
-    }
+    };
 
     handleSubmit = (data) => {
-       // console.log('TESTESTTESTESTSET');
         console.log(data);
         this.props.edit(data);
         this.returnToHome();
@@ -41,7 +40,7 @@ class ProductEdit extends Component{
                <p>The product is loading...</p>
            ) : (
                <ProductEditForm  product={this.props.product} categories={this.props.categories}
-                                 onSubmit={this.handleSubmit.bind(this)} />
+                                 onSubmit={this.handleSubmit} />
            );
 
        return (
