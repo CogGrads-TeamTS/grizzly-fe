@@ -37,15 +37,18 @@ class ProductAdd extends Component {
     }
 
     notify = () => {
-        toast("Success!");
-// toast.success('🦄 Wow so easy!', {
-//             position: "top-right"
-//             autoClose: 5000
-//             hideProgressBar: false
-//             closeOnClick: true
-//             pauseOnHover: true
-//             draggable: true
-//             });
+        // toast("Success!");
+
+        // toast("Default Notification !");
+
+        toast.success('Add Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
         
     }
 
@@ -60,6 +63,8 @@ class ProductAdd extends Component {
 
     returnToHome = () => {
         this.props.history.push("/");
+        console.log("TOASTY");
+        this.notify();
     }
 
     handleSubmit = (e) => {

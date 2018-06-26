@@ -13,6 +13,8 @@ import ProductAddButton from './ProductAddButton';
 // import CategoryAddModal from './Modals/CategoryAddModal';
  import Search from './ProductSearch';
 import ProductSortByButton from './ProductSortByButton';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class Product extends React.Component{
@@ -35,11 +37,25 @@ class Product extends React.Component{
         this.catId = "";
         // this.updateSort = this.updateSort.bind(this);
          this.updateSearch = this.updateSearch.bind(this);
+         this.notify = this.notify.bind(this);
     }
     
     componentDidMount(){
         this.props.fetchData(); // Initial fetch
         console.log("MOUNT FETCH")
+    }
+
+    notify = () => {
+        console.log("CLICKME");
+        toast.success('Delete Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+        
     }
 
     fetchDataWithFilter() {
@@ -74,7 +90,7 @@ class Product extends React.Component{
         console.log("isLastOnProductIncrement: " + this.props.last);
     }
     addConfirm = (e) => {
-        
+        console.log("HELLO");
     }
 
     render(){
@@ -85,6 +101,7 @@ class Product extends React.Component{
 
         return(
             <div>
+                <ToastContainer />
                 <Row>
                     <Col md="6" sm="6" xs="12">
                         <Search placeholder="Search by Product" updateSearch={searchDebounce} />
@@ -117,6 +134,7 @@ class Product extends React.Component{
          console.log("parent deleting product");
          console.log(prod);
          this.props.delete(prod.id);
+         this.notify();
     }
 
     // editProduct(prod) {
