@@ -39,7 +39,6 @@ class GlobalSearch extends React.Component {
         <Select
           name="form-field-name"
           value={this.props.selected}
-          valueKey={this.props.search}
           onInputChange={this.searchDebounce}
           onChange={(selected) => {
             this.props.saveSelected(selected)
