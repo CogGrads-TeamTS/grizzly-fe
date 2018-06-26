@@ -3,6 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reacts
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form';
 import CategoryForm from '../CategoryForm';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddModal extends Component {
     constructor(props) {
@@ -16,7 +18,19 @@ class AddModal extends Component {
         this.toggle = this.toggle.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.notify = this.notify.bind(this);
+    }
+    
+    notify = () => {
+        toast.success('Add Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
     }
     
     toggle() {
@@ -47,6 +61,7 @@ class AddModal extends Component {
         console.log(event)
         this.handleSubmit(event)
         this.toggle()
+        this.notify();
     }
 
     submit = values => {

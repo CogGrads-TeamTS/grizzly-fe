@@ -1,39 +1,67 @@
 import React from 'react';
-import {
-  Form,
-  FormGroup,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
- } from 'reactstrap';
+import {connect} from 'react-redux';
+import { globalFetchData } from '../../actions/globalActions';
+import Select from 'react-select';
+import _ from 'lodash';
+import 'react-select/dist/react-select.css';
 
 class GlobalSearch extends React.Component {
- 
+  constructor(props) {
+    super(props);
+
+    this.options = [];
+    }
+
+  searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
+
+  searchValue = event => {
+    this.searchDebounce(event.target.value);
+  }
+
+  updateSearch(search) {
+    this.setState({search});
+    this.props.fetchData({search, callback: this.loadingCallback});
+}
+
   render() { 
-    const classes = `col-12 btn-left-curve ${this.props.rounded}`;
+    this.options = [];
+    _.map(this.props.results, (service) => {
+      _.map(service, (element) => {
+        this.options.push({
+          value: element.id,
+          label: element.name,
+        })
+      })
+    })
+    
     return (
-      <Form>
-        <FormGroup>
-        <InputGroup className={this.props.classname}>
-          <Input 
-          className={classes}
-          type="search" 
-          name="search" 
-          id="exampleSearch" 
-          placeholder={this.props.placeholder} 
-          />
-            {/* <InputGroupAddon addonType="prepend">
-              <Button 
-              className="btn-search btn-right-curve">
-                <i className="fa fa-search"></i>
-              </Button>
-            </InputGroupAddon> */}
-            </InputGroup>
-        </FormGroup>
-      </Form>
+      <div>
+        <Select
+          name="form-field-name"
+          value=''
+          valueKey={this.props.search}
+          onInputChange={this.searchDebounce}
+          className="global-search-box"
+          options = {this.options}
+          isLoading= {this.props.loading}
+        />
+        </div>
     )
   }
 }
 
-export default GlobalSearch;
+const mapStateToProps = (state) => {
+  return {
+    results: state.global.results,
+    search: state.global.search,
+    loading: state.globalIsLoading,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      fetchData: (search) => dispatch(globalFetchData(search))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (GlobalSearch);

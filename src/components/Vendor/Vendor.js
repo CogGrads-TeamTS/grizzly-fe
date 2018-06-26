@@ -6,6 +6,8 @@ import {vendorsFetchData,addVendorAction,deleteVendorAction,editVendorAction} fr
 import VendorAddModal from './Modals/VendorAddModal'
 import VendorSortByButton from './VendorSortByButton';
 import VendorSearch from './VendorSearch';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import _ from 'lodash';
 
@@ -25,6 +27,19 @@ class Vendor extends React.Component{
         this.search = "";
         this.hasMore = true;
         this.updateSort = this.updateSort.bind(this);
+        this.notify = this.notify.bind(this);
+    }
+
+    notify = () => {
+        toast.success('Delete Success', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+        
     }
     componentDidMount(){
         this.props.fetchData();
@@ -58,6 +73,7 @@ class Vendor extends React.Component{
         
         return(
             <div>
+                <ToastContainer />
                 <Row>
                     <Col md="6" sm="6" xs="12">
                         <VendorSearch placeholder="Search by Vendor" updateSearch={searchDebounce} />
@@ -88,6 +104,7 @@ class Vendor extends React.Component{
         console.log("parent deleting category");
         console.log(vend);
         this.props.delete(vend.id);
+        this.notify();
     }
 
     editVendor(ven) { console.log(ven);
