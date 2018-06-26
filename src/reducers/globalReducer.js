@@ -5,12 +5,18 @@ export function global(state = {}, action){
         case types.LOAD_GLOBAL_SUCCESS:
             const search = action.data.search;
             delete action.data.search;
-            console.log(action.data)
-            console.log(search)
+
             return {
                 ...state,
                 results: action.data,
                 search: search
+            };
+
+            case types.SAVE_GLOBAL_SELECTED_SUCCESS:
+            console.log(action.data)
+            return {
+                ...state,
+                selected: action.data
             };
 
         default:

@@ -26,3 +26,11 @@ export function globalFetchData({search}){
              .catch((error)=>dispatch(loadGlobalError(error)));
      };
  }
+
+ const saveGlobalSuccess = (data) => ({type: types.SAVE_GLOBAL_SELECTED_SUCCESS, data});
+ 
+ export function globalSaveSearch(selected){
+    return function (dispatch) {
+        dispatch(saveGlobalSuccess(selected));
+    };
+}
