@@ -65,9 +65,9 @@ submitAndClose = () => {
           <ModalBody>
             <form onSubmit={this.handleSubmit}>
                 <label>Category Name:</label>
-                <input name="name" value={this.state.name} style={{width: "60%", float: "right"}} onChange={this.handleNameChange} /><br/>
-                <label>Category Description:</label>
-                <input name="description" value={this.state.description} style={{width: "60%", float: "right"}} onChange={this.handleDescriptionChange}/><br/>
+                <input name="name" className="form-fields" value={this.state.name} style={{width: "60%", float: "right"}} onChange={this.handleNameChange} /><br/>
+                <label className="form-label">Category Description:</label>
+                <textarea name="description" className="form-fields" value={this.state.description} style={{width: "60%", float: "right", height: "125px", resize: "none"}} onChange={this.handleDescriptionChange}/>
             </form>
           </ModalBody>
           <ModalFooter>
