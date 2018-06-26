@@ -8,7 +8,7 @@ const loadGlobalError = (error) => ({type: types.LOAD_GLOBAL_ERROR, globalHasErr
 const loadGlobalLoading = (loading) =>({type: types.LOAD_GLOBAL_LOADING, globalIsLoading:loading});
 
 export function globalFetchData({search}){
-     const url = `${API_URL}/search?size=8&search=${search}`;
+     const url = `${API_URL}/search?size=5&search=${search}`;
      return function (dispatch) { 
          dispatch(loadGlobalLoading(true));
          const request=axios.get(url);

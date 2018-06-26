@@ -54,6 +54,7 @@ class GlobalSearch extends React.Component {
           }}
           className="global-search-box"
           valueComponent={customValue}
+          optionComponent={optionValue}
           options={this.options}
           isLoading={this.props.loading}
           arrowRenderer={() => {return <span><img className="global-search-icon" src={searchIcon} /></span>}}
@@ -63,30 +64,56 @@ class GlobalSearch extends React.Component {
   }
 }
 
+//  Component methods for Select Prop
 const customValue = props => {
-
-  const switchServicePill = (service) => {
-    switch(service){
-      case "vendors":
-        return "secondary"
-      case "products":
-        return "success"
-      default:
-        return "primary"
-    }
-  }
-
   return (
     <div className="Select-value" title={props.value.title}>
       <span className="Select-value-label">
         {props.children}
         <div className="srch-srvce-txt">{props.value.service}</div>
-        {/* <Badge className="srch-srvce-pl" color={switchServicePill(props.value.service)} pill>{props.value.service}</Badge> */}
       </span>
     </div>
   );
 };
 
+const optionValue = props => {
+  const handleMouseDown = (event) => {
+		event.preventDefault();
+		event.stopPropagation();
+		props.onSelect(props.option, event);
+  }
+  
+	const handleMouseEnter = (event) => {
+		props.onFocus(props.option, event);
+  }
+  
+	const handleMouseMove = (event) => {
+		if (props.isFocused) return;
+		props.onFocus(props.option, event);
+  }
+  
+  return (
+    <div className={props.className}
+				onMouseDown={handleMouseDown}
+				onMouseEnter={handleMouseEnter}
+				onMouseMove={handleMouseMove}
+				title={props.option.title}>
+				{props.children}
+        <div className="srch-srvce-txt">{props.option.service}</div>
+			</div>
+    // <div className="Select-value" title={props.option.value}>
+    //   <span className="Select-value-label">
+    //     {props.children}
+    //     <div className="srch-srvce-txt">{props.option.service}</div>
+    //   </span>
+    // </div>
+  );
+};
+
+
+
+
+// Mapping Methods
 const mapStateToProps = (state) => {
   return {
     results: state.global.results,
