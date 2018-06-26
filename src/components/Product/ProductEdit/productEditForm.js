@@ -74,8 +74,7 @@ class ProductEditForm extends Component{
                                                                        onChange={
                                                                            () => {this.props.product.catName = cat.name;
                                                                            this.props.product.catId = cat.id;
-                                                                           this.props.product.category.id=cat.id;
-                                                                               this.props.product.category.name=cat.name;}}/>{' '}
+                                                                          }}/>{' '}
 
                                                                 {cat.name}
                                                             </label>
