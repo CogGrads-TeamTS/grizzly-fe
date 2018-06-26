@@ -4,7 +4,7 @@ import { Container, Row, Col, Button} from 'reactstrap';
 import StarRatings from 'react-star-ratings';
 import ProductViewCarousel from './ProductViewCarousel';
 import Carousel from 'nuka-carousel';
-import {upper} from '../../lib/helper'
+import {upper} from '../../../lib/helper'
 
 class ProductViewLayout extends Component {
 
