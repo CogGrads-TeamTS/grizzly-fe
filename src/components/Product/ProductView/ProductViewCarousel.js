@@ -26,6 +26,9 @@ const buildImages = (images) => {
     items.push({
       src: noimage,
       captionText: "Stop throwing errors pls"
+    },{
+      src: noimage,
+      captionText: "Stop throwing errors pls"
     })
   } else {
 
@@ -95,7 +98,9 @@ class ProductViewCarousel extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} style={{width: '100%', height: '100%'}}/>
+        <div className="carousel-item-img-contain">
+          <img src={item.src} alt={item.altText}/>
+        </div>
         </CarouselItem>
       );
     });
@@ -105,7 +110,7 @@ class ProductViewCarousel extends Component {
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
-        interval={30000}
+        interval={10000}
       >
         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
         {slides}

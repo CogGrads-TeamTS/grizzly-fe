@@ -3,6 +3,7 @@ import { Container, Card, Button, CardTitle, CardText, Row, Col } from 'reactstr
 import {  Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {upper} from '../../lib/helper';
 import UserForm from './UserForm';
+import defaultProfile from '../../Assets/default_profile.gif';
 
 class User extends Component{
     constructor(props){
@@ -48,7 +49,7 @@ class User extends Component{
                             </div>
                         </CardTitle>
                             <div className="profile-image">
-                                <img src="http://i.imgur.com/Esvthp8.gif" width="100%" height="100%"/>
+                                <img src={defaultProfile} width="100%" height="100%"/>
                             </div>
                           
                             <UserForm userData={this.props.userData} isDisabled={isDisbaled} onSubmit={this.handleSubmit} isActive={isActive} notActive={this.notActive}/>
