@@ -6,7 +6,6 @@ import ImageUploader from 'react-images-upload';
 
 
 let ProductAddForm = (props) => {
-    console.log(props);
     const {handleSubmit, returnToHome, onDrop} = props;
 
     if(props.categories == undefined){
@@ -25,20 +24,25 @@ let ProductAddForm = (props) => {
                         maxFileSize={5242880}
                         withPreview={true}
                         className="image-uploader"
+                        fileSizeError='File size is too big'
+                        fileTypeError="is not supported file extension"
+                        label='Max file size: 5mb, accepted: jpg, png, gif'
                     />
                 </Col>
                 <Col md="6" sm="6">
                     <form onSubmit={handleSubmit}>
                         
-                        <label> Product Name </label>
+                        <label> Name </label>
                             <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
                     
-                        <label> Product Description </label>
+                        <label> Description </label>
                             <Field name="description" component="input" placeholder="Add Description" className="form-fields"/>
                     
                         <label> Brand</label>
                             <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
-                        <label>Product Category</label>
+                        <Row>
+                            <Col sm="6">
+                        <label>Category</label>
                         <div className="product-category">
                             {_.map(props.categories, cat => {
                                 return (
@@ -50,10 +54,14 @@ let ProductAddForm = (props) => {
                                 )})
                             }
                             </div>
-                        <label>Product Price</label>
-                            <Field name="price" component="input" placeholder="Price" className="form-fields"/>
-                        <label>Product Discount</label>
-                            <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
+                            </Col>
+                            <Col sm="6">
+                                <label> Price</label>
+                                <Field name="price" component="input" placeholder="Price" className="form-fields"/>
+                                <label style={{marginTop: '16px'}}> Discount</label>
+                                <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
+                            </Col>
+                        </Row>
 
                             <Row>
                         <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>

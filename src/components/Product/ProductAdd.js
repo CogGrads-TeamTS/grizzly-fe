@@ -30,49 +30,65 @@ class ProductAdd extends Component {
           )
     }
 
+    /**
+     * 
+     * @param {*} picture File object
+     * 
+     * If the picture array (of Files) is larger than 5 notify the user 
+     * to remove the last image on the picture array
+     */
     onDrop(picture) {
-        console.log(picture);
-        
-        this.setState({
-            pictures: picture
-        });
-
-        //postImageData(this.state.pictures.)
-        // console.log(this.state.pictures[0]);
-        // this.props.addImage(2, picture, 1);
-    }
-    notify = () => {
-        toast.success('Add Success', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-        });        
+        if(picture.length <= 5){
+            this.setState({
+                pictures: picture
+            });
+        }
+        else {
+            console.log(picture[picture.length-1])
+            this.notify('error', picture[picture.length-1]);
+        }
     }
     
-
+    notify = (e, picture) => {
+        switch(e) {
+            case "success":
+            toast.success('Add Success', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+            
+            case "error":
+            console.log(picture);
+            toast.error(`Too Many Files, Please remove ${picture.name}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+           
+    }
+    
     componentDidMount(){
-        console.log("Did mount")
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
     fetchDataWithFilter() {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
-        console.log('fetch data with filter page: ' + this.search);
     }
 
     returnToHome = () => {
         this.props.history.push("/");
-        console.log("TOASTY");
         this.notify();
     }
 
     handleSubmit = (e) => {
-
-        console.log(this.state.pictures)
         const pictures = this.state.pictures
-
         this.props.add({
             name:e.name,
             description: e.description,
