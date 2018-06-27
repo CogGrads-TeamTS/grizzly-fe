@@ -13,7 +13,6 @@ export function global(state = {}, action){
             };
 
             case types.SAVE_GLOBAL_SELECTED_SUCCESS:
-            console.log(action.data)
             return {
                 ...state,
                 selected: action.data

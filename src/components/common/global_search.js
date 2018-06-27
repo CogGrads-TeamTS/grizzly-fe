@@ -16,14 +16,13 @@ class GlobalSearch extends React.Component {
     this.options = [];
   }
 
-  searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
-
   searchValue = event => {
     this.searchDebounce(event.target.value);
   }
 
+  searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
+
   updateSearch(search) {
-    this.setState({ search });
     this.props.fetchData({ search, callback: this.loadingCallback });
   }
 
@@ -44,7 +43,7 @@ class GlobalSearch extends React.Component {
   determinePath(selected) {
     if(selected === null) return 
     if(selected.service === "products"){
-      this.props.history.push(`/product/${selected.value}`);
+        this.props.history.push(`/product/${selected.value}`);
     }
   }
 

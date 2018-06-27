@@ -8,12 +8,17 @@ class ProductView extends Component {
     componentDidMount(){
         this.props.fetchData(this.props.match.params.id);
         this.props.fetchImages(this.props.match.params.id);
+        
     }
 
-    
+    componentDidUpdate(prevProps) {
+        if(this.props.match.params.id !== prevProps.match.params.id){
+            this.props.fetchData(this.props.match.params.id);
+            this.props.fetchImages(this.props.match.params.id);
+        }
+    }
 
     render() { 
-        console.log(this.props.images)
         const isLoading = (this.props.product === undefined) ?
             (  
                 <p>The product is loading...</p>
@@ -31,7 +36,6 @@ class ProductView extends Component {
 }
 
 const mapStateToProps = (state) => { 
-    console.log(state.products)
     return{
         product: state.products.selected,
         images: state.products.images,
