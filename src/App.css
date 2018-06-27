@@ -990,7 +990,7 @@ input:disabled{
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   padding: 2%;
   height: 135px;
-  width: 300px;
+  /* width: 300px; */
   overflow-y: scroll;
   margin-bottom: 15px;
 }
