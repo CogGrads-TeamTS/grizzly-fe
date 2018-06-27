@@ -7,6 +7,9 @@ tbody {
   cursor: pointer;
 }
 
+textarea {
+  resize: none !important;
+}
 .global-search-box {
   width: 400px;
   transform: translateX(-40%) 

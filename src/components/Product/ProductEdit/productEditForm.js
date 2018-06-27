@@ -6,118 +6,86 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import ProductViewCarousel from '../ProductView/ProductViewCarousel';
 
-const returnToHome = () => {
-    this.props.history.push("/");
-}
-
 class ProductEditForm extends Component{
 
     constructor(props) {
         super(props);
     }
+
+    returnToHome = () => {
+        this.props.history.push(`/product/${this.props.match.params.id}`);
+    }
+
     render(){
 
     const {handleSubmit,categories,product} = this.props;
-        
-        console.log(this.props.product);
 
 
     return (
         <Container fluid={true}>
-
-            <Row>
-
-                <Col md="6" sm="6">
+            <Row style={{marginTop: '30px'}}>
+                <Col md="5" sm="12">
                     {/*<img name="img" className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>*/}
                     {/*<div className="prod-image-caption">Product Image Carousel</div>*/}
                     <div className="prod-body-images">
                         <ProductViewCarousel images={this.props.product.images}/>
                     </div>
-
                 </Col>
-                <Col md="6" sm="6" height="100%">
+                <Col md="7" sm="6">
                     <form onSubmit={handleSubmit}>
-                        <fieldset className="form-group">
-                            <label>Name: </label>
-                            <Field  className="form-control" component="input" type="text" name="name" /><br/>
-                        </fieldset>
-                        <fieldset className="form-group">
-                            <label>Brand: </label>
-                            <Field  className="form-control"  component="input" type="text" name="brand" /><br/>
-                        </fieldset>
-                        <fieldset className="form-group">
-                            <label>Description: </label>
-                            <Field  className="form-control"  component="textarea" name="description" type="textarea" />
-                        </fieldset>
-                        <div>
-                            <fieldset className="form-group">
-                                <label>Category Selected: </label>
-                                <Field  className="form-control"  component="input" name="catName" value={this.props.initialValues.catName} type="text" disabled />
-                            </fieldset>
-                    </div>
-
-                        <div className="text-left">
-                            <label>Change Category : </label>
-                            <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
-                            <UncontrolledCollapse toggler="#toggler">
-                                <Card>
-                                    <CardBody className="cat-collapse">
-                                        <div>
+                        <Row>
+                            <Col>
+                                <label> Name </label>
+                                <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <label> Description </label>
+                                <Field name="description" component="textarea" placeholder="Add Description" className="form-fields"/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                            <label> Brand</label>
+                            <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm="6">
+                                <label>Category</label>
+                                <div className="product-category">
+                                    {_.map(this.props.categories, cat => {
+                                        return (
                                             <div>
+                                                <label>
+                                                    <Field name="catName" component="input" type="radio" value={cat.name}
+                                                        onChange={
+                                                            () => {this.props.product.catName = cat.name;
+                                                            this.props.product.catId = cat.id;
+                                                            }}/>{' '}
 
-                                                {_.map(this.props.categories, cat => {
-
-                                                    return (
-                                                        <div>
-                                                            <label>
-                                                                <Field name="catName" component="input" type="radio" value={cat.name}
-                                                                       onChange={
-                                                                           () => {this.props.product.catName = cat.name;
-                                                                           this.props.product.catId = cat.id;
-                                                                          }}/>{' '}
-
-                                                                {cat.name}
-                                                            </label>
-                                                        </div>
-                                                    )
-                                                })}
+                                                    {cat.name}
+                                                </label>
                                             </div>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </UncontrolledCollapse>
-                        </div>
-
-                        <Row>
-                            <Col md="6" sm="6" height="100%">
-                                <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input"  name="price" type="text"  style={{marginTop: "5%"}}/><br/>
-                                </fieldset>
+                                        )
+                                    })}
+                                </div>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col md="6" sm="6" height="100%">
-                                <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input" name="discount" type="text"  style={{marginTop: "5%"}}/><br/>
-                                </fieldset>
+                            <Col sm="6">
+                                <label> Price</label>
+                                <Field name="price" component="input" placeholder="Price" className="form-fields"/>
+                                <label style={{marginTop: '16px'}}> Discount</label>
+                                <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
                             </Col>
                         </Row>
 
-                        <div className="prod-footer">
-                            <div className="prod-body-price">
-                                <Button outline color="primary"  onClick={handleSubmit} type="submit">Edit</Button>
-                            </div>
-
-                            <div className="prod-body-discount">
-                                <Button outline color="secondary" onClick={this.returnToHome}>Cancel</Button>
-                            </div>
-                        </div>
-
-                    </form>
-
-
+                            <Row>
+                        <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={this.returnToHome}>Cancel</Button></Col>
+                        <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
+                    </Row>
+                    </form> 
                 </Col>
-
             </Row>
         </Container>
 
@@ -135,8 +103,5 @@ ProductEditForm = reduxForm({
 })(ProductEditForm)
 
 // now set initialValues using data from your store state
-ProductEditForm = connect(state => ({initialValues: state.products.selected})
-   
-)(ProductEditForm)
-
+ProductEditForm = withRouter(connect(state => ({initialValues: state.products.selected}))(ProductEditForm))
 export default ProductEditForm;

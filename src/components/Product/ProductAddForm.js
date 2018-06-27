@@ -29,17 +29,26 @@ let ProductAddForm = (props) => {
                         label='Max file size: 5mb, accepted: jpg, png, gif'
                     />
                 </Col>
-                <Col md="6" sm="6">
+                <Col md="7" sm="6">
                     <form onSubmit={handleSubmit}>
-                        
-                        <label> Name </label>
-                            <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
-                    
-                        <label> Description </label>
-                            <Field name="description" component="input" placeholder="Add Description" className="form-fields"/>
-                    
-                        <label> Brand</label>
+                        <Row>
+                            <Col>
+                                <label> Name </label>
+                                <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <label> Description </label>
+                                <Field name="description" component="textarea" placeholder="Add Description" className="form-fields"/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                            <label> Brand</label>
                             <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
+                            </Col>
+                        </Row>
                         <Row>
                             <Col sm="6">
                         <label>Category</label>
