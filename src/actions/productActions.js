@@ -100,7 +100,7 @@ export function productFetchImagesByID(id){
 
 
 
- export function editProductAction(payload) {
+ export function editProductAction(payload, images) {
     //console.log( payload);
 
     return (dispatch) => {
@@ -112,8 +112,18 @@ export function productFetchImagesByID(id){
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
+
+                console.log(images)
+                // Update pictures
+                // if(images.length > 0) {
+                //     var i;
+                //     for(i = 0; i < images.length; i++){
+                //         var image = images[i]
+                //         dispatch(addProductImages(response.data.id, image, i));
+                //     }
+                // }
+
                 dispatch(editProductSuccess(payload))
-               
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 console.log(error);
@@ -146,12 +156,10 @@ export function addProductAction({name, description, brand, catId, price, discou
                     }
                 }
                 
-                console.log("FINISHED SAVING THE PRODUCT.")
                 return response.data;
             })
             .then((data) => dispatch(addProductSuccess(data)))
             .then(() => {
-                console.log("TRIGGERED CALLBACK");
                 callback()
             })
             .catch((error) =>  dispatch(addProductError(error)))

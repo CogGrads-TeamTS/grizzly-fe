@@ -22,14 +22,21 @@ class ProductEdit extends Component{
     };
 
     handleSubmit = (data) => {
-        console.log(data);
-        this.props.edit(data);
+        const images = this.state.images;
+        console.log(images)
+        this.props.edit(data, images);
         this.returnToHome();
     };
     componentDidMount(){
 
         this.props.fetchData(this.props.match.params.id);
         this.props.categoryFetchData();
+
+        // this.updateItems(this.props.product.images)
+    }
+
+    updateItems = (images) => {
+        this.setState({images})
     }
 
 
@@ -40,7 +47,7 @@ class ProductEdit extends Component{
                <p>The product is loading...</p>
            ) : (
                <ProductEditForm  product={this.props.product} categories={this.props.categories}
-                                 onSubmit={this.handleSubmit} />
+                                 onSubmit={this.handleSubmit} callbackUpdate={this.updateItems.bind(this)}/>
            );
 
        return (
@@ -66,7 +73,7 @@ const mapDispatchToProps = (dispatch) => { console.log();
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
         categoryFetchData: ()=> dispatch(categoriesFetchData()),
-        edit: (payload) => dispatch(editProductAction(payload))
+        edit: (payload, images) => dispatch(editProductAction(payload, images))
     };
 };
 

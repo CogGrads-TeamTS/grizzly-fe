@@ -26,9 +26,6 @@ const buildImages = (images) => {
     items.push({
       src: noimage,
       captionText: "Stop throwing errors pls"
-    },{
-      src: noimage,
-      captionText: "Stop throwing errors pls"
     })
   } else {
 
