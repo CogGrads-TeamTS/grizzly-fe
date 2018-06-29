@@ -1,17 +1,36 @@
 import React, { Component } from 'react'
 import Tabs from '../components/common/common_tabs';
+import Header from '../components/common/common_header';
+import Sidebar from '../components/common/common_sidebar';
+import {Row, Col } from 'reactstrap';
+import isAuthenticated from '../Auth/isAuthenticated';
+import { Redirect } from 'react-router-dom';
 
-import CategoryModal from './Category/Modals/categoryModal'
-
-class Homepage extends Component {
-
-    render() {
-        return ( 
+const HomePage = (props)=>(
+        isAuthenticated()?(
             <div>
-                <Tabs />             
-            </div> 
-        );
-    }
-}
+                <div className="header">
+                    <Row className="nav-row">
+                        <Col xs="12">
+                            <Header from={this.props}/>
+                        </Col>
+                    </Row>
+                </div>
+                <Row className="main">
+                    <Col xs="12" sm="3">
+                        <Sidebar />
+                    </Col>
+                    <Col xs="12" sm="9">
+                        <Tabs />
+                    </Col>
+                </Row>
+            </div>
+    ) : (
+            <Redirect to={{
+                pathname: '/',
+                state: { from: props.location }
+            }} />
+        )
+);
 
-export default Homepage;
+export default HomePage;

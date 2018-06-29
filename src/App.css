@@ -994,3 +994,21 @@ input:disabled{
   overflow-y: scroll;
   margin-bottom: 15px;
 }
+
+.auth0-lock.auth0-lock .auth0-lock-name {
+    font-size: 28px;
+    position: relative;
+}
+.auth0-lock-header-bg::selection {
+    background-color: transparent !important;
+}
+.auth0-lock-header-bg-blur::selection {
+    display: none !important;
+
+}
+.auth0-lock-submit::selection,
+.auth0-global-message::selection,
+.auth0-global-message-error::selection
+{
+    background-color:  #F1A94E;
+}

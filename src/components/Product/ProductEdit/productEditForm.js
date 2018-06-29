@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import ProductViewCarousel from '../ProductView/ProductViewCarousel';
 
 const returnToHome = () => {
-    this.props.history.push("/");
-}
+    this.props.history.push("/dashboard");
+};
 
 class ProductEditForm extends Component{
 
