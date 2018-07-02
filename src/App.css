@@ -995,6 +995,8 @@ input:disabled{
   margin-bottom: 15px;
 }
 
+/*Admin login screen */
+
 .auth0-lock.auth0-lock .auth0-lock-name {
     font-size: 28px;
     position: relative;

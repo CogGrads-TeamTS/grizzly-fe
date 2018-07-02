@@ -11,7 +11,7 @@ class Sidebar extends Component {
         
     }
     componentDidMount(){
-        this.props.fetchUserData(1);
+        this.props.fetchUserData();
     }
     
     editUser(payload){
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        fetchUserData: (id) => dispatch(fetchUserByID(id)),
+        fetchUserData: () => dispatch(fetchUserByID()),
         editUserById: (payload) => dispatch(editUserById(payload))
     }
 }

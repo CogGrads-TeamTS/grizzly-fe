@@ -7,12 +7,13 @@ const loadUserSuccess = (data) => ({type: types.LOAD_USER_SUCCESS, data});
 const loadUserError = (error) => ({type: types.LOAD_USER_ERROR, userHasErrored:error});
 const loadUserLoading = (loading) =>({type: types.LOAD_USER_LOADING, userIsLoading:loading});
 
-export function fetchUserByID(id){
-
-     const url = `${API_URL}/${id}`;
+export function fetchUserByID(){
+    const accessToken = localStorage.getItem('access_token');
+    console.log(accessToken);
+     const url = `${API_URL}`;
      return function (dispatch) { 
          dispatch(loadUserLoading(true));
-         const request=axios.get(url);
+         const request=axios.get(url, { headers: { authorization: `Bearer ${accessToken}` } });
          request
              .then((response) =>{ 
                  if(!response.status == 200)
