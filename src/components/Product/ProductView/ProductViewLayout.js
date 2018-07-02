@@ -10,7 +10,6 @@ class ProductViewLayout extends Component {
 
     render(){
 
-        console.log(this.props.images);
         return (
             <Container fluid={true} className="prod-view-container">
                 <Row>

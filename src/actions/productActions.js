@@ -30,7 +30,6 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
     return function (dispatch) {
         // get data from external data source
         dispatch(loadProductLoading(true));
-        console.log("URL IS: " + url)
         const request=axios.get(url);
         request
             .then((response) =>{ //console.log(response);
@@ -39,7 +38,6 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
                     throw Error(response.statusText);
                 }
                 dispatch(loadProductLoading(false));
-                console.log("FINISHED RETRIEVING PRODUCTS")
                 return response.data;
             })
             .then((data)=>dispatch(loadProductSuccess(data)))
@@ -74,14 +72,14 @@ export function productFetchImagesByID(id){
 
     // const urlParams = `search=&page=&size=&sort=`;
     const url = `${API_URL}/${id}/images`;
-    console.log(url)
+
     //const  url ='http://localhost:3005/vendor/';
     return function (dispatch) {
         // get data from external data source
         dispatch(loadSingleProductImageLoading(true));
         const request=axios.get(url);
         request
-            .then((response) =>{ console.log(response);
+            .then((response) =>{
                 if(!response.status == 200)
                 {
                     throw Error(response.statusText);
@@ -100,7 +98,7 @@ export function productFetchImagesByID(id){
 
 
 
- export function editProductAction(payload) {
+ export function editProductAction(payload, images) {
     //console.log( payload);
 
     return (dispatch) => {
@@ -112,8 +110,17 @@ export function productFetchImagesByID(id){
                 if (!response.status == 200) {
                     throw Error(response.statusText);
                 }
+
+                // Update pictures
+                if(images.length > 0) {
+                    var i;
+                    for(i = 0; i < images.length; i++){
+                        var image = images[i]
+                        dispatch(editProductImage(image.id, image.url, image.sort))
+                    }
+                }
+
                 dispatch(editProductSuccess(payload))
-               
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
                 console.log(error);
@@ -146,12 +153,10 @@ export function addProductAction({name, description, brand, catId, price, discou
                     }
                 }
                 
-                console.log("FINISHED SAVING THE PRODUCT.")
                 return response.data;
             })
             .then((data) => dispatch(addProductSuccess(data)))
             .then(() => {
-                console.log("TRIGGERED CALLBACK");
                 callback()
             })
             .catch((error) =>  dispatch(addProductError(error)))
@@ -179,41 +184,9 @@ export function deleteProductAction(id) {
 
 }
 
-// export function addProductAction(name, description, brand, catId, price, discount, rating){
-
-//     return(dispatch) => {
-
-//         //const  url ='http://localhost:3005/vendor/add';
-//        // const request = axios.post(`http://localhost:3005/vendor/`, {name: name, about: about, email:email,webpage:webpage,
-//            // contact:contact, address:address,  portfolioURL:portfolioURL });
-//         const request = axios.post(`${API_URL}/add`, name, description, brand, catId, price, discount, rating);
-//         request
-//             .then(( response) => {
-//                 if (!response.status == 200) {
-//                     throw Error(response.statusText);
-//                 }console.log(response);
-//                 dispatch(addProductSuccess( 
-//                     response.data.id,
-//                     response.data.name,
-//                     response.data.description,
-//                     response.data.brand,
-//                     response.data.catId,
-//                     response.data.price,
-//                     response.data.discount,
-//                     response.data.rating
-//                 ))
-//             })
-//             .catch((error) => { // Catch the error thrown if status isn't 200
-//                 dispatch(addProductError(error));
-//                 console.log(error);
-//             })
-//     };
-// }
-
 const addProductImageSuccess = (name, sort) => ({ type: types.ADD_PRODUCT_IMAGE_SUCCESS, name, sort});
 
 export function addProductImages(id, file, sort) {
-    console.log(file);
 
     const url = `${API_URL}/${id}/images/add`;
     const formData = new FormData();
@@ -231,14 +204,52 @@ export function addProductImages(id, file, sort) {
         .then(( response) => {
             if (!response.status == 201) {
                 throw Error(response.statusText);
-            }console.log(response);
+            }
             dispatch(addProductImageSuccess( 
                 response.data,
             ))
         })
         .catch((error) => { // Catch the error thrown if status isn't 200
             dispatch(addProductError(error));
-            console.log(error);
+        })
+    };
+}
+
+const deleteProductImageSuccess =(image) => ({type:types.DELETE_PRODUCT_IMAGE_SUCCESS, payload:image});
+export function deleteProductImage(image) {
+    console.log(image);
+    return(dispatch) => {
+        const request = axios.delete(`${API_URL}/image/delete`, {params: {id:image.id, url:image.url}});
+        request
+            .then((response) =>{
+                if(!response.status == 200){
+                    throw Error(response.statusText);
+                }
+
+                console.log(response.data);
+                dispatch(deleteProductImageSuccess(image));
+            })
+            .catch((error) =>{
+                dispatch(deleteProductError(error));
+            })
+    };
+
+}
+
+const editProductImageSuccess =(image) => ({type:types.EDIT_PRODUCT_IMAGE_SUCCESS, payload:image});
+export function editProductImage(id, url, sort) {
+
+    return (dispatch) => {
+        const request = axios.put(`${API_URL}/edit/0/images?id=${id}&url=${url}&sort=${sort}`);
+        request
+        .then(( response) => {
+            if (!response.status == 200) {
+                throw Error(response.statusText);
+            }
+            dispatch(editProductImageSuccess(response.data))
+        })
+        .catch((error) => { // Catch the error thrown if status isn't 200
+            dispatch(editProductError(error));
         })
     };
 }

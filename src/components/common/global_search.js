@@ -14,6 +14,11 @@ class GlobalSearch extends React.Component {
     super(props);
 
     this.options = [];
+
+    this.state = {
+      overlayClass: "search-overlay-shadow",
+      globalSearchBoxClass: "global-search-box",
+    }
   }
 
   searchValue = event => {
@@ -40,10 +45,23 @@ class GlobalSearch extends React.Component {
     })
   }
 
+  activateBackdrop() {
+    this.setState({
+      overlayClass: "search-overlay-shadow-active",
+      globalSearchBoxClass: "global-search-box-active"
+    })
+  }
+  deactivateBackdrop() {
+    this.setState({
+      overlayClass: "search-overlay-shadow",
+      globalSearchBoxClass: "global-search-box"
+    })
+  }
+
   determinePath(selected) {
-    if(selected === null) return 
-    if(selected.service === "products"){
-        this.props.history.push(`/product/${selected.value}`);
+    if (selected === null) return
+    if (selected.service === "products") {
+      this.props.history.push(`/product/${selected.value}`);
     }
   }
 
@@ -51,8 +69,12 @@ class GlobalSearch extends React.Component {
     this.options = [];
     this.mapSearchElements();
 
+    let overlay_class = this.state.overlayClass;
+    let search_box_class = this.state.globalSearchBoxClass;
+
     return (
       <div>
+        <div className={overlay_class}></div>
         <Select
           name="form-field-name"
           custom={"hello"}
@@ -63,7 +85,9 @@ class GlobalSearch extends React.Component {
             this.determinePath(selected)
             this.props.saveSelected(selected)
           }}
-          className="global-search-box"
+          onFocus={this.activateBackdrop.bind(this)}
+          onClose={this.deactivateBackdrop.bind(this)}
+          className={search_box_class}
           valueComponent={customValue}
           optionComponent={optionComponent}
           options={this.options}
