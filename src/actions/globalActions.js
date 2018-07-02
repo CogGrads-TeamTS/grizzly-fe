@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-const API_URL = 'http://ts.ausgrads.academy:8765/';
+const API_URL = 'http://ts.ausgrads.academy:8765';
 
 const loadGlobalSuccess = (data) => ({type: types.LOAD_GLOBAL_SUCCESS, data});
 const loadGlobalError = (error) => ({type: types.LOAD_GLOBAL_ERROR, globalHasErrored:error});
