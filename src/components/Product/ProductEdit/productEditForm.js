@@ -1,132 +1,162 @@
-import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { Container, Row, Col, Form,Input,Label, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { Container, Row, Col, Form, Input, Label, FormGroup, UncontrolledCollapse, Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import ProductViewCarousel from '../ProductView/ProductViewCarousel';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import classNames from 'classnames';
+import ListWrapper from './ListWrapper';
+import './list.css';
 
-const returnToHome = () => {
-    this.props.history.push("/");
-}
 
-class ProductEditForm extends Component{
+class ProductEditForm extends Component {
 
     constructor(props) {
         super(props);
     }
-    render(){
 
-    const {handleSubmit,categories,product} = this.props;
-        
-        console.log(this.props.product);
+    SortableList = SortableContainer(({ items }) => {
+        return (
+            <div className="list stylizedList grid">
+                {_.map(items, (image, index) => {
+                    return <this.SortableItem key={`item-${index}`} index={index} image={image} />
+                })}
+            </div>
+        );
+    });
+    
+    SortableItem = SortableElement(({ image }) => {
+        const urladdition="http://ts.ausgrads.academy/images/"
+        return <div className="gridItem stylizedItem">
+            <div className="wrapper">
+                <div className="carousel-item-img-contain">
+                     <img src={urladdition + image.url} />
+                </div>
+                <div className="sort-disp-wrapper">
+                    <div className="sort-disp-num">{image.sort + 1}</div>
+                </div>
+                <div className="cancel-btn-wrapper">
+                    <Button className="carousel-item-img-cancel" size="1" color="danger" onClick={() => this.props.deleteImage(image)}>X</Button>
+                </div>
+            </div>
+        </div>
+    });
 
+     // Sort the images
+     sortImages = (items) => {
+        // Re-sort images
+        _.map(items, (image, i) => {
+            image.sort = i;
+        });
+        items.sort((x, y) => x.sort - y.sort);
+        return items;
+      }
 
-    return (
-        <Container fluid={true}>
+    getItems = () => {
+        const images = [];
+        _.map(this.props.product.images, image => {
+            images.push(image)
+        })
+        return images;
+    }
 
-            <Row>
+    returnToHome = () => {
+        this.props.history.push(`/product/${this.props.match.params.id}`);
+    }
 
-                <Col md="6" sm="6">
-                    {/*<img name="img" className="prod-image-img" src="https://via.placeholder.com/450x370" width="100%"/>*/}
-                    {/*<div className="prod-image-caption">Product Image Carousel</div>*/}
-                    <div className="prod-body-images">
-                        <ProductViewCarousel images={this.props.product.images}/>
-                    </div>
+    render() {
 
-                </Col>
-                <Col md="6" sm="6" height="100%">
-                    <form onSubmit={handleSubmit}>
-                        <fieldset className="form-group">
-                            <label>Name: </label>
-                            <Field  className="form-control" component="input" type="text" name="name" /><br/>
-                        </fieldset>
-                        <fieldset className="form-group">
-                            <label>Brand: </label>
-                            <Field  className="form-control"  component="input" type="text" name="brand" /><br/>
-                        </fieldset>
-                        <fieldset className="form-group">
-                            <label>Description: </label>
-                            <Field  className="form-control"  component="textarea" name="description" type="textarea" />
-                        </fieldset>
-                        <div>
-                            <fieldset className="form-group">
-                                <label>Category Selected: </label>
-                                <Field  className="form-control"  component="input" name="catName" value={this.props.initialValues.catName} type="text" disabled />
-                            </fieldset>
-                    </div>
+        const { handleSubmit } = this.props;
 
-                        <div className="text-left">
-                            <label>Change Category : </label>
-                            <Button outline color="primary" id="toggler" style={{ marginBottom: '1rem' }} >    Category</Button>
-                            <UncontrolledCollapse toggler="#toggler">
-                                <Card>
-                                    <CardBody className="cat-collapse">
-                                        <div>
-                                            <div>
-
-                                                {_.map(this.props.categories, cat => {
-
-                                                    return (
-                                                        <div>
-                                                            <label>
-                                                                <Field name="catName" component="input" type="radio" value={cat.name}
-                                                                       onChange={
-                                                                           () => {this.props.product.catName = cat.name;
-                                                                           this.props.product.catId = cat.id;
-                                                                          }}/>{' '}
-
-                                                                {cat.name}
-                                                            </label>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </UncontrolledCollapse>
-                        </div>
-
+        return (
+            <Container fluid={true}>
+                <Row style={{ marginTop: '30px' }}>
+                    <Col md="6" sm="12">
                         <Row>
-                            <Col md="6" sm="6" height="100%">
-                                <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input"  name="price" type="text"  style={{marginTop: "5%"}}/><br/>
-                                </fieldset>
-                            </Col>
+                            <label>Reogranize images</label>
                         </Row>
                         <Row>
-                            <Col md="6" sm="6" height="100%">
-                                <fieldset className="form-group">
-                                    <Field  className="form-control"  component="input" name="discount" type="text"  style={{marginTop: "5%"}}/><br/>
-                                </fieldset>
-                            </Col>
+                            <div className="prod-body-images">
+                                <div className="root">
+                                    <ListWrapper
+                                        component={this.SortableList}
+                                        axis={'xy'}
+                                        // Sort images before they are passed in
+                                        items={this.getItems(10, 110)}
+                                        helperClass="stylizedHelper"
+                                        className={classNames("list", "stylizedList", "grid")}
+                                        itemClass={classNames("stylizedItem", "gridItem")}
+                                        callbackUpdate={this.props.callbackUpdate}
+                                    />
+                                </div>
+                                {/* NOTE: THis can be used if we want to reintroduce image uploads on edit */}
+                                {/* <SortableList items={this.state.items} onSortEnd={this.onSortEnd} /> */}
+                                {/* <ProductViewCarousel images={this.props.product.images} /> */}
+                            </div>
                         </Row>
+                    </Col>
+                    <Col md="6" sm="6">
+                        <form onSubmit={handleSubmit}>
+                            <Row>
+                                <Col>
+                                    <label> Name </label>
+                                    <Field name="name" component="input" placeholder="Product Name" className="form-fields" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <label> Description </label>
+                                    <Field name="description" component="textarea" placeholder="Add Description" className="form-fields" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <label> Brand</label>
+                                    <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm="6">
+                                    <label>Category</label>
+                                    <div className="product-category">
+                                        {_.map(this.props.categories, cat => {
+                                            return (
+                                                <div key={cat.id}>
+                                                    <label>
+                                                        <Field name="catName" component="input" type="radio" value={cat.name}
+                                                            onChange={
+                                                                () => {
+                                                                    this.props.product.catName = cat.name;
+                                                                    this.props.product.catId = cat.id;
+                                                                }} />{' '}
 
-                        <div className="prod-footer">
-                            <div className="prod-body-price">
-                                <Button outline color="primary"  onClick={handleSubmit} type="submit">Edit</Button>
-                            </div>
+                                                        {cat.name}
+                                                    </label>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </Col>
+                                <Col sm="6">
+                                    <label> Price</label>
+                                    <Field name="price" component="input" placeholder="Price" className="form-fields" />
+                                    <label style={{ marginTop: '16px' }}> Discount</label>
+                                    <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
+                                </Col>
+                            </Row>
 
-                            <div className="prod-body-discount">
-                                <Button outline color="secondary" onClick={this.returnToHome}>Cancel</Button>
-                            </div>
-                        </div>
-
-                    </form>
-
-
-                </Col>
-
-            </Row>
-        </Container>
-
-    )
-
-}
-
-
-
+                            <Row>
+                                <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={this.returnToHome}>Cancel</Button></Col>
+                                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Edit</Button></Col>
+                            </Row>
+                        </form>
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
 }
 
 ProductEditForm = reduxForm({
@@ -135,8 +165,5 @@ ProductEditForm = reduxForm({
 })(ProductEditForm)
 
 // now set initialValues using data from your store state
-ProductEditForm = connect(state => ({initialValues: state.products.selected})
-   
-)(ProductEditForm)
-
+ProductEditForm = withRouter(connect(state => ({ initialValues: state.products.selected }))(ProductEditForm))
 export default ProductEditForm;

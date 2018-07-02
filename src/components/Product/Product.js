@@ -95,8 +95,6 @@ class Product extends React.Component{
     render(){
         // waits for the user to stop typing before issuing the search request to the server.
         const searchDebounce = _.debounce((search) => { this.updateSearch(search) }, 300);
-        
-        console.log("IS RE RENDERING")
 
         return(
             <div>
@@ -157,7 +155,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => { console.log(dispatch);
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (search, page, size, sort, catId)=> dispatch(productFetchData(search, page, size, sort, catId)),
         delete: (id) => dispatch(deleteProductAction(id)),

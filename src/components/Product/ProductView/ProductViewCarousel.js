@@ -4,44 +4,42 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
 } from 'reactstrap';
 import noimage from '../../../Assets/noimage.jpg';
-import logo from '../../../Assets/griz-logo.png';
 
 let items = [];
 
 const urladdition="http://ts.ausgrads.academy/images/"
 
+const sortImages = (images) => {
+  images.sort((x, y) => x.sort - y.sort);
+  return images;
+}
 
+
+// Build the slides for the caruosel using images parsed images
 const buildImages = (images) => {
-
-  items = [];
-  console.log(images)
-
+  items = []; // Item array
   const size = images == null ? 0 : images.length;
   let i;
 
+  // IF no images show default no-show image
   if(size == 0){
     items.push({
       src: noimage,
-      captionText: "Stop throwing errors pls"
-    },{
-      src: noimage,
-      captionText: "Stop throwing errors pls"
+      captionText: "Image Caption"
     })
   } else {
-
+    // Sort the images based on their sort values
+    images = sortImages(images);
+    // Arrange slides by order
     for(i = 0; i < size; i++){
-      console.log(images[i].url)
       items.push({
         src: urladdition + images[i].url,
-        captionText: "Stop throwing errors pls"
+        captionText: "Image Caption"
       })
     }
   }
-
-  console.log(items)
 };
 
 
@@ -96,15 +94,14 @@ class ProductViewCarousel extends Component {
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}
-          key={item.src}
-        >
+          key={item.src}>
         <div className="carousel-item-img-contain">
           <img src={item.src} alt={item.altText}/>
         </div>
         </CarouselItem>
       );
     });
-
+    
     return (
       <Carousel
         activeIndex={activeIndex}

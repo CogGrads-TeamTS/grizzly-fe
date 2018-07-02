@@ -7,6 +7,9 @@ tbody {
   cursor: pointer;
 }
 
+textarea {
+  resize: none !important;
+}
 .global-search-box {
   width: 400px;
   transform: translateX(-40%) 
@@ -83,8 +86,8 @@ tbody {
 .carousel-item-img-contain > img{
   max-width: 80%;
   max-height:80%;
-  min-width: 50%;
-  min-height: 50%;
+  min-width: 25%;
+  min-height: 25%;
 }
 
 .prod-body-images {
