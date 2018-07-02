@@ -9,7 +9,7 @@ const loadUserLoading = (loading) =>({type: types.LOAD_USER_LOADING, userIsLoadi
 
 export function fetchUserByID(){
     const accessToken = localStorage.getItem('access_token');
-    console.log(accessToken);
+   // console.log(accessToken);
      const url = `${API_URL}`;
      return function (dispatch) { 
          dispatch(loadUserLoading(true));
@@ -34,7 +34,7 @@ const editUserLoading = (loading) => ({type: types.EDIT_USER_LOADING, payload: l
 
 export function editUserById(data){
 
-    return(dispatch) => { 
+    return(dispatch) => { console.log(data);
         const request = axios.put(`${API_URL}/edit/${data.id}`, data);
 
         request

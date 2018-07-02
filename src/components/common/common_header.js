@@ -18,6 +18,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from '../../Auth/Login';
 import isAuthenticated from "../../Auth/isAuthenticated";
+import {connect} from "react-redux";
+import {editUserById, fetchUserByID} from "../../actions/userActions";
 
 class Header extends React.Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class Header extends React.Component {
         isOpen: !this.state.isOpen
       });
     }
-    render() {
+    render() { //console.log(this.props.user);
       return (
         <div>
           <ToastContainer />
@@ -46,7 +48,7 @@ class Header extends React.Component {
                 <NavItem>
                   <NavLink href="/components/"><i className="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
                 </NavItem>
-                <span className="nav-link welcome-admin p-t-10 white">Welcome, Admin John</span>
+                <span className="nav-link welcome-admin p-t-10 white">Welcome,{this.props.user !== undefined && this.props.user.name}</span>
                 <NavItem className="p-0">
                     { (isAuthenticated) ? (
                           <NavLink href="/logout">
@@ -55,8 +57,6 @@ class Header extends React.Component {
                           </NavLink>
                         ) : (
                         <NavLink>
-                            <Button color="secondary" className="logout-button p-t-10" id="btn-rounded" onClick={() => Login}>Login</Button>
-                            <span className="logout-text">Login</span>
                         </NavLink> )}
                         </NavItem>
               </Nav>
@@ -67,4 +67,16 @@ class Header extends React.Component {
     }
   }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return{
+        user: state.user.user,
+        userIsLoading: state.userIsLoading
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        fetchUserData: () => dispatch(fetchUserByID())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
