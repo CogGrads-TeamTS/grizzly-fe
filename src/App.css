@@ -10,10 +10,6 @@ tbody {
 textarea {
   resize: none !important;
 }
-.global-search-box {
-  width: 400px;
-  transform: translateX(-40%) 
-}
 
 .prod-view-container {
   height: 80vh;
