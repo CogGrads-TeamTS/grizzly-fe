@@ -18,7 +18,7 @@ class Sidebar extends Component {
         this.props.editUserById(payload);
     }
 
-    render() { 
+    render() { console.log(this.props.user);
         const userData = this.props.userIsLoading  ? null : <User userData={this.props.user}/>;
         
         return ( 

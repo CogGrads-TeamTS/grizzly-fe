@@ -18,7 +18,7 @@ class Homepage extends Component {
                     <div className="header">
                         <Row className="nav-row">
                             <Col xs="12">
-                                <Header from={this.props}/>
+                                <Header/>
                             </Col>
                         </Row>
                     </div>
