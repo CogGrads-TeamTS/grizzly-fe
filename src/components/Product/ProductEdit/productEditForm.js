@@ -11,39 +11,48 @@ import ListWrapper from './ListWrapper';
 import './list.css';
 
 
-const SortableList = SortableContainer(({ items }) => {
-    return (
-        <div className="list stylizedList grid">
-            {_.map(items, (image, index) => {
-                return <SortableItem key={`item-${index}`} index={index} image={image} />
-            })}
-        </div>
-    );
-});
-
-const SortableItem = SortableElement(({ image }) => {
-    const urladdition="http://ts.ausgrads.academy/images/"
-    return <div className="gridItem stylizedItem">
-        <div className="wrapper">
-            <div className="carousel-item-img-contain">
-                 <img src={urladdition + image.url} />
-            </div>
-            <div className="sort-disp-wrapper">
-                <div className="sort-disp-num">{image.sort}</div>
-            </div>
-            <div className="cancel-btn-wrapper">
-                <Button className="carousel-item-img-cancel" size="1" color="danger">X</Button>
-            </div>
-        </div>
-    </div>
-}
-);
-
 class ProductEditForm extends Component {
 
     constructor(props) {
         super(props);
     }
+
+    SortableList = SortableContainer(({ items }) => {
+        return (
+            <div className="list stylizedList grid">
+                {_.map(items, (image, index) => {
+                    return <this.SortableItem key={`item-${index}`} index={index} image={image} />
+                })}
+            </div>
+        );
+    });
+    
+    SortableItem = SortableElement(({ image }) => {
+        const urladdition="http://ts.ausgrads.academy/images/"
+        return <div className="gridItem stylizedItem">
+            <div className="wrapper">
+                <div className="carousel-item-img-contain">
+                     <img src={urladdition + image.url} />
+                </div>
+                <div className="sort-disp-wrapper">
+                    <div className="sort-disp-num">{image.sort + 1}</div>
+                </div>
+                <div className="cancel-btn-wrapper">
+                    <Button className="carousel-item-img-cancel" size="1" color="danger" onClick={() => this.props.deleteImage(image)}>X</Button>
+                </div>
+            </div>
+        </div>
+    });
+
+     // Sort the images
+     sortImages = (items) => {
+        // Re-sort images
+        _.map(items, (image, i) => {
+            image.sort = i;
+        });
+        items.sort((x, y) => x.sort - y.sort);
+        return items;
+      }
 
     getItems = () => {
         const images = [];
@@ -72,8 +81,9 @@ class ProductEditForm extends Component {
                             <div className="prod-body-images">
                                 <div className="root">
                                     <ListWrapper
-                                        component={SortableList}
+                                        component={this.SortableList}
                                         axis={'xy'}
+                                        // Sort images before they are passed in
                                         items={this.getItems(10, 110)}
                                         helperClass="stylizedHelper"
                                         className={classNames("list", "stylizedList", "grid")}
@@ -81,6 +91,7 @@ class ProductEditForm extends Component {
                                         callbackUpdate={this.props.callbackUpdate}
                                     />
                                 </div>
+                                {/* NOTE: THis can be used if we want to reintroduce image uploads on edit */}
                                 {/* <SortableList items={this.state.items} onSortEnd={this.onSortEnd} /> */}
                                 {/* <ProductViewCarousel images={this.props.product.images} /> */}
                             </div>

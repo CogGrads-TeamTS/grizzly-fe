@@ -16,6 +16,9 @@ class ProductView extends Component {
             this.props.fetchData(this.props.match.params.id);
             this.props.fetchImages(this.props.match.params.id);
         }
+        if(JSON.stringify(this.props.images) !== JSON.stringify(prevProps.images)){
+            this.props.fetchImages(this.props.match.params.id);
+        }
     }
 
     render() { 
@@ -42,7 +45,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => { console.log(dispatch);
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
         fetchImages: (id) => dispatch(productFetchImagesByID(id)),

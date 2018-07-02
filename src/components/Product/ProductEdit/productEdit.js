@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import { productFetchDataByID,editProductAction } from '../../../actions/productActions';
+import { productFetchDataByID,editProductAction, deleteProductImage } from '../../../actions/productActions';
 import ProductEditForm from "./productEditForm";
 import { categoriesFetchData } from '../../../actions/categoryActions';
 import {connect} from "react-redux";
-import {withRouter} from 'react-router-dom';
 
 class ProductEdit extends Component{
 
@@ -22,32 +21,38 @@ class ProductEdit extends Component{
     };
 
     handleSubmit = (data) => {
-        const images = this.state.images;
-        console.log(images)
+        let images = this.state.images;
+        // if(this.state.images != true) { images = this.props.product.images;} 
+        // else {images = this.state.images;}
+        // console.log(images)
         this.props.edit(data, images);
         this.returnToHome();
     };
-    componentDidMount(){
 
+    componentDidMount(){
         this.props.fetchData(this.props.match.params.id);
         this.props.categoryFetchData();
-
-        // this.updateItems(this.props.product.images)
     }
 
     updateItems = (images) => {
-        this.setState({images})
+        this.setState({
+            images
+        })
+    }
+
+    deleteImage = (image) => {
+        this.props.deleteImage(image);
     }
 
 
    render(){
-
        const isLoading = (this.props.product === undefined) ?
            (
                <p>The product is loading...</p>
            ) : (
                <ProductEditForm  product={this.props.product} categories={this.props.categories}
-                                 onSubmit={this.handleSubmit} callbackUpdate={this.updateItems.bind(this)}/>
+                                 onSubmit={this.handleSubmit} callbackUpdate={this.updateItems.bind(this)}
+                                 deleteImage={this.deleteImage.bind(this)}/>
            );
 
        return (
@@ -69,11 +74,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => { console.log();
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (id)=> dispatch(productFetchDataByID(id)),
         categoryFetchData: ()=> dispatch(categoriesFetchData()),
-        edit: (payload, images) => dispatch(editProductAction(payload, images))
+        edit: (payload, images) => dispatch(editProductAction(payload, images)),
+        deleteImage: (image) => dispatch(deleteProductImage(image))
     };
 };
 
