@@ -10,6 +10,9 @@ import classNames from 'classnames';
 import ListWrapper from './ListWrapper';
 import './list.css';
 
+const returnToHome = () => {
+    this.props.history.push("/dashboard");
+};
 
 class ProductEditForm extends Component {
 

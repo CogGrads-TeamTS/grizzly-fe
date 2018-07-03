@@ -7,12 +7,13 @@ const loadUserSuccess = (data) => ({type: types.LOAD_USER_SUCCESS, data});
 const loadUserError = (error) => ({type: types.LOAD_USER_ERROR, userHasErrored:error});
 const loadUserLoading = (loading) =>({type: types.LOAD_USER_LOADING, userIsLoading:loading});
 
-export function fetchUserByID(id){
-
-     const url = `${API_URL}/${id}`;
+export function fetchUserByID(){
+    const accessToken = localStorage.getItem('access_token');
+   // console.log(accessToken);
+     const url = `${API_URL}`;
      return function (dispatch) { 
          dispatch(loadUserLoading(true));
-         const request=axios.get(url);
+         const request=axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } });
          request
              .then((response) =>{ 
                  if(!response.status == 200)
@@ -33,7 +34,7 @@ const editUserLoading = (loading) => ({type: types.EDIT_USER_LOADING, payload: l
 
 export function editUserById(data){
 
-    return(dispatch) => { 
+    return(dispatch) => { console.log(data);
         const request = axios.put(`${API_URL}/edit/${data.id}`, data);
 
         request

@@ -16,6 +16,10 @@ import GlobalSearch from './global_search';
 import grizzlogo from '../../Assets/griz-logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from '../../Auth/Login';
+import isAuthenticated from "../../Auth/isAuthenticated";
+import {connect} from "react-redux";
+import {editUserById, fetchUserByID} from "../../actions/userActions";
 
 class Header extends React.Component {
     constructor(props) {
@@ -31,7 +35,7 @@ class Header extends React.Component {
         isOpen: !this.state.isOpen
       });
     }
-    render() {
+    render() { //console.log(this.props.user);
       return (
         <div>
           <ToastContainer />
@@ -42,15 +46,19 @@ class Header extends React.Component {
               <Nav className="ml-auto" navbar>
               <GlobalSearch classname="global-search" rounded="search-rounded" placeholder="Search" />
                 <NavItem>
-                  <NavLink href="/components/"><i className="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
+                  <NavLink href="/"><i className="far fa-bell p-t-5 white"></i><span className="user-msg">Messages</span></NavLink>
                 </NavItem>
-                <span className="nav-link welcome-admin p-t-10 white">Welcome, Admin John</span>
+                <span className="nav-link welcome-admin p-t-10 white">Welcome,{this.props.user !== undefined && this.props.user.name}</span>
                 <NavItem className="p-0">
-                  <NavLink href="/"> 
-                    <Button color="secondary" className="logout-button p-t-10" id="btn-rounded">Logout <i className="fas fa-sign-out-alt white"></i></Button>
-                    <span className="logout-text">Logout</span>
-                  </NavLink>
-                </NavItem>
+                    { (isAuthenticated) ? (
+                          <NavLink href="/logout">
+                            <Button color="secondary" className="logout-button p-t-10" id="btn-rounded">Logout <i className="fas fa-sign-out-alt white"></i></Button>
+                            <span className="logout-text">Logout</span>
+                          </NavLink>
+                        ) : (
+                        <NavLink>
+                        </NavLink> )}
+                        </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
@@ -59,4 +67,16 @@ class Header extends React.Component {
     }
   }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return{
+        user: state.user.user,
+        userIsLoading: state.userIsLoading
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        fetchUserData: () => dispatch(fetchUserByID())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
