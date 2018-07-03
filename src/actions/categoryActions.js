@@ -21,7 +21,7 @@ export function categoriesFetchData(param, search = SEARCH_DEFAULT, pageNumber =
 
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}`;
     //console.log("url param: " + urlParams);
-    const url = `${API_URL}categories/page?${urlParams}`;
+    const url = `${API_URL}/categories/page?${urlParams}`;
     //console.log(url);
 
     return (dispatch) => {
@@ -50,7 +50,7 @@ export function categoriesFetchNames() {
 
    // BUILD URL
    
-   const url = `${API_URL}categories`;
+   const url = `${API_URL}/categories`;
 
    return (dispatch) => {
        dispatch(loadCategoriesLoading(true));
@@ -79,7 +79,7 @@ export function deleteCategory(id) {
     console.log("delete called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.delete(`${API_URL}categories/${id}`);
+        const request = axios.delete(`${API_URL}/categories/${id}`);
         request
             .then((response) => {
                 //console.log(response);
@@ -103,7 +103,7 @@ export function editCategoryAction(id, name, description) {
    // console.log("Edit Category called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.put(`${API_URL}categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
         request
             .then((response) => {
                 //console.log(response);
@@ -126,7 +126,7 @@ const addCategoryError = (error) => ({ type: types.ADD_CATEGORY_ERROR, payload: 
 export function addCategoryAction(name, description){
     
     return(dispatch) => {
-       const request = axios.post(`${API_URL}categories/add`, {name: name, description: description});
+       const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description});
        request
         .then(( response) => {
             if (!response.status == 200) {

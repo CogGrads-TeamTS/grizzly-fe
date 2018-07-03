@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Tabs from '../components/common/common_tabs';
+
 import Header from '../components/common/common_header';
 import Sidebar from '../components/common/common_sidebar';
 import {Row, Col } from 'reactstrap';
@@ -27,7 +27,7 @@ class Homepage extends Component {
                             <Sidebar/>
                         </Col>
                         <Col xs="12" sm="9">
-                            <Tabs/>
+                            {this.props.children}
                         </Col>
                     </Row>
                 </div>
