@@ -49,5 +49,6 @@
     "chai": "^4.1.2",
     "mocha": "*"
   },
-  "homepage": "/admin/"
+  "login": "/admin/",
+  "logout": "/admin/"
 }
