@@ -22,7 +22,6 @@ let CategoryForm = props => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" type="submit" onClick={this.submitAndClose}>Submit</Button>{' '}
-        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
       </ModalFooter>
     </form>
   )
