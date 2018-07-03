@@ -39,8 +39,9 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "REACT_APP_STAGE=dev react-scripts start",
+    "build": "REACT_APP_STAGE=production react-scripts build",
+    "react-test": "react-scripts test --env=jsdom",
     "test": "mocha",
     "eject": "react-scripts eject"
   },
