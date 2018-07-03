@@ -10,7 +10,7 @@ class Logout extends Component {
         localStorage.removeItem('expires_at');
     }
 
-    render() {
+    render() { console.log(config.logout.pathname);
         return (
             <Redirect to={{
                 pathname: config.logout.pathname,
