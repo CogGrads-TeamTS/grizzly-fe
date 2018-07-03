@@ -1,12 +1,18 @@
 const dev = {
     auth0: {
         callbackUri: "http://localhost:3000/admin/callback"
+    },
+    logout: {
+        pathname: "/"
     }
 }
 
 const prod = {
     auth0: {
         callbackUri: "http://ts.ausgrads.academy/admin/callback"
+    },
+    logout: {
+        pathname: "/admin"
     }
 }
 
