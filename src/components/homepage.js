@@ -22,7 +22,7 @@ class Homepage extends Component {
                             </Col>
                         </Row>
                     </div>
-                    <Row className="main">
+                    <Row className="main" style={{marginLeft: '0px',marginRight: '0px'}}>
                         <Col xs="12" sm="3">
                             <Sidebar/>
                         </Col>

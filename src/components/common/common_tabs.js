@@ -23,8 +23,6 @@ class Tabs extends Component {
     }
     render() {
         return (
-                <Row>
-                    <Col>
                         <div>
                             <Nav tabs>
                                 <NavItem>
@@ -76,8 +74,7 @@ class Tabs extends Component {
                                 </TabPane>
                             </TabContent>
                         </div>
-                    </Col>
-                </Row>
+                   
         );
     }
 }
