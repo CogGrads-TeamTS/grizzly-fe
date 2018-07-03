@@ -5,16 +5,16 @@ const dev = {
     logout: {
         pathname: "/"
     }
-}
+};
 
 const prod = {
     auth0: {
         callbackUri: "http://ts.ausgrads.academy/admin/callback"
     },
     logout: {
-        pathname: "/admin"
+        pathname: "http://ts.ausgrads.academy/admin/"
     }
-}
+};
 
 const config = process.env.REACT_APP_STAGE === 'production'
     ? prod
