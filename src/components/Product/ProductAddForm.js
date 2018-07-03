@@ -3,7 +3,9 @@ import React from 'react';
 import { Table, Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import ImageUploader from 'react-images-upload';
-import { renderField, required, maxLength40, minValue1, noSpecialChars, isValidPrice, numOnly } from '../common/redux_validation';
+import { renderField, required, maxLength40, 
+    minValue1, noSpecialChars, isValidPrice, numOnly, 
+    percentMax} from '../common/redux_validation';
 
 let ProductAddForm = (props) => {
     const { handleSubmit, returnToHome, onDrop } = props;
@@ -69,14 +71,11 @@ let ProductAddForm = (props) => {
                                 </div>
                             </Col>
                             <Col sm="6">
-                                <Row>
                                     <Field name="price" label="Price" prefix="$ " type="input" component={renderField}
                                         placeholder="$ 10.00" className="form-fields" validate={[required, isValidPrice]} normalize={numOnly} />
-                                </Row>
-                                <Row>
+                                    <br />
                                     <Field name="discount" label="Discount" prefix="% " type="input" component={renderField}
-                                        placeholder="% 0" className="form-fields" normalize={numOnly}/>
-                                </Row>
+                                        placeholder="% 0" className="form-fields" normalize={percentMax}/>
                             </Col>
                         </Row>
 

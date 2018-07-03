@@ -19,6 +19,7 @@ export const noSpecialChars = value =>
 export const isValidPrice = value =>
     value && value.match("^[0-9]+$|^[0-9]+[.][0-9]{2}$") ? undefined : "Must be a valid price"
 
+// Normaliser for using number only input
 export const numOnly = (value) => {
     if (!value) {
         return value
@@ -26,6 +27,22 @@ export const numOnly = (value) => {
 
     const onlyNums = value.replace(/[^(\d\.)]/g, '')
     return onlyNums;
+}
+
+// Normaliser for discount
+export const percentMax = (value, prevVal) => {
+    if (!value) return value
+    const onlyNums = Number.parseInt(value.replace(/[^(\d)]/g, ''))
+
+    // Handle NAN's
+    if(Number.isNaN(prevVal)) prevVal = 0;
+    if(Number.isNaN(onlyNums)) {return 0}
+
+    // Limit of 100
+    if(onlyNums > 100){
+        if(typeof prevVal == "number") return prevVal;
+        else return prevVal.replace(/[^(\d)]/g, '')
+    } else return onlyNums;
 }
 
 export const renderField = ({
