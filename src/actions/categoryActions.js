@@ -15,7 +15,7 @@ const SORT_DEFAULT = "id,desc";
 const SEARCH_DEFAULT = "";
 
 // Use default values if none are specified
-export function categoriesFetchData(param, search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
+export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
     // BUILD URL
 

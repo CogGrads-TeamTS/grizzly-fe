@@ -44,7 +44,7 @@ class VendorSearch extends React.Component {
             <InputGroupAddon addonType="prepend">
               <Button 
               className="btn-search btn-right-curve">
-                <i className="fa fa-search"></i>
+                <i className={this.props.loading ? `fas fa-spinner fa-spin` : 'fa fa-search'}></i>
               </Button>
             </InputGroupAddon>
             </InputGroup>
@@ -57,6 +57,7 @@ class VendorSearch extends React.Component {
 const mapStateToProps = (state) => { 
   return{
       vendors: state.vendors,
+      loading: state.vendorIsLoading
   };
 };
 
