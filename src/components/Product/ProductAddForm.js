@@ -4,8 +4,8 @@ import { Table, Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Butt
 import { Field, reduxForm } from 'redux-form';
 import ImageUploader from 'react-images-upload';
 import { renderField, required, maxLength40, 
-    minValue1, noSpecialChars, isValidPrice, numOnly, 
-    percentMax} from '../common/redux_validation';
+    minValue0, noSpecialChars, isValidPrice, numOnly, 
+    percentMax, isValidPercentage} from '../common/redux_validation';
 
 let ProductAddForm = (props) => {
     const { handleSubmit, returnToHome, onDrop } = props;
@@ -36,7 +36,7 @@ let ProductAddForm = (props) => {
                         <Row>
                             <Col>
                                 <Field name="name" label="Name" type="text" component={renderField}
-                                    placeholder="Product Name" className="form-fields" validate={[required, maxLength40, minValue1, noSpecialChars]} />
+                                    placeholder="Product Name" className="form-fields" validate={[required, maxLength40, noSpecialChars]} />
                             </Col>
                         </Row>
                         <Row>
@@ -55,14 +55,12 @@ let ProductAddForm = (props) => {
                             <Col sm="6">
                                 <label>Category</label>
                                 <div className="product-category">
-                                    {_.map(props.categories, (cat, i) => {
+                                    {_.map(props.categories, (cat) => {
                                         // Select the first category
-                                        let selected = "";
-                                        if (i == 0) selected = "checked";
                                         return (
                                             <div key={cat.id}>
                                                 <label>
-                                                    <Field name="category" component="input" checked={selected} type="radio" value={String(cat.id)} /> {` ${cat.name}`}
+                                                    <Field name="category" component="input" type="radio" value={String(cat.id)} /> {` ${cat.name}`}
                                                 </label>
                                             </div>
                                         )
@@ -75,7 +73,7 @@ let ProductAddForm = (props) => {
                                         placeholder="$ 10.00" className="form-fields" validate={[required, isValidPrice]} normalize={numOnly} />
                                     <br />
                                     <Field name="discount" label="Discount" prefix="% " type="input" component={renderField}
-                                        placeholder="% 0" className="form-fields" normalize={percentMax}/>
+                                        placeholder="%" className="form-fields" validate={[isValidPercentage]} normalize={ percentMax}/>
                             </Col>
                         </Row>
 

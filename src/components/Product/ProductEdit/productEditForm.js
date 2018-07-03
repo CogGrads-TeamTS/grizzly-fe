@@ -29,13 +29,13 @@ class ProductEditForm extends Component {
             </div>
         );
     });
-    
+
     SortableItem = SortableElement(({ image }) => {
-        const urladdition="http://ts.ausgrads.academy/images/"
+        const urladdition = "http://ts.ausgrads.academy/images/"
         return <div className="gridItem stylizedItem">
             <div className="wrapper">
                 <div className="carousel-item-img-contain">
-                     <img src={urladdition + image.url} />
+                    <img src={urladdition + image.url} />
                 </div>
                 <div className="sort-disp-wrapper">
                     <div className="sort-disp-num">{image.sort + 1}</div>
@@ -47,15 +47,15 @@ class ProductEditForm extends Component {
         </div>
     });
 
-     // Sort the images
-     sortImages = (items) => {
+    // Sort the images
+    sortImages = (items) => {
         // Re-sort images
         _.map(items, (image, i) => {
             image.sort = i;
         });
         items.sort((x, y) => x.sort - y.sort);
         return items;
-      }
+    }
 
     getItems = () => {
         const images = [];
@@ -128,13 +128,9 @@ class ProductEditForm extends Component {
                                             return (
                                                 <div key={cat.id}>
                                                     <label>
-                                                        <Field name="catName" component="input" type="radio" value={cat.name}
+                                                        <Field name="catName" component="input" type="radio" input={cat.name}
                                                             onChange={
-                                                                () => {
-                                                                    this.props.product.catName = cat.name;
-                                                                    this.props.product.catId = cat.id;
-                                                                }} />{' '}
-
+                                                                () => { this.props.product.catId = cat.id;}} />{' '}
                                                         {cat.name}
                                                     </label>
                                                 </div>
@@ -152,7 +148,7 @@ class ProductEditForm extends Component {
 
                             <Row>
                                 <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={this.returnToHome}>Cancel</Button></Col>
-                                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Save</Button></Col>
+                                <Col><Button className="btn-width-100 float-right" color="primary" type="submit">Save</Button></Col>
                             </Row>
                         </form>
                     </Col>

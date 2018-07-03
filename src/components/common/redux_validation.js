@@ -11,13 +11,17 @@ export const maxLength40 = maxLength(40);
 // Minimum value function
 const minValue = min => value =>
     value && value < min ? `Must be at least ${min}` : undefined
-export const minValue1 = minValue(1);
+export const minValue0 = minValue(0);
 
 export const noSpecialChars = value =>
     value && value.match("^[_A-z0-9 ]*((-|\s)*[_A-z0-9])*$") ? undefined : "Text cannot contain special characters";
 
 export const isValidPrice = value =>
-    value && value.match("^[0-9]+$|^[0-9]+[.][0-9]{2}$") ? undefined : "Must be a valid price"
+    value && value.match("^[0-9]+[.][0-9]{2}$") ? undefined : "Must be a valid price"
+
+export const isValidPercentage = value => {
+    return value <= 100 && value >= 0 ? undefined : "Must be a valid Percentage" }
+
 
 // Normaliser for using number only input
 export const numOnly = (value) => {
@@ -48,6 +52,7 @@ export const percentMax = (value, prevVal) => {
 export const renderField = ({
     prefix,
     input,
+    value,
     label,
     type,
     className,
