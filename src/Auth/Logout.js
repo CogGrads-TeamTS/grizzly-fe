@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import config from '../config'
 class Logout extends Component {
 
     constructor(props) {
@@ -10,10 +9,10 @@ class Logout extends Component {
         localStorage.removeItem('expires_at');
     }
 
-    render() { console.log(config.logout.pathname);
+    render() {
         return (
             <Redirect to={{
-                pathname: config.logout.pathname,
+                pathname: '/',
                 state: { from: this.props.location }
             }} />
         );
