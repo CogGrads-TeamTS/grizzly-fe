@@ -149,7 +149,7 @@ class ProductEditForm extends Component {
 
                             <Row>
                                 <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={this.returnToHome}>Cancel</Button></Col>
-                                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Edit</Button></Col>
+                                <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Save</Button></Col>
                             </Row>
                         </form>
                     </Col>

@@ -78,9 +78,6 @@ class ProductAdd extends Component {
     componentDidMount(){
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
-    fetchDataWithFilter() {
-        this.props.fetchData(this.search, this.page, this.size, this.sort)
-    }
 
     returnToHome = () => {
         this.props.history.push("/");
@@ -112,7 +109,6 @@ class ProductAdd extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         names: state.category.names,
         last: state.category.last
