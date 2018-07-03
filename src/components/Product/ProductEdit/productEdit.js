@@ -17,7 +17,7 @@ class ProductEdit extends Component{
     }
     
     returnToHome = () => {
-        this.props.history.push("/");
+        this.props.history.push("/dashboard");
     };
 
     handleSubmit = (data) => {

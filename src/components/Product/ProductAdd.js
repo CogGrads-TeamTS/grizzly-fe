@@ -80,7 +80,7 @@ class ProductAdd extends Component {
     }
 
     returnToHome = () => {
-        this.props.history.push("/");
+        this.props.history.push("/dashboard");
         this.notify();
     }
 
