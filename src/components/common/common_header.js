@@ -51,7 +51,7 @@ class Header extends React.Component {
                 <span className="nav-link welcome-admin p-t-10 white">Welcome,{this.props.user !== undefined && this.props.user.name}</span>
                 <NavItem className="p-0">
                     { (isAuthenticated) ? (
-                          <NavLink href="/logout">
+                          <NavLink href="/admin/logout">
                             <Button color="secondary" className="logout-button p-t-10" id="btn-rounded">Logout <i className="fas fa-sign-out-alt white"></i></Button>
                             <span className="logout-text">Logout</span>
                           </NavLink>
