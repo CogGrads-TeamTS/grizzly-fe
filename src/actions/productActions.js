@@ -21,6 +21,10 @@ const NO_PARAM = "id,desc";
 const SEARCH = "";
 const CATEGORY = "";
 
+function authHeader() {
+    return { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+}
+
 export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAULT_PAGE_SIZE,sortParam=NO_PARAM, catId=CATEGORY){
 
     const urlParams = `search=${search}&page=${pageNumber}&size=${size}&sort=${sortParam}&category=${catId}`;
@@ -103,7 +107,7 @@ export function productFetchImagesByID(id){
 
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
-        const request = axios.put(`${API_URL}/edit/${payload.id}`, payload);
+        const request = axios.put(`${API_URL}/edit/${payload.id}`, payload, {headers: authHeader()});
         request
             .then((response) => {
                 //console.log(response);
@@ -137,7 +141,7 @@ export function addProductAction({name, description, brand, catId, price, discou
 
     return(dispatch) => {
 
-        const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating});
+        const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating}, {headers: authHeader()});
         request
             .then((response) => {
                 if (!response.status == 200) {
@@ -169,7 +173,7 @@ const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload
 export function deleteProductAction(id) {
     console.log(id);
     return(dispatch) => {
-        const request = axios.delete(`${API_URL}/${id}`);
+        const request = axios.delete(`${API_URL}/${id}`, {headers: authHeader()});
         request
             .then((response) =>{
                 if(!response.status == 200){
@@ -194,7 +198,8 @@ export function addProductImages(id, file, sort) {
     formData.append('sort', sort);
     const config = {
         headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
         }
     }
 
@@ -219,7 +224,7 @@ const deleteProductImageSuccess =(image) => ({type:types.DELETE_PRODUCT_IMAGE_SU
 export function deleteProductImage(image) {
     console.log(image);
     return(dispatch) => {
-        const request = axios.delete(`${API_URL}/image/delete`, {params: {id:image.id, url:image.url}});
+        const request = axios.delete(`${API_URL}/image/delete`, {params: {id:image.id, url:image.url}}, {headers: authHeader()});
         request
             .then((response) =>{
                 if(!response.status == 200){
@@ -240,7 +245,7 @@ const editProductImageSuccess =(image) => ({type:types.EDIT_PRODUCT_IMAGE_SUCCES
 export function editProductImage(id, url, sort) {
 
     return (dispatch) => {
-        const request = axios.put(`${API_URL}/edit/0/images?id=${id}&url=${url}&sort=${sort}`);
+        const request = axios.put(`${API_URL}/edit/0/images?id=${id}&url=${url}&sort=${sort}`, {}, {headers: authHeader()});
         request
         .then(( response) => {
             if (!response.status == 200) {
