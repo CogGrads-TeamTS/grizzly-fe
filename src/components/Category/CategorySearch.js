@@ -22,7 +22,7 @@ class Search extends React.Component {
   }
 
   searchValue = event => {
-    this.props.updateSearch(event.target.value);
+    this.props.updateSearch(event.currentTarget.value);
     console.log(event.currentTarget.value);
   }
 
