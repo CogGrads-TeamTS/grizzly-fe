@@ -75,3 +75,30 @@ export const renderField = ({
         </div>
     )
 };
+
+export const renderTextArea = ({
+    prefix,
+    input,
+    value,
+    label,
+    type,
+    className,
+    placeholder,
+    meta: { touched, error, warning }
+}) => {
+    if (touched && !error && !warning) { className += " form-field-success" }
+    else if (touched && (error || warning)) { className += " form-field-failure" }
+
+    if(prefix && input.value !== "") input.value = prefix + input.value; 
+    return (
+        <div>
+            <label>{label}</label>
+            <div className="form-fields-container">
+                <textarea {...input} className={className} placeholder={placeholder} type={type} />
+                <div className="form-fields-error-container">
+                    {touched && (error && <span className="form-fields-error-text"><i className="fas fa-exclamation-circle"></i> {error}</span>) || (warning && <span>{warning}</span>)}
+                </div>
+            </div>
+        </div>
+    )
+};
