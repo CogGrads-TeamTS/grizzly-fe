@@ -49,7 +49,7 @@ const loadAllCategoriesSuccess = (data) => ({type: types.LOAD_ALL_CATEGORIES_SUC
 export function categoriesFetchNames() {
 
    // BUILD URL
-   
+   console.log("SASH BROKE MY CODE")
    const url = `${API_URL}/categories`;
 
    return (dispatch) => {

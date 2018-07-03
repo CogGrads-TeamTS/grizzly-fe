@@ -1,20 +1,22 @@
 import _ from 'lodash';
 import React from 'react';
-import { Table,Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { Table, Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import ImageUploader from 'react-images-upload';
-
+import { renderField, required, maxLength40, 
+    minValue0, noSpecialChars, isValidPrice, numOnly, 
+    percentMax, isValidPercentage} from '../common/redux_validation';
 
 let ProductAddForm = (props) => {
-    const {handleSubmit, returnToHome, onDrop} = props;
+    const { handleSubmit, returnToHome, onDrop } = props;
 
-    if(props.categories == undefined){
+    if (props.categories == undefined) {
         return <div>loading...</div>
     }
 
     return (
         <Container fluid={true}>
-            <Row style={{marginTop: '30px'}}>
+            <Row style={{ marginTop: '30px' }}>
                 <Col md="5" sm="12" >
                     <ImageUploader
                         withIcon={true}
@@ -30,62 +32,65 @@ let ProductAddForm = (props) => {
                     />
                 </Col>
                 <Col md="7" sm="6">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} autoComplete="off">
                         <Row>
                             <Col>
-                                <label> Name </label>
-                                <Field name="name" component="input" placeholder="Product Name" className="form-fields"/>
+                                <Field name="name" label="Name" type="text" component={renderField}
+                                    placeholder="Product Name" className="form-fields" validate={[required, maxLength40, noSpecialChars]} />
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <label> Description </label>
-                                <Field name="description" component="textarea" placeholder="Add Description" className="form-fields"/>
+                                <Field name="description" label="Description" type="textarea" component={renderField}
+                                    placeholder="Add Description" className="form-fields" validate={[required]} />
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                            <label> Brand</label>
-                            <Field name="brand" component="input" placeholder="Add Brand" className="form-fields" />
+                                <Field name="brand" label="Brand" type="input" component={renderField}
+                                    placeholder="Add Brand" className="form-fields" validate={[required, maxLength40]} />
                             </Col>
                         </Row>
                         <Row>
                             <Col sm="6">
-                        <label>Category</label>
-                        <div className="product-category">
-                            {_.map(props.categories, cat => {
-                                return (
-                                    <div key={cat.id}>
-                                        <label>
-                                            <Field name="category" component="input" type="radio" value={String(cat.id)} /> {` ${cat.name}`}
-                                        </label>
-                                    </div>
-                                )})
-                            }
-                            </div>
+                                <label>Category</label>
+                                <div className="product-category">
+                                    {_.map(props.categories, (cat) => {
+                                        // Select the first category
+                                        return (
+                                            <div key={cat.id}>
+                                                <label>
+                                                    <Field name="category" component="input" type="radio" value={String(cat.id)} /> {` ${cat.name}`}
+                                                </label>
+                                            </div>
+                                        )
+                                    })
+                                    }
+                                </div>
                             </Col>
                             <Col sm="6">
-                                <label> Price</label>
-                                <Field name="price" component="input" placeholder="Price" className="form-fields"/>
-                                <label style={{marginTop: '16px'}}> Discount</label>
-                                <Field name="discount" component="input" placeholder="Discount" className="form-fields" />
+                                    <Field name="price" label="Price" prefix="$ " type="input" component={renderField}
+                                        placeholder="$ 10.00" className="form-fields" validate={[required, isValidPrice]} normalize={numOnly} />
+                                    <br />
+                                    <Field name="discount" label="Discount" prefix="% " type="input" component={renderField}
+                                        placeholder="%" className="form-fields" validate={[isValidPercentage]} normalize={ percentMax}/>
                             </Col>
                         </Row>
 
-                            <Row>
-                        <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>
-                        <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
-                    </Row>
-                    </form> 
+                        <Row>
+                            <Col><Button className="btn-width-100 float-left" color="secondary" type="button" onClick={returnToHome}>Cancel</Button></Col>
+                            <Col><Button className="btn-width-100 float-right" color="primary" type="submit" >Add</Button></Col>
+                        </Row>
+                    </form>
                 </Col>
-            </Row>  
+            </Row>
         </Container>
     )
 }
 
 ProductAddForm = reduxForm({
     // a unique name for the form
-    form: 'addProduct'
-  })(ProductAddForm)
+    form: 'addProduct',
+})(ProductAddForm)
 
-  export default ProductAddForm;
+export default ProductAddForm;

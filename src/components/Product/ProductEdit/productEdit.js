@@ -21,10 +21,8 @@ class ProductEdit extends Component{
     };
 
     handleSubmit = (data) => {
+        data.catId = this.props.product.catId; // Update catId before sending
         let images = this.state.images;
-        // if(this.state.images != true) { images = this.props.product.images;} 
-        // else {images = this.state.images;}
-        // console.log(images)
         this.props.edit(data, images);
         this.returnToHome();
     };
