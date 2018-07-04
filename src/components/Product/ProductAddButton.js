@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
+import React from 'react';
+import { Button } from 'reactstrap';
 import { withRouter } from 'react-router';
 
 const ProductAdd = (props) => {

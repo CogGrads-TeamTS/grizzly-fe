@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Modal, Form, FormGroup, Label, Row, Col, Input, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
-import {
-    renderField, renderTextArea, required, maxLength40,
-    minValue0, noSpecialChars, isValidPrice, numOnly,
-    percentMax, isValidPercentage
-} from '../../common/redux_validation';
-import { ToastContainer, toast } from 'react-toastify';
+import { Button, Modal, ModalHeader } from 'reactstrap';
+import { reduxForm } from 'redux-form';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import VendorForm from '../VendorForm';
 

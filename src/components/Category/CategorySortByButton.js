@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, ButtonDropdown } from 'reactstrap';
-import axios from 'axios';
+import { DropdownToggle, DropdownItem, DropdownMenu, ButtonDropdown } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { categoriesFetchData } from '../../actions/categoryActions';
@@ -30,18 +29,6 @@ class CategorySortByButton extends Component {
         this.setState({
           dropdownValue: event.currentTarget.textContent,
         });
-
-        // console.log('sort value: ' + event.currentTarget.value );
-
-        // this.props.sortChanged(event.currentTarget.value);
-
-        // console.log('category filter sort param: ' + this.props.filter.sort);
-
-        // Enter new action here
-        // console.log('fetching params...');
-        // setTimeout (() => {
-        //     this.props.fetchData()
-        // } , 2000);
         
         this.props.update(event.currentTarget.value);
     }

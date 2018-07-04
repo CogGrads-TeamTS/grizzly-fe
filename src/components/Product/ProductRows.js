@@ -1,11 +1,9 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
-
 import StarRatings from 'react-star-ratings';
 
-const ProductRows = (props) => { //console.log(props.category);
+const ProductRows = (props) => {
     const  product  = props.products;
 
     const handleClick = () => {

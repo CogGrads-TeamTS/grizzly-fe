@@ -1,10 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
+import { Button, ModalBody, ModalFooter } from 'reactstrap';
 import {
-  renderField, renderTextArea, required, maxLength40,
-  minValue0, noSpecialChars, isValidPrice, numOnly,
-  percentMax, isValidPercentage
+  renderField, renderTextArea, required, maxLength40, noSpecialChars, 
 } from '../common/redux_validation';
 
 let CategoryForm = props => {

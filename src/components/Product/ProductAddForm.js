@@ -1,16 +1,16 @@
 import _ from 'lodash';
 import React from 'react';
-import { Table, Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { Container, Row, Col,Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import ImageUploader from 'react-images-upload';
 import { renderField, renderTextArea, required, maxLength40, 
-    minValue0, noSpecialChars, isValidPrice, numOnly, 
+    noSpecialChars, isValidPrice, numOnly, 
     percentMax, isValidPercentage} from '../common/redux_validation';
 
 let ProductAddForm = (props) => {
     const { handleSubmit, returnToHome, onDrop } = props;
 
-    if (props.categories == undefined) {
+    if (props.categories === undefined) {
         return <div>loading...</div>
     }
 

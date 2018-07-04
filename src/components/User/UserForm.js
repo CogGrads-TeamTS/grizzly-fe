@@ -1,8 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
-import { Table,Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
-import ImageUploader from 'react-images-upload';
 import {connect} from 'react-redux'
 
 

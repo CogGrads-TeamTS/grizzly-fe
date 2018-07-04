@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
+import { Button, Modal, ModalHeader, Fade } from 'reactstrap';
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form';
 import CategoryForm from '../CategoryForm';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
