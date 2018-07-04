@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, ButtonDropdown } from 'reactstrap';
-import axios from 'axios';
+import { DropdownToggle, DropdownItem, DropdownMenu, ButtonDropdown } from 'reactstrap';
 import { connect } from 'react-redux';
 
 import { categoriesFetchData } from '../../actions/categoryActions';

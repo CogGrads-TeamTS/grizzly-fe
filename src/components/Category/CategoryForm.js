@@ -1,23 +1,27 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
+import { Button, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  renderField, renderTextArea, required, maxLength40, noSpecialChars, 
+} from '../common/redux_validation';
 
 let CategoryForm = props => {
+  console.log(props)
   const { handleSubmit } = props
   return (
     <form onSubmit={handleSubmit}>
-    <ModalBody> 
-      <div style={{height: "200px"}}>
-                    <label>Category Name:</label>
-                    <Field name="name" component="input" className="form-fields" placeholder="Add Name" style={{width: "60%", float: "right"}}/><br/>
-                    <label className="form-label">Category Description:</label>
-                    <Field name="description" component="textarea"  className="form-fields" placeholder="Add Description" style={{width: "60%", float: "right", height: "125px", resize: "none"}} /><br/>
-                    </div>
-    </ModalBody>
-    <ModalFooter>
-                    <Button color="primary" type="submit" onClick={this.submitAndClose}>Submit</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-    </ModalFooter>
+      <ModalBody>
+        <div style={{ maxHeight: "270px" }}>
+          <Field name="name" label="Name" type="text" component={renderField}
+            placeholder="Add Name" className="form-fields" validate={[required, maxLength40, noSpecialChars]} />
+            <br/> 
+          <Field name="description" label="Description" type="textarea" component={renderTextArea}
+            placeholder="Add Description" className="form-fields" validate={[required]} />
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" type="submit" onClick={this.submitAndClose}>Submit</Button>{' '}
+      </ModalFooter>
     </form>
   )
 }

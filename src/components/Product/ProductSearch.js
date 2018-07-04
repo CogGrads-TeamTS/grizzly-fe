@@ -14,8 +14,6 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        placeholder : props.placeholder;
-
         this.searchValue = this.searchValue.bind(this);
     }
 

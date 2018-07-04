@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import {vendor,vendorHasErrored,vendorIsLoading} from './vendorReducer';
 import { reducer as formReducer } from 'redux-form';
 import { category, categoryHasErrored, categoryIsLoading } from './categoryReducer';

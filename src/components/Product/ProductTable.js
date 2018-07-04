@@ -2,11 +2,8 @@ import React from 'react';
 import { Table,Container, Row, Col } from 'reactstrap';
 import _ from 'lodash';
 import InfiniteScroll from 'react-infinite-scroller';
-import {Link} from 'react-router-dom';
-
 import ProductRows from './ProductRows';
 import ConfirmDeleteModal from './Modals/ProductConfirmDeleteModal';
-// import EditModal from './Modals/CategoryEditModal';
 
 class ProductTable extends React.Component {
     

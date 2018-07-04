@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const upper = (string) => { // Convert string into uppercase
         if(string === null || string === undefined) {return "Not Specified"}
         if(typeof string === 'string') {return string}

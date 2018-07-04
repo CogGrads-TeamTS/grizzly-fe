@@ -29,7 +29,7 @@ export function vendorsFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFA
         const request = axios.get(url);
         request
             .then((response) =>{ //console.log(response);
-                if(!response.status == 200)
+                if(!response.status === 200)
                 {
                     throw Error(response.statusText);
                 }
@@ -43,7 +43,7 @@ export function vendorsFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFA
 }
 
 const editVendorSuccess = (payload) => ({ type: types.EDIT_VENDOR_SUCCESS, payload });
-const editVendorLoading = (loading) => ({ type: types.EDIT_VENDOR_LOADING, payload: loading });
+// const editVendorLoading = (loading) => ({ type: types.EDIT_VENDOR_LOADING, payload: loading });
 const editVendorError = (error) => ({ type: types.EDIT_VENDOR_ERROR, payload: error });
 
 export function editVendorAction(payload) {
@@ -55,13 +55,12 @@ export function editVendorAction(payload) {
         request
             .then((response) => {
                 //console.log(response);
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
                 dispatch(editVendorSuccess(payload))
             })
             .catch((error) => { // Catch the error thrown if status isn't 200
-                //console.log(error);
                 dispatch(editVendorError(error));
             })
     };
@@ -86,7 +85,7 @@ export function addVendorAction(name,about,email,webpage,contact,address,portfol
             contact:contact, address:address,  portfolioURL:portfolioURL }, {headers: authHeader()});
         request
             .then(( response) => {
-                if (!response.status == 201) {
+                if (!response.status === 201) {
                     throw Error(response.statusText);
                 }//console.log(response);
                 dispatch(addVendorSuccess( 
@@ -116,7 +115,7 @@ export function deleteVendorAction(id) {
         const request = axios.delete(`${API_URL}/vendors/${id}`, {headers: authHeader()});
         request
             .then((response) =>{
-                if(!response.status == 200){
+                if(!response.status === 200){
                     throw Error(response.statusText);
                 }
                 dispatch(deleteVendorSuccess(id));

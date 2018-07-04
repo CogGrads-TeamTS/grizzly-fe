@@ -34,7 +34,7 @@ export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_D
         const request = axios.get(url);
         request
             .then((response) => { //console.log(response)
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
 
@@ -62,7 +62,7 @@ export function categoriesFetchNames() {
        const request = axios.get(url);
        request
            .then((response) => { console.log(response)
-               if (!response.status == 200) {
+               if (!response.status === 200) {
                    throw Error(response.statusText);
                }
 
@@ -76,7 +76,7 @@ export function categoriesFetchNames() {
 }
 
 const deleteCategorySuccess = (id) => ({ type: types.DELETE_CATEGORY_SUCCESS, payload: id });
-const deleteCategoryLoading = (loading) => ({ type: types.DELETE_CATEGORY_LOADING, payload: loading });
+// const deleteCategoryLoading = (loading) => ({ type: types.DELETE_CATEGORY_LOADING, payload: loading });
 const deleteCategoryError = (error) => ({ type: types.DELETE_CATEGORY_ERROR, payload: error });
 
 export function deleteCategory(id) {
@@ -86,8 +86,7 @@ export function deleteCategory(id) {
         const request = axios.delete(`${API_URL}/categories/${id}`, {headers: authHeader()});
         request
             .then((response) => {
-                //console.log(response);
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
                 dispatch(deleteCategorySuccess(id))
@@ -100,7 +99,7 @@ export function deleteCategory(id) {
 }
 
 const editCategorySuccess = (id, name, description) => ({ type: types.EDIT_CATEGORY_SUCCESS, id: id, name:name, description: description });
-const editCategoryLoading = (loading) => ({ type: types.EDIT_CATEGORY_LOADING, payload: loading });
+// const editCategoryLoading = (loading) => ({ type: types.EDIT_CATEGORY_LOADING, payload: loading });
 const editCategoryError = (error) => ({ type: types.EDIT_CATEGORY_ERROR, payload: error });
 
 export function editCategoryAction(id, name, description) {
@@ -111,7 +110,7 @@ export function editCategoryAction(id, name, description) {
         request
             .then((response) => {
                 //console.log(response);
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
                 dispatch(editCategorySuccess(id, name, description))
@@ -124,7 +123,7 @@ export function editCategoryAction(id, name, description) {
 }
 
 const addCategorySuccess = (id, name, description, count) => ({ type: types.ADD_CATEGORY_SUCCESS, id: id, name: name, description: description, count: count });
-const addCategoryLoading = (loading) => ({ type: types.ADD_CATEGORY_LOADING, payload: loading });
+// const addCategoryLoading = (loading) => ({ type: types.ADD_CATEGORY_LOADING, payload: loading });
 const addCategoryError = (error) => ({ type: types.ADD_CATEGORY_ERROR, payload: error });
 
 export function addCategoryAction(name, description){
@@ -133,7 +132,7 @@ export function addCategoryAction(name, description){
        const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description}, {headers: authHeader()});
        request
         .then(( response) => {
-            if (!response.status == 200) {
+            if (!response.status === 200) {
                 throw Error(response.statusText);
             }
             dispatch(addCategorySuccess(response.data.id, response.data.name, response.data.description, 0))//remove hard coded count and replace with server response

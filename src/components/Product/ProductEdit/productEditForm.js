@@ -1,24 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { Container, Row, Col, Form, Input, Label, FormGroup, UncontrolledCollapse, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import ProductViewCarousel from '../ProductView/ProductViewCarousel';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import ListWrapper from './ListWrapper';
 import './list.css';
 
-const returnToHome = () => {
-    this.props.history.push("/dashboard");
-};
-
 class ProductEditForm extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     SortableList = SortableContainer(({ items }) => {
         return (
@@ -35,7 +26,7 @@ class ProductEditForm extends Component {
         return <div className="gridItem stylizedItem">
             <div className="wrapper">
                 <div className="carousel-item-img-contain">
-                    <img src={urladdition + image.url} />
+                    <img src={urladdition + image.url} alt="img" />
                 </div>
                 <div className="sort-disp-wrapper">
                     <div className="sort-disp-num">{image.sort + 1}</div>
