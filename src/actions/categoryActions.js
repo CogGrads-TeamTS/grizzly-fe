@@ -14,6 +14,10 @@ const SIZE_DEFAULT = 20;
 const SORT_DEFAULT = "id,desc";
 const SEARCH_DEFAULT = "";
 
+function authHeader() {
+    return { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+}
+
 // Use default values if none are specified
 export function categoriesFetchData(search = SEARCH_DEFAULT, pageNumber = PAGE_DEFAULT,
      size = SIZE_DEFAULT, sortParam = SORT_DEFAULT) {
@@ -79,7 +83,7 @@ export function deleteCategory(id) {
     console.log("delete called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.delete(`${API_URL}/categories/${id}`);
+        const request = axios.delete(`${API_URL}/categories/${id}`, {headers: authHeader()});
         request
             .then((response) => {
                 //console.log(response);
@@ -103,7 +107,7 @@ export function editCategoryAction(id, name, description) {
    // console.log("Edit Category called, id: " + id);
 
     return (dispatch) => {
-        const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
+        const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description}, {headers: authHeader()});
         request
             .then((response) => {
                 //console.log(response);
@@ -126,13 +130,13 @@ const addCategoryError = (error) => ({ type: types.ADD_CATEGORY_ERROR, payload: 
 export function addCategoryAction(name, description){
     
     return(dispatch) => {
-       const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description});
+       const request = axios.post(`${API_URL}/categories/add`, {name: name, description: description}, {headers: authHeader()});
        request
         .then(( response) => {
             if (!response.status == 200) {
                 throw Error(response.statusText);
             }
-            dispatch(addCategorySuccess(response.data.id, response.data.name, response.data.description, 15))//remove hard coded count and replace with server response
+            dispatch(addCategorySuccess(response.data.id, response.data.name, response.data.description, 0))//remove hard coded count and replace with server response
         })
         .catch((error) => { // Catch the error thrown if status isn't 200
                 dispatch(addCategoryError(error));
