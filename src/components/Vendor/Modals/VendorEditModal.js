@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Modal,Form,FormGroup,Label, Col,Input, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
-import PropTypes from 'prop-types'
+import { Button, Modal,Form,FormGroup,Label, Col,Input, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class VendorEditModal extends Component{
     constructor(props) {

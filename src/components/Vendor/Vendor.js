@@ -6,7 +6,7 @@ import {vendorsFetchData,addVendorAction,deleteVendorAction,editVendorAction} fr
 import VendorAddModal from './Modals/VendorAddModal'
 import VendorSortByButton from './VendorSortByButton';
 import VendorSearch from './VendorSearch';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import _ from 'lodash';

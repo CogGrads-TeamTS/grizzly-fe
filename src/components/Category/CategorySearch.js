@@ -10,13 +10,9 @@ import {
 import { connect } from 'react-redux';
  import { categoriesFetchData } from '../../actions/categoryActions';
 
-const ENTER_KEY = 13;
-
 class Search extends React.Component {
   constructor(props) {
     super(props);
-
-    placeholder : props.placeholder;
 
     this.searchValue = this.searchValue.bind(this);
   }

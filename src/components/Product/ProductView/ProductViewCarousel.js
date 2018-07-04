@@ -24,7 +24,7 @@ const buildImages = (images) => {
   let i;
 
   // IF no images show default no-show image
-  if(size == 0){
+  if(size === 0){
     items.push({
       src: noimage,
       captionText: "Image Caption"

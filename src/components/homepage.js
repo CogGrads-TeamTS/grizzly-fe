@@ -8,9 +8,6 @@ import { Redirect } from 'react-router-dom';
 
 class Homepage extends Component {
 
-    constructor(props){
-        super(props);
-    }
     render() {
         return (
             isAuthenticated() ? (

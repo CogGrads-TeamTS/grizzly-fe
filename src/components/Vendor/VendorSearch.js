@@ -10,8 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { vendorsFetchData } from '../../actions/vendorActions';
 
-const ENTER_KEY = 13;
-
 class VendorSearch extends React.Component {
   constructor(props) {
     super(props);

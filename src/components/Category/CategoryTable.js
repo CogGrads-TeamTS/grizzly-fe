@@ -23,8 +23,7 @@ class CategoryTable extends React.Component {
                 <div></div>
             </div>
         </div>;
-        
-        {console.log(this.props.categories)}
+    
         // This method is used to determine what rows to load in table based on categories length using a ternary operator
         const tableIsEmpty = _.isEmpty(this.props.categories) ?
             (  
