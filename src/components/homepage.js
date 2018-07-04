@@ -4,10 +4,31 @@ import Header from '../components/common/common_header';
 import Sidebar from '../components/common/common_sidebar';
 import {Row, Col } from 'reactstrap';
 import isAuthenticated from '../Auth/isAuthenticated';
-import { Redirect } from 'react-router-dom';
+import { Redirect,withRouter } from 'react-router-dom';
+
+import axios from 'axios';
 
 class Homepage extends Component {
 
+    constructor(props){
+        super(props);
+        axios.interceptors.response.use(response => {
+            console.log(response);
+            return response;
+         }, error => {
+            // 403 forbidden, 401 unauthorized
+           if (error.response.status === 403) {
+            // token is valid however forbidden to access the resource
+            // log the user out
+            this.props.history.replace('/logout')
+           } else if (error.response.status === 401) {
+            // token is not valid however may need to be refreshed...
+            // TODO: refresh the token and make request again?
+            this.props.history.replace('/logout')
+           }
+           return error;
+        });
+    }
     render() {
         return (
             isAuthenticated() ? (
@@ -38,4 +59,4 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+export default withRouter(Homepage);
