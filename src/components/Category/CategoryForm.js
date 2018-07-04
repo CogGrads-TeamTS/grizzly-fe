@@ -8,6 +8,7 @@ import {
 } from '../common/redux_validation';
 
 let CategoryForm = props => {
+  console.log(props)
   const { handleSubmit } = props
   return (
     <form onSubmit={handleSubmit}>

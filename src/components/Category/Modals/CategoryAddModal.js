@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class AddModal extends Component {
     constructor(props) {
+        console.log(props)
         super(props);
         this.state = {
           modal: false,
@@ -42,13 +43,11 @@ class AddModal extends Component {
     handleNameChange(event) {
         this.setState({
             name: event.target.value,
-            description: this.state.description
         })
     }
     
     handleDescriptionChange(event) {
         this.setState({
-            name: this.state.name,
             description: event.target.value
         })
     }
@@ -64,11 +63,6 @@ class AddModal extends Component {
         this.notify();
     }
 
-    submit = values => {
-        // console.log(values)
-    }
-
-    // FIXME - add return key to submit for modal actions
     render() {
         return (
             <div>

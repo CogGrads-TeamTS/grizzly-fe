@@ -8,6 +8,7 @@ import {
 } from '../../common/redux_validation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import VendorForm from '../VendorForm';
 
 class VendorAddModal extends Component {
     constructor(props) {
@@ -92,48 +93,28 @@ class VendorAddModal extends Component {
     }
     handleSubmit(event) {
         this.props.confirm({
-            name: this.state.name,
-            about: this.state.about,
-            email: this.state.email,
-            webpage: this.state.webpage,
-            contact: this.state.contact,
-            address: this.state.address,
-            portfolioURL: this.state.portfolioURL
-
+            name: event.name,
+            about: event.about,
+            email: event.email,
+            webpage: event.webpage,
+            contact: event.contact,
+            address: event.address,
+            portfolioURL: event.portfolioURL
         });
     }
-    submitAndClose = () => {
-        this.handleSubmit();
+    submitAndClose = (event) => {
+        this.handleSubmit(event);
         this.toggle();
         this.notify();
     };
+
     render() {
         return (
             <div>
                 <Button color="success" onClick={this.toggle}>{this.props.buttonLabel}</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                    <form onSubmit={this.handleSubmit}>
-                        <ModalHeader toggle={this.toggle}>Add Vendor</ModalHeader>
-                        <ModalBody>
-                            <Field name="name" label="Name" type="text" component={renderField}
-                                placeholder="Add Name" className="form-fields" validate={[required, maxLength40, noSpecialChars]} />
-                            <Field name="about" label="About" type="textarea" component={renderTextArea}
-                                placeholder="Add About" className="form-fields" validate={[required]} />
-                            <Field name="email" label="Email" type="text" component={renderField}
-                                placeholder="Add Email" className="form-fields" validate={[required]} />
-                                <Field name="contact" label="Number" type="text" component={renderField}
-                                placeholder="Add Contact" className="form-fields" validate={[required]} />
-                            <Field name="webpage" label="Web Page" type="text" component={renderField}
-                                placeholder="Add Webpage" className="form-fields" />
-                            <Field name="address" label="Address" type="textarea" component={renderTextArea}
-                                placeholder="Add Address" className="form-fields" />
-                            <Field name="portfolioURL" label="Portfolio URL" type="text" component={renderField}
-                                placeholder="Add Contact" className="form-fields" />
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="primary" onClick={this.submitAndClose}>Add</Button>{' '}
-                        </ModalFooter>
-                    </form>
+                    <ModalHeader toggle={this.toggle}>Add Vendor</ModalHeader>
+                    <VendorForm onSubmit={this.submitAndClose} toggle={this.toggle} actionLabel={this.props.actionLabel} /> 
                 </Modal>
             </div>
         );
