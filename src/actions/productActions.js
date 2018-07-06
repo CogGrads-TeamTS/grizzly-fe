@@ -37,7 +37,7 @@ export function productFetchData(search=SEARCH,pageNumber=FIRST_PAGE,size=DEFAUL
         const request=axios.get(url);
         request
             .then((response) =>{ //console.log(response);
-                if(!response.status == 200)
+                if(!response.status === 200)
                 {
                     throw Error(response.statusText);
                 }
@@ -60,7 +60,7 @@ export function productFetchDataByID(id){
          const request=axios.get(url);
          request
              .then((response) =>{ //console.log(response);
-                 if(!response.status == 200)
+                 if(!response.status === 200)
                  {
                      throw Error(response.statusText);
                  }
@@ -84,7 +84,7 @@ export function productFetchImagesByID(id){
         const request=axios.get(url);
         request
             .then((response) =>{
-                if(!response.status == 200)
+                if(!response.status === 200)
                 {
                     throw Error(response.statusText);
                 }
@@ -97,21 +97,22 @@ export function productFetchImagesByID(id){
 }
 
  const editProductSuccess = (payload) => ({ type: types.EDIT_PRODUCT_SUCCESS, payload });
- const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
+//  const editProductLoading = (loading) => ({ type: types.EDIT_PRODUCT_LOADING, payload: loading });
  const editProductError = (error) => ({ type: types.EDIT_PRODUCT_ERROR, payload: error });
 
 
 
  export function editProductAction(payload, images) {
-    //console.log( payload);
+    console.log( payload);
 
+    
     return (dispatch) => {
         // const request = axios.put(`${API_URL}/categories/edit/${id}`, {name: name, description: description});
         const request = axios.put(`${API_URL}/edit/${payload.id}`, payload, {headers: authHeader()});
         request
             .then((response) => {
                 //console.log(response);
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
 
@@ -144,7 +145,7 @@ export function addProductAction({name, description, brand, catId, price, discou
         const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating}, {headers: authHeader()});
         request
             .then((response) => {
-                if (!response.status == 200) {
+                if (!response.status === 200) {
                     throw Error(response.statusText);
                 }
 
@@ -176,7 +177,7 @@ export function deleteProductAction(id) {
         const request = axios.delete(`${API_URL}/${id}`, {headers: authHeader()});
         request
             .then((response) =>{
-                if(!response.status == 200){
+                if(!response.status === 200){
                     throw Error(response.statusText);
                 }
                 dispatch(deleteProductSuccess(id));
@@ -207,7 +208,7 @@ export function addProductImages(id, file, sort) {
         const request = axios.post(url, formData, config);
         request
         .then(( response) => {
-            if (!response.status == 201) {
+            if (!response.status === 201) {
                 throw Error(response.statusText);
             }
             dispatch(addProductImageSuccess( 
@@ -227,7 +228,7 @@ export function deleteProductImage(image) {
         const request = axios.delete(`${API_URL}/image/delete`, {params: {id:image.id, url:image.url}}, {headers: authHeader()});
         request
             .then((response) =>{
-                if(!response.status == 200){
+                if(!response.status === 200){
                     throw Error(response.statusText);
                 }
 
@@ -248,7 +249,7 @@ export function editProductImage(id, url, sort) {
         const request = axios.put(`${API_URL}/edit/0/images?id=${id}&url=${url}&sort=${sort}`, {}, {headers: authHeader()});
         request
         .then(( response) => {
-            if (!response.status == 200) {
+            if (!response.status === 200) {
                 throw Error(response.statusText);
             }
             dispatch(editProductImageSuccess(response.data))

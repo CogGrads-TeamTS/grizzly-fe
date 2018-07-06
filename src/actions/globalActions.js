@@ -14,7 +14,7 @@ export function globalFetchData({search}){
          const request=axios.get(url);
          request
              .then((response) =>{ 
-                 if(!response.status == 200)
+                 if(!response.status === 200)
                  {
                      throw Error(response.statusText);
                  }

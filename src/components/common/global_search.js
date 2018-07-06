@@ -92,7 +92,7 @@ class GlobalSearch extends React.Component {
           optionComponent={optionComponent}
           options={this.options}
           isLoading={this.props.loading}
-          arrowRenderer={() => { return <span><img className="global-search-icon" src={searchIcon} /></span> }}
+          arrowRenderer={() => { return <span><img className="global-search-icon" alt="img" src={searchIcon} /></span> }}
         />
       </div>
     )

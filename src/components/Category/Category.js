@@ -6,7 +6,7 @@ import CategorySortByButton from './CategorySortByButton';
 import { categoriesFetchData, deleteCategory, editCategoryAction, addCategoryAction } from '../../actions/categoryActions';
 import CategoryAddModal from './Modals/CategoryAddModal';
 import Search from './CategorySearch';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import _ from 'lodash';
 

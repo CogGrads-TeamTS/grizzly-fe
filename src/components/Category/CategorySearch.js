@@ -10,19 +10,15 @@ import {
 import { connect } from 'react-redux';
  import { categoriesFetchData } from '../../actions/categoryActions';
 
-const ENTER_KEY = 13;
-
 class Search extends React.Component {
   constructor(props) {
     super(props);
-
-    placeholder : props.placeholder;
 
     this.searchValue = this.searchValue.bind(this);
   }
 
   searchValue = event => {
-    this.props.updateSearch(event.target.value);
+    this.props.updateSearch(event.currentTarget.value);
     console.log(event.currentTarget.value);
   }
 
@@ -46,7 +42,7 @@ class Search extends React.Component {
             <InputGroupAddon addonType="prepend">
               <Button 
               className="btn-search btn-right-curve">
-                <i className="fa fa-search"></i>
+                <i className={this.props.loading ? `fas fa-spinner fa-spin` : 'fa fa-search'}></i>
               </Button>
             </InputGroupAddon>
             </InputGroup>
@@ -59,7 +55,8 @@ class Search extends React.Component {
 const mapStateToProps = (state) => { 
   return{
       categories: state.category,
-      filter: state.categoryFilter
+      filter: state.categoryFilter,
+      loading: state.categoryIsLoading
   };
 };
 

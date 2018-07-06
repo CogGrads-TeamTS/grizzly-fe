@@ -16,7 +16,7 @@ export function fetchUserByID(){
          const request=axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } });
          request
              .then((response) =>{ 
-                 if(!response.status == 200)
+                 if(!response.status === 200)
                  {
                      throw Error(response.statusText);
                  }
@@ -30,7 +30,7 @@ export function fetchUserByID(){
 
 const editUserSuccess = (data) => ({type: types.EDIT_USER_SUCCESS, data });
 const editUserError = (error) => ({type: types.EDIT_USER_ERROR, payload: error});
-const editUserLoading = (loading) => ({type: types.EDIT_USER_LOADING, payload: loading})
+// const editUserLoading = (loading) => ({type: types.EDIT_USER_LOADING, payload: loading})
 
 export function editUserById(data){
 
@@ -39,7 +39,7 @@ export function editUserById(data){
 
         request
             .then((response) => {
-                if(!response.status == 200){
+                if(!response.status === 200){
                     throw Error(response.statusText);
                 }
                 dispatch(editUserSuccess(data));

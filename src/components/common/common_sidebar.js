@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchUserByID, editUserById } from '../../actions/userActions';
 import User from '../User/User';
-import { Table,Container, Row, Col, Form, FormGroup, UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 
 class Sidebar extends Component {
     constructor(props){
@@ -18,9 +17,7 @@ class Sidebar extends Component {
         this.props.editUserById(payload);
     }
 
-    render() { console.log(this.props.user);
-        const userData = this.props.userIsLoading  ? null : <User userData={this.props.user}/>;
-        
+    render() { 
         return ( 
             <div>{this.props.user !== undefined && <User userData={this.props.user} edit={this.editUser} />}</div>
         );

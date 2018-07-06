@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import { productFetchDataByID, deleteCategory, editCategoryAction, addProductImages, addProductAction } from '../../actions/productActions';
+import React, { Component } from 'react'
+import { addProductImages, addProductAction } from '../../actions/productActions';
 import ProductAddForm from './ProductAddForm';
 import { connect } from 'react-redux';
 import { categoriesFetchNames } from '../../actions/categoryActions';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class ProductAdd extends Component {
@@ -11,7 +11,7 @@ class ProductAdd extends Component {
         super(props);
 
         this.page = 0;
-        this.size = 20; 
+        this.size = 20;
         this.sort = "id,desc";
         this.search = "";
 
@@ -20,14 +20,6 @@ class ProductAdd extends Component {
 
         this.state = { pictures: [] };
         this.onDrop = this.onDrop.bind(this);
-
-        const Msg = ({ closeToast }) => (
-            <div>
-              Lorem ipsum dolor
-              <button>Retry</button>
-              <button onClick={closeToast}>Close</button>
-            </div>
-          )
     }
 
     /**
@@ -38,47 +30,48 @@ class ProductAdd extends Component {
      * to remove the last image on the picture array
      */
     onDrop(picture) {
-        if(picture.length <= 5){
+        if (picture.length <= 5) {
             this.setState({
                 pictures: picture
             });
         }
         else {
-            console.log(picture[picture.length-1])
-            this.notify('error', picture[picture.length-1]);
+            console.log(picture[picture.length - 1])
+            this.notify('error', picture[picture.length - 1]);
         }
     }
-    
+
     notify = (e, picture) => {
-        switch(e) {
+        switch (e) {
             case "success":
-            toast.success('Add Success', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true
-            });
-            
+                toast.success('Add Success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+                break;
+
             case "error":
-            console.log(picture);
-            toast.error(`Too Many Files, Please remove ${picture.name}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true
-            });
+                toast.error(`Too Many Files, Please remove ${picture.name}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+                break;
+
+            default:
+                break;
         }
-           
+
     }
-    
-    componentDidMount(){
-        this.props.fetchData(this.search, this.page, this.size, this.sort)
-    }
-    fetchDataWithFilter() {
+
+    componentDidMount() {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
 
@@ -90,7 +83,7 @@ class ProductAdd extends Component {
     handleSubmit = (e) => {
         const pictures = this.state.pictures
         this.props.add({
-            name:e.name,
+            name: e.name,
             description: e.description,
             brand: e.brand,
             catId: e.category,
@@ -105,14 +98,13 @@ class ProductAdd extends Component {
     render() {
         return (
             <div>
-                <ProductAddForm onSubmit={this.handleSubmit} categories={this.props.names} returnToHome={this.returnToHome} onDrop={this.onDrop}/>
+                <ProductAddForm onSubmit={this.handleSubmit} categories={this.props.names} returnToHome={this.returnToHome} onDrop={this.onDrop} />
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         names: state.category.names,
         last: state.category.last
@@ -121,7 +113,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: ()=> dispatch(categoriesFetchNames()),
+        fetchData: () => dispatch(categoriesFetchNames()),
         addImage: (id, file, sort) => dispatch(addProductImages(id, file, sort)),
         add: (name, description, brand, catId, price, discount, rating, pictures, callback) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callback))
     };

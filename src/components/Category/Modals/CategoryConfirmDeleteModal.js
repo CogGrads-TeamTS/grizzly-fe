@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
 import PropTypes from 'prop-types'
-import { deleteCategory } from '../../../actions/categoryActions';
 
 class ConfirmVendorDeleteModal extends React.Component {
   constructor(props) {

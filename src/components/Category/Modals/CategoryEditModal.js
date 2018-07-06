@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Fade } from 'reactstrap';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 class EditModal extends React.Component {
   constructor(props) {

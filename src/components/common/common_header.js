@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     Collapse,
     Navbar,
@@ -7,19 +7,14 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    Button,
-    DropdownItem } from 'reactstrap';
+    Button } from 'reactstrap';
 import GlobalSearch from './global_search';
 import grizzlogo from '../../Assets/griz-logo.png';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Login from '../../Auth/Login';
 import isAuthenticated from "../../Auth/isAuthenticated";
 import {connect} from "react-redux";
-import {editUserById, fetchUserByID} from "../../actions/userActions";
+import { fetchUserByID} from "../../actions/userActions";
 
 class Header extends React.Component {
     constructor(props) {
@@ -40,7 +35,7 @@ class Header extends React.Component {
         <div>
           <ToastContainer />
           <Navbar  light expand="md">
-            <NavbarBrand href="/admin"><img className="griz-logo" src={grizzlogo}  /></NavbarBrand>
+            <NavbarBrand href="/admin"><img className="griz-logo" alt="img" src={grizzlogo}  /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

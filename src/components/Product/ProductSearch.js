@@ -14,8 +14,6 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        placeholder : props.placeholder;
-
         this.searchValue = this.searchValue.bind(this);
     }
 
@@ -44,7 +42,7 @@ class Search extends React.Component {
                         <InputGroupAddon addonType="prepend">
                             <Button
                                 className="btn-search btn-right-curve">
-                                <i className="fa fa-search"></i>
+                                <i className={this.props.loading ? `fas fa-spinner fa-spin` : 'fa fa-search'}></i>
                             </Button>
                         </InputGroupAddon>
                     </InputGroup>
@@ -56,7 +54,8 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => {
     return{
-        products: state.product
+        products: state.product,
+        loading: state.productIsLoading
     };
 };
 
