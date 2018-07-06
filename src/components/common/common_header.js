@@ -40,7 +40,7 @@ class Header extends React.Component {
         <div>
           <ToastContainer />
           <Navbar  light expand="md">
-            <NavbarBrand href="/"><img className="griz-logo" src={grizzlogo}  /></NavbarBrand>
+            <NavbarBrand href="/admin"><img className="griz-logo" src={grizzlogo}  /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
