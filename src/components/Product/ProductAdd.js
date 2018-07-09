@@ -77,7 +77,7 @@ class ProductAdd extends Component {
 
     returnToHome = () => {
         this.props.history.push("/dashboard");
-        this.notify();
+        this.notify("success");
     }
 
     handleSubmit = (e) => {
