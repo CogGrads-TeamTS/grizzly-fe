@@ -138,7 +138,7 @@ export function productFetchImagesByID(id){
 // FIXME: Change the fields
 const addProductSuccess = (data) => ({type: types.ADD_PRODUCT_SUCCESS, data});
 const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
-export function addProductAction({name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed}){
+export function addProductAction({name, description, brand, catId, price, discount, rating, pictures, callback}){
 
     return(dispatch) => {
 
@@ -146,7 +146,7 @@ export function addProductAction({name, description, brand, catId, price, discou
         request
             .then((response) => {
                 if (!response.status === 200 || !response.status) {
-                    callbackFailed();
+                    callback("error");
                     throw Error(response.statusText);
                 }
 
@@ -163,7 +163,7 @@ export function addProductAction({name, description, brand, catId, price, discou
             })
             .then((data) => dispatch(addProductSuccess(data)))
             .then(() => {
-                callbackSuccess();
+                callback("success");
             })
             .catch((error) =>  dispatch(addProductError(error)))
     }
@@ -172,13 +172,13 @@ export function addProductAction({name, description, brand, catId, price, discou
 const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
 const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
-export function deleteProductAction(id, callbackSuccess, callbackFailed) {
+export function deleteProductAction({id, callback}) {
     return(dispatch) => {
         const request = axios.delete(`${API_URL}/${id.id}`, {headers: authHeader()});
         request
             .then((response) =>{
                 if(!response.status === 200 || !response.status){
-                    id.callbackFailed();
+                    callback("error");
                     throw Error(response.statusText);
                 }
                 dispatch(deleteProductSuccess(id));

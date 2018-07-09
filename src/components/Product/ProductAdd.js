@@ -16,7 +16,8 @@ class ProductAdd extends Component {
         this.search = "";
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.notify = this.notify.bind(this);
+        this.notify = this.notify.bind(this);
+        this.returnToHome = this.returnToHome.bind(this);
 
         this.state = { pictures: [] };
         this.onDrop = this.onDrop.bind(this);
@@ -89,11 +90,7 @@ class ProductAdd extends Component {
     returnToHome = (type) => {
         console.log(type);
         this.props.history.push("/dashboard");
-        this.notify("success");
-    }
-
-    callbackFailed = () => {
-        this.notify("error");
+        this.notify(type);
     }
 
     handleSubmit = (e) => {
@@ -107,8 +104,7 @@ class ProductAdd extends Component {
             discount: e.discount,
             rating: 0,
             pictures,
-            callbackSuccess: this.returnToHome,
-            callbackFailed: this.callbackFailed
+            callback: this.returnToHome
         });
     }
 
@@ -132,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: () => dispatch(categoriesFetchNames()),
         addImage: (id, file, sort) => dispatch(addProductImages(id, file, sort)),
-        add: (name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed))
+        add: (name, description, brand, catId, price, discount, rating, pictures, callback) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callback))
     };
 };
 
