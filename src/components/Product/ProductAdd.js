@@ -16,7 +16,8 @@ class ProductAdd extends Component {
         this.search = "";
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.notify = this.notify.bind(this);
+        this.notify = this.notify.bind(this);
+        this.returnToHome = this.returnToHome.bind(this);
 
         this.state = { pictures: [] };
         this.onDrop = this.onDrop.bind(this);
@@ -37,7 +38,7 @@ class ProductAdd extends Component {
         }
         else {
             console.log(picture[picture.length - 1])
-            this.notify('error', picture[picture.length - 1]);
+            this.notify('errorpic', picture[picture.length - 1]);
         }
     }
 
@@ -54,7 +55,7 @@ class ProductAdd extends Component {
                 });
                 break;
 
-            case "error":
+            case "errorpic":
                 toast.error(`Too Many Files, Please remove ${picture.name}`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -64,6 +65,17 @@ class ProductAdd extends Component {
                     draggable: true
                 });
                 break;
+
+            case "error":
+                toast.error('Product Failed to add', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
+                    break;
 
             default:
                 break;
@@ -75,9 +87,10 @@ class ProductAdd extends Component {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
 
-    returnToHome = () => {
+    returnToHome = (type) => {
+        console.log(type);
         this.props.history.push("/dashboard");
-        this.notify("success");
+        this.notify(type);
     }
 
     handleSubmit = (e) => {

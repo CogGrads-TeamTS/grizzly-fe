@@ -39,17 +39,34 @@ class Product extends React.Component{
         this.props.fetchData(); // Initial fetch
         //console.log("MOUNT FETCH")
     }
+    notify = (e) => {
+        switch (e) {
+            case "success":
+                toast.success('Add Success', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+                break;
 
-    notify = () => {
-        toast.success('Delete Success', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-        });
-        
+            case "error":
+                toast.error('Product Failed to add', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
+                    break;
+
+            default:
+                break;
+        }
+
     }
 
     fetchDataWithFilter() {
@@ -124,8 +141,11 @@ class Product extends React.Component{
     deleteProduct(prod) {
          //console.log("parent deleting product");
         // console.log(prod);
-         this.props.delete(prod.id);
-         this.notify();
+         this.props.delete({
+             id: prod.id,
+             callback: this.notify
+         });
+        //  this.notify();
     }
 
     // editProduct(prod) {
@@ -153,7 +173,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (search, page, size, sort, catId)=> dispatch(productFetchData(search, page, size, sort, catId)),
-        delete: (id) => dispatch(deleteProductAction(id)),
+        delete: (id, callback) => dispatch(deleteProductAction(id, callback)),
         // edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         // add: (name, description) => dispatch(addCategoryAction(name, description))
     };
