@@ -138,14 +138,15 @@ export function productFetchImagesByID(id){
 // FIXME: Change the fields
 const addProductSuccess = (data) => ({type: types.ADD_PRODUCT_SUCCESS, data});
 const addProductError = (error) => ({type : types.ADD_PRODUCT_ERROR, payload: error});
-export function addProductAction({name, description, brand, catId, price, discount, rating, pictures, callback}){
+export function addProductAction({name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed}){
 
     return(dispatch) => {
 
         const request = axios.post(`${API_URL}/add`, {name, description, brand, catId, price, discount, rating}, {headers: authHeader()});
         request
             .then((response) => {
-                if (!response.status === 200) {
+                if (!response.status === 200 || !response.status) {
+                    callbackFailed();
                     throw Error(response.statusText);
                 }
 
@@ -162,7 +163,7 @@ export function addProductAction({name, description, brand, catId, price, discou
             })
             .then((data) => dispatch(addProductSuccess(data)))
             .then(() => {
-                callback()
+                callbackSuccess();
             })
             .catch((error) =>  dispatch(addProductError(error)))
     }
@@ -171,13 +172,13 @@ export function addProductAction({name, description, brand, catId, price, discou
 const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
 const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
-export function deleteProductAction(id) {
-    console.log(id);
+export function deleteProductAction(id, callbackSuccess, callbackFailed) {
     return(dispatch) => {
-        const request = axios.delete(`${API_URL}/${id}`, {headers: authHeader()});
+        const request = axios.delete(`${API_URL}/${id.id}`, {headers: authHeader()});
         request
             .then((response) =>{
-                if(!response.status === 200){
+                if(!response.status === 200 || !response.status){
+                    id.callbackFailed();
                     throw Error(response.statusText);
                 }
                 dispatch(deleteProductSuccess(id));

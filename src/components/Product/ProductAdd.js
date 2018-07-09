@@ -37,7 +37,7 @@ class ProductAdd extends Component {
         }
         else {
             console.log(picture[picture.length - 1])
-            this.notify('error', picture[picture.length - 1]);
+            this.notify('errorpic', picture[picture.length - 1]);
         }
     }
 
@@ -54,7 +54,7 @@ class ProductAdd extends Component {
                 });
                 break;
 
-            case "error":
+            case "errorpic":
                 toast.error(`Too Many Files, Please remove ${picture.name}`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -64,6 +64,17 @@ class ProductAdd extends Component {
                     draggable: true
                 });
                 break;
+
+            case "error":
+                toast.error('Product Failed to add', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                    });
+                    break;
 
             default:
                 break;
@@ -75,9 +86,14 @@ class ProductAdd extends Component {
         this.props.fetchData(this.search, this.page, this.size, this.sort)
     }
 
-    returnToHome = () => {
+    returnToHome = (type) => {
+        console.log(type);
         this.props.history.push("/dashboard");
         this.notify("success");
+    }
+
+    callbackFailed = () => {
+        this.notify("error");
     }
 
     handleSubmit = (e) => {
@@ -91,7 +107,8 @@ class ProductAdd extends Component {
             discount: e.discount,
             rating: 0,
             pictures,
-            callback: this.returnToHome
+            callbackSuccess: this.returnToHome,
+            callbackFailed: this.callbackFailed
         });
     }
 
@@ -115,7 +132,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: () => dispatch(categoriesFetchNames()),
         addImage: (id, file, sort) => dispatch(addProductImages(id, file, sort)),
-        add: (name, description, brand, catId, price, discount, rating, pictures, callback) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callback))
+        add: (name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed) => dispatch(addProductAction(name, description, brand, catId, price, discount, rating, pictures, callbackSuccess, callbackFailed))
     };
 };
 
