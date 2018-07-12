@@ -42,7 +42,7 @@ class Product extends React.Component{
     notify = (e) => {
         switch (e) {
             case "success":
-                toast.success('Add Success', {
+                toast.success('Delete Success', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -53,7 +53,7 @@ class Product extends React.Component{
                 break;
 
             case "error":
-                toast.error('Product Failed to add', {
+                toast.error('Product Failed to Delete', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -140,7 +140,7 @@ class Product extends React.Component{
 
     deleteProduct(prod) {
          //console.log("parent deleting product");
-        // console.log(prod);
+         console.log(prod);
          this.props.delete({
              id: prod.id,
              callback: this.notify
@@ -153,7 +153,6 @@ class Product extends React.Component{
     //     console.log(cat);
     //     this.props.edit(cat.id, cat.name, cat.description);
     // }
-
     // addConfirm(prod){
     //     this.props.add(cat.name, cat.description);
     // }
@@ -173,7 +172,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (search, page, size, sort, catId)=> dispatch(productFetchData(search, page, size, sort, catId)),
-        delete: (id, callback) => dispatch(deleteProductAction(id, callback)),
+        delete: (id,callback) => dispatch(deleteProductAction(id,callback))
         // edit: (id, name, description) => dispatch(editCategoryAction(id, name, description)),
         // add: (name, description) => dispatch(addCategoryAction(name, description))
     };
