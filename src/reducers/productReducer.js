@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import _ from 'lodash';
 
 export function products(state = {}, action) {
-    
+
     switch (action.type) {
         case types.LOAD_PRODUCT_SUCCESS:
             const productArray = action.data.products.content;
@@ -33,6 +33,7 @@ export function products(state = {}, action) {
             };
 
         case types.DELETE_PRODUCT_SUCCESS:
+            //console.log(action.payload);
             return {
                 ...state,
                 content: state.content.filter(prod => prod.id !== action.payload)

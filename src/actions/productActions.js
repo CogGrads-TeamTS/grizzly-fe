@@ -146,7 +146,7 @@ export function addProductAction({name, description, brand, catId, price, discou
         request
             .then((response) => {
                 if (!response.status === 200 || !response.status) {
-                    callback("error");
+                    callback("success");
                     throw Error(response.statusText);
                 }
 
@@ -172,15 +172,17 @@ export function addProductAction({name, description, brand, catId, price, discou
 const deleteProductSuccess =(id) => ({type:types.DELETE_PRODUCT_SUCCESS, payload:id});
 const deleteProductError = (error) => ({type:types.DELETE_PRODUCT_ERROR ,payload:error});
 
-export function deleteProductAction({id, callback}) {
+export function deleteProductAction({id,callback}) {
     return(dispatch) => {
-        const request = axios.delete(`${API_URL}/${id.id}`, {headers: authHeader()});
+        const request = axios.delete(`${API_URL}/${id}`, {headers: authHeader()});
         request
             .then((response) =>{
                 if(!response.status === 200 || !response.status){
                     callback("error");
                     throw Error(response.statusText);
                 }
+                //console.log(id);
+                callback("success");
                 dispatch(deleteProductSuccess(id));
             })
             .catch((error) =>{
